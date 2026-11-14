@@ -22,11 +22,22 @@ test("main navigation, health, filters, and synchronized candidate focus", async
   await expect(page.getByTestId("candidate-earth-danakil")).toHaveCount(0);
   await page.getByRole("button", { name: /^All/ }).click();
 
+  const navigation = page.getByRole("navigation", { name: "Main navigation" });
+  await navigation.getByRole("button", { name: "Planetary explorer" }).click();
+  await expect(page.getByTestId("planetary-explorer-view")).toBeVisible();
+  await expect(page.getByTestId("candidate-earth-atacama")).toHaveCount(0);
+  await navigation.getByRole("button", { name: "Analogue discovery" }).click();
+  await expect(page.getByTestId("candidate-earth-atacama")).toBeVisible();
+  await expect(page.getByTestId("results-panel")).toHaveCount(0);
+  await navigation.getByRole("button", { name: "Comparison lab" }).click();
+  await expect(page.getByTestId("comparison-lab-view")).toBeVisible();
+  await page.getByRole("button", { name: "Edit site selection" }).click();
+  await expect(page.getByTestId("candidate-earth-atacama")).toBeVisible();
+
   await page.getByRole("button", { name: "Mars" }).click();
   await expect(page.getByText("PLANETARY REFERENCE · PROCESSED TERRAIN")).toBeVisible();
   await page.getByRole("button", { name: "Moon" }).click();
   await expect(page.getByRole("heading", { name: "Interactive lunar surface" })).toBeVisible();
-  const navigation = page.getByRole("navigation", { name: "Main navigation" });
   await navigation.getByRole("button", { name: "Research assistant" }).click();
   await expect(page.getByRole("button", { name: "Assistant unavailable" })).toBeDisabled();
   await navigation.getByRole("button", { name: "Mission planner" }).click();
@@ -41,6 +52,8 @@ test("real result is honest, clears on focus change, and downloads valid JSON", 
   await expect(page.getByTestId("candidate-earth-atacama")).toBeVisible();
   await expect(page.getByRole("button", { name: "Compare 3 sites" })).toBeVisible();
   await page.getByRole("button", { name: "Compare 3 sites" }).click();
+  await expect(page.getByTestId("comparison-lab-view")).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Main navigation" }).getByRole("button", { name: "Comparison lab" })).toHaveAttribute("aria-current", "page");
   const result = page.getByTestId("result-earth-atacama");
   await expect(result).toContainText("PROCESSED DEM");
   await expect(result).toContainText("Processing runs:");
@@ -63,8 +76,10 @@ test("real result is honest, clears on focus change, and downloads valid JSON", 
 
   await navigation.getByRole("button", { name: "Analogue discovery" }).click();
   await page.getByRole("button", { name: /Upper Mustang/ }).click();
-  await expect(page.getByTestId("selected-candidate-details")).toContainText("Upper Mustang");
+  await expect(page.getByTestId("candidate-earth-upper-mustang")).toHaveClass(/focused/);
   await expect(page.getByTestId("result-earth-atacama")).toHaveCount(0);
+  await navigation.getByRole("button", { name: "Comparison lab" }).click();
+  await expect(page.getByTestId("selected-candidate-details")).toContainText("Upper Mustang");
 });
 
 test("API unavailable state is understandable", async ({ page }) => {

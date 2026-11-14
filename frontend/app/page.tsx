@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import PlanetSelector from "./components/PlanetSelector";
 import AssistantPage from "./components/workspace/pages/AssistantPage";
 import CandidatePanel from "./components/workspace/discovery/CandidatePanel";
@@ -43,7 +43,6 @@ export default function Home() {
   const [resultsStale, setResultsStale] = useState(false);
   const [terrainError, setTerrainError] = useState<{ siteId: string; message: string } | null>(null);
   const [results, setResults] = useState<ComparisonResult[]>([]);
-  const resultsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -97,7 +96,6 @@ export default function Home() {
   }, []);
 
   const toggleCandidate = useCallback((id: string) => {
-    setFocusedCandidateId(id);
     clearComparisonState();
     setSelectedIds((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]);
   }, [clearComparisonState]);
@@ -125,7 +123,7 @@ export default function Home() {
       const response = await api.discover(selectedIds);
       setResults(response.results);
       setResultsStale(false);
-      window.requestAnimationFrame(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
+      setActiveSection("comparison");
     } catch (error) {
       setResultsStale(results.length > 0);
       setComparisonError(error instanceof Error ? error.message : "Comparison request failed");
@@ -221,8 +219,8 @@ export default function Home() {
         <div className={`workspace-shell ${sharedWorkspace ? "is-visible" : "is-hidden"}`} aria-hidden={!sharedWorkspace}>
           <SectionToolbar section={activeSection} title={activeTitle} health={health} />
           <div className="selector-container"><PlanetSelector activePlanet={activePlanet} onChange={setActivePlanet} /></div>
-          <div className={`dashboard-grid dashboard-grid-${activeSection}`}>
-            <PlanetStage
+          <div className={`dashboard-grid dashboard-grid-${activeSection}`} data-testid={activeSection === "explorer" ? "planetary-explorer-view" : undefined}>
+            {activeSection !== "comparison" && <PlanetStage
               activePlanet={activePlanet}
               activeSection={activeSection}
               sites={sites}
@@ -237,8 +235,8 @@ export default function Home() {
               onPlanetChange={setActivePlanet}
               onSiteSelect={handleSiteSelect}
               onZoomChange={setIsZoomedIn}
-            />
-            <section className="workspace-panel" aria-label="Terrain comparison workspace">
+            />}
+            {activeSection !== "explorer" && activeSection !== "comparison" && <section className={`workspace-panel workspace-panel-${activeSection}`} aria-label="Terrain comparison workspace">
               <CandidatePanel
                 sites={filteredSites}
                 selectedIds={selectedIds}
@@ -269,6 +267,25 @@ export default function Home() {
                 onFocus={focusCandidate}
                 onCompare={compareTerrain}
               />
+              {activeSection === "overview" && <ResultsPanel
+                results={results}
+                resultsStale={resultsStale}
+                comparisonAttempted={comparisonAttempted}
+                realResultCount={realResultCount}
+                previewResultCount={previewResultCount}
+                selectedSite={selectedSite}
+                selectedAoi={selectedAoi}
+                selectedTerrain={selectedTerrain}
+                selectedSource={selectedSource}
+                terrainError={terrainError}
+                onDownload={downloadResult}
+              />}
+            </section>}
+            {activeSection === "comparison" && <section className="comparison-lab" data-testid="comparison-lab-view" aria-label="Comparison results">
+              <div className="comparison-lab-actions">
+                <p className="panel-muted">{results.length ? "Review the returned terrain evidence and provenance below." : "Run a comparison from Analogue Discovery to see evidence here."}</p>
+                <button className="button button-secondary" type="button" onClick={() => setActiveSection("discovery")}>Edit site selection <span>→</span></button>
+              </div>
               <ResultsPanel
                 results={results}
                 resultsStale={resultsStale}
@@ -280,10 +297,9 @@ export default function Home() {
                 selectedTerrain={selectedTerrain}
                 selectedSource={selectedSource}
                 terrainError={terrainError}
-                resultsRef={resultsRef}
                 onDownload={downloadResult}
               />
-            </section>
+            </section>}
           </div>
         </div>
         {activeSection === "data" && <DataCenterPage sites={sites} sources={sources} terrain={terrain} aois={aois} onNavigate={setActiveSection} />}
