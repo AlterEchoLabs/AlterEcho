@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import PlanetSelector from "./components/PlanetSelector";
 import AssistantPage from "./components/workspace/pages/AssistantPage";
 import CandidatePanel from "./components/workspace/discovery/CandidatePanel";
@@ -43,6 +43,7 @@ export default function Home() {
   const [resultsStale, setResultsStale] = useState(false);
   const [terrainError, setTerrainError] = useState<{ siteId: string; message: string } | null>(null);
   const [results, setResults] = useState<ComparisonResult[]>([]);
+  const resultsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -96,6 +97,7 @@ export default function Home() {
   }, []);
 
   const toggleCandidate = useCallback((id: string) => {
+    setFocusedCandidateId(id);
     clearComparisonState();
     setSelectedIds((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]);
   }, [clearComparisonState]);
@@ -123,6 +125,7 @@ export default function Home() {
       const response = await api.discover(selectedIds);
       setResults(response.results);
       setResultsStale(false);
+      window.requestAnimationFrame(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
     } catch (error) {
       setResultsStale(results.length > 0);
       setComparisonError(error instanceof Error ? error.message : "Comparison request failed");
@@ -277,6 +280,7 @@ export default function Home() {
                 selectedTerrain={selectedTerrain}
                 selectedSource={selectedSource}
                 terrainError={terrainError}
+                resultsRef={resultsRef}
                 onDownload={downloadResult}
               />
             </section>

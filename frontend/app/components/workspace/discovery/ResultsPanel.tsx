@@ -1,8 +1,9 @@
+import type { RefObject } from "react";
 import type { ComparisonResult, Site, SourceManifest, TerrainSummary, AoiFeature } from "../../../../lib/api";
 import ResultCard from "../shared/ResultCard";
 import { coordinate, dataLabel, longitude } from "../shared/formatters";
 
-export default function ResultsPanel({ results, resultsStale, comparisonAttempted, realResultCount, previewResultCount, selectedSite, selectedAoi, selectedTerrain, selectedSource, terrainError, onDownload }: {
+export default function ResultsPanel({ results, resultsStale, comparisonAttempted, realResultCount, previewResultCount, selectedSite, selectedAoi, selectedTerrain, selectedSource, terrainError, resultsRef, onDownload }: {
   results: ComparisonResult[];
   resultsStale: boolean;
   comparisonAttempted: boolean;
@@ -13,11 +14,12 @@ export default function ResultsPanel({ results, resultsStale, comparisonAttempte
   selectedTerrain?: TerrainSummary;
   selectedSource?: SourceManifest;
   terrainError: { siteId: string; message: string } | null;
+  resultsRef: RefObject<HTMLDivElement | null>;
   onDownload: (result: ComparisonResult) => void;
 }) {
   return <div className="evidence-column">
     <div className="results-heading"><div><p className="eyebrow">SCIENTIFIC EVIDENCE</p><h2>Comparison results</h2></div>{results.length > 0 && <span className="result-count">{results.length} returned</span>}</div>
-    <div className="results-list" data-testid="results-panel">
+    <div ref={resultsRef} className="results-list" data-testid="results-panel">
       {resultsStale && results.length > 0 && <div className="stale-result" role="status">Previous result shown. The latest comparison request failed.</div>}
       {!results.length && <div className="empty-state"><span className="empty-icon">◌</span><strong>{comparisonAttempted ? "No result was returned" : "Your evidence will appear here"}</strong><p>{comparisonAttempted ? "Check the request status and retry the comparison." : "Select real processed Earth sites, then run a comparison to see ranked terrain results."}</p></div>}
       {results.some((result) => result.ranking_scope === "real_only") && <h3 className="result-section-title">Real terrain ranking <span>{realResultCount}</span></h3>}
