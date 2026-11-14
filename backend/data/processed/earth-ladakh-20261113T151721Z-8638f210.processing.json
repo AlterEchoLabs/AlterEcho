@@ -39,7 +39,7 @@
     "roughness_window_pixels": 5
   },
   "output_summary": "data\\processed\\earth-ladakh.terrain.json",
-  "output_checksum": "4477e19cf81a24b1f65214fa79fbc96149f40461c5194b33ed949b5b9fc8cec9",
+  "output_checksum": "98f4fcacf8cda42957b4c3d56acd660a6006e54c4cc09f0c062e8192df18e014",
   "quality_passed": true,
   "warnings": []
 }

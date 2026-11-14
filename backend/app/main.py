@@ -5,11 +5,11 @@ from fastapi.encoders import jsonable_encoder
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from app.config import settings
+from app.config import api_title, settings
 from app.routers import catalog, comparison, geospatial, health
 
 
-app = FastAPI(title=settings.app_name, version=settings.app_version)
+app = FastAPI(title=api_title(), description=settings.description, version=settings.app_version)
 app.add_middleware(CORSMiddleware, allow_origins=list(settings.cors_origins), allow_credentials=False, allow_methods=["GET", "POST"], allow_headers=["*"])
 app.include_router(health.router, prefix="/api", tags=["system"])
 app.include_router(catalog.router, prefix="/api", tags=["catalog"])
@@ -30,5 +30,5 @@ async def http_exception_handler(_: Request, exc: HTTPException):
 
 @app.get("/")
 def root():
-    return {"service": settings.app_name, "docs": "/docs", "health": "/api/health"}
+    return {"service": settings.product_name, "application_id": settings.application_id, "version": settings.app_version, "docs": "/docs", "health": "/api/health"}
 

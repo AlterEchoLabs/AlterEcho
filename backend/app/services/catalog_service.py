@@ -1,8 +1,9 @@
 import json
 from pathlib import Path
 
-from app.models.schemas import Planet, Site, SourceReference, TerrainFeatureSummary
+from app.models.schemas import DataStatus, Planet, ProcessingStatus, Site, SourceReference, TerrainFeatureSummary
 from app.services.geospatial_service import GEO_DATA
+from app.services.integrity_service import validate_site_integrity
 
 
 DATA_DIR = Path(__file__).resolve().parents[1] / "data"
@@ -16,13 +17,6 @@ def _read_json(filename: str):
 PLANETS = [Planet.model_validate(item) for item in _read_json("planets.json")]
 SITES = [Site.model_validate(item) for item in _read_json("sites.json")]
 SOURCES = [SourceReference.model_validate(item) for item in _read_json("sources.json")]
-_DEMO = _read_json("comparisons.demo.json")
-FEATURES = {
-    site_id: TerrainFeatureSummary(site_id=site_id, **values)
-    for site_id, values in _DEMO["features"].items()
-}
-
-
 def list_sites(body: str | None = None, data_status: str | None = None, analog_type: str | None = None) -> list[Site]:
     sites = [_with_processed_status(site) for site in SITES]
     return [
@@ -39,7 +33,8 @@ def get_site(site_id: str) -> Site | None:
 
 
 def get_feature_summary(site_id: str) -> TerrainFeatureSummary | None:
-    return FEATURES.get(site_id)
+    """Deprecated compatibility adapter: production never serves synthetic fixtures."""
+    return None
 
 
 def get_processed_summary(site_id: str) -> TerrainFeatureSummary | None:
@@ -47,26 +42,36 @@ def get_processed_summary(site_id: str) -> TerrainFeatureSummary | None:
     return TerrainFeatureSummary.model_validate_json(path.read_text(encoding="utf-8")) if path.exists() else None
 
 
+def get_validated_processed_summary(site_id: str) -> TerrainFeatureSummary | None:
+    site = next((item for item in SITES if item.id == site_id), None)
+    if not site or validate_site_integrity(site):
+        return None
+    return get_processed_summary(site_id)
+
+
 def _with_processed_status(site: Site) -> Site:
-    processed = get_processed_summary(site.id)
-    if not processed or processed.data_status.value != "real_processed":
+    if site.data_status != DataStatus.real_processed:
         return site
+    processed = get_validated_processed_summary(site.id)
+    if not processed:
+        return site.model_copy(update={"data_status": DataStatus.unavailable, "processing_status": ProcessingStatus.processed, "available_metrics": []})
     available = [name for name in ("slope_p50_deg", "slope_p90_deg", "local_relief_p50_m", "local_relief_p90_m", "roughness_mean", "roughness_p90") if getattr(processed, name) is not None]
     return site.model_copy(update={"data_status": processed.data_status, "available_metrics": available})
 
 
 def data_status_summary() -> dict[str, int | str]:
     sites = [_with_processed_status(site) for site in SITES]
-    counts = {f"{status}_sites": sum(site.data_status.value == status for site in sites) for status in ("real_processed", "demo_fixture", "metadata_only", "unavailable")}
-    if counts["real_processed_sites"] and (counts["demo_fixture_sites"] or counts["metadata_only_sites"] or counts["unavailable_sites"]):
-        mode = "mixed"
-    elif counts["real_processed_sites"]:
-        mode = "real"
-    elif counts["demo_fixture_sites"]:
-        mode = "demo"
-    else:
-        mode = "unavailable"
-    counts["data_mode"] = mode
-    counts["rankable_real_candidates"] = sum(site.body.value == "earth" and site.data_status.value == "real_processed" and len(site.available_metrics) >= 4 for site in sites)
+    counts = {
+        "real_processed_sites": sum(site.data_status == DataStatus.real_processed for site in sites),
+        "planned_sites": sum(site.data_status == DataStatus.planned for site in sites),
+        "metadata_only_sites": sum(site.data_status == DataStatus.metadata_only for site in sites),
+        "unavailable_sites": sum(site.data_status == DataStatus.unavailable for site in sites),
+        "production_demo_sites": 0,
+    }
+    rankable = sum(site.body.value == "earth" and site.data_status == DataStatus.real_processed and len(site.available_metrics) >= 4 for site in sites)
+    counts["rankable_real_earth_candidates"] = rankable
+    counts["rankable_real_candidates"] = rankable  # Deprecated Phase 3 alias.
+    counts["demo_fixture_sites"] = 0  # Deprecated Phase 3 alias.
+    counts["data_mode"] = "real_with_planned" if counts["planned_sites"] or counts["metadata_only_sites"] else "real"
     return counts
 

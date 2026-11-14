@@ -1,0 +1,30 @@
+{
+  "site_id": "earth-upper-mustang",
+  "aoi_id": "earth-upper-mustang-aoi-v1",
+  "provider": "Copernicus Data Space Ecosystem / ESA",
+  "collection": "sentinel-2-l2a",
+  "discovered_at": "2026-11-14T10:04:54.582763+00:00",
+  "selection_policy": "90 days <=10% cloud; 90 days <=15%; 365 days <=15%; rank cloud ascending, acquisition time descending, product ID ascending",
+  "attempts": [
+    {
+      "datetime": "2026-08-16T10:04:52.652696Z/2026-11-14T10:04:52.652696Z",
+      "cloud_limit_pct": 10,
+      "result_count": 21
+    }
+  ],
+  "retrieval_status": "metadata_selected_asset_not_retrieved",
+  "selected_scene": {
+    "product_id": "S2A_MSIL2A_20261112T050221_N0513_R119_T45RTN_20261112T100604",
+    "acquisition_datetime": "2026-11-12T05:02:21.024000Z",
+    "cloud_cover_pct": 0.0,
+    "processing_level": "Sentinel-2 Level-2A",
+    "asset_keys": [
+      "B02_10m",
+      "B03_10m",
+      "B04_10m",
+      "TCI_10m",
+      "thumbnail"
+    ],
+    "official_stac_record": "https://stac.dataspace.copernicus.eu/v1/collections/sentinel-2-l2a/items/S2A_MSIL2A_20261112T050221_N0513_R119_T45RTN_20261112T100604"
+  }
+}

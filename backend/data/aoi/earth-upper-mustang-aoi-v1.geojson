@@ -7,7 +7,11 @@
     "intended_analog_characteristics": ["arid dissected terrain", "slope distribution", "local relief", "surface roughness"],
     "known_limitations": ["The AOI requires expert review and field-context validation", "Terrain does not measure aridity, geology, access, or operational safety"],
     "creation_method": "Approximate WGS84 display footprint around a 10 km metric analysis grid center.",
-    "source_references": ["earth-upper-mustang-srtmgl1"]
+    "source_references": ["earth-upper-mustang-srtmgl1"],
+    "planetary_target": "The registered 10 km Jezero reference window under terrain-only comparison.",
+    "analogy_dimensions_not_covered": ["atmosphere", "gravity", "radiation", "geology", "temperature", "habitability"],
+    "representativeness": "Feature-focused window; it does not represent the complete Upper Mustang region.",
+    "known_selection_bias": "The site was selected as an established project candidate before terrain-v3 scoring; independent AOI review is pending."
   },
   "geometry": {"type": "Polygon", "coordinates": [[[83.8486,29.0550],[83.9514,29.0550],[83.9514,29.1450],[83.8486,29.1450],[83.8486,29.0550]]]}
 }

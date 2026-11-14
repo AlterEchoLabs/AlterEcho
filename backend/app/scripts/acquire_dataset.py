@@ -7,6 +7,7 @@ import urllib.error
 import urllib.request
 import zipfile
 
+from app.config import settings
 from app.services.geospatial_service import GEO_DATA, load_aoi, load_manifest, sha256_file, write_manifest
 from app.services.srtm_service import mosaic_rasters, redact_secret, srtm_archive_name, srtm_download_url, tiles_for_geojson_geometry
 from app.services.terrain_service import inspect_dem
@@ -17,7 +18,7 @@ class AcquisitionError(RuntimeError):
 
 
 def earthdata_headers(environment: dict[str, str]) -> dict[str, str]:
-    headers = {"User-Agent": "TerraLuna-AI/0.3"}
+    headers = {"User-Agent": f"{settings.application_id}/{settings.app_version}"}
     token = environment.get("EARTHDATA_TOKEN")
     username, password = environment.get("EARTHDATA_USERNAME"), environment.get("EARTHDATA_PASSWORD")
     if token:
@@ -53,11 +54,11 @@ def extract_dem(archive_path: Path, raw_dir: Path) -> Path:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Acquire or register a TerraLuna source dataset")
+    parser = argparse.ArgumentParser(description=f"Acquire or register a {settings.product_name} source dataset")
     parser.add_argument("--source-id", required=True); parser.add_argument("--force", action="store_true")
     args = parser.parse_args(); manifest = load_manifest(args.source_id)
     raw_dir = GEO_DATA / "raw"; raw_dir.mkdir(parents=True, exist_ok=True)
-    headers = {"User-Agent": "TerraLuna-AI/0.3"}
+    headers = {"User-Agent": f"{settings.application_id}/{settings.app_version}"}
     if manifest.planetary_body == "earth": headers = earthdata_headers(dict(os.environ))
     if manifest.planetary_body == "earth" and manifest.aoi_id:
         tile_ids = tiles_for_geojson_geometry(load_aoi(manifest.aoi_id).geometry)

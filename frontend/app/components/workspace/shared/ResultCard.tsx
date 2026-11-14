@@ -11,9 +11,10 @@ export default function ResultCard({ result, rank, onDownload }: { result: Compa
         <h3>{result.candidate_site.name}</h3>
         <p className="result-direction">Compared with {result.reference_site.name}, Mars</p>
       </div>
-      <div className="score-block"><span>Terrain similarity</span><strong className="score">{result.display_percentage === null ? "Not rankable" : `${result.display_percentage}%`}</strong></div>
+      <div className="score-block"><span>{result.methodology_version === "terrain-v3.0" ? "Terrain Analogy Index" : "Historical terrain-shape similarity index"}</span><strong className="score">{result.display_percentage === null ? "Not rankable" : `${result.display_percentage}/100`}</strong></div>
     </header>
     {!real && <p className="preview-warning">Illustrative fixture values only — this is not a NASA-derived discovery.</p>}
+    <p className="index-warning">This index is not a probability, confidence value, or complete planetary similarity measure.</p>
     <div className="result-meta"><em className={`data-badge ${result.data_status}`}>{dataLabel(result.data_status)}</em><span>Method {result.methodology_version}</span></div>
     <p className={`compatibility ${result.compatibility?.compatible ? "compatible" : "preview"}`}>{result.compatibility?.compatible ? "Compatible inputs" : "Preview / compatibility limits"}</p>
     {result.compatibility?.warnings.map((warning) => <p className="warning-text" key={warning}>{warning}</p>)}

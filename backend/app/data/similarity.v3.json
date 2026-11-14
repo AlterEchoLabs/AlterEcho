@@ -1,0 +1,29 @@
+{
+  "methodology_version": "terrain-v3.0",
+  "core_extent_m": 10000.0,
+  "halo_width_m": 1200.0,
+  "scales_m": [60, 120, 240],
+  "local_relief_neighborhood_m": 1000.0,
+  "roughness_neighborhood_m": 300.0,
+  "minimum_feature_coverage_fraction": 0.9,
+  "distributions": {
+    "elevation_relative_m": [-1000, -500, -250, -100, -50, -20, -10, 0, 10, 20, 50, 100, 250, 500, 1000],
+    "slope_deg": [0, 1, 2, 3, 5, 8, 12, 18, 25, 35, 50, 70, 90],
+    "roughness_m": [0, 1, 2, 5, 10, 20, 40, 80, 160, 320, 640],
+    "local_relief_m": [0, 5, 10, 20, 50, 100, 200, 400, 800, 1600, 3200]
+  },
+  "distribution_distance_scales": {
+    "elevation_relative_m": 150.0,
+    "slope_deg": 8.0,
+    "roughness_m": 30.0,
+    "local_relief_m": 200.0
+  },
+  "feature_weights": {
+    "elevation_relative_m": 0.15,
+    "slope_deg": 0.3,
+    "roughness_m": 0.2,
+    "local_relief_m": 0.35
+  },
+  "scale_weights": {"60": 0.5, "120": 0.3, "240": 0.2},
+  "sensitivity": {"weight_perturbation_fraction": 0.2, "distance_scale_perturbation_fraction": 0.2}
+}

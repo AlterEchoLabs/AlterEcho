@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import SiteImageryViewer from "../../SiteImageryViewer";
 import type { AoiFeature, Site, SourceManifest, TerrainSummary } from "../../../../lib/api";
 import type { Planet, Section } from "../types";
 
@@ -8,7 +9,7 @@ const CandidateMap = dynamic<{ onZoomChange: (value: boolean) => void; sites: Si
 const SpaceScene = dynamic<{ onMoonClick: () => void; showOrbit: boolean; active: boolean }>(() => import("../../SpaceScene"), { ssr: false });
 const PlanetViewer = dynamic(() => import("../../PlanetViewer"), { ssr: false });
 
-export default function PlanetStage({ activePlanet, activeSection, sites, filteredSites, aois, focusedCandidateId, catalogLoading, reference, referenceTerrain, jezeroSource, isZoomedIn, onPlanetChange, onSiteSelect, onZoomChange }: {
+export default function PlanetStage({ activePlanet, activeSection, sites, filteredSites, aois, focusedCandidateId, catalogLoading, reference, referenceTerrain, referenceAoi, jezeroSource, isZoomedIn, onPlanetChange, onSiteSelect, onZoomChange }: {
   activePlanet: Planet;
   activeSection: Section;
   sites: Site[];
@@ -18,6 +19,7 @@ export default function PlanetStage({ activePlanet, activeSection, sites, filter
   catalogLoading: boolean;
   reference: Site | null;
   referenceTerrain?: TerrainSummary;
+  referenceAoi?: AoiFeature | null;
   jezeroSource?: SourceManifest;
   isZoomedIn: boolean;
   onPlanetChange: (planet: Planet) => void;
@@ -43,6 +45,7 @@ export default function PlanetStage({ activePlanet, activeSection, sites, filter
           <small>{referenceTerrain?.aoi_id ?? "AOI unavailable"} · {referenceTerrain?.analysis_width_m ? `${(referenceTerrain.analysis_width_m / 1000).toFixed(2)} km square` : "size unavailable"} · {referenceTerrain?.resolution_m ?? "—"} m grid</small>
           <p className="source-line">{jezeroSource?.provider ?? "Source unavailable"} · {jezeroSource?.instrument ?? "instrument unavailable"}<br />Coverage {referenceTerrain ? `${(referenceTerrain.valid_coverage_fraction * 100).toFixed(1)}%` : "—"} · Method {String(referenceTerrain?.calculation_metadata.methodology_version ?? "—")}</p>
         </div>
+        {reference && referenceAoi && <div className="mars-imagery-panel"><SiteImageryViewer site={reference} aoi={referenceAoi} /></div>}
         <div className="map-overlay map-overlay-top">MARS · 3D TERRAIN MODEL</div>
       </>}
       {activePlanet === "moon" && <div className="coming-soon">

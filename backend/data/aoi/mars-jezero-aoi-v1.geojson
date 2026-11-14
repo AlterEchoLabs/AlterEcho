@@ -8,7 +8,11 @@
     "intended_analog_characteristics": ["local slope distribution", "local relief", "surface roughness"],
     "known_limitations": ["The window is not the whole crater or delta", "Terrain alone does not represent Jezero geology or environment"],
     "creation_method": "Geodetic display footprint approximated from a 10 km square; processing constructs an exact metric grid around the center.",
-    "source_references": ["mars-jezero-ctx-dem"]
+    "source_references": ["mars-jezero-ctx-dem"],
+    "planetary_target": "Mars reference terrain window inside Jezero Crater.",
+    "analogy_dimensions_not_covered": ["atmosphere", "gravity", "radiation", "geology", "temperature", "habitability"],
+    "representativeness": "Feature-focused reference window; it does not represent the complete Jezero Crater.",
+    "known_selection_bias": "The center is inherited from the project reference selection; independent geomorphology review is pending."
   },
   "geometry": {"type": "Polygon", "coordinates": [[[77.3611,18.3557],[77.5389,18.3557],[77.5389,18.5243],[77.3611,18.5243],[77.3611,18.3557]]]}
 }

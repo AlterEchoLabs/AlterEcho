@@ -1,6 +1,6 @@
 [
   {"id":"nasa-jezero","title":"NASA - Jezero Crater","url":"https://science.nasa.gov/mars/mars-exploration/mars-2020-perseverance/mission-overview/jezero-crater/","role":"reference context"},
-  {"id":"usgs-jezero-dem","title":"USGS Mars 2020 landing-site terrain products","url":"https://www.usgs.gov/data/mars-2020-terrain-relative-navigation-ctx-dtm-mosaic","role":"future DEM source"},
+  {"id":"usgs-jezero-dem","title":"USGS Mars 2020 landing-site terrain products","url":"https://www.usgs.gov/data/mars-2020-terrain-relative-navigation-ctx-dtm-mosaic","role":"processed DEM source"},
   {"id":"handoff-candidate-atlas","title":"AlterEcho research handoff candidate atlas","url":"about:local-research-handoff","role":"project hypothesis"},
   {"id":"ladakh-research","title":"Ladakh analogue research","url":"https://doi.org/10.1017/S1473550419000119","role":"analog context"},
   {"id":"isro-ladakh","title":"ISRO Space Analog Mission in Tso Kar Valley","url":"https://www.isro.gov.in/ISRO_EN/Space_Analog_Mission.html","role":"operational context"},

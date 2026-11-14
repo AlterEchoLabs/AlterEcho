@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import PlanetSelector from "./components/PlanetSelector";
@@ -15,6 +15,7 @@ import SectionToolbar from "./components/workspace/layout/SectionToolbar";
 import WorkspaceHeader from "./components/workspace/layout/WorkspaceHeader";
 import WorkspaceSidebar from "./components/workspace/layout/WorkspaceSidebar";
 import { api, type AoiFeature, type ComparisonResult, type HealthResponse, type Site, type SourceManifest, type TerrainSummary } from "../lib/api";
+import { BRAND } from "../config/brand";
 import type { DataFilter, Planet, Section } from "./components/workspace/types";
 import { sectionTitles } from "./components/workspace/types";
 
@@ -33,6 +34,7 @@ export default function Home() {
   const [candidateQuery, setCandidateQuery] = useState("");
   const [regionFilter, setRegionFilter] = useState("all");
   const [environmentFilter, setEnvironmentFilter] = useState("all");
+  const [methodologyVersion, setMethodologyVersion] = useState<"terrain-v3.0" | "terrain-v2.0">("terrain-v3.0");
   const [aois, setAois] = useState<AoiFeature[]>([]);
   const [terrain, setTerrain] = useState<Record<string, TerrainSummary>>({});
   const [sources, setSources] = useState<SourceManifest[]>([]);
@@ -79,7 +81,6 @@ export default function Home() {
       setTerrain(Object.fromEntries(summaries.map((summary) => [summary.site_id, summary])));
       if (items[6].status === "fulfilled") setSources(items[6].value as SourceManifest[]);
     });
-
     return () => { active = false; };
   }, []);
 
@@ -104,14 +105,14 @@ export default function Home() {
     setFocusedCandidateId(id);
     clearComparisonState();
   }, [clearComparisonState]);
-
   const selectAllReal = useCallback(() => {
     setSelectedIds(sites.filter((site) => site.data_status === "real_processed").map((site) => site.id));
     clearComparisonState();
   }, [sites, clearComparisonState]);
 
   const compareTerrain = useCallback(async () => {
-    if (!selectedIds.length) {
+    const eligibleIds = selectedIds.filter((id) => sites.some((site) => site.id === id && site.data_status === "real_processed"));
+    if (!eligibleIds.length) {
       setComparisonError("Select at least one real Earth site.");
       setComparisonAttempted(true);
       return;
@@ -120,8 +121,8 @@ export default function Home() {
     setComparisonError(null);
     setComparisonAttempted(true);
     try {
-      const response = await api.discover(selectedIds);
-      setResults(response.results);
+      const response = await api.discover(eligibleIds, methodologyVersion);
+      setResults(response.real_results);
       setResultsStale(false);
       setActiveSection("comparison");
     } catch (error) {
@@ -130,7 +131,7 @@ export default function Home() {
     } finally {
       setComparisonLoading(false);
     }
-  }, [selectedIds, results.length]);
+  }, [selectedIds, sites, results.length, methodologyVersion]);
 
   const downloadResult = useCallback((result: ComparisonResult) => {
     const url = URL.createObjectURL(new Blob([JSON.stringify(result, null, 2)], { type: "application/json" }));
@@ -161,7 +162,7 @@ export default function Home() {
     [sites, focusedCandidateId],
   );
   useEffect(() => {
-    if (!selectedSite || terrain[selectedSite.id]) return;
+    if (!selectedSite || selectedSite.data_status !== "real_processed" || terrain[selectedSite.id]) return;
     const controller = new AbortController();
     api.terrain(selectedSite.id, controller.signal)
       .then((summary) => {
@@ -178,7 +179,7 @@ export default function Home() {
   const candidateCounts = useMemo(() => ({
     all: sites.length,
     real_processed: sites.filter((site) => site.data_status === "real_processed").length,
-    demo_fixture: sites.filter((site) => site.data_status === "demo_fixture").length,
+    planned: sites.filter((site) => site.data_status === "planned").length,
     metadata_only: sites.filter((site) => site.data_status === "metadata_only").length,
   }), [sites]);
 
@@ -194,6 +195,7 @@ export default function Home() {
   const earthAois = useMemo(() => aois.filter((aoi) => aoi.properties.planetary_body === "earth"), [aois]);
   const referenceTerrain = terrain["mars-jezero"];
   const selectedAoi = aois.find((aoi) => aoi.properties.site_id === selectedSite?.id);
+  const referenceAoi = aois.find((aoi) => aoi.properties.site_id === "mars-jezero") ?? null;
   const selectedTerrain = selectedSite ? terrain[selectedSite.id] : undefined;
   const selectedSourceId = selectedSite ? ({
     "earth-atacama": "earth-atacama-srtmgl1",
@@ -203,13 +205,13 @@ export default function Home() {
   const selectedSource = sources.find((source) => source.source_id === selectedSourceId);
   const jezeroSource = sources.find((source) => source.source_id === "mars-jezero-ctx-dem");
   const selectedRealCount = selectedIds.filter((id) => sites.some((site) => site.id === id && site.data_status === "real_processed")).length;
-  const comparisonButtonLabel = comparisonLoading ? "Comparing…" : selectedRealCount ? `Compare ${selectedRealCount} site${selectedRealCount === 1 ? "" : "s"}` : "Select real sites to compare";
+  const comparisonButtonLabel = comparisonLoading ? "Comparing..." : selectedRealCount ? `Compare ${selectedRealCount} site${selectedRealCount === 1 ? "" : "s"}` : "Select real sites to compare";
   const activeTitle = sectionTitles[activeSection];
   const realResultCount = results.filter((result) => result.comparison_classification === "real_comparison").length;
   const previewResultCount = results.filter((result) => result.comparison_classification !== "real_comparison").length;
   const sharedWorkspace = ["overview", "explorer", "discovery", "comparison"].includes(activeSection);
 
-  return <main className="app-shell">
+  return <main className="app-shell" data-application-id={BRAND.applicationId} data-build-identifier={BRAND.buildIdentifier} data-application-version={BRAND.applicationVersion}>
     <WorkspaceSidebar activeSection={activeSection} resultCount={results.length} version={health?.application_version ?? "FRONTEND"} onSectionChange={setActiveSection} />
     <div className="app-main">
       <WorkspaceHeader title={activeTitle} health={health} backendError={backendError} />
@@ -230,6 +232,7 @@ export default function Home() {
               catalogLoading={catalogLoading}
               reference={reference}
               referenceTerrain={referenceTerrain}
+              referenceAoi={referenceAoi}
               jezeroSource={jezeroSource}
               isZoomedIn={isZoomedIn}
               onPlanetChange={setActivePlanet}
@@ -258,6 +261,7 @@ export default function Home() {
                 comparisonLoading={comparisonLoading}
                 backendError={backendError}
                 comparisonError={comparisonError}
+                methodologyVersion={methodologyVersion}
                 onQueryChange={setCandidateQuery}
                 onRegionChange={setRegionFilter}
                 onEnvironmentChange={setEnvironmentFilter}
@@ -266,6 +270,7 @@ export default function Home() {
                 onToggle={toggleCandidate}
                 onFocus={focusCandidate}
                 onCompare={compareTerrain}
+                onMethodologyChange={(value) => { setMethodologyVersion(value); clearComparisonState(); }}
               />
               {activeSection === "overview" && <ResultsPanel
                 results={results}

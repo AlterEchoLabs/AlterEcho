@@ -39,7 +39,7 @@
     "roughness_window_pixels": 5
   },
   "output_summary": "data\\processed\\earth-atacama.terrain.json",
-  "output_checksum": "23b59f66860ccb16d3945e40f0302f241267b2b211ec55aa57b6db83412fb8f9",
+  "output_checksum": "d108745b51636cbcca6149ee3b718c5fadaa46300181b0323f18204fb95efcd1",
   "quality_passed": true,
   "warnings": []
 }

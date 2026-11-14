@@ -9,8 +9,9 @@ client = TestClient(app)
 def test_health():
     response = client.get("/api/health")
     assert response.status_code == 200
-    assert response.json()["data_mode"] == "mixed"
-    assert response.json()["data_counts"]["real_processed_sites"] >= 1
+    assert response.json()["data_mode"] == "real_with_planned"
+    assert response.json()["data_counts"]["real_processed_sites"] == 4
+    assert response.json()["data_counts"]["production_demo_sites"] == 0
 
 
 def test_catalog_and_earth_filter():
@@ -24,6 +25,7 @@ def test_discover_schema_and_unknown_site():
     response = client.post("/api/discover", json={"reference_site_id": "mars-jezero", "candidate_site_ids": ["earth-atacama"]})
     assert response.status_code == 200
     assert response.json()["results"][0]["data_status"] == "real_processed"
+    assert response.json()["preview_results"] == []
     missing = client.post("/api/discover", json={"reference_site_id": "mars-jezero", "candidate_site_ids": ["missing"]})
     assert missing.status_code == 404
     assert missing.json()["error"]["code"] == "candidate_not_found"

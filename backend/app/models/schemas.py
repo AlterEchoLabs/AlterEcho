@@ -7,6 +7,8 @@ from pydantic import BaseModel, Field, field_validator, model_validator
 
 class DataStatus(str, Enum):
     real_processed = "real_processed"
+    planned = "planned"
+    # Retained for test-fixture and response backward compatibility only.
     demo_fixture = "demo_fixture"
     metadata_only = "metadata_only"
     unavailable = "unavailable"
@@ -16,6 +18,18 @@ class Body(str, Enum):
     earth = "earth"
     mars = "mars"
     moon = "moon"
+
+
+class ProcessingStatus(str, Enum):
+    not_processed = "not_processed"
+    processed = "processed"
+    integrity_checked = "integrity_checked"
+
+
+class ScientificValidationStatus(str, Enum):
+    not_reviewed = "not_reviewed"
+    methodology_review_pending = "methodology_review_pending"
+    research_reviewed = "research_reviewed"
 
 
 class Planet(BaseModel):
@@ -50,6 +64,10 @@ class Site(BaseModel):
     available_metrics: list[str]
     thumbnail_url: str | None = None
     map_display: dict[str, Any]
+    processing_status: ProcessingStatus = ProcessingStatus.not_processed
+    scientific_validation_status: ScientificValidationStatus = ScientificValidationStatus.not_reviewed
+    aoi_id: str | None = None
+    source_id: str | None = None
 
 
 class TerrainFeatureSummary(BaseModel):
@@ -142,6 +160,10 @@ class AOIRecord(BaseModel):
     creation_method: str
     source_references: list[str]
     geometry: dict[str, Any]
+    planetary_target: str | None = None
+    analogy_dimensions_not_covered: list[str] = Field(default_factory=list)
+    representativeness: str | None = None
+    known_selection_bias: str | None = None
 
 
 class Compatibility(BaseModel):
@@ -183,6 +205,7 @@ class DiscoverRequest(BaseModel):
     reference_site_id: str = "mars-jezero"
     candidate_site_ids: list[str] = Field(min_length=1, max_length=20)
     weights: dict[str, float] | None = None
+    methodology_version: str = "terrain-v3.0"
 
     @field_validator("candidate_site_ids")
     @classmethod
@@ -247,4 +270,111 @@ class DiscoverResponse(BaseModel):
     ranking_scope: str = "preview_only"
     real_results: list[ComparisonResult] = Field(default_factory=list)
     preview_results: list[ComparisonResult] = Field(default_factory=list)
+    unrankable_results: list[ComparisonResult] = Field(default_factory=list)
+
+
+class FeatureCoverage(BaseModel):
+    valid_sample_count: int = Field(ge=0)
+    total_expected_sample_count: int = Field(gt=0)
+    coverage_fraction: float = Field(ge=0, le=1)
+    nodata_propagation: str
+    kernel_edge_exclusions: int = Field(ge=0)
+    quality_flag: str
+
+
+class DistributionSummary(BaseModel):
+    feature: str
+    bin_edges: list[float]
+    normalized_counts: list[float]
+    valid_sample_count: int = Field(ge=0)
+    @model_validator(mode="after")
+    def bins_match_counts(self):
+        if len(self.bin_edges) != len(self.normalized_counts) + 1:
+            raise ValueError("distribution bin_edges must contain one more value than normalized_counts")
+        return self
+
+
+class ScaleTerrainResult(BaseModel):
+    resolution_m: float = Field(gt=0)
+    metrics: dict[str, float | None]
+    feature_coverage: dict[str, FeatureCoverage]
+    distributions: dict[str, DistributionSummary]
+
+
+class TerrainV3Artifact(BaseModel):
+    site_id: str
+    methodology_version: str = "terrain-v3.0"
+    source_summary_methodology: str = "terrain-v2.0"
+    core_aoi_id: str
+    core_width_m: float
+    core_height_m: float
+    halo_width_m: float
+    horizontal_units: str
+    vertical_units: str
+    vertical_datum: str | None
+    nodata_definition: str
+    resampling_method: str
+    scales: dict[str, ScaleTerrainResult]
+    core_valid_coverage: dict[str, float]
+    halo_valid_coverage: dict[str, float]
+    quality_status: str
+    cross_validation_status: str
+    provenance: dict[str, Any]
+    warnings: list[str] = Field(default_factory=list)
+
+
+class DatasetRecord(BaseModel):
+    dataset_id: str
+    provider: str
+    product_name: str
+    product_id: str | None
+    collection: str | None
+    version: str | None
+    celestial_body: str
+    scientific_dimension: str
+    spatial_resolution: str | None
+    temporal_coverage: str | None
+    spatial_coverage: str | None
+    authentication_requirement: str | None
+    license_or_usage_notes: str | None
+    doi: str | None
+    official_landing_page: str
+    api_endpoint: str | None
+    local_status: str
+    intended_project_use: str
+    known_limitations: list[str]
+    checksum: str | None = None
+    last_checked_date: str | None = None
+
+
+class ImageryRecord(BaseModel):
+    imagery_id: str
+    site_id: str
+    body: Body
+    mode: str
+    provider: str
+    collection: str | None
+    product_id: str | None
+    acquisition_datetime: datetime | None
+    publication_datetime: datetime | None = None
+    resolution_m: float | None
+    cloud_cover_pct: float | None = Field(default=None, ge=0, le=100)
+    processing_level: str | None
+    bbox: list[float]
+    aoi_id: str | None
+    preview_url: str | None
+    tile_url: str | None = None
+    attribution: str
+    official_source_url: str
+    cache_status: str
+    cache_date: datetime | None = None
+    data_status: str
+    limitations: list[str] = Field(default_factory=list)
+    display_resolution_m: float | None = None
+    aoi_coverage_fraction: float | None = Field(default=None, ge=0, le=1)
+    source_checksum: str | None = None
+    preview_checksum: str | None = None
+    source_crs: str | None = None
+    native_resolution: list[float] | None = None
+    source_download_url: str | None = None
 

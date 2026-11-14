@@ -39,7 +39,7 @@
     "roughness_window_pixels": 5
   },
   "output_summary": "data\\processed\\earth-upper-mustang.terrain.json",
-  "output_checksum": "4d27b82518f8ba9e290bc50dfa8f79db85214967a3c3cc4ca1eb9d98990669d1",
+  "output_checksum": "f2bd8d75ae11aa91050fad894ca118bdd019bb86bb540d70fb86752ee092ae8d",
   "quality_passed": true,
   "warnings": []
 }

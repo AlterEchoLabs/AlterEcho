@@ -1,2 +1,2 @@
-"""TerraLuna AI backend."""
+"""AlterEcho terrain explorer backend."""
 

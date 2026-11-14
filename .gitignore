@@ -2,12 +2,14 @@
 .venv*/
 __pycache__/
 .pytest_cache/
-.env
+**/.env*
+!**/.env.example
 node_modules/
 .next/
+frontend/test-results/
+frontend/playwright-report/
 backend/data/raw/
 backend/data/interim/
 backend/data/cache/
-backend/.env
 
 /backend/.env

@@ -39,7 +39,7 @@
     "roughness_window_pixels": 5
   },
   "output_summary": "data\\processed\\mars-jezero.terrain.json",
-  "output_checksum": "737a10d9c5af3aca9b00a458f887f7ae6d8d34117b3b2ece68d5dbe7b0dff1cf",
+  "output_checksum": "c66ee79d532f77298d34823832031e7aa784da35e2b6110c2b9e85d35b40f31c",
   "quality_passed": true,
   "warnings": []
 }

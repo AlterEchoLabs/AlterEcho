@@ -1,4 +1,4 @@
-# TerraLuna AI backend
+# Backend
 
 Welcome! This is the FastAPI side of TerraLuna AI. It provides the catalog of planetary bodies and terrain sites, comparison endpoints for the frontend, and a separate toolchain for processing elevation data.
 
@@ -189,3 +189,4 @@ Dataset acquisition may require Earthdata credentials for protected sources. Sup
 - `CORS_ORIGINS` — comma-separated allowed frontend origins; defaults to local development origins on port 3000.
 
 Restart the server after changing environment variables so the settings are read again.
+The FastAPI backend serves only real, integrity-checked terrain summaries in production. Planned and metadata-only sites remain catalog records but cannot receive scores. Synthetic values are restricted to `tests/fixtures/` and generated unit-test inputs. Artifact integrity is not a claim of independent scientific validation.

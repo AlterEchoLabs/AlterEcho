@@ -30,21 +30,25 @@ def test_earthdata_auth_failure_and_secret_redaction():
     assert token not in redact_secret(f"request failed using Bearer {token}", f"Bearer {token}")
 
 
-def test_health_reports_mixed_counts():
+def test_health_reports_real_with_planned_counts():
     payload = client.get("/api/health").json()
-    assert payload["data_mode"] == "mixed"
-    assert payload["data_counts"]["real_processed_sites"] >= 1
-    assert payload["data_counts"]["demo_fixture_sites"] >= 1
-    assert payload["data_counts"]["rankable_real_candidates"] == 3
+    assert payload["data_mode"] == "real_with_planned"
+    assert payload["data_counts"]["real_processed_sites"] == 4
+    assert payload["data_counts"]["planned_sites"] == 2
+    assert payload["data_counts"]["metadata_only_sites"] == 1
+    assert payload["data_counts"]["production_demo_sites"] == 0
+    assert payload["data_counts"]["rankable_real_earth_candidates"] == 3
 
 
-def test_preview_ranking_is_separate_and_metadata_has_no_score():
+def test_planned_and_metadata_sites_have_no_score_or_fixture_fallback():
     payload = client.post("/api/discover", json={"reference_site_id":"mars-jezero","candidate_site_ids":["earth-holuhraun", "earth-danakil"]}).json()
-    assert payload["ranking_scope"] == "preview_only" and payload["real_results"] == []
-    assert len(payload["preview_results"]) == 2
-    danakil = next(item for item in payload["preview_results"] if item["candidate_site"]["id"] == "earth-danakil")
+    assert payload["ranking_scope"] == "unrankable_only" and payload["real_results"] == []
+    assert payload["preview_results"] == []
+    assert len(payload["unrankable_results"]) == 2
+    assert all(item["overall_similarity"] is None for item in payload["results"])
+    danakil = next(item for item in payload["unrankable_results"] if item["candidate_site"]["id"] == "earth-danakil")
     assert danakil["overall_similarity"] is None
-    assert danakil["comparison_classification"] == "not_rankable_metadata"
+    assert danakil["comparison_classification"] == "not_rankable_metadata_only"
 
 
 def test_stale_processing_output_checksum_is_rejected(tmp_path, monkeypatch):

@@ -1,4 +1,5 @@
 import type { ComparisonResult, Site, SourceManifest, TerrainSummary, AoiFeature } from "../../../../lib/api";
+import SiteImageryViewer from "../../SiteImageryViewer";
 import ResultCard from "../shared/ResultCard";
 import { coordinate, dataLabel, longitude } from "../shared/formatters";
 
@@ -28,6 +29,7 @@ export default function ResultsPanel({ results, resultsStale, comparisonAttempte
     {selectedSite ? <article className="site-card" data-testid="selected-candidate-details">
       <div className="site-card-heading"><div><p className="eyebrow">SELECTED STUDY AREA</p><h3>{selectedSite.name}</h3></div><em className={`data-badge ${selectedSite.data_status}`}>{dataLabel(selectedSite.data_status)}</em></div>
       <p>{selectedSite.short_description}</p>
+      {selectedSite.data_status === "real_processed" && <SiteImageryViewer site={selectedSite} aoi={selectedAoi ?? null} />}
       {terrainError?.siteId === selectedSite.id && <p className="warning-text" role="alert">Dataset details unavailable: {terrainError.message}</p>}
       <dl>
         <dt>Coordinates</dt><dd>{coordinate(selectedSite.latitude)}, {longitude(selectedSite.longitude)}</dd>
