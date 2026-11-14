@@ -50,7 +50,7 @@ def processing_run(run_id: str):
 
 @router.get("/imagery-assets/{asset_name}", include_in_schema=False)
 def imagery_asset(asset_name: str):
-    allowed = {"mars-jezero-ctx-reference.png"}
+    allowed = {"mars-jezero-ctx-reference.png", "earth-atacama-sentinel-reference.png"}
     if asset_name not in allowed:
         raise HTTPException(status_code=404, detail={"code": "imagery_asset_not_found", "message": "Unknown imagery asset"})
     path = GEO_DATA / "processed" / "imagery" / asset_name

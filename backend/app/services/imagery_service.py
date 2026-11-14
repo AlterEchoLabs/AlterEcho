@@ -137,7 +137,11 @@ def list_site_imagery(site_id: str) -> list[ImageryRecord]:
         selection_path = GEO_DATA / "imagery" / f"{site_id}.sentinel-selection.json"
         selection = json.loads(selection_path.read_text(encoding="utf-8")) if selection_path.exists() else None
         selected_scene = selection.get("selected_scene") if selection else None
-        reference = ImageryRecord(
+        local_reference_path = GEO_DATA / "processed" / "imagery" / f"{site_id}-sentinel-reference.json"
+        if local_reference_path.exists():
+            reference = ImageryRecord.model_validate_json(local_reference_path.read_text(encoding="utf-8"))
+        else:
+            reference = ImageryRecord(
             imagery_id=f"{site_id}-sentinel-2-reference", site_id=site_id, body=site.body, mode="reference",
             provider="Copernicus Data Space Ecosystem / ESA", collection="sentinel-2-l2a", product_id=selected_scene.get("product_id") if selected_scene else None,
             acquisition_datetime=datetime.fromisoformat(selected_scene["acquisition_datetime"].replace("Z", "+00:00")) if selected_scene else None,
@@ -146,7 +150,7 @@ def list_site_imagery(site_id: str) -> list[ImageryRecord]:
             preview_url=None, attribution="Copernicus Sentinel data", official_source_url=selected_scene.get("official_stac_record") if selected_scene and selected_scene.get("official_stac_record") else "https://dataspace.copernicus.eu/",
             cache_status="metadata_cached" if selected_scene else "not_cached", data_status="authentication_required" if not credentials_status()["copernicus"] else "acquisition_pending",
             limitations=["Scene metadata may be selected, but no image is displayed until protected band assets are retrieved, cropped and checksummed.", "Cloud screening follows the 90-day/10%, 90-day/15%, then 365-day/15% policy."],
-        )
+            )
         latest = ImageryRecord(
             imagery_id=f"{site_id}-gibs-latest", site_id=site_id, body=site.body, mode="latest_observation",
             provider=gibs["provider"], collection="GIBS EPSG:3857 best", product_id=gibs["layer_identifier"],

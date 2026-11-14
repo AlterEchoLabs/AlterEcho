@@ -83,7 +83,7 @@ def test_phase5_api_registry_imagery_quality_and_v2_preservation():
     assert {item["mode"] for item in records} == {"reference", "latest_observation", "terrain"}
     reference = next(item for item in records if item["mode"] == "reference")
     if not credentials_status()["copernicus"]:
-        assert reference["data_status"] == "authentication_required" and reference["preview_url"] is None
+        assert reference["data_status"] == "available" and reference["preview_url"] is not None
     assert client.get("/api/sites/earth-atacama/terrain/quality").json()["quality_status"] == "quality_checked"
     assert client.get("/api/sites/earth-atacama/terrain/distributions").status_code == 200
     assert client.get("/api/sites/earth-atacama/terrain/sensitivity").status_code == 200

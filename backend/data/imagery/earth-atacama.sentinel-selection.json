@@ -1,30 +1,23 @@
 {
   "site_id": "earth-atacama",
   "aoi_id": "earth-atacama-aoi-v1",
-  "provider": "Copernicus Data Space Ecosystem / ESA",
+  "provider": "Microsoft Planetary Computer / Sentinel-2 L2A",
   "collection": "sentinel-2-l2a",
-  "discovered_at": "2026-11-14T10:04:51.228037+00:00",
-  "selection_policy": "90 days <=10% cloud; 90 days <=15%; 365 days <=15%; rank cloud ascending, acquisition time descending, product ID ascending",
-  "attempts": [
-    {
-      "datetime": "2026-08-16T10:04:46.592851Z/2026-11-14T10:04:46.592851Z",
-      "cloud_limit_pct": 10,
-      "result_count": 43
-    }
-  ],
-  "retrieval_status": "metadata_selected_asset_not_retrieved",
+  "discovered_at": "2026-11-14T11:13:26.265735+00:00",
+  "retrieval_status": "verified_local_rgb_crop",
   "selected_scene": {
-    "product_id": "S2B_MSIL2A_20261027T144729_N0513_R139_T19KDP_20261027T200046",
-    "acquisition_datetime": "2026-10-27T14:47:29.024000Z",
-    "cloud_cover_pct": 0.0,
+    "product_id": "S2B_MSIL2A_20260927T144729_R139_T19KDP_20260927T195914",
+    "acquisition_datetime": "2026-09-27T14:47:29.024000Z",
+    "cloud_cover_pct": 0.000238,
     "processing_level": "Sentinel-2 Level-2A",
     "asset_keys": [
-      "B02_10m",
-      "B03_10m",
-      "B04_10m",
-      "TCI_10m",
-      "thumbnail"
+      "B02",
+      "B03",
+      "B04"
     ],
-    "official_stac_record": "https://stac.dataspace.copernicus.eu/v1/collections/sentinel-2-l2a/items/S2B_MSIL2A_20261027T144729_N0513_R139_T19KDP_20261027T200046"
+    "official_stac_record": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2B_MSIL2A_20260927T144729_R139_T19KDP_20260927T195914",
+    "preview_checksum": "a498ba500849705040ccaac3ab486e4c764a0de62fe340b923da5566e29b064b",
+    "output_resolution_m": 10,
+    "aoi_coverage_fraction": 1.0
   }
 }
