@@ -35,19 +35,19 @@ export default function PlanetStage({ activePlanet, activeSection, sites, filter
         <div className="map-overlay map-overlay-bottom">{filteredSites.length} catalog sites <span>·</span> Drag to rotate <span>·</span> Scroll to zoom</div>
       </>}
       {activePlanet === "mars" && <>
-        <div className="planet-viewer"><PlanetViewer planet="mars" /></div>
-        <div className="reference-overlay">
+        <div className="planet-viewer"><PlanetViewer planet="mars" site={reference} /></div>
+        {/* <div className="reference-overlay">
           <span>PLANETARY REFERENCE · {referenceTerrain?.data_status === "real_processed" ? "PROCESSED TERRAIN" : "CATALOG"}</span>
           <h2>{reference?.name ?? "Jezero Crater"}</h2>
           <p>{reference?.short_description ?? "Reference metadata unavailable while the backend is offline."}</p>
           <small>{referenceTerrain?.aoi_id ?? "AOI unavailable"} · {referenceTerrain?.analysis_width_m ? `${(referenceTerrain.analysis_width_m / 1000).toFixed(2)} km square` : "size unavailable"} · {referenceTerrain?.resolution_m ?? "—"} m grid</small>
           <p className="source-line">{jezeroSource?.provider ?? "Source unavailable"} · {jezeroSource?.instrument ?? "instrument unavailable"}<br />Coverage {referenceTerrain ? `${(referenceTerrain.valid_coverage_fraction * 100).toFixed(1)}%` : "—"} · Method {String(referenceTerrain?.calculation_metadata.methodology_version ?? "—")}</p>
-        </div>
+        </div> */}
         <div className="map-overlay map-overlay-top">MARS · 3D TERRAIN MODEL</div>
       </>}
       {activePlanet === "moon" && <div className="coming-soon">
         <div className="moon-preview"><PlanetViewer planet="moon" /></div>
-        <div className="coming-copy"><span>LUNAR EXPLORATION</span><h2>Interactive lunar surface</h2><p>The 3D Moon model is available to explore. Lunar terrain analysis and comparison are not connected to the current backend.</p><span className="future-badge">ANALYSIS PIPELINE · PLANNED</span></div>
+        {/* <div className="coming-copy"><span>LUNAR EXPLORATION</span><h2>Interactive lunar surface</h2><p>The 3D Moon model is available to explore. Lunar terrain analysis and comparison are not connected to the current backend.</p><span className="future-badge">ANALYSIS PIPELINE · PLANNED</span></div> */}
       </div>}
       <SpaceScene onMoonClick={() => onPlanetChange("moon")} showOrbit={!isZoomedIn} active={activeSection !== "data" && activeSection !== "assistant" && activeSection !== "mission" && activeSection !== "reports" && activePlanet === "earth"} />
   </section>;
