@@ -58,7 +58,7 @@ function CandidateMap({ sites, aois = [], focusedSiteId, onSelect, onZoomChange 
         const region = document.createElement("p"); region.textContent = site.country_or_region;
         const status = document.createElement("small"); status.textContent = site.data_status.replace("_", " ");
         popup.append(title, region, status);
-        new Popup().setLngLat([site.longitude, site.latitude]).setDOMContent(popup).addTo(map);
+        new Popup({ className: "candidate-map-popup" }).setLngLat([site.longitude, site.latitude]).setDOMContent(popup).addTo(map);
       });
       map.on("mouseenter", "candidate-points", () => { map.getCanvas().style.cursor = "pointer"; });
       map.on("mouseleave", "candidate-points", () => { map.getCanvas().style.cursor = ""; });
