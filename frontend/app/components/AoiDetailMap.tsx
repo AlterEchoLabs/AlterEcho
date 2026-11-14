@@ -19,7 +19,7 @@ function AoiDetailMap({ aoi, tileUrl, label }: { aoi: AoiFeature; tileUrl: strin
     const north = Math.max(...coordinates.map((point) => point[1]));
     const map = new MapLibreMap({
       container: container.current,
-      style: { version: 8, sources: { observation: { type: "raster", tiles: [tileUrl], tileSize: 256, attribution: "NASA Worldview / GIBS" } }, layers: [{ id: "observation", type: "raster", source: "observation" }] },
+      style: { version: 8, sources: { observation: { type: "raster", tiles: [tileUrl], tileSize: 256, maxzoom: 9, attribution: "NASA Worldview / GIBS" } }, layers: [{ id: "observation", type: "raster", source: "observation" }] },
       bounds: [[west, south], [east, north]], fitBoundsOptions: { padding: 28, maxZoom: 9 }, maxZoom: 9,
       attributionControl: { compact: true }, dragRotate: false, pitchWithRotate: false,
     });

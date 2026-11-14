@@ -29,12 +29,12 @@ export default function ResultsPanel({ results, resultsStale, comparisonAttempte
     {selectedSite ? <article className="site-card" data-testid="selected-candidate-details">
       <div className="site-card-heading"><div><p className="eyebrow">SELECTED STUDY AREA</p><h3>{selectedSite.name}</h3></div><em className={`data-badge ${selectedSite.data_status}`}>{dataLabel(selectedSite.data_status)}</em></div>
       <p>{selectedSite.short_description}</p>
-      {selectedSite.data_status === "real_processed" && <SiteImageryViewer site={selectedSite} aoi={selectedAoi ?? null} />}
+      {selectedSite.data_status === "real_processed" && <SiteImageryViewer key={selectedSite.id} site={selectedSite} aoi={selectedAoi ?? null} />}
       {terrainError?.siteId === selectedSite.id && <p className="warning-text" role="alert">Dataset details unavailable: {terrainError.message}</p>}
       <dl>
         <dt>Coordinates</dt><dd>{coordinate(selectedSite.latitude)}, {longitude(selectedSite.longitude)}</dd>
         <dt>Study window</dt><dd>{selectedAoi ? `${selectedAoi.properties.width_m / 1000} × ${selectedAoi.properties.height_m / 1000} km · ${selectedAoi.properties.aoi_id}` : "Regional locator only; no verified AOI footprint"}</dd>
-        <dt>Source resolution</dt><dd>{selectedSource?.native_resolution ?? "Not available"}{selectedTerrain?.resolution_m ? ` · processed on a ${selectedTerrain.resolution_m} m grid` : ""}</dd>
+        <dt>Source resolution</dt><dd>{selectedSource?.native_resolution ? (Array.isArray(selectedSource.native_resolution) ? selectedSource.native_resolution.join(" × ") : selectedSource.native_resolution) : "Not available"}{selectedTerrain?.resolution_m ? ` · processed on a ${selectedTerrain.resolution_m} m grid` : ""}</dd>
         <dt>Data quality</dt><dd>{selectedTerrain ? `${(selectedTerrain.valid_coverage_fraction * 100).toFixed(1)}% valid coverage` : selectedSite.data_status === "real_processed" ? "Processed summary loading…" : "No validated terrain summary"}</dd>
         <dt>Known limits</dt><dd>{selectedSite.known_limitations.join(" ")}</dd>
       </dl>

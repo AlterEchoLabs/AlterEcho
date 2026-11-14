@@ -21,6 +21,7 @@ import { sectionTitles } from "./components/workspace/types";
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState<Section>("overview");
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [activePlanet, setActivePlanet] = useState<Planet>("earth");
   const [isZoomedIn, setIsZoomedIn] = useState(false);
   const [health, setHealth] = useState<HealthResponse | null>(null);
@@ -212,17 +213,17 @@ export default function Home() {
   const sharedWorkspace = ["overview", "explorer", "discovery", "comparison"].includes(activeSection);
 
   return <main className="app-shell" data-application-id={BRAND.applicationId} data-build-identifier={BRAND.buildIdentifier} data-application-version={BRAND.applicationVersion}>
-    <WorkspaceSidebar activeSection={activeSection} resultCount={results.length} version={health?.application_version ?? "FRONTEND"} onSectionChange={setActiveSection} />
+    <WorkspaceSidebar activeSection={activeSection} resultCount={results.length} version={health?.application_version ?? "FRONTEND"} collapsed={sidebarCollapsed} onSectionChange={setActiveSection} onToggleCollapsed={() => setSidebarCollapsed((current) => !current)} />
     <div className="app-main">
-      <WorkspaceHeader title={activeTitle} health={health} backendError={backendError} />
+      <WorkspaceHeader title={activeTitle} health={health} backendError={backendError} sidebarCollapsed={sidebarCollapsed} onToggleSidebar={() => setSidebarCollapsed((current) => !current)} />
       <div className="page-content">
         {activeSection === "overview" && <OverviewHeader referenceName={reference?.name ?? "Jezero Crater"} referenceTerrain={referenceTerrain} />}
         {activeSection === "overview" && <OverviewStats health={health} />}
         <div className={`workspace-shell ${sharedWorkspace ? "is-visible" : "is-hidden"}`} aria-hidden={!sharedWorkspace}>
           <SectionToolbar section={activeSection} title={activeTitle} health={health} />
-          <div className="selector-container"><PlanetSelector activePlanet={activePlanet} onChange={setActivePlanet} /></div>
+          {activeSection === "explorer" && <div className="selector-container"><PlanetSelector activePlanet={activePlanet} onChange={setActivePlanet} /></div>}
           <div className={`dashboard-grid dashboard-grid-${activeSection}`} data-testid={activeSection === "explorer" ? "planetary-explorer-view" : undefined}>
-            {activeSection !== "comparison" && <PlanetStage
+            {activeSection === "explorer" && <PlanetStage
               activePlanet={activePlanet}
               activeSection={activeSection}
               sites={sites}

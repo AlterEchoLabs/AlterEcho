@@ -11,13 +11,15 @@ const navigation: { id: Section; label: string; icon: string; group: "Research" 
   { id: "reports", label: "Research reports", icon: "↗", group: "Workspace" },
 ];
 
-export default function WorkspaceSidebar({ activeSection, resultCount, version, onSectionChange }: {
+export default function WorkspaceSidebar({ activeSection, resultCount, version, collapsed, onSectionChange, onToggleCollapsed }: {
   activeSection: Section;
   resultCount: number;
   version: string;
+  collapsed: boolean;
   onSectionChange: (section: Section) => void;
+  onToggleCollapsed: () => void;
 }) {
-  return <aside className="app-sidebar">
+  return <aside className={`app-sidebar ${collapsed ? "is-collapsed" : ""}`}>
     <button className="brand-lockup" type="button" onClick={() => onSectionChange("overview")} aria-label="TerraLuna AI overview">
       <span className="brand-symbol"><span /></span><span className="brand-name">TERRA<span>LUNA</span><small>PLANETARY ANALOGUE RESEARCH</small></span>
     </button>
@@ -32,5 +34,6 @@ export default function WorkspaceSidebar({ activeSection, resultCount, version, 
       </div>)}
     </nav>
     <div className="sidebar-bottom"><span className="sidebar-bottom-mark">NASA SPACE APPS · 2026</span><p>Explore Earth environments as analogues for planetary terrain.</p><span className="version-label">TERRALUNA AI <i>·</i> {version}</span></div>
+    <button className="sidebar-toggle" type="button" onClick={onToggleCollapsed} aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"} aria-pressed={collapsed}>{collapsed ? "»" : "«"}</button>
   </aside>;
 }

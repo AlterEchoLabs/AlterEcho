@@ -9,6 +9,7 @@ const MODE_LABELS: Record<string, string> = { reference: "High-resolution refere
 export default function SiteImageryViewer({ site, aoi }: { site: Site; aoi: AoiFeature | null }) {
   const [payload, setPayload] = useState<{ siteId: string; records: ImageryRecord[]; error: string | null }>({ siteId: "", records: [], error: null });
   const [mode, setMode] = useState<ImageryRecord["mode"]>("reference");
+  const [viewMode, setViewMode] = useState<"satellite" | "terrain" | "globe">("satellite");
 
   useEffect(() => {
     const controller = new AbortController();
@@ -21,17 +22,24 @@ export default function SiteImageryViewer({ site, aoi }: { site: Site; aoi: AoiF
   const loading = payload.siteId !== site.id;
   const records = loading ? [] : payload.records;
   const error = loading ? null : payload.error;
-  const active = records.find((item) => item.mode === mode) ?? records[0];
+  const active = viewMode === "satellite"
+    ? records.find((item) => item.mode === mode) ?? records.find((item) => item.mode === "latest_observation") ?? records[0]
+    : viewMode === "terrain" ? records.find((item) => item.mode === "terrain") : undefined;
 
   return <section className="imagery-viewer" aria-label={`${site.name} AOI imagery`} data-testid="imagery-viewer">
     <header><div><span className="eyebrow">EXACT STUDY AREA</span><h4>{site.name} · 2D AOI viewer</h4></div><div className="north-arrow" aria-label="North is up">N ↑</div></header>
-    <div className="imagery-modes" role="tablist" aria-label="Imagery layers">{records.map((record) => <button key={record.imagery_id} role="tab" aria-selected={active?.imagery_id === record.imagery_id} className={active?.imagery_id === record.imagery_id ? "active" : ""} onClick={() => setMode(record.mode)}>{MODE_LABELS[record.mode]}</button>)}</div>
+    <div className="viewer-mode-switcher" role="tablist" aria-label="Viewer modes">
+      {(["satellite", "terrain", "globe"] as const).map((item) => <button key={item} role="tab" aria-selected={viewMode === item} className={viewMode === item ? "active" : ""} onClick={() => setViewMode(item)}>{item === "satellite" ? "Satellite" : item === "terrain" ? "3D Terrain" : "Globe"}</button>)}
+    </div>
+    {viewMode === "satellite" && <div className="imagery-modes" role="tablist" aria-label="Satellite layers">{records.filter((record) => record.mode !== "terrain").map((record) => <button key={record.imagery_id} role="tab" aria-selected={active?.imagery_id === record.imagery_id} className={active?.imagery_id === record.imagery_id ? "active" : ""} onClick={() => setMode(record.mode)}>{MODE_LABELS[record.mode]}</button>)}</div>}
     <div className="imagery-canvas">
       {loading && <div className="imagery-state imagery-loading">Loading AOI layer metadata…</div>}
       {error && <div className="imagery-state">Provider metadata unavailable: {error}. No substitute image is shown.</div>}
-      {!loading && !error && active?.preview_url && <div className="imagery-preview" role="img" aria-label={`Derived terrain visualization for the exact ${site.name} study AOI`} style={{ backgroundImage: `url(${resolveApiUrl(active.preview_url)})` }} />}
+      {!loading && !error && viewMode === "globe" && <div className="imagery-state"><strong>Globe view is optional</strong><p>Open Planetary Explorer for the interactive Earth globe. This panel stays fitted to the selected {site.name} study area.</p></div>}
+      {!loading && !error && active?.preview_url && <div className="imagery-preview" role="img" aria-label={`${active.mode === "terrain" ? "Derived terrain visualization" : "True-colour satellite crop"} for the exact ${site.name} study AOI`} style={{ backgroundImage: `url(${resolveApiUrl(active.preview_url)})` }} />}
       {!loading && !error && active?.tile_url && aoi && <AoiDetailMap aoi={aoi} tileUrl={active.tile_url} label={`${MODE_LABELS[active.mode]} for the exact ${site.name} AOI`} />}
       {!loading && !error && active && !active.preview_url && !active.tile_url && <div className="imagery-state"><strong>{MODE_LABELS[active.mode]} unavailable</strong><span>{active.data_status.replaceAll("_", " ")}</span><p>{active.limitations[0]}</p></div>}
+      {!loading && !error && viewMode === "satellite" && active?.data_status === "authentication_required" && <p className="imagery-fallback-note">Detailed imagery is unavailable for this site yet; authentication is required for protected assets. Recent observation and terrain remain available.</p>}
       <div className="aoi-frame" aria-hidden="true" />
       <div className="scale-bar"><i />{aoi ? `${(aoi.properties.width_m / 1000).toFixed(0)} km AOI` : "AOI unavailable"}</div>
       <div className="coordinate-readout">{site.latitude.toFixed(4)}°, {site.longitude.toFixed(4)}°</div>

@@ -52,6 +52,7 @@ test("isolated build identity, real catalog, planned sites, and navigation", asy
   await page.getByRole("button", { name: "Edit site selection" }).click();
   await expect(page.getByTestId("candidate-earth-atacama")).toBeVisible();
 
+  await navigation.getByRole("button", { name: "Planetary explorer" }).click();
   await page.getByRole("button", { name: "Mars" }).click();
   await expect(page.getByText("PLANETARY REFERENCE · PROCESSED TERRAIN")).toBeVisible();
   await page.getByRole("button", { name: "Mars" }).click();
@@ -117,20 +118,23 @@ test("exact AOI imagery modes are honest and rapid site switching does not leave
   await page.goto("/");
   const viewer = page.getByTestId("imagery-viewer");
   await expect(viewer).toContainText("Atacama Desert · 2D AOI viewer");
-  await expect(viewer).toContainText("authentication required");
-  await expect(viewer).toContainText("no image is displayed until protected band assets are retrieved");
+  await expect(viewer).toContainText("verified local crop");
+  await expect(viewer.getByRole("img", { name: /True-colour satellite crop for the exact Atacama Desert study AOI/ })).toBeVisible();
   await viewer.getByRole("tab", { name: "Latest available observation" }).click();
   await expect(viewer).toContainText("VIIRS_NOAA20_CorrectedReflectance_TrueColor");
   await expect(viewer).toContainText("2026-11-14");
   await expect(viewer.getByRole("img", { name: /Latest available observation for the exact Atacama Desert AOI/ })).toBeVisible();
-  await viewer.getByRole("tab", { name: "Terrain analysis" }).click();
-  await expect(viewer.getByRole("img", { name: /exact Atacama Desert study AOI/ })).toBeVisible();
+  await viewer.getByRole("tab", { name: "3D Terrain" }).click();
+  await expect(viewer.getByRole("img", { name: /Derived terrain visualization for the exact Atacama Desert study AOI/ })).toBeVisible();
+  await viewer.getByRole("tab", { name: "Globe" }).click();
+  await expect(viewer).toContainText("Open Planetary Explorer for the interactive Earth globe");
   await page.getByRole("button", { name: /Upper Mustang/ }).click();
   await page.getByRole("button", { name: /^Ladakh/ }).click();
   await expect(viewer).toContainText("Ladakh · 2D AOI viewer");
   await expect(viewer).not.toContainText("Upper Mustang · 2D AOI viewer");
-  await viewer.getByRole("tab", { name: "Terrain analysis" }).click();
-  await expect(viewer.getByRole("img", { name: /exact Ladakh study AOI/ })).toBeVisible();
+  await expect(viewer).toContainText("authentication required");
+  await viewer.getByRole("tab", { name: "3D Terrain" }).click();
+  await expect(viewer.getByRole("img", { name: /Derived terrain visualization for the exact Ladakh study AOI/ })).toBeVisible();
   expect(errors).toEqual([]);
 });
 
@@ -148,7 +152,7 @@ test("API unavailable state never shows fixture results", async ({ page }) => {
   await page.route(`${apiBase}/api/**`, (route) => route.abort());
   await page.goto("/");
   await expect(page.getByText("Backend unavailable", { exact: true })).toBeVisible();
-  await expect(page.getByText(/Candidate catalog unavailable|No backend candidates/).first()).toBeVisible();
+  await expect(page.getByText(/Could not load the candidate catalog|No sites match these filters/).first()).toBeVisible();
   await expect(page.locator("[data-testid^='result-']")).toHaveCount(0);
 });
 
