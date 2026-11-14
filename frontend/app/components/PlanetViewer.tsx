@@ -2,9 +2,25 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, useGLTF } from "@react-three/drei";
+import { Html, OrbitControls, useGLTF } from "@react-three/drei";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
+import type { Site } from "../../lib/api";
+
+const DEFAULT_MARS_REFERENCE = { name: "Jezero Crater", latitude: 18.38, longitude: 77.58 };
+const MARS_PRIME_MERIDIAN_LOCAL_DEGREES = 134.64;
+
+function marsLocationPosition(latitude: number, longitude: number) {
+  const latitudeRadians = THREE.MathUtils.degToRad(latitude);
+  const localLongitudeRadians = THREE.MathUtils.degToRad(MARS_PRIME_MERIDIAN_LOCAL_DEGREES - longitude);
+  const radius = 1.77;
+
+  return new THREE.Vector3(
+    radius * Math.cos(latitudeRadians) * Math.cos(localLongitudeRadians),
+    radius * Math.sin(latitudeRadians),
+    radius * Math.cos(latitudeRadians) * Math.sin(localLongitudeRadians),
+  );
+}
 
 function MoonModel() {
   const moonRef = useRef<THREE.Group>(null);
@@ -43,7 +59,7 @@ function MoonModel() {
   );
 }
 
-function MarsModel() {
+function MarsModel({ site = DEFAULT_MARS_REFERENCE }: { site?: Pick<Site, "name" | "latitude" | "longitude"> }) {
   const planetRef = useRef<THREE.Group>(null);
   const { scene } = useGLTF("/models/Mars.glb");
 
@@ -62,6 +78,7 @@ function MarsModel() {
 
     return model;
   }, [scene]);
+  const jezeroPosition = useMemo(() => marsLocationPosition(site.latitude, site.longitude), [site.latitude, site.longitude]);
 
   useFrame((_, delta) => {
     if (planetRef.current) {
@@ -72,14 +89,21 @@ function MarsModel() {
   return (
     <group ref={planetRef}>
       <primitive object={mars} />
+      <Html position={jezeroPosition} occlude>
+        <div className="mars-location-marker" data-testid="mars-location-marker" role="img" aria-label={`${site.name} approximate location`}>
+          {site.name}
+        </div>
+      </Html>
     </group>
   );
 }
 
 export default function PlanetViewer({
   planet,
+  site,
 }: {
   planet: "mars" | "moon";
+  site?: Pick<Site, "name" | "latitude" | "longitude"> | null;
 }) {
   return (
     <div style={{ width: "100%", height: "650px" }}>
@@ -103,7 +127,7 @@ export default function PlanetViewer({
         {planet === "moon" ? (
           <MoonModel />
         ) : (
-          <MarsModel />
+          <MarsModel site={site ?? DEFAULT_MARS_REFERENCE} />
         )}
 
         <OrbitControls

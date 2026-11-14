@@ -36,6 +36,8 @@ test("main navigation, health, filters, and synchronized candidate focus", async
 
   await page.getByRole("button", { name: "Mars" }).click();
   await expect(page.getByText("PLANETARY REFERENCE · PROCESSED TERRAIN")).toBeVisible();
+  await expect(page.getByTestId("mars-location-marker")).toBeVisible();
+  await expect(page.getByTestId("mars-location-marker")).toContainText("Jezero Crater");
   await page.getByRole("button", { name: "Moon" }).click();
   await expect(page.getByRole("heading", { name: "Interactive lunar surface" })).toBeVisible();
   await navigation.getByRole("button", { name: "Research assistant" }).click();
