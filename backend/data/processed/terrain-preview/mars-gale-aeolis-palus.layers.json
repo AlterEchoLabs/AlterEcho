@@ -9,5 +9,61 @@
   "slope_ramp": "linear 0-35 degrees, fixed across sites",
   "slope_p50_deg": 2.06,
   "source_sha256": "e258cc973b6e2b221b7b313ba24f333db19fe38453cf9265fa2c4ce8959b88df",
-  "purpose": "visualisation only; numeric analysis uses terrain-v3/v4"
+  "purpose": "visualisation only; numeric analysis uses terrain-v3/v4",
+  "georeferencing": {
+    "version": "georeferenced-grid-v1.0",
+    "crs": "PROJCS[\"unknown\",GEOGCS[\"unknown\",DATUM[\"unknown\",SPHEROID[\"unknown\",3396190,0]],PRIMEM[\"Reference meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",-4.5625],PARAMETER[\"central_meridian\",137.4417],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+    "transform": [
+      30.0,
+      0.0,
+      -5010.0,
+      0.0,
+      -30.0,
+      -265430.80745008466
+    ],
+    "width_pixels": 334,
+    "height_pixels": 334,
+    "corner_order": [
+      "northwest",
+      "northeast",
+      "southeast",
+      "southwest"
+    ],
+    "corners_wgs84": [
+      [
+        137.35690958,
+        -4.47797827
+      ],
+      [
+        137.52649042,
+        -4.47797827
+      ],
+      [
+        137.52649042,
+        -4.64702173
+      ],
+      [
+        137.35690958,
+        -4.64702173
+      ]
+    ],
+    "study_window_corners_wgs84": [
+      [
+        137.35707882,
+        -4.47814698
+      ],
+      [
+        137.52632118,
+        -4.47814698
+      ],
+      [
+        137.52632118,
+        -4.64685302
+      ],
+      [
+        137.35707882,
+        -4.64685302
+      ]
+    ]
+  }
 }

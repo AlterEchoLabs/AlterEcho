@@ -9,5 +9,61 @@
   "slope_ramp": "linear 0-35 degrees, fixed across sites",
   "slope_p50_deg": 2.04,
   "source_sha256": "65076c24d022dd70c3b755c63de3665e350f8905dc473cedc2ea929ad8102c0b",
-  "purpose": "visualisation only; numeric analysis uses terrain-v3/v4"
+  "purpose": "visualisation only; numeric analysis uses terrain-v3/v4",
+  "georeferencing": {
+    "version": "georeferenced-grid-v1.0",
+    "crs": "EPSG:32612",
+    "transform": [
+      30.0,
+      0.0,
+      288561.11335887905,
+      0.0,
+      -30.0,
+      4815625.283656703
+    ],
+    "width_pixels": 334,
+    "height_pixels": 334,
+    "corner_order": [
+      "northwest",
+      "northeast",
+      "southeast",
+      "southwest"
+    ],
+    "corners_wgs84": [
+      [
+        -113.61376632,
+        43.46366877
+      ],
+      [
+        -113.49001891,
+        43.46643221
+      ],
+      [
+        -113.48632522,
+        43.3762931
+      ],
+      [
+        -113.60988955,
+        43.37353829
+      ]
+    ],
+    "study_window_corners_wgs84": [
+      [
+        -113.61363895,
+        43.46358164
+      ],
+      [
+        -113.49013872,
+        43.46633956
+      ],
+      [
+        -113.48645222,
+        43.37638037
+      ],
+      [
+        -113.60977011,
+        43.37363106
+      ]
+    ]
+  }
 }

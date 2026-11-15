@@ -32,6 +32,7 @@ from rasterio.transform import from_origin
 from rasterio.vrt import WarpedVRT
 
 from app.services.geospatial_service import GEO_DATA, _analysis_crs, _center_in_crs, load_aoi, sha256_file
+from app.services.georeferencing import build_grid_georeferencing
 
 STAC = "https://planetarycomputer.microsoft.com/api/stac/v1"
 SAS_TOKEN = "https://planetarycomputer.microsoft.com/api/sas/v1/token/{account}/{container}"
@@ -194,6 +195,9 @@ def acquire(site_id: str, aoi_id: str, item_id: str | None = None) -> dict:
     scene_url = f"{STAC}/collections/{COLLECTION}/items/{scene['id']}"
     acquired = props.get("datetime")
     ring = aoi.geometry["coordinates"][0]
+    georeferencing = build_grid_georeferencing(
+        result["crs"], result["transform"], result["n"], result["n"], body="earth"
+    )
     metadata = {
         "imagery_id": f"{site_id}-sentinel-2-reference", "site_id": site_id, "body": "earth", "mode": "reference",
         "provider": "Copernicus Sentinel-2 L2A via Microsoft Planetary Computer", "collection": COLLECTION, "product_id": scene["id"],
@@ -212,6 +216,7 @@ def acquire(site_id: str, aoi_id: str, item_id: str | None = None) -> dict:
         "aoi_statistics_method": "SCL band (20 m) warped with nearest neighbour onto the AOI grid: cloud = classes 3, 8, 9, 10; snow = 11; invalid = 0, 1.",
         "registration": {"grid": "AOI-centred UTM square identical in construction to the terrain analysis grid", "crs": str(result["crs"]),
                          "pixel_m": PIXEL_M, "pixels": result["n"]},
+        "georeferencing": georeferencing,
         "preview_checksum": sha256_file(output_path), "source_crs": props.get("proj:epsg") and f"EPSG:{props.get('proj:epsg')}",
         "native_resolution": [10.0, 10.0], "selection_rejections": rejected[:10],
     }

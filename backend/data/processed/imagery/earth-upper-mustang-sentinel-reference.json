@@ -50,5 +50,61 @@
     10.0,
     10.0
   ],
-  "selection_rejections": []
+  "selection_rejections": [],
+  "georeferencing": {
+    "version": "georeferenced-grid-v1.0",
+    "crs": "EPSG:32644",
+    "transform": [
+      10.0,
+      0.0,
+      777251.4698173576,
+      0.0,
+      -10.0,
+      3227540.6385543835
+    ],
+    "width_pixels": 1000,
+    "height_pixels": 1000,
+    "corner_order": [
+      "northwest",
+      "northeast",
+      "southeast",
+      "southwest"
+    ],
+    "corners_wgs84": [
+      [
+        83.8499238,
+        29.14617362
+      ],
+      [
+        83.95260484,
+        29.1439487
+      ],
+      [
+        83.95003161,
+        29.05381052
+      ],
+      [
+        83.84743975,
+        29.05602726
+      ]
+    ],
+    "study_window_corners_wgs84": [
+      [
+        83.8499238,
+        29.14617362
+      ],
+      [
+        83.95260484,
+        29.1439487
+      ],
+      [
+        83.95003161,
+        29.05381052
+      ],
+      [
+        83.84743975,
+        29.05602726
+      ]
+    ]
+  }
 }

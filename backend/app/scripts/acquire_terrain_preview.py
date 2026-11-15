@@ -26,6 +26,7 @@ from app.config import settings
 from app.scripts.acquire_dataset import AcquisitionError, download, earthdata_headers, extract_dem
 from app.services.catalog_service import get_site
 from app.services.geospatial_service import GEO_DATA, _analysis_crs, _center_in_crs, load_aoi, load_manifest, sha256_file
+from app.services.georeferencing import build_grid_georeferencing
 
 def _sites() -> list[str]:
     from app.services.catalog_service import SITES as CATALOG
@@ -125,6 +126,10 @@ def build_layers(site_id: str) -> dict:
         cx, cy = _center_in_crs(crs, aoi.planetary_body, aoi.center_longitude, aoi.center_latitude)
         size = n + 2 * pad
         transform = from_origin(cx - size * LAYER_RESOLUTION_M / 2, cy + size * LAYER_RESOLUTION_M / 2, LAYER_RESOLUTION_M, LAYER_RESOLUTION_M)
+        image_transform = from_origin(cx - n * LAYER_RESOLUTION_M / 2, cy + n * LAYER_RESOLUTION_M / 2, LAYER_RESOLUTION_M, LAYER_RESOLUTION_M)
+        study_columns = ceil(aoi.width_m / LAYER_RESOLUTION_M)
+        study_rows = ceil(aoi.height_m / LAYER_RESOLUTION_M)
+        study_transform = from_origin(cx - aoi.width_m / 2, cy + aoi.height_m / 2, aoi.width_m / study_columns, aoi.height_m / study_rows)
         z = np.full((size, size), np.nan, dtype="float64")
         reproject(source=rasterio.band(dataset, 1), destination=z, src_transform=dataset.transform, src_crs=dataset.crs,
                   src_nodata=dataset.nodata, dst_transform=transform, dst_crs=crs, dst_nodata=np.nan, resampling=Resampling.bilinear)
@@ -145,7 +150,13 @@ def build_layers(site_id: str) -> dict:
     Image.fromarray(ramp, "RGB").save(OUTPUT_DIR / f"{site_id}.slope.png", optimize=True)
     meta = {"site_id": site_id, "resolution_m": LAYER_RESOLUTION_M, "pixels": n, "hillshade": {"azimuth_deg": 315, "altitude_deg": 45},
             "slope_ramp": "linear 0-35 degrees, fixed across sites", "slope_p50_deg": round(float(np.nanmedian(slope)), 2),
-            "source_sha256": expected_checksum(manifest), "purpose": "visualisation only; numeric analysis uses terrain-v3/v4"}
+            "source_sha256": expected_checksum(manifest), "purpose": "visualisation only; numeric analysis uses terrain-v3/v4",
+            "georeferencing": build_grid_georeferencing(
+                crs, image_transform, n, n, body=aoi.planetary_body,
+                study_window_affine=study_transform,
+                study_window_width_pixels=study_columns,
+                study_window_height_pixels=study_rows,
+            )}
     (OUTPUT_DIR / f"{site_id}.layers.json").write_text(json.dumps(meta, indent=2), encoding="utf-8", newline="\n")
     return meta
 

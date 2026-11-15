@@ -813,21 +813,9 @@ def data_roles() -> list[DataRole]:
     return out
 
 
-def _corners(site, extent_m: float) -> list[list[float]]:
-    from rasterio.crs import CRS
-    from rasterio.warp import transform
-    from app.services.geospatial_service import _analysis_crs, _center_in_crs
-    aoi = load_aoi(site.aoi_id)
-    crs = _analysis_crs(CRS.from_epsg(4326), "earth", aoi.center_longitude, aoi.center_latitude)
-    cx, cy = _center_in_crs(crs, "earth", aoi.center_longitude, aoi.center_latitude)
-    h = extent_m / 2
-    xs, ys = [cx - h, cx + h, cx + h, cx - h], [cy + h, cy + h, cy - h, cy - h]
-    lons, lats = transform(crs, CRS.from_epsg(4326), xs, ys)
-    return [[round(lo, 6), round(la, 6)] for lo, la in zip(lons, lats)]
-
-
 def explorer(site_id: str) -> ExplorerWindow:
     from app.services.imagery_service import list_site_imagery
+    from app.services.georeferencing import corners_from_georeferencing
     site = get_site(site_id)
     if not site or site.body.value != "earth" or not site.aoi_id:
         raise KeyError(site_id)
@@ -837,15 +825,15 @@ def explorer(site_id: str) -> ExplorerWindow:
     recent = next((r for r in records if r.mode == "latest_observation" and r.tile_url), None)
     imagery = None
     if detailed:
-        px = 1000 if detailed.display_resolution_m in (None, 10, 10.0) else round(10_000 / detailed.display_resolution_m)
-        imagery = {"url": detailed.preview_url, "corners": _corners(site, px * (detailed.display_resolution_m or 10.0)), "resolution_m": detailed.resolution_m,
+        image_corners = corners_from_georeferencing(detailed.georeferencing)
+        imagery = {"url": detailed.preview_url, "corners": image_corners, "resolution_m": detailed.resolution_m,
                    "product_id": detailed.product_id, "acquired": detailed.acquisition_datetime.isoformat() if detailed.acquisition_datetime else None,
                    "attribution": detailed.attribution, "source_url": detailed.official_source_url}
     layers_path = GEO_DATA / "processed" / "terrain-preview" / f"{site_id}.layers.json"
     hill = slope = None
     if layers_path.exists():
         lay = json.loads(layers_path.read_text(encoding="utf-8"))
-        corners = _corners(site, lay["pixels"] * lay["resolution_m"])
+        corners = corners_from_georeferencing(lay.get("georeferencing"))
         hill = {"url": f"/api/sites/{site_id}/terrain/layers/hillshade.png", "corners": corners, "resolution_m": lay["resolution_m"],
                 "source": "Same SRTMGL1.003 DEM as the terrain measurement", "light": "315 deg azimuth, 45 deg altitude"}
         slope = {"url": f"/api/sites/{site_id}/terrain/layers/slope.png", "corners": corners, "resolution_m": lay["resolution_m"], "ramp": lay["slope_ramp"]}
@@ -855,7 +843,9 @@ def explorer(site_id: str) -> ExplorerWindow:
                "attribution": recent.attribution, "product_id": recent.product_id}
     lat = aoi.center_latitude
     native = log2(156_543.03 * cos(radians(lat)) / 10.0)
-    return ExplorerWindow(site_id=site_id, name=site.name, center=[aoi.center_longitude, lat], aoi_corners=_corners(site, aoi.width_m),
+    georeferencing = detailed.georeferencing if detailed else lay.get("georeferencing") if layers_path.exists() else None
+    aoi_corners = corners_from_georeferencing(georeferencing, study_window=True)
+    return ExplorerWindow(site_id=site_id, name=site.name, center=[aoi.center_longitude, lat], aoi_corners=aoi_corners,
                           imagery=imagery, hillshade=hill, slope=slope, recent=rec, max_native_zoom=round(native, 2),
                           notes=["The 10 m image covers only the study window; outside it the map shows coarser global imagery.",
                                  f"Zoom stops at about {native + 0.5:.1f}, half a level past the 10 m image's native detail, so no extra detail is implied.",

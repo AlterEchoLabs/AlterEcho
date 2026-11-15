@@ -34,3 +34,14 @@ def test_editable_guide_has_native_equations():
     assert xml.count("<m:oMath>") == 12
     assert "<m:f>" in xml and "<m:sSub>" in xml and "<m:sSup>" in xml
     assert "40 References" in xml
+
+
+def test_vercel_packages_runtime_data_and_display_assets():
+    services_config = json.loads((BACKEND_ROOT.parent / "vercel.json").read_text(encoding="utf-8"))
+    standalone_config = json.loads((BACKEND_ROOT / "vercel.json").read_text(encoding="utf-8"))
+    includes = [
+        services_config["services"]["backend"]["functions"]["app/main.py"]["includeFiles"],
+        standalone_config["functions"]["app/main.py"]["includeFiles"],
+    ]
+    expected = "{app/data/**,data/aoi/**,data/imagery/**,data/manifests/**,data/processed/**}"
+    assert includes == [expected, expected]

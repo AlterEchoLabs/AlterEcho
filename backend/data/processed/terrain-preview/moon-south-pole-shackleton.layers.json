@@ -9,5 +9,61 @@
   "slope_ramp": "linear 0-35 degrees, fixed across sites",
   "slope_p50_deg": 22.25,
   "source_sha256": "60cdb4d19a3a955e70bd5920a569fac94a3e32d840736f34aac72803605d0032",
-  "purpose": "visualisation only; numeric analysis uses terrain-v3/v4"
+  "purpose": "visualisation only; numeric analysis uses terrain-v3/v4",
+  "georeferencing": {
+    "version": "georeferenced-grid-v1.0",
+    "crs": "PROJCS[\"POLAR_STEREOGRAPHIC MOON\",GEOGCS[\"GCS_MOON\",DATUM[\"D_MOON\",SPHEROID[\"MOON\",1737400,0]],PRIMEM[\"Reference_Meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Polar_Stereographic\"],PARAMETER[\"latitude_of_origin\",-90],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1],AXIS[\"Easting\",NORTH],AXIS[\"Northing\",NORTH]]",
+    "transform": [
+      30.0,
+      0.0,
+      -5010.0,
+      0.0,
+      -30.0,
+      5010.0
+    ],
+    "width_pixels": 334,
+    "height_pixels": 334,
+    "corner_order": [
+      "northwest",
+      "northeast",
+      "southeast",
+      "southwest"
+    ],
+    "corners_wgs84": [
+      [
+        -45.0,
+        -89.76634508
+      ],
+      [
+        45.0,
+        -89.76634508
+      ],
+      [
+        135.0,
+        -89.76634508
+      ],
+      [
+        -135.0,
+        -89.76634508
+      ]
+    ],
+    "study_window_corners_wgs84": [
+      [
+        -45.0,
+        -89.76681145
+      ],
+      [
+        45.0,
+        -89.76681145
+      ],
+      [
+        135.0,
+        -89.76681145
+      ],
+      [
+        -135.0,
+        -89.76681145
+      ]
+    ]
+  }
 }

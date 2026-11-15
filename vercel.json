@@ -3,7 +3,12 @@
   "services": {
     "backend": {
       "root": "backend",
-      "framework": "fastapi"
+      "framework": "fastapi",
+      "functions": {
+        "app/main.py": {
+          "includeFiles": "{app/data/**,data/aoi/**,data/imagery/**,data/manifests/**,data/processed/**}"
+        }
+      }
     },
     "frontend": {
       "root": "frontend",

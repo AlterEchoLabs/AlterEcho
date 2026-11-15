@@ -394,4 +394,5 @@ class ImageryRecord(BaseModel):
     aoi_statistics_method: str | None = None
     aoi_coverage_meaning: str | None = None
     registration: dict[str, Any] | None = None
+    georeferencing: dict[str, Any] | None = None
 

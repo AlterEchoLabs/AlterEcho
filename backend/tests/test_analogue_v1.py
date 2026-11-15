@@ -299,3 +299,35 @@ def test_explorer_returns_exact_ten_kilometre_corners_and_native_zoom():
     assert width_km == pytest.approx(10, abs=0.15) and height_km == pytest.approx(10, abs=0.15)
     assert 13 < data["max_native_zoom"] < 15 and data["imagery"]["acquired"].startswith("2026")
     assert client.get("/api/v3/sites/mars-jezero/explorer").status_code == 404
+
+
+def test_committed_routes_do_not_import_rasterio(monkeypatch):
+    """Regression for native GDAL libraries being unavailable in a serverless runtime."""
+    import builtins
+
+    real_import = builtins.__import__
+
+    def without_rasterio(name, *args, **kwargs):
+        if name == "rasterio" or name.startswith("rasterio."):
+            raise ImportError("rasterio is unavailable in this runtime")
+        return real_import(name, *args, **kwargs)
+
+    monkeypatch.setattr(builtins, "__import__", without_rasterio)
+    explorer = client.get("/api/v3/sites/earth-hanksville-mdrs/explorer")
+    assert explorer.status_code == 200
+    payload = explorer.json()
+    assert len(payload["aoi_corners"]) == len(payload["imagery"]["corners"]) == 4
+    assert payload["aoi_corners"] == payload["imagery"]["corners"]
+    assert payload["aoi_corners"][0] == pytest.approx([-110.84907281, 38.45154873], abs=1e-8)
+    assert payload["hillshade"]["corners"] != payload["aoi_corners"]  # 334 x 30 m is an explicit 10.02 km display grid.
+    assert payload["imagery"]["url"].endswith("earth-hanksville-mdrs-sentinel-reference.png")
+    image = client.get(payload["imagery"]["url"])
+    assert image.status_code == 200 and image.headers["content-type"] == "image/png" and image.content.startswith(b"\x89PNG")
+
+    health = client.get("/api/health")
+    assert health.status_code == 200 and health.json()["data_counts"]["real_processed_sites"] == 14
+    assert client.get("/api/v3/references").status_code == 200
+    assert client.get("/api/sites").status_code == 200
+    assert client.get("/api/sites/earth-hanksville-mdrs/imagery").status_code == 200
+    assert client.get("/api/v3/result", params={"site": "earth-hanksville-mdrs", "reference": "mars-jezero", "profile": "terrain_analogy"}).status_code == 200
+    assert client.post("/api/explore/preflight", json={"lat": 38.4064, "lon": -110.7919}).status_code == 200

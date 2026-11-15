@@ -109,6 +109,12 @@ cd frontend; Copy-Item .env.example .env.local; npm.cmd ci; npm.cmd run dev
 
 The atlas serves small committed artifacts, so no raw raster or provider call is needed to browse. Explore jobs fetch SRTMGL1 tiles, which needs `EARTHDATA_TOKEN` (or `EARTHDATA_USERNAME`/`EARTHDATA_PASSWORD`) in `backend/.env`; the file is git-ignored. Without credentials, a job reports `requires_credentials` and fetches nothing.
 
+### Production hosting boundary
+
+The catalog, processed-site explorer, references, comparisons, results, imagery and terrain-layer routes serve committed JSON and image artifacts and do not import Rasterio at request time. The root `vercel.json` includes those artifacts for a combined Services deployment, and `backend/vercel.json` includes the application data plus the AOI, imagery, manifest and processed-artifact directories when the backend is deployed as its own monorepo project. Raw downloads, caches and job workspaces are not bundled.
+
+Custom-area Explore jobs are different: they download and mosaic SRTM rasters, reproject terrain grids, and create a Sentinel crop during the request workflow. They require Rasterio/GDAL (including its native shared libraries), writable persistent job storage, a worker that survives beyond one HTTP invocation, and Earthdata credentials when tiles are not cached. A standard Vercel Python Function does not provide that complete execution/storage model. Preserve those jobs on a GDAL-capable persistent backend or worker; the application reports unavailable credentials or a recorded job failure rather than substituting fixture data.
+
 ## Tests
 
 ```bash
