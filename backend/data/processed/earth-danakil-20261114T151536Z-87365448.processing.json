@@ -38,7 +38,7 @@
     "roughness_neighborhood_m": 300.0,
     "roughness_window_pixels": 5
   },
-  "output_summary": "data\\processed\\earth-danakil.terrain.json",
+  "output_summary": "data/processed/earth-danakil.terrain.json",
   "output_checksum": "fe6a15a9881aed9adcd62b56ea6718c57a9441531882a73ce0b3a1693d92e168",
   "quality_passed": true,
   "warnings": []

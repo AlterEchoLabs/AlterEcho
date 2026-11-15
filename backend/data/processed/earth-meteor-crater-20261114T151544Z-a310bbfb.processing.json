@@ -38,7 +38,7 @@
     "roughness_neighborhood_m": 300.0,
     "roughness_window_pixels": 5
   },
-  "output_summary": "data\\processed\\earth-meteor-crater.terrain.json",
+  "output_summary": "data/processed/earth-meteor-crater.terrain.json",
   "output_checksum": "4ffe967eb4747562375af7cddcd0493db6de6a72e107e45c4125c65a87405fda",
   "quality_passed": true,
   "warnings": []

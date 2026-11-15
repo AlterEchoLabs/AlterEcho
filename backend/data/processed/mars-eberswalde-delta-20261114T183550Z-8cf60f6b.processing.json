@@ -38,7 +38,7 @@
     "roughness_neighborhood_m": 300.0,
     "roughness_window_pixels": 5
   },
-  "output_summary": "data\\processed\\mars-eberswalde-delta.terrain.json",
+  "output_summary": "data/processed/mars-eberswalde-delta.terrain.json",
   "output_checksum": "72b4175fb105f1b096146f94b06b16f112fa0db972d8c5ed2a6ccd022998c0d9",
   "quality_passed": true,
   "warnings": []

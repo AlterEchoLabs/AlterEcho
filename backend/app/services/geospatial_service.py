@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 from hashlib import sha256
 import json
 from math import ceil, floor
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from uuid import uuid4
 import numpy as np
 
@@ -55,7 +55,13 @@ def metric_grid_size(width_m: float, height_m: float, resolution_m: float) -> tu
 
 def validate_processing_report(report_path: str | Path) -> dict:
     report = json.loads(Path(report_path).read_text(encoding="utf-8"))
-    summary_path = BACKEND_ROOT / report["output_summary"]
+    output_summary = report.get("output_summary")
+    if not isinstance(output_summary, str) or "\\" in output_summary:
+        raise ValueError("Processed output path must be a portable repository-relative POSIX path")
+    relative = PurePosixPath(output_summary)
+    if relative.is_absolute() or ".." in relative.parts:
+        raise ValueError("Processed output path must stay inside the backend root")
+    summary_path = BACKEND_ROOT.joinpath(*relative.parts)
     if not summary_path.exists():
         raise ValueError("Processed output referenced by the run is missing")
     actual = canonical_text_sha256(summary_path)
@@ -113,7 +119,7 @@ def process_site(input_path: str | Path, site_id: str, aoi_id: str, source_id: s
     interim = GEO_DATA / "interim" / f"{site_id}-{run_id}.harmonized.tif"; interim.parent.mkdir(parents=True, exist_ok=True)
     with rasterio.open(interim, "w", driver="GTiff", height=rows, width=columns, count=1, dtype="float32", crs=analysis_crs, transform=target_transform, nodata=np.nan, compress="deflate") as output: output.write(destination, 1)
     summary_path = GEO_DATA / "processed" / f"{site_id}.terrain.json"; write_summary(summary, summary_path); output_checksum = canonical_text_sha256(summary_path)
-    report = {"processing_run_id": run_id, "timestamp": datetime.now(timezone.utc).isoformat(), "site_id": site_id, "source_id": source_id, "source_checksum": source_checksum, "aoi_version": aoi.version, "methodology_version": "terrain-v2.0", "software_version": "0.2.0", "native_resolution": native_resolution, "target_resolution": target_resolution_m, "source_crs": source_crs, "processing_crs": str(analysis_crs), "resampling_method": "bilinear", "nodata_handling": "Source nodata is propagated to NaN and excluded from every metric", "requested_analysis_window_m": [aoi.width_m, aoi.height_m], "actual_analysis_window_m": [actual_width, actual_height], "grid_dimensions": [columns, rows], "metric_configuration": summary.calculation_metadata, "output_summary": str(summary_path.relative_to(BACKEND_ROOT)), "output_checksum": output_checksum, "quality_passed": real_ready, "warnings": summary.quality["warnings"]}
+    report = {"processing_run_id": run_id, "timestamp": datetime.now(timezone.utc).isoformat(), "site_id": site_id, "source_id": source_id, "source_checksum": source_checksum, "aoi_version": aoi.version, "methodology_version": "terrain-v2.0", "software_version": "0.2.0", "native_resolution": native_resolution, "target_resolution": target_resolution_m, "source_crs": source_crs, "processing_crs": str(analysis_crs), "resampling_method": "bilinear", "nodata_handling": "Source nodata is propagated to NaN and excluded from every metric", "requested_analysis_window_m": [aoi.width_m, aoi.height_m], "actual_analysis_window_m": [actual_width, actual_height], "grid_dimensions": [columns, rows], "metric_configuration": summary.calculation_metadata, "output_summary": summary_path.relative_to(BACKEND_ROOT).as_posix(), "output_checksum": output_checksum, "quality_passed": real_ready, "warnings": summary.quality["warnings"]}
     report_path = GEO_DATA / "processed" / f"{run_id}.processing.json"; report_path.parent.mkdir(parents=True, exist_ok=True); report_path.write_text(json.dumps(report, indent=2), encoding="utf-8", newline="\n")
     manifest.processing_status = "processed" if real_ready else "quality_failed"
     manifest.notes = "Downloaded file was checksummed, inspected, and processed through the terrain-v2.0 pipeline." if real_ready else "Processing completed but one or more real-data quality gates failed."

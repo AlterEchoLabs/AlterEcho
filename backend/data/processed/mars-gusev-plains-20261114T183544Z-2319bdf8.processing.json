@@ -38,7 +38,7 @@
     "roughness_neighborhood_m": 300.0,
     "roughness_window_pixels": 5
   },
-  "output_summary": "data\\processed\\mars-gusev-plains.terrain.json",
+  "output_summary": "data/processed/mars-gusev-plains.terrain.json",
   "output_checksum": "beb23de3385114a982e2e9a788606034c2487bc5d6d5a586ada398a927608945",
   "quality_passed": true,
   "warnings": []

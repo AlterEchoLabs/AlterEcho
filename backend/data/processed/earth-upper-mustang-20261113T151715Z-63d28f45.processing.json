@@ -38,7 +38,7 @@
     "roughness_neighborhood_m": 300.0,
     "roughness_window_pixels": 5
   },
-  "output_summary": "data\\processed\\earth-upper-mustang.terrain.json",
+  "output_summary": "data/processed/earth-upper-mustang.terrain.json",
   "output_checksum": "f2bd8d75ae11aa91050fad894ca118bdd019bb86bb540d70fb86752ee092ae8d",
   "quality_passed": true,
   "warnings": []

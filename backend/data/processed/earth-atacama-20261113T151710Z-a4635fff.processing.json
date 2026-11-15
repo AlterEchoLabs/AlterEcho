@@ -38,7 +38,7 @@
     "roughness_neighborhood_m": 300.0,
     "roughness_window_pixels": 5
   },
-  "output_summary": "data\\processed\\earth-atacama.terrain.json",
+  "output_summary": "data/processed/earth-atacama.terrain.json",
   "output_checksum": "d108745b51636cbcca6149ee3b718c5fadaa46300181b0323f18204fb95efcd1",
   "quality_passed": true,
   "warnings": []

@@ -38,7 +38,7 @@
     "roughness_neighborhood_m": 300.0,
     "roughness_window_pixels": 5
   },
-  "output_summary": "data\\processed\\moon-south-pole-shackleton.terrain.json",
+  "output_summary": "data/processed/moon-south-pole-shackleton.terrain.json",
   "output_checksum": "bde027f81f7587f7454d8d804c7b307d079fdcd0f0ff3da0d7fad7e1ea0e4791",
   "quality_passed": true,
   "warnings": []

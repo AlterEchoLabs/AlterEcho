@@ -38,7 +38,7 @@
     "roughness_neighborhood_m": 300.0,
     "roughness_window_pixels": 5
   },
-  "output_summary": "data\\processed\\mars-insight-elysium.terrain.json",
+  "output_summary": "data/processed/mars-insight-elysium.terrain.json",
   "output_checksum": "c35d7e3ad8a0d03d5108522c13291dff3bd70f43f4a250481ffe06c83f9a5330",
   "quality_passed": true,
   "warnings": []

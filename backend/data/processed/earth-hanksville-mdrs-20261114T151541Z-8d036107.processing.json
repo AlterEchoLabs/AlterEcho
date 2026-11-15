@@ -38,7 +38,7 @@
     "roughness_neighborhood_m": 300.0,
     "roughness_window_pixels": 5
   },
-  "output_summary": "data\\processed\\earth-hanksville-mdrs.terrain.json",
+  "output_summary": "data/processed/earth-hanksville-mdrs.terrain.json",
   "output_checksum": "7a299cb205f32668ad5ff2c566646f1041c166ab07441a6e64ae2aff636d51ae",
   "quality_passed": true,
   "warnings": []
