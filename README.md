@@ -10,9 +10,9 @@
 
 <p align="center">
   🌍 <strong>Live site: <a href="https://alterecho.earth">alterecho.earth</a></strong><br>
-  📄 <a href="docs/paper/methods.pdf">Research paper (PDF)</a> ·
-  <a href="docs/paper/methods.docx">Word</a> ·
-  <a href="docs/paper/methods.md">Markdown</a> ·
+  📄 <a href="https://drive.google.com/file/d/1EyDiu4EL1J4xMW1P9io_gHG7sNFtYVb1/view?usp=sharing">Research paper (PDF)</a> ·
+  <!-- <a href="docs/paper/methods.docx">Word</a> ·
+  <a href="docs/paper/methods.md">Markdown</a> · -->
   <a href="docs/ALTERECHO_SYSTEM_AND_RESEARCH_GUIDE.pdf">System &amp; research guide</a>
 </p>
 
