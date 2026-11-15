@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="frontend/public/alterecho-header-logo.png" alt="AlterEcho logo" width="220">
+  <img src="frontend/public/alterecho-header-logo.png" alt="AlterEcho logo" width="100">
 </p>
 
 <h1 align="center">AlterEcho</h1>
