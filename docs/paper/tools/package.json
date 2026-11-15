@@ -1,0 +1,6 @@
+{
+  "name": "terraluna-paper-tools",
+  "private": true,
+  "description": "Builds docs/paper/methods.docx from paper-content.json (equations are completed by Word, see word_equations.ps1)",
+  "dependencies": { "docx": "9.5.1" }
+}

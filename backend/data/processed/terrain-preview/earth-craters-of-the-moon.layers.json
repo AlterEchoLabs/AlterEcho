@@ -1,0 +1,13 @@
+{
+  "site_id": "earth-craters-of-the-moon",
+  "resolution_m": 30.0,
+  "pixels": 334,
+  "hillshade": {
+    "azimuth_deg": 315,
+    "altitude_deg": 45
+  },
+  "slope_ramp": "linear 0-35 degrees, fixed across sites",
+  "slope_p50_deg": 2.04,
+  "source_sha256": "65076c24d022dd70c3b755c63de3665e350f8905dc473cedc2ea929ad8102c0b",
+  "purpose": "visualisation only; numeric analysis uses terrain-v3/v4"
+}

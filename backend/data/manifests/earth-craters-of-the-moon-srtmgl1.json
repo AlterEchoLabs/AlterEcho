@@ -1,0 +1,49 @@
+{
+  "source_id": "earth-craters-of-the-moon-srtmgl1",
+  "title": "NASA Shuttle Radar Topography Mission Global 1 Arc Second V003",
+  "planetary_body": "earth",
+  "provider": "NASA LP DAAC / USGS EROS",
+  "mission": "Shuttle Radar Topography Mission",
+  "instrument": "SRTM C-band radar",
+  "product_name": "SRTMGL1",
+  "product_version": "003",
+  "source_page_url": "https://search.earthdata.nasa.gov/search?q=SRTMGL1",
+  "download_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/N43W114.SRTMGL1.hgt/N43W114.SRTMGL1.hgt.zip",
+  "doi": "10.5067/MEaSUREs/SRTM/SRTMGL1.003",
+  "access_date": "2026-11-14",
+  "license_or_use_constraints": "NASA Earthdata authentication may be required; follow LP DAAC data-use and citation guidance.",
+  "native_resolution": [
+    0.0002777777777777778,
+    0.0002777777777777778
+  ],
+  "native_crs": "EPSG:4326",
+  "native_bounds": [
+    -114.00013888888888,
+    42.999861111111116,
+    -112.9998611111111,
+    44.00013888888889
+  ],
+  "native_nodata": -32768.0,
+  "file_size": 10696890,
+  "filename": "N43W114.SRTMGL1.hgt.zip",
+  "sha256_checksum": "7503728745b982564c79e63794df79ad1e53e0875671a4701999dd9c283a4d32",
+  "citation_text": "NASA JPL, NASA Shuttle Radar Topography Mission Global 1 arc second V003, DOI 10.5067/MEaSUREs/SRTM/SRTMGL1.003.",
+  "processing_status": "processed",
+  "notes": "Downloaded file was checksummed, inspected, and processed through the terrain-v2.0 pipeline.",
+  "extracted_filename": "N43W114.hgt",
+  "extracted_sha256_checksum": "65076c24d022dd70c3b755c63de3665e350f8905dc473cedc2ea929ad8102c0b",
+  "aoi_id": "earth-craters-of-the-moon-aoi-v1",
+  "tiles": [
+    {
+      "tile_id": "N43W114",
+      "filename": "N43W114.SRTMGL1.hgt.zip",
+      "download_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/N43W114.SRTMGL1.hgt/N43W114.SRTMGL1.hgt.zip",
+      "sha256_checksum": "7503728745b982564c79e63794df79ad1e53e0875671a4701999dd9c283a4d32",
+      "file_size": 10696890,
+      "extracted_filename": "N43W114.hgt",
+      "extracted_sha256_checksum": "65076c24d022dd70c3b755c63de3665e350f8905dc473cedc2ea929ad8102c0b"
+    }
+  ],
+  "mosaic_filename": null,
+  "mosaic_sha256_checksum": null
+}

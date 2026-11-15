@@ -1,0 +1,369 @@
+{
+  "version": "data-roles-1.0",
+  "notice": "Every product below is either a scored input, a quality or uncertainty input, or display context. Display context never enters a number.",
+  "roles": [
+    {
+      "id": "srtmgl1",
+      "label": "Earth elevation model",
+      "role": "scored_input",
+      "body": "earth",
+      "product": "NASA SRTMGL1.003 (Shuttle Radar Topography Mission, 1 arc-second)",
+      "registry_id": "earth-srtmgl1-v003",
+      "measures": "Ground elevation in metres (EGM96 geoid) from C-band radar interferometry flown in February 2000.",
+      "why": {
+        "terrain_analogy": "Slope and relative elevation are derived from it on the same physical grid as the Jezero DEM, so landform shape can be compared without comparing absolute heights.",
+        "balanced_science": "Supplies the terrain family only (30 % of the planned evidence).",
+        "rover_mobility": "Gives broad terrain context at 60 m; it cannot see wheel-scale obstacles.",
+        "biosignature_fieldwork": "Terrain is 10 % of this profile and not task-critical.",
+        "mars_base_field_testing": "Supplies the terrain family only (35 % of the planned evidence)."
+      },
+      "native_resolution": "1 arc-second (about 30 m; 28-31 m east-west at the sites)",
+      "analysis_resolution": "60 m primary grid; 120 and 240 m as sensitivity checks; 1.2 km halo",
+      "dates": "11-22 February 2000",
+      "footprint": "Each 10 km Earth study window plus a 1.2 km halo; coverage 60 N to 56 S",
+      "used_in": [
+        "F1 terrain: slope distribution W1",
+        "F1 terrain: relative-elevation distribution W1",
+        "diagnostics: local relief and roughness"
+      ],
+      "cannot_establish": [
+        "soil strength or trafficability",
+        "rocks or obstacles smaller than the grid",
+        "mineralogy or geology",
+        "changes after February 2000 (for example later construction or mining)"
+      ],
+      "source_url": "https://www.usgs.gov/centers/eros/science/usgs-eros-archive-digital-elevation-shuttle-radar-topography-mission-srtm-1",
+      "doi": "10.5067/MEaSUREs/SRTM/SRTMGL1.003"
+    },
+    {
+      "id": "ctx-dem",
+      "label": "Jezero elevation model",
+      "role": "scored_input",
+      "body": "mars",
+      "product": "Mars 2020 Science Investigation CTX DEM mosaic, 20 m (USGS, Calef 2021)",
+      "registry_id": "mars-jezero-ctx-dem",
+      "measures": "Mars surface elevation from Context Camera stereo, on an equirectangular grid true to scale at 18.4663 N.",
+      "why": {
+        "terrain_analogy": "Defines the reference window's slope and relative-elevation distributions on the same 60 m physical grid as the Earth windows.",
+        "balanced_science": "Planetary side of the terrain family.",
+        "rover_mobility": "Planetary side of the broad terrain context.",
+        "biosignature_fieldwork": "Planetary side of the terrain family (not task-critical).",
+        "mars_base_field_testing": "Planetary side of the terrain family."
+      },
+      "native_resolution": "20 m posting (stereo effective resolution is coarser)",
+      "analysis_resolution": "60 m primary grid; 120 and 240 m sensitivity",
+      "dates": "Mosaic published 2021-10-14 from CTX images acquired 2006 onward",
+      "footprint": "10 km window at 18.44 N, 77.45 E inside Jezero crater near the delta front",
+      "used_in": [
+        "F1 terrain reference distributions",
+        "resolution floor: the same window moved 2 km N/S/E/W"
+      ],
+      "cannot_establish": [
+        "ancient lake conditions (it records today's surface)",
+        "rock size, soil strength or dust",
+        "mineralogy"
+      ],
+      "source_url": null
+    },
+    {
+      "id": "ctx-dtm-controlled",
+      "label": "Additional Mars elevation models",
+      "role": "scored_input",
+      "body": "mars",
+      "product": "USGS Astrogeology controlled CTX DTMs (STAC mro_ctx_controlled_usgs_dtms), 20 m, CC0-1.0, DOI 10.5066/P9JKVWR3",
+      "registry_id": "mars-ctx-dtm-controlled",
+      "measures": "Mars surface elevation from Context Camera stereo pairs, controlled to MOLA; heights above the areoid where a geoid-adjusted asset exists.",
+      "why": {
+        "terrain_analogy": "Define the Gale, InSight, Gusev and Eberswalde reference windows on the same 60 m physical grid as the Earth windows.",
+        "balanced_science": "Planetary side of the terrain family.",
+        "rover_mobility": "Planetary side of the broad terrain context.",
+        "biosignature_fieldwork": "Planetary side of the terrain family (not task-critical).",
+        "mars_base_field_testing": "Planetary side of the terrain family."
+      },
+      "native_resolution": "20 m posting; stereo effective resolution is coarser and short-wavelength noise is present",
+      "analysis_resolution": "60 m primary grid; 120 and 240 m sensitivity",
+      "dates": "CTX stereo images 2006 onward; products published 2023-2024",
+      "footprint": "One 10 km window per reference, read with HTTP range requests (no bulk download)",
+      "used_in": [
+        "F1 terrain reference distributions",
+        "resolution floor: each window moved 2 km N/S/E/W"
+      ],
+      "cannot_establish": [
+        "rocks smaller than the grid",
+        "regolith or soil strength",
+        "mineralogy",
+        "ancient environments (they record the present surface)"
+      ],
+      "source_url": "https://stac.astrogeology.usgs.gov/docs/data/mars/ctxdtms/",
+      "doi": "10.5066/P9JKVWR3"
+    },
+    {
+      "id": "lola",
+      "label": "Lunar south-pole elevation model",
+      "role": "scored_input",
+      "body": "moon",
+      "product": "LRO LOLA LDEM_875S_20M (PDS Geosciences Node)",
+      "registry_id": "moon-lola-ldem-875s-20m",
+      "measures": "Lunar surface elevation from laser altimetry, polar stereographic, true scale at the pole.",
+      "why": {
+        "terrain_analogy": "Defines the limited lunar reference window. No placement or illumination checks have been run for it."
+      },
+      "native_resolution": "20 m posting; many cells are interpolated between laser tracks",
+      "analysis_resolution": "60 m primary grid",
+      "dates": "LRO mapping since 2009",
+      "footprint": "10 km window at the lunar south pole (Shackleton rim area)",
+      "used_in": [
+        "F1 terrain reference distributions (Moon)"
+      ],
+      "cannot_establish": [
+        "illumination or permanently shadowed regions",
+        "thermal environment",
+        "regolith properties"
+      ],
+      "source_url": "https://pds-geosciences.wustl.edu/missions/lro/lola.htm"
+    },
+    {
+      "id": "dem-alternatives",
+      "label": "Alternative Earth elevation models",
+      "role": "uncertainty_input",
+      "body": "earth",
+      "product": "NASADEM_HGT.001 and Copernicus DEM GLO-30 via Microsoft Planetary Computer",
+      "registry_id": "earth-nasadem-hgt-v001",
+      "measures": "The same windows from two other DEM products (NASADEM: reprocessed SRTM; GLO-30: TanDEM-X 2011-2015).",
+      "why": {
+        "terrain_analogy": "Their disagreement with SRTM sets the DEM part of the resolution floor: distances smaller than it cannot separate sites."
+      },
+      "native_resolution": "1 arc-second (~30 m)",
+      "analysis_resolution": "60 m",
+      "dates": "NASADEM: February 2000 (reprocessed 2020); GLO-30: 2011-2015",
+      "footprint": "Each Earth window",
+      "used_in": [
+        "resolution floor delta_dem",
+        "sensitivity scenario: DEM choice"
+      ],
+      "cannot_establish": [
+        "which DEM is correct; their spread is a product uncertainty, not ground truth"
+      ],
+      "source_url": "https://planetarycomputer.microsoft.com/dataset/nasadem"
+    },
+    {
+      "id": "worldcover",
+      "label": "Land cover (built-up mask)",
+      "role": "quality_input",
+      "body": "earth",
+      "product": "ESA WorldCover 10 m v200 (2021) via Microsoft Planetary Computer",
+      "registry_id": "earth-esa-worldcover-v200",
+      "measures": "Eleven land-cover classes at 10 m, from Sentinel-1 and Sentinel-2 (2021).",
+      "why": {
+        "terrain_analogy": "Built-up cells and one neighbouring cell are excluded from the terrain features so buildings and roads do not count as landforms."
+      },
+      "native_resolution": "10 m",
+      "analysis_resolution": "aggregated to the 60 m grid (any built-up pixel excludes the cell)",
+      "dates": "2021",
+      "footprint": "Each Earth window plus halo",
+      "used_in": [
+        "terrain exclusion mask"
+      ],
+      "cannot_establish": [
+        "mines, heaps and graded ground, which are usually classed as bare land (the original Atacama complex was missed this way)",
+        "construction dates"
+      ],
+      "source_url": "https://esa-worldcover.org/"
+    },
+    {
+      "id": "sentinel2",
+      "label": "Detailed Earth image",
+      "role": "display_context",
+      "body": "earth",
+      "product": "Copernicus Sentinel-2 Level-2A true colour (B04/B03/B02) via Microsoft Planetary Computer",
+      "registry_id": "earth-sentinel-2-l2a-pc",
+      "measures": "Surface reflectance in visible bands on one date.",
+      "why": {
+        "terrain_analogy": "Shows the selected window and lets people check it for contamination (it revealed the industrial complex in the original Atacama window). Its colours are not part of any score.",
+        "biosignature_fieldwork": "True colour cannot identify minerals or biosignatures."
+      },
+      "native_resolution": "10 m",
+      "analysis_resolution": "displayed at 10 m on the analysis grid; not analysed",
+      "dates": "One scene per site, 2025-11 to 2026-11 (shown on each image)",
+      "footprint": "Exactly the 10 km window",
+      "used_in": [
+        "display",
+        "manual contamination check"
+      ],
+      "cannot_establish": [
+        "geology or mineralogy",
+        "terrain shape",
+        "conditions on any other date; it is not live"
+      ],
+      "source_url": "https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a"
+    },
+    {
+      "id": "viirs",
+      "label": "Latest broad Earth image",
+      "role": "display_context",
+      "body": "earth",
+      "product": "NASA GIBS VIIRS NOAA-20 Corrected Reflectance (true colour)",
+      "registry_id": "earth-gibs-viirs",
+      "measures": "Daily visible reflectance at about 375 m.",
+      "why": {
+        "terrain_analogy": "Recent regional context around the window. A 10 km window is only about 27 pixels across, so it shows far less detail than the 10 m scene."
+      },
+      "native_resolution": "about 375 m",
+      "analysis_resolution": "not analysed",
+      "dates": "Latest available day from the GIBS capabilities (may be cloudy)",
+      "footprint": "Global daily",
+      "used_in": [
+        "display"
+      ],
+      "cannot_establish": [
+        "anything inside the window at metre scale",
+        "real-time conditions"
+      ],
+      "source_url": "https://nasa-gibs.github.io/gibs-api-docs/"
+    },
+    {
+      "id": "ctx-ortho",
+      "label": "Jezero image",
+      "role": "display_context",
+      "body": "mars",
+      "product": "Mars 2020 CTX orthomosaic, 6 m (USGS)",
+      "registry_id": "mars-jezero-ctx-ortho",
+      "measures": "Visible-light Mars surface image mosaic.",
+      "why": {
+        "terrain_analogy": "Shows the reference window. Not part of any score."
+      },
+      "native_resolution": "6 m",
+      "analysis_resolution": "not analysed",
+      "dates": "CTX images from 2006 onward",
+      "footprint": "The 10 km Jezero window",
+      "used_in": [
+        "display"
+      ],
+      "cannot_establish": [
+        "mineralogy",
+        "terrain shape"
+      ],
+      "source_url": null
+    },
+    {
+      "id": "modis-lst",
+      "label": "Earth surface temperature",
+      "role": "context_measurement",
+      "body": "earth",
+      "product": "MODIS/Aqua MYD11A2.061 land surface temperature, 8-day, 1 km",
+      "registry_id": "earth-modis-myd11a2",
+      "measures": "Clear-sky skin temperature in kelvin, day (~13:30) and night (~01:30) passes, 2024.",
+      "why": {
+        "mars_base_field_testing": "Planned thermal family. It fails the comparability audit against MEDA (1 km area mean vs a point beside the rover; clear-sky composites vs all-condition sols), so it is shown as context only.",
+        "balanced_science": "Planned thermal family; context only for the same reason."
+      },
+      "native_resolution": "1 km",
+      "analysis_resolution": "mean over the 10 km window",
+      "dates": "Calendar 2024 (44 composites)",
+      "footprint": "Each Earth window",
+      "used_in": [
+        "thermal comparability audit (context only)"
+      ],
+      "cannot_establish": [
+        "air temperature",
+        "Mars-equivalent conditions",
+        "ancient climate"
+      ],
+      "source_url": "https://doi.org/10.5067/MODIS/MYD11A2.061"
+    },
+    {
+      "id": "meda",
+      "label": "Jezero ground temperature",
+      "role": "context_measurement",
+      "body": "mars",
+      "product": "Mars 2020 MEDA TIRS calibrated ground temperature (PDS Atmospheres Node)",
+      "registry_id": "mars-meda-tirs",
+      "measures": "Ground skin temperature measured from the rover mast at a few square metres.",
+      "why": {
+        "mars_base_field_testing": "Planetary side of the thermal audit; spatial support and sampling do not match MODIS, so context only."
+      },
+      "native_resolution": "point (a few m²)",
+      "analysis_resolution": "annual medians of sol windows",
+      "dates": "2021-2022 sols inside the reference window",
+      "footprint": "Rover positions inside the Jezero window",
+      "used_in": [
+        "thermal comparability audit (context only)"
+      ],
+      "cannot_establish": [
+        "the window-wide temperature regime",
+        "conditions of the ancient lake"
+      ],
+      "source_url": null
+    },
+    {
+      "id": "mola",
+      "label": "Mars global elevation (check)",
+      "role": "uncertainty_input",
+      "body": "mars",
+      "product": "MGS MOLA global DEM mosaic, 463 m (USGS)",
+      "registry_id": "mars-mola-dem",
+      "measures": "Laser altimetry elevation of Mars at 463 m.",
+      "why": {
+        "terrain_analogy": "Regional cross-check of CTX slopes at 480 m over 30 km; not scored."
+      },
+      "native_resolution": "463 m",
+      "analysis_resolution": "480 m (check only)",
+      "dates": "1997-2001",
+      "footprint": "30 km around Jezero",
+      "used_in": [
+        "regional DEM check"
+      ],
+      "cannot_establish": [
+        "anything at the 60 m analysis scale"
+      ],
+      "source_url": null
+    },
+    {
+      "id": "globes",
+      "label": "Globe textures",
+      "role": "display_context",
+      "body": "all",
+      "product": "NASA Blue Marble (GIBS), USGS Viking colour mosaic, NASA SVS LROC WAC",
+      "registry_id": "globes-orientation",
+      "measures": "Global colour mosaics for orientation.",
+      "why": {
+        "terrain_analogy": "Orientation only. They are not observations of a study window and never enter a number."
+      },
+      "native_resolution": "about 500 m to 10 km per pixel",
+      "analysis_resolution": "not analysed",
+      "dates": "Multi-year composites",
+      "footprint": "Global",
+      "used_in": [
+        "display"
+      ],
+      "cannot_establish": [
+        "anything about a 10 km window"
+      ],
+      "source_url": "https://nasa-gibs.github.io/gibs-api-docs/"
+    },
+    {
+      "id": "literature",
+      "label": "Published research context",
+      "role": "literature_context",
+      "body": "all",
+      "product": "Peer-reviewed papers and agency pages listed on the Sources page (for example Sun & Stack 2020 USGS SIM 3464 for Jezero)",
+      "registry_id": null,
+      "measures": "Findings about a region, usually not about our exact 10 km window.",
+      "why": {
+        "biosignature_fieldwork": "Explains why a region has been used for method testing. It is kept apart from window measurements and never scored.",
+        "terrain_analogy": "Context for why a window was chosen; not evidence that it matches."
+      },
+      "native_resolution": "varies",
+      "analysis_resolution": "not analysed",
+      "dates": "per publication",
+      "footprint": "usually regional",
+      "used_in": [
+        "research context panels"
+      ],
+      "cannot_establish": [
+        "properties of the exact study window"
+      ],
+      "source_url": null
+    }
+  ]
+}

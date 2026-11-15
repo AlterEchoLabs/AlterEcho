@@ -1,0 +1,68 @@
+{
+  "type": "Feature",
+  "id": "mars-gale-aeolis-palus-aoi-v1",
+  "properties": {
+    "aoi_id": "mars-gale-aeolis-palus-aoi-v1",
+    "site_id": "mars-gale-aeolis-palus",
+    "version": "1.0",
+    "planetary_body": "mars",
+    "center_latitude": -4.5625,
+    "center_longitude": 137.4417,
+    "width_m": 10000.0,
+    "height_m": 10000.0,
+    "selection_rationale": "Centred 3 km north of the Curiosity (Bradbury) landing point (4.5895 S, 137.4417 E) to keep the window on the Aeolis Palus plains; fixed before any terrain value was computed. The CTX image shows the dark-toned band still reaching the south-east corner (roughly a tenth of the window).",
+    "intended_analog_characteristics": [
+      "local slope distribution",
+      "relative elevation distribution"
+    ],
+    "known_limitations": [
+      "The window covers plains and, in its south-east corner, part of a dark-toned band; Aeolis Mons (Mount Sharp) is outside it",
+      "Rover-scale observations do not validate window-scale terrain statistics",
+      "Terrain metrics do not establish geology, habitability, safety or radiation"
+    ],
+    "creation_method": "Planetocentric latitude, east-positive longitude on the Mars sphere (R = 3,396,190 m); processing builds a local equirectangular grid true to scale at the window latitude.",
+    "source_references": [
+      "mars-gale-aeolis-palus-ctx-dtm",
+      "grotzinger-2014-gale",
+      "usgs-ctx-dtms"
+    ],
+    "planetary_target": "Reference window for terrain-only comparison with Earth windows.",
+    "analogy_dimensions_not_covered": [
+      "atmosphere",
+      "gravity",
+      "radiation",
+      "geology",
+      "temperature",
+      "habitability"
+    ],
+    "representativeness": "One 10 km window; it does not represent the whole crater or plain.",
+    "known_selection_bias": "Placed at a mission site by a documented rule."
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          137.35708,
+          -4.64685
+        ],
+        [
+          137.52632,
+          -4.64685
+        ],
+        [
+          137.52632,
+          -4.47815
+        ],
+        [
+          137.35708,
+          -4.47815
+        ],
+        [
+          137.35708,
+          -4.64685
+        ]
+      ]
+    ]
+  }
+}

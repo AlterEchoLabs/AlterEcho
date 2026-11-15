@@ -1,0 +1,27 @@
+{
+  "site_id": "earth-atacama-south",
+  "aoi_id": "earth-atacama-south-aoi-v1",
+  "provider": "Copernicus Sentinel-2 L2A via Microsoft Planetary Computer",
+  "collection": "sentinel-2-l2a",
+  "discovered_at": "2026-11-14T17:14:44.605701+00:00",
+  "retrieval_status": "verified_local_rgb_crop",
+  "selected_scene": {
+    "product_id": "S2B_MSIL2A_20260927T144729_R139_T19KDP_20260927T195914",
+    "acquisition_datetime": "2026-09-27T14:47:29.024000Z",
+    "cloud_cover_pct": 0.000238,
+    "processing_level": "Sentinel-2 Level-2A",
+    "asset_keys": [
+      "B02",
+      "B03",
+      "B04",
+      "SCL"
+    ],
+    "official_stac_record": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2B_MSIL2A_20260927T144729_R139_T19KDP_20260927T195914",
+    "preview_checksum": "4bd488284c91aae21169947cc9ca4f712cae1789ad30f6c7091f986d2914f2b0",
+    "output_resolution_m": 10.0,
+    "aoi_coverage_fraction": 1.0,
+    "aoi_valid_pixel_fraction": 1.0,
+    "aoi_cloud_fraction": 0.0,
+    "aoi_snow_fraction": 0.0
+  }
+}

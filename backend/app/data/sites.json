@@ -1,0 +1,654 @@
+[
+  {
+    "id": "mars-jezero",
+    "name": "Jezero Crater",
+    "body": "mars",
+    "country_or_region": "Mars - Isidis Planitia",
+    "latitude": 18.44,
+    "longitude": 77.45,
+    "short_description": "A measured 10 km reference window inside Jezero Crater, processed from the Mars 2020 CTX DEM mosaic.",
+    "analog_type": "planetary_reference",
+    "relevant_characteristics": [
+      "crater-floor terrain",
+      "ancient delta setting",
+      "low-relief reference window"
+    ],
+    "known_limitations": [
+      "This measured window does not represent the whole crater",
+      "Terrain metrics do not establish geology, safety, atmosphere, radiation, or habitability"
+    ],
+    "source_references": [
+      "nasa-jezero",
+      "usgs-jezero-dem"
+    ],
+    "data_status": "real_processed",
+    "processing_status": "integrity_checked",
+    "scientific_validation_status": "methodology_review_pending",
+    "aoi_id": "mars-jezero-aoi-v1",
+    "source_id": "mars-jezero-ctx-dem",
+    "available_metrics": [
+      "slope_p50_deg",
+      "slope_p90_deg",
+      "local_relief_p50_m",
+      "local_relief_p90_m",
+      "roughness_mean",
+      "roughness_p90"
+    ],
+    "thumbnail_url": null,
+    "map_display": {
+      "marker_color": "#ef4444",
+      "display_coordinate_status": "measured_aoi_center"
+    }
+  },
+  {
+    "id": "mars-gale-aeolis-palus",
+    "name": "Gale Crater floor (Aeolis Palus)",
+    "body": "mars",
+    "country_or_region": "Mars - Gale crater",
+    "latitude": -4.5625,
+    "longitude": 137.4417,
+    "short_description": "A measured 10 km Mars reference window processed from a USGS controlled CTX DTM (T01_000815_1749_XN_05S222W__K19_060629_1752_XI_04S222W).",
+    "analog_type": "planetary_reference",
+    "relevant_characteristics": [
+      "crater-floor plains (Aeolis Palus)",
+      "alluvial fan material",
+      "Curiosity landing region"
+    ],
+    "known_limitations": [
+      "The window covers plains and, in its south-east corner, part of a dark-toned band; Aeolis Mons (Mount Sharp) is outside it",
+      "Rover-scale observations do not validate window-scale terrain statistics",
+      "Terrain metrics do not establish geology, habitability, safety or radiation",
+      "CTX stereo noise adds short-wavelength texture; on very smooth plains it inflates 60 m slopes"
+    ],
+    "source_references": [
+      "grotzinger-2014-gale",
+      "usgs-ctx-dtms"
+    ],
+    "data_status": "real_processed",
+    "processing_status": "integrity_checked",
+    "scientific_validation_status": "methodology_review_pending",
+    "aoi_id": "mars-gale-aeolis-palus-aoi-v1",
+    "source_id": "mars-gale-aeolis-palus-ctx-dtm",
+    "available_metrics": [
+      "slope_p50_deg",
+      "slope_p90_deg",
+      "local_relief_p50_m",
+      "local_relief_p90_m",
+      "roughness_mean",
+      "roughness_p90"
+    ],
+    "thumbnail_url": null,
+    "map_display": {
+      "marker_color": "#ef4444",
+      "display_coordinate_status": "measured_aoi_center"
+    }
+  },
+  {
+    "id": "mars-insight-elysium",
+    "name": "Elysium Planitia (InSight landing site)",
+    "body": "mars",
+    "country_or_region": "Mars - Elysium Planitia",
+    "latitude": 4.5024,
+    "longitude": 135.6234,
+    "short_description": "A measured 10 km Mars reference window processed from a USGS controlled CTX DTM (N15_068239_1823_XN_02N224W__F18_042827_1842_XN_04N224W).",
+    "analog_type": "planetary_reference",
+    "relevant_characteristics": [
+      "smooth volcanic plains",
+      "degraded impact craters",
+      "InSight landing region"
+    ],
+    "known_limitations": [
+      "A 20 m DTM cannot resolve the metre-scale rocks and hollows described at the lander",
+      "CTX stereo noise adds short-wavelength texture; on very smooth plains it inflates 60 m slopes (median 60 m slope 3.1 deg here)",
+      "Regolith thickness and mechanical properties are not measured",
+      "Terrain metrics do not establish geology, habitability, safety or radiation"
+    ],
+    "source_references": [
+      "golombek-2020-insight",
+      "usgs-ctx-dtms"
+    ],
+    "data_status": "real_processed",
+    "processing_status": "integrity_checked",
+    "scientific_validation_status": "methodology_review_pending",
+    "aoi_id": "mars-insight-elysium-aoi-v1",
+    "source_id": "mars-insight-elysium-ctx-dtm",
+    "available_metrics": [
+      "slope_p50_deg",
+      "slope_p90_deg",
+      "local_relief_p50_m",
+      "local_relief_p90_m",
+      "roughness_mean",
+      "roughness_p90"
+    ],
+    "thumbnail_url": null,
+    "map_display": {
+      "marker_color": "#ef4444",
+      "display_coordinate_status": "measured_aoi_center"
+    }
+  },
+  {
+    "id": "mars-gusev-plains",
+    "name": "Gusev crater plains (Spirit landing site)",
+    "body": "mars",
+    "country_or_region": "Mars - Gusev crater",
+    "latitude": -14.5684,
+    "longitude": 175.4726,
+    "short_description": "A measured 10 km Mars reference window processed from a USGS controlled CTX DTM (P22_009530_1653_XI_14S184W__P06_003333_1652_XI_14S184W).",
+    "analog_type": "planetary_reference",
+    "relevant_characteristics": [
+      "basaltic cratered plains",
+      "western Columbia Hills",
+      "Spirit traverse region"
+    ],
+    "known_limitations": [
+      "The window mixes plains and part of the Columbia Hills",
+      "Rover-scale observations do not validate window-scale statistics",
+      "Terrain metrics do not establish geology, habitability, safety or radiation",
+      "CTX stereo noise adds short-wavelength texture; on very smooth plains it inflates 60 m slopes"
+    ],
+    "source_references": [
+      "golombek-2006-gusev",
+      "usgs-ctx-dtms"
+    ],
+    "data_status": "real_processed",
+    "processing_status": "integrity_checked",
+    "scientific_validation_status": "methodology_review_pending",
+    "aoi_id": "mars-gusev-plains-aoi-v1",
+    "source_id": "mars-gusev-plains-ctx-dtm",
+    "available_metrics": [
+      "slope_p50_deg",
+      "slope_p90_deg",
+      "local_relief_p50_m",
+      "local_relief_p90_m",
+      "roughness_mean",
+      "roughness_p90"
+    ],
+    "thumbnail_url": null,
+    "map_display": {
+      "marker_color": "#ef4444",
+      "display_coordinate_status": "measured_aoi_center"
+    }
+  },
+  {
+    "id": "mars-eberswalde-delta",
+    "name": "Eberswalde crater delta",
+    "body": "mars",
+    "country_or_region": "Mars - Eberswalde crater",
+    "latitude": -23.85,
+    "longitude": -33.55,
+    "short_description": "A measured 10 km Mars reference window processed from a USGS controlled CTX DTM (B22_018056_1559_XN_24S033W__G01_018557_1555_XN_24S033W).",
+    "analog_type": "planetary_reference",
+    "relevant_characteristics": [
+      "fan delta with distributary channels",
+      "inverted channel deposits",
+      "crater-floor sediments"
+    ],
+    "known_limitations": [
+      "A delta deposit and a desert landscape can share slope statistics without sharing a process",
+      "Mineralogy is not measured",
+      "Terrain metrics do not establish geology, habitability, safety or radiation",
+      "CTX stereo noise adds short-wavelength texture; on very smooth plains it inflates 60 m slopes"
+    ],
+    "source_references": [
+      "malin-edgett-2003-eberswalde",
+      "usgs-ctx-dtms"
+    ],
+    "data_status": "real_processed",
+    "processing_status": "integrity_checked",
+    "scientific_validation_status": "methodology_review_pending",
+    "aoi_id": "mars-eberswalde-delta-aoi-v1",
+    "source_id": "mars-eberswalde-delta-ctx-dtm",
+    "available_metrics": [
+      "slope_p50_deg",
+      "slope_p90_deg",
+      "local_relief_p50_m",
+      "local_relief_p90_m",
+      "roughness_mean",
+      "roughness_p90"
+    ],
+    "thumbnail_url": null,
+    "map_display": {
+      "marker_color": "#ef4444",
+      "display_coordinate_status": "measured_aoi_center"
+    }
+  },
+  {
+    "id": "earth-upper-mustang",
+    "name": "Upper Mustang",
+    "body": "earth",
+    "country_or_region": "Nepal",
+    "latitude": 29.1,
+    "longitude": 83.9,
+    "short_description": "A measured 10 km high-altitude arid terrain window processed from NASA SRTMGL1.003.",
+    "analog_type": "terrain_candidate",
+    "relevant_characteristics": [
+      "aridity",
+      "erosion",
+      "rugged slopes"
+    ],
+    "known_limitations": [
+      "The measured window does not represent all of Upper Mustang",
+      "Literature support for this exact window is documentation pending",
+      "Terrain alone does not establish a Mars analog"
+    ],
+    "source_references": [
+      "handoff-candidate-atlas"
+    ],
+    "data_status": "real_processed",
+    "processing_status": "integrity_checked",
+    "scientific_validation_status": "methodology_review_pending",
+    "aoi_id": "earth-upper-mustang-aoi-v1",
+    "source_id": "earth-upper-mustang-srtmgl1",
+    "available_metrics": [
+      "slope_p50_deg",
+      "slope_p90_deg",
+      "local_relief_p50_m",
+      "local_relief_p90_m",
+      "roughness_mean",
+      "roughness_p90"
+    ],
+    "thumbnail_url": null,
+    "map_display": {
+      "marker_color": "#f97316",
+      "display_coordinate_status": "measured_aoi_center"
+    }
+  },
+  {
+    "id": "earth-ladakh",
+    "name": "Ladakh",
+    "body": "earth",
+    "country_or_region": "India",
+    "latitude": 34.2,
+    "longitude": 77.6,
+    "short_description": "A measured 10 km cold-desert terrain window processed from NASA SRTMGL1.003.",
+    "analog_type": "terrain_candidate",
+    "relevant_characteristics": [
+      "cold desert",
+      "large relief",
+      "rocky slopes"
+    ],
+    "known_limitations": [
+      "The measured window does not represent all of Ladakh",
+      "The exact named subregion and selection rationale are documentation pending",
+      "Earth pressure is not comparable to Mars"
+    ],
+    "source_references": [
+      "ladakh-research",
+      "isro-ladakh"
+    ],
+    "data_status": "real_processed",
+    "processing_status": "integrity_checked",
+    "scientific_validation_status": "methodology_review_pending",
+    "aoi_id": "earth-ladakh-aoi-v1",
+    "source_id": "earth-ladakh-srtmgl1",
+    "available_metrics": [
+      "slope_p50_deg",
+      "slope_p90_deg",
+      "local_relief_p50_m",
+      "local_relief_p90_m",
+      "roughness_mean",
+      "roughness_p90"
+    ],
+    "thumbnail_url": null,
+    "map_display": {
+      "marker_color": "#f97316",
+      "display_coordinate_status": "measured_aoi_center"
+    }
+  },
+  {
+    "id": "earth-atacama",
+    "name": "Atacama Desert",
+    "body": "earth",
+    "country_or_region": "Chile",
+    "latitude": -24.2,
+    "longitude": -69.9,
+    "short_description": "A measured 10 km arid-terrain window processed from NASA SRTMGL1.003.",
+    "analog_type": "terrain_candidate",
+    "relevant_characteristics": [
+      "extreme aridity",
+      "rocky and salt landscapes"
+    ],
+    "known_limitations": [
+      "The measured window does not represent the complete Atacama Desert",
+      "Aridity is not scored by the terrain-shape index",
+      "Scientific calibration of the configured index is pending"
+    ],
+    "source_references": [
+      "atacama-study",
+      "nasa-atacama"
+    ],
+    "data_status": "real_processed",
+    "processing_status": "integrity_checked",
+    "scientific_validation_status": "methodology_review_pending",
+    "aoi_id": "earth-atacama-aoi-v1",
+    "source_id": "earth-atacama-srtmgl1",
+    "available_metrics": [
+      "slope_p50_deg",
+      "slope_p90_deg",
+      "local_relief_p50_m",
+      "local_relief_p90_m",
+      "roughness_mean",
+      "roughness_p90"
+    ],
+    "thumbnail_url": null,
+    "map_display": {
+      "marker_color": "#f97316",
+      "display_coordinate_status": "measured_aoi_center"
+    }
+  },
+  {
+    "id": "earth-atacama-south",
+    "name": "Atacama Desert (south window)",
+    "body": "earth",
+    "country_or_region": "Chile",
+    "latitude": -24.2722,
+    "longitude": -69.9005,
+    "short_description": "A measured 10 km arid-terrain window 8 km south of the original Atacama window, free of built structures, processed from NASA SRTMGL1.003.",
+    "analog_type": "terrain_candidate",
+    "relevant_characteristics": [
+      "extreme aridity",
+      "rocky and salt landscapes"
+    ],
+    "known_limitations": [
+      "The measured window does not represent the complete Atacama Desert",
+      "Unpaved tracks and a survey grid cross the window (narrower than one 60 m cell)",
+      "Atacama life-detection research elsewhere in the desert does not validate this exact window",
+      "Aridity, salts and soil chemistry are not measured by the terrain features"
+    ],
+    "source_references": [
+      "atacama-study",
+      "nasa-atacama"
+    ],
+    "data_status": "real_processed",
+    "processing_status": "integrity_checked",
+    "scientific_validation_status": "methodology_review_pending",
+    "aoi_id": "earth-atacama-south-aoi-v1",
+    "source_id": "earth-atacama-south-srtmgl1",
+    "available_metrics": [
+      "slope_p50_deg",
+      "slope_p90_deg",
+      "local_relief_p50_m",
+      "local_relief_p90_m",
+      "roughness_mean",
+      "roughness_p90"
+    ],
+    "thumbnail_url": null,
+    "map_display": {
+      "marker_color": "#f97316",
+      "display_coordinate_status": "measured_aoi_center"
+    }
+  },
+  {
+    "id": "earth-holuhraun",
+    "name": "Holuhraun Volcanic Highlands",
+    "body": "earth",
+    "country_or_region": "Iceland",
+    "latitude": 64.85,
+    "longitude": -16.83,
+    "short_description": "Planned dataset integration for a volcanic lava-field candidate.",
+    "analog_type": "terrain_candidate",
+    "relevant_characteristics": [
+      "young lava terrain",
+      "volcanic roughness"
+    ],
+    "known_limitations": [
+      "Not processed or rankable",
+      "Requires ArcticDEM or another documented high-latitude DEM",
+      "Volcanic analogy is not a Jezero geology match"
+    ],
+    "source_references": [
+      "raven-holuhraun",
+      "holuhraun-study"
+    ],
+    "data_status": "planned",
+    "processing_status": "not_processed",
+    "scientific_validation_status": "not_reviewed",
+    "aoi_id": null,
+    "source_id": null,
+    "available_metrics": [],
+    "thumbnail_url": null,
+    "map_display": {
+      "marker_color": "#64748b",
+      "display_coordinate_status": "regional_locator"
+    }
+  },
+  {
+    "id": "earth-mcmurdo-dry-valleys",
+    "name": "McMurdo Dry Valleys",
+    "body": "earth",
+    "country_or_region": "Antarctica",
+    "latitude": -77.6333,
+    "longitude": 162.8667,
+    "short_description": "Planned REMA integration using a Taylor Valley-area regional locator.",
+    "analog_type": "terrain_candidate",
+    "relevant_characteristics": [
+      "cold desert",
+      "exposed polar ground",
+      "isolation"
+    ],
+    "known_limitations": [
+      "Not processed or rankable",
+      "Requires REMA; SRTM has no coverage",
+      "Ice, biology, seasonality, and logistics are not terrain metrics"
+    ],
+    "source_references": [
+      "nasa-astrobiology-sites",
+      "usap-taylor-valley"
+    ],
+    "data_status": "planned",
+    "processing_status": "not_processed",
+    "scientific_validation_status": "not_reviewed",
+    "aoi_id": null,
+    "source_id": null,
+    "available_metrics": [],
+    "thumbnail_url": null,
+    "map_display": {
+      "marker_color": "#64748b",
+      "display_coordinate_status": "regional_locator"
+    }
+  },
+  {
+    "id": "earth-danakil",
+    "name": "Dallol, Danakil Depression",
+    "body": "earth",
+    "country_or_region": "Ethiopia (Afar)",
+    "latitude": 14.2417,
+    "longitude": 40.2989,
+    "short_description": "A measured 10 km window centred on the Dallol hydrothermal dome, processed from NASA SRTMGL1.003.",
+    "analog_type": "environmental_candidate",
+    "relevant_characteristics": [
+      "hydrothermal field",
+      "evaporite salt plain",
+      "extreme heat"
+    ],
+    "known_limitations": [
+      "Hydrothermal chemistry and salts are not measured by the terrain index",
+      "The salt plain is very flat; terrain similarity says nothing about mineralogy",
+      "Access is hazardous and seasonally restricted; not assessed here"
+    ],
+    "source_references": [
+      "dallol-study"
+    ],
+    "data_status": "real_processed",
+    "processing_status": "integrity_checked",
+    "scientific_validation_status": "methodology_review_pending",
+    "aoi_id": "earth-danakil-aoi-v1",
+    "source_id": "earth-danakil-srtmgl1",
+    "available_metrics": [
+      "slope_p50_deg",
+      "slope_p90_deg",
+      "local_relief_p50_m",
+      "local_relief_p90_m",
+      "roughness_mean",
+      "roughness_p90"
+    ],
+    "thumbnail_url": null,
+    "map_display": {
+      "marker_color": "#f97316",
+      "display_coordinate_status": "measured_aoi_center"
+    }
+  },
+  {
+    "id": "earth-craters-of-the-moon",
+    "name": "Craters of the Moon lava field",
+    "body": "earth",
+    "country_or_region": "Idaho, USA",
+    "latitude": 43.42,
+    "longitude": -113.55,
+    "short_description": "A measured 10 km window over the northern Craters of the Moon lava field, processed from NASA SRTMGL1.003.",
+    "analog_type": "terrain_candidate",
+    "relevant_characteristics": [
+      "young basaltic lava flows",
+      "cinder cones",
+      "rough volcanic surfaces"
+    ],
+    "known_limitations": [
+      "Region-level BASALT research does not validate this exact window",
+      "Basalt composition and vesicularity are not measured by the terrain index",
+      "National monument rules govern access; not assessed here"
+    ],
+    "source_references": [
+      "basalt-lim-2019"
+    ],
+    "data_status": "real_processed",
+    "processing_status": "integrity_checked",
+    "scientific_validation_status": "methodology_review_pending",
+    "aoi_id": "earth-craters-of-the-moon-aoi-v1",
+    "source_id": "earth-craters-of-the-moon-srtmgl1",
+    "available_metrics": [
+      "slope_p50_deg",
+      "slope_p90_deg",
+      "local_relief_p50_m",
+      "local_relief_p90_m",
+      "roughness_mean",
+      "roughness_p90"
+    ],
+    "thumbnail_url": null,
+    "map_display": {
+      "marker_color": "#f97316",
+      "display_coordinate_status": "measured_aoi_center"
+    }
+  },
+  {
+    "id": "earth-hanksville-mdrs",
+    "name": "Hanksville badlands (MDRS)",
+    "body": "earth",
+    "country_or_region": "Utah, USA",
+    "latitude": 38.4064,
+    "longitude": -110.7919,
+    "short_description": "A measured 10 km window centred on the Mars Desert Research Station area, processed from NASA SRTMGL1.003.",
+    "analog_type": "terrain_candidate",
+    "relevant_characteristics": [
+      "sedimentary badlands",
+      "arid erosion",
+      "operational analog station"
+    ],
+    "known_limitations": [
+      "Operational use of the station does not establish terrain similarity",
+      "Sedimentary mineralogy is not measured by the terrain index",
+      "Private and public land access rules are not assessed"
+    ],
+    "source_references": [
+      "mdrs-station"
+    ],
+    "data_status": "real_processed",
+    "processing_status": "integrity_checked",
+    "scientific_validation_status": "methodology_review_pending",
+    "aoi_id": "earth-hanksville-mdrs-aoi-v1",
+    "source_id": "earth-hanksville-mdrs-srtmgl1",
+    "available_metrics": [
+      "slope_p50_deg",
+      "slope_p90_deg",
+      "local_relief_p50_m",
+      "local_relief_p90_m",
+      "roughness_mean",
+      "roughness_p90"
+    ],
+    "thumbnail_url": null,
+    "map_display": {
+      "marker_color": "#f97316",
+      "display_coordinate_status": "measured_aoi_center"
+    }
+  },
+  {
+    "id": "earth-meteor-crater",
+    "name": "Meteor Crater (Barringer)",
+    "body": "earth",
+    "country_or_region": "Arizona, USA",
+    "latitude": 35.0272,
+    "longitude": -111.0225,
+    "short_description": "A measured 10 km window centred on Meteor Crater, processed from NASA SRTMGL1.003 (two-tile mosaic).",
+    "analog_type": "terrain_candidate",
+    "relevant_characteristics": [
+      "simple impact crater",
+      "ejecta blanket",
+      "arid plateau"
+    ],
+    "known_limitations": [
+      "The crater is small relative to the window, so plateau terrain dominates the distributions",
+      "Impact petrology and shock features are not measured",
+      "Privately managed site; access not assessed"
+    ],
+    "source_references": [
+      "kring-2007-barringer"
+    ],
+    "data_status": "real_processed",
+    "processing_status": "integrity_checked",
+    "scientific_validation_status": "methodology_review_pending",
+    "aoi_id": "earth-meteor-crater-aoi-v1",
+    "source_id": "earth-meteor-crater-srtmgl1",
+    "available_metrics": [
+      "slope_p50_deg",
+      "slope_p90_deg",
+      "local_relief_p50_m",
+      "local_relief_p90_m",
+      "roughness_mean",
+      "roughness_p90"
+    ],
+    "thumbnail_url": null,
+    "map_display": {
+      "marker_color": "#f97316",
+      "display_coordinate_status": "measured_aoi_center"
+    }
+  },
+  {
+    "id": "moon-south-pole-shackleton",
+    "name": "Lunar south pole (Shackleton rim)",
+    "body": "moon",
+    "country_or_region": "Moon - south polar region",
+    "latitude": -90.0,
+    "longitude": 0.0,
+    "short_description": "A measured 10 km window centred on the lunar south pole, on Shackleton crater's rim, processed from LRO LOLA 20 m polar topography.",
+    "analog_type": "planetary_reference",
+    "relevant_characteristics": [
+      "crater rim",
+      "steep inner wall",
+      "polar plateau"
+    ],
+    "known_limitations": [
+      "Terrain shape only; illumination, permanent shadow, volatiles and regolith are not assessed",
+      "Limited lunar comparison: Earth terrain is shaped by atmosphere and water"
+    ],
+    "source_references": [
+      "lola-pds"
+    ],
+    "data_status": "real_processed",
+    "processing_status": "integrity_checked",
+    "scientific_validation_status": "methodology_review_pending",
+    "aoi_id": "moon-south-pole-shackleton-aoi-v1",
+    "source_id": "moon-south-pole-shackleton-lola-ldem",
+    "available_metrics": [
+      "slope_p50_deg",
+      "slope_p90_deg",
+      "local_relief_p50_m",
+      "local_relief_p90_m",
+      "roughness_mean",
+      "roughness_p90"
+    ],
+    "thumbnail_url": null,
+    "map_display": {
+      "marker_color": "#b9bfc9",
+      "display_coordinate_status": "measured_aoi_center"
+    }
+  }
+]

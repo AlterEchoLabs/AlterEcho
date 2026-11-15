@@ -1,0 +1,39 @@
+{
+  "site_id": "earth-meteor-crater",
+  "aoi_id": "earth-meteor-crater-aoi-v1",
+  "product": "ESA WorldCover 10 m v200",
+  "collection": "esa-worldcover",
+  "item_ids": [
+    "ESA_WorldCover_10m_2021_v200_N33W114",
+    "ESA_WorldCover_10m_2021_v200_N33W111"
+  ],
+  "product_version": "2.0.0",
+  "reference_year": 2021,
+  "pixel_size": "10 m (1/12000 deg)",
+  "provider": "ESA via Microsoft Planetary Computer",
+  "licence": "CC-BY-4.0",
+  "attribution": "\u00a9 ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium",
+  "official_stac_records": [
+    "https://planetarycomputer.microsoft.com/api/stac/v1/collections/esa-worldcover/items/ESA_WorldCover_10m_2021_v200_N33W114",
+    "https://planetarycomputer.microsoft.com/api/stac/v1/collections/esa-worldcover/items/ESA_WorldCover_10m_2021_v200_N33W111"
+  ],
+  "core_pixel_count": 1419486,
+  "class_fractions_core": {
+    "Tree cover": 0.001014,
+    "Shrubland": 0.010895,
+    "Grassland": 0.606448,
+    "Cropland": 0.00013,
+    "Built-up": 0.000542,
+    "Bare / sparse vegetation": 0.380925,
+    "Permanent water bodies": 4.6e-05
+  },
+  "built_up_fraction_core": 0.000542,
+  "clip_file": "data/processed/landcover/earth-meteor-crater.worldcover-v200.tif",
+  "clip_sha256": "93f1bdd4e5d707c9a07e51fc5eb1696da4444c508b8954d6cb340c2bc1443ef0",
+  "limitations": [
+    "WorldCover is a 2021 classification with a stated global accuracy near 77 %; class errors are not quantified per AOI here.",
+    "Mine pits, heaps and graded ground are usually classed as bare/sparse (60), so this check under-detects mining disturbance.",
+    "SRTM elevation dates from February 2000; built-up land mapped in 2021 may postdate the DEM."
+  ],
+  "generated_at": "2026-11-14T17:10:21.598712+00:00"
+}

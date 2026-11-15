@@ -1,0 +1,20 @@
+{
+  "gibs": {
+    "provider": "NASA GIBS / Worldview",
+    "layer_identifier": "VIIRS_NOAA20_CorrectedReflectance_TrueColor",
+    "observation_date": "2026-11-14",
+    "projection": "EPSG:3857",
+    "tile_matrix_set": "GoogleMapsCompatible_Level9",
+    "format": "image/jpeg",
+    "resolution_description": "VIIRS corrected-reflectance observational context; approximately 375 m source resolution",
+    "archive_status": "standard_archive_best",
+    "capabilities_url": "https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/1.0.0/WMTSCapabilities.xml",
+    "tile_template": "https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_NOAA20_CorrectedReflectance_TrueColor/default/2026-11-14/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpeg",
+    "verified_at": "2026-11-14T15:32:14.004814+00:00",
+    "limitations": [
+      "Latest available observation is not a live feed and may contain clouds.",
+      "The observation date comes from the official capabilities time dimension and does not guarantee a cloud-free view at every AOI.",
+      "The layer is lower resolution than Sentinel-2 and is context only."
+    ]
+  }
+}

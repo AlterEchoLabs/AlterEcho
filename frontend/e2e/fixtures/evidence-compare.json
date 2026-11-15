@@ -1,0 +1,761 @@
+{
+    "model_version": "analog-evidence-v1.0",
+    "review_status": "provisional_pending_expert_review",
+    "reference_site_id": "mars-jezero",
+    "profile": {
+        "id": "balanced_science",
+        "label": "Balanced science",
+        "purpose": "General analog research shortlisting across physical dimensions.",
+        "weights": {
+            "terrain": 0.35,
+            "temperature": 0.15,
+            "geology": 0.2,
+            "water_ice": 0.1,
+            "surface_processes": 0.1,
+            "subsurface_habitability": 0.1
+        },
+        "required_dimensions": [
+            "terrain"
+        ],
+        "min_backed_weight_fraction": 0.4,
+        "review_status": "provisional_pending_expert_review"
+    },
+    "common_basis": [
+        "terrain",
+        "temperature"
+    ],
+    "common_basis_weight_fraction": 0.5,
+    "ranking_status": "ranked",
+    "ordering_note": "The order matches the terrain-only baseline: surface temperature similarities range only 0.07\u00e2\u20ac\u201c0.16, so terrain decides the order. Adding those dimensions changes the index values, not the order.",
+    "results": [
+        {
+            "site_id": "earth-atacama",
+            "site_name": "Atacama Desert",
+            "rank": 1,
+            "ranking_status": "ranked",
+            "index": 69.3,
+            "backed_weight_fraction": 0.5,
+            "scoring_basis": [
+                "terrain",
+                "temperature"
+            ],
+            "evidence_quality": "limited",
+            "dimensions": [
+                {
+                    "dimension": "terrain",
+                    "label": "Terrain shape",
+                    "profile_weight": 0.35,
+                    "status": "measured",
+                    "quality": "moderate",
+                    "similarity": 0.9613532854194056,
+                    "used_in_score": true,
+                    "reason": "terrain-v3.0 distributions at 60/120/240 m on integrity-checked artifacts.",
+                    "features": [
+                        {
+                            "dimension": "terrain",
+                            "feature": "elevation_relative_m",
+                            "label": "Relative-elevation distribution",
+                            "reference_value": 58.924049377441406,
+                            "candidate_value": 52.64309310913086,
+                            "difference": -6.28,
+                            "units": "m",
+                            "similarity": 0.9682882216316265,
+                            "weight_in_dimension": 0.15
+                        },
+                        {
+                            "dimension": "terrain",
+                            "feature": "slope_deg",
+                            "label": "Slope distribution",
+                            "reference_value": 1.8282084238231922,
+                            "candidate_value": 2.426142883435922,
+                            "difference": 0.6,
+                            "units": "\u00c2\u00b0",
+                            "similarity": 0.9443668899721688,
+                            "weight_in_dimension": 0.3
+                        },
+                        {
+                            "dimension": "terrain",
+                            "feature": "roughness_m",
+                            "label": "Roughness distribution (300 m window)",
+                            "reference_value": 3.640102101230172,
+                            "candidate_value": 4.3456246550831645,
+                            "difference": 0.71,
+                            "units": "m",
+                            "similarity": 0.9807035420555062,
+                            "weight_in_dimension": 0.2
+                        },
+                        {
+                            "dimension": "terrain",
+                            "feature": "local_relief_m",
+                            "label": "Local relief distribution (1 km window)",
+                            "reference_value": 33.659912109375,
+                            "candidate_value": 39.4613037109375,
+                            "difference": 5.8,
+                            "units": "m",
+                            "similarity": 0.961883647919742,
+                            "weight_in_dimension": 0.35
+                        }
+                    ]
+                },
+                {
+                    "dimension": "temperature",
+                    "label": "Surface temperature",
+                    "profile_weight": 0.15,
+                    "status": "measured",
+                    "quality": "limited",
+                    "similarity": 0.06798950995769237,
+                    "used_in_score": true,
+                    "reason": "Matched local solar times and full annual cycles; point sensor (Mars) versus AOI mean (Earth).",
+                    "features": [
+                        {
+                            "dimension": "temperature",
+                            "feature": "diurnal_range_p50_k",
+                            "label": "Diurnal range (annual median)",
+                            "reference_value": 74.22,
+                            "candidate_value": 38.59,
+                            "difference": -35.63,
+                            "units": "K",
+                            "similarity": 0.059540160828015096,
+                            "weight_in_dimension": 0.5
+                        },
+                        {
+                            "dimension": "temperature",
+                            "feature": "night_temperature_p50_k",
+                            "label": "Night skin temperature (annual median)",
+                            "reference_value": 196.26,
+                            "candidate_value": 279.41,
+                            "difference": 83.15,
+                            "units": "K",
+                            "similarity": 0.003961478360598973,
+                            "weight_in_dimension": 0.25
+                        },
+                        {
+                            "dimension": "temperature",
+                            "feature": "day_temperature_p50_k",
+                            "label": "Day skin temperature (annual median)",
+                            "reference_value": 269.6,
+                            "candidate_value": 318.39,
+                            "difference": 48.79,
+                            "units": "K",
+                            "similarity": 0.14891623981414034,
+                            "weight_in_dimension": 0.25
+                        }
+                    ]
+                },
+                {
+                    "dimension": "geology",
+                    "label": "Geology and mineralogy",
+                    "profile_weight": 0.2,
+                    "status": "not_comparable",
+                    "quality": "none",
+                    "similarity": null,
+                    "used_in_score": false,
+                    "reason": "No mineral-class product has been processed for this AOI. The planned source, EMIT L2B mineral identification, needs NASA Earthdata access, and its coverage of this exact AOI is unverified. A true-colour image is not mineral evidence.",
+                    "features": []
+                },
+                {
+                    "dimension": "water_ice",
+                    "label": "Water, ice and resources",
+                    "profile_weight": 0.1,
+                    "status": "missing",
+                    "quality": "none",
+                    "similarity": null,
+                    "used_in_score": false,
+                    "reason": "No water, ice or resource observation has been processed for this AOI. A non-detection would not show absence.",
+                    "features": []
+                },
+                {
+                    "dimension": "surface_processes",
+                    "label": "Surface processes",
+                    "profile_weight": 0.1,
+                    "status": "missing",
+                    "quality": "none",
+                    "similarity": null,
+                    "used_in_score": false,
+                    "reason": "No process indicators have been processed for either body: no Sentinel-1/2 indices and no mapped Mars landforms. The Sentinel-2 crop is display imagery only.",
+                    "features": []
+                },
+                {
+                    "dimension": "subsurface_habitability",
+                    "label": "Subsurface and habitability context",
+                    "profile_weight": 0.1,
+                    "status": "not_comparable",
+                    "quality": "none",
+                    "similarity": null,
+                    "used_in_score": false,
+                    "reason": "No comparable subsurface product exists for this AOI. TerraLuna makes no life-detection or habitability claim.",
+                    "features": []
+                }
+            ],
+            "factors": [
+                {
+                    "kind": "helped",
+                    "dimension": "terrain",
+                    "text": "Local relief distribution (1 km window) is close (median 39.5 m vs 33.7 m at Jezero).",
+                    "short_label": "local relief",
+                    "weight_share": 0.245
+                },
+                {
+                    "kind": "helped",
+                    "dimension": "terrain",
+                    "text": "Slope distribution is close (median 2.4\u00c2\u00b0 vs 1.8\u00c2\u00b0 at Jezero).",
+                    "short_label": "slope",
+                    "weight_share": 0.21
+                },
+                {
+                    "kind": "helped",
+                    "dimension": "terrain",
+                    "text": "Roughness distribution (300 m window) is close (mean 4.3 m vs 3.6 m at Jezero).",
+                    "short_label": "roughness",
+                    "weight_share": 0.14
+                },
+                {
+                    "kind": "hurt",
+                    "dimension": "temperature",
+                    "text": "Diurnal range (annual median) differs (38.6 K vs 74.2 K at Jezero).",
+                    "short_label": "day\u00e2\u20ac\u201cnight temperature range",
+                    "weight_share": 0.15
+                },
+                {
+                    "kind": "hurt",
+                    "dimension": "temperature",
+                    "text": "Night skin temperature (annual median) differs (279.4 K vs 196.3 K at Jezero).",
+                    "short_label": "night temperature",
+                    "weight_share": 0.075
+                },
+                {
+                    "kind": "hurt",
+                    "dimension": "temperature",
+                    "text": "Day skin temperature (annual median) differs (318.4 K vs 269.6 K at Jezero).",
+                    "short_label": "day temperature",
+                    "weight_share": 0.075
+                },
+                {
+                    "kind": "gap",
+                    "dimension": "geology",
+                    "text": "Geology and mineralogy carries 20% of this profile but has no comparable evidence (not comparable).",
+                    "short_label": "geology and mineralogy",
+                    "weight_share": 0.2
+                },
+                {
+                    "kind": "gap",
+                    "dimension": "water_ice",
+                    "text": "Water, ice and resources carries 10% of this profile but has no comparable evidence (missing).",
+                    "short_label": "water, ice and resources",
+                    "weight_share": 0.1
+                },
+                {
+                    "kind": "gap",
+                    "dimension": "surface_processes",
+                    "text": "Surface processes carries 10% of this profile but has no comparable evidence (missing).",
+                    "short_label": "surface processes",
+                    "weight_share": 0.1
+                },
+                {
+                    "kind": "gap",
+                    "dimension": "subsurface_habitability",
+                    "text": "Subsurface and habitability context carries 10% of this profile but has no comparable evidence (not comparable).",
+                    "short_label": "subsurface and habitability context",
+                    "weight_share": 0.1
+                }
+            ],
+            "terrain_baseline": {
+                "method": "terrain-v3.0",
+                "index": 96.1,
+                "rank": 1
+            },
+            "sensitivity": {
+                "tested_configurations": 9,
+                "index_range": [
+                    65.0,
+                    73.3
+                ],
+                "rank_range": [
+                    1,
+                    1
+                ],
+                "notice": "Deterministic perturbation of profile weights (\u00c2\u00b120%), thermal tolerances (\u00c2\u00b120%) and the terrain-v3 tested range. Not a confidence interval."
+            },
+            "explanation": "Atacama Desert scores 69.3/100 on terrain shape + surface temperature, which covers 50% of the Balanced science weight. Closest: local relief distribution (1 km window) is close (median 39.5 m vs 33.7 m at Jezero). Largest mismatch: diurnal range (annual median) differs (38.6 K vs 74.2 K at Jezero).",
+            "not_assessed": [
+                "site access and permits",
+                "safe traversal",
+                "logistics",
+                "landing or base suitability"
+            ]
+        },
+        {
+            "site_id": "earth-upper-mustang",
+            "site_name": "Upper Mustang",
+            "rank": 2,
+            "ranking_status": "ranked",
+            "index": 27.9,
+            "backed_weight_fraction": 0.5,
+            "scoring_basis": [
+                "terrain",
+                "temperature"
+            ],
+            "evidence_quality": "limited",
+            "dimensions": [
+                {
+                    "dimension": "terrain",
+                    "label": "Terrain shape",
+                    "profile_weight": 0.35,
+                    "status": "measured",
+                    "quality": "moderate",
+                    "similarity": 0.3409377628342195,
+                    "used_in_score": true,
+                    "reason": "terrain-v3.0 distributions at 60/120/240 m on integrity-checked artifacts.",
+                    "features": [
+                        {
+                            "dimension": "terrain",
+                            "feature": "elevation_relative_m",
+                            "label": "Relative-elevation distribution",
+                            "reference_value": 58.924049377441406,
+                            "candidate_value": 370.2835388183594,
+                            "difference": 311.36,
+                            "units": "m",
+                            "similarity": 0.25831985456325357,
+                            "weight_in_dimension": 0.15
+                        },
+                        {
+                            "dimension": "terrain",
+                            "feature": "slope_deg",
+                            "label": "Slope distribution",
+                            "reference_value": 1.8282084238231922,
+                            "candidate_value": 16.932575771050832,
+                            "difference": 15.1,
+                            "units": "\u00c2\u00b0",
+                            "similarity": 0.22067294542548468,
+                            "weight_in_dimension": 0.3
+                        },
+                        {
+                            "dimension": "terrain",
+                            "feature": "roughness_m",
+                            "label": "Roughness distribution (300 m window)",
+                            "reference_value": 3.640102101230172,
+                            "candidate_value": 27.54533650070734,
+                            "difference": 23.91,
+                            "units": "m",
+                            "similarity": 0.5090136272912823,
+                            "weight_in_dimension": 0.2
+                        },
+                        {
+                            "dimension": "terrain",
+                            "feature": "local_relief_m",
+                            "label": "Local relief distribution (1 km window)",
+                            "reference_value": 33.659912109375,
+                            "candidate_value": 280.829345703125,
+                            "difference": 247.17,
+                            "units": "m",
+                            "similarity": 0.38338621589665606,
+                            "weight_in_dimension": 0.35
+                        }
+                    ]
+                },
+                {
+                    "dimension": "temperature",
+                    "label": "Surface temperature",
+                    "profile_weight": 0.15,
+                    "status": "measured",
+                    "quality": "limited",
+                    "similarity": 0.13425398904005453,
+                    "used_in_score": true,
+                    "reason": "Matched local solar times and full annual cycles; point sensor (Mars) versus AOI mean (Earth).",
+                    "features": [
+                        {
+                            "dimension": "temperature",
+                            "feature": "diurnal_range_p50_k",
+                            "label": "Diurnal range (annual median)",
+                            "reference_value": 74.22,
+                            "candidate_value": 30.52,
+                            "difference": -43.7,
+                            "units": "K",
+                            "similarity": 0.014353584808210888,
+                            "weight_in_dimension": 0.5
+                        },
+                        {
+                            "dimension": "temperature",
+                            "feature": "night_temperature_p50_k",
+                            "label": "Night skin temperature (annual median)",
+                            "reference_value": 196.26,
+                            "candidate_value": 270.65,
+                            "difference": 74.39,
+                            "units": "K",
+                            "similarity": 0.011949119563660604,
+                            "weight_in_dimension": 0.25
+                        },
+                        {
+                            "dimension": "temperature",
+                            "feature": "day_temperature_p50_k",
+                            "label": "Day skin temperature (annual median)",
+                            "reference_value": 269.6,
+                            "candidate_value": 299.19,
+                            "difference": 29.59,
+                            "units": "K",
+                            "similarity": 0.4963596669801358,
+                            "weight_in_dimension": 0.25
+                        }
+                    ]
+                },
+                {
+                    "dimension": "geology",
+                    "label": "Geology and mineralogy",
+                    "profile_weight": 0.2,
+                    "status": "not_comparable",
+                    "quality": "none",
+                    "similarity": null,
+                    "used_in_score": false,
+                    "reason": "No mineral-class product has been processed for this AOI. The planned source, EMIT L2B mineral identification, needs NASA Earthdata access, and its coverage of this exact AOI is unverified. A true-colour image is not mineral evidence.",
+                    "features": []
+                },
+                {
+                    "dimension": "water_ice",
+                    "label": "Water, ice and resources",
+                    "profile_weight": 0.1,
+                    "status": "missing",
+                    "quality": "none",
+                    "similarity": null,
+                    "used_in_score": false,
+                    "reason": "No water, ice or resource observation has been processed for this AOI. A non-detection would not show absence.",
+                    "features": []
+                },
+                {
+                    "dimension": "surface_processes",
+                    "label": "Surface processes",
+                    "profile_weight": 0.1,
+                    "status": "missing",
+                    "quality": "none",
+                    "similarity": null,
+                    "used_in_score": false,
+                    "reason": "No process indicators have been processed for either body: no Sentinel-1/2 indices and no mapped Mars landforms. The Sentinel-2 crop is display imagery only.",
+                    "features": []
+                },
+                {
+                    "dimension": "subsurface_habitability",
+                    "label": "Subsurface and habitability context",
+                    "profile_weight": 0.1,
+                    "status": "not_comparable",
+                    "quality": "none",
+                    "similarity": null,
+                    "used_in_score": false,
+                    "reason": "No comparable subsurface product exists for this AOI. TerraLuna makes no life-detection or habitability claim.",
+                    "features": []
+                }
+            ],
+            "factors": [
+                {
+                    "kind": "hurt",
+                    "dimension": "terrain",
+                    "text": "Slope distribution differs (median 16.9\u00c2\u00b0 vs 1.8\u00c2\u00b0 at Jezero).",
+                    "short_label": "slope",
+                    "weight_share": 0.21
+                },
+                {
+                    "kind": "hurt",
+                    "dimension": "terrain",
+                    "text": "Local relief distribution (1 km window) differs (median 280.8 m vs 33.7 m at Jezero).",
+                    "short_label": "local relief",
+                    "weight_share": 0.245
+                },
+                {
+                    "kind": "hurt",
+                    "dimension": "temperature",
+                    "text": "Diurnal range (annual median) differs (30.5 K vs 74.2 K at Jezero).",
+                    "short_label": "day\u00e2\u20ac\u201cnight temperature range",
+                    "weight_share": 0.15
+                },
+                {
+                    "kind": "gap",
+                    "dimension": "geology",
+                    "text": "Geology and mineralogy carries 20% of this profile but has no comparable evidence (not comparable).",
+                    "short_label": "geology and mineralogy",
+                    "weight_share": 0.2
+                },
+                {
+                    "kind": "gap",
+                    "dimension": "water_ice",
+                    "text": "Water, ice and resources carries 10% of this profile but has no comparable evidence (missing).",
+                    "short_label": "water, ice and resources",
+                    "weight_share": 0.1
+                },
+                {
+                    "kind": "gap",
+                    "dimension": "surface_processes",
+                    "text": "Surface processes carries 10% of this profile but has no comparable evidence (missing).",
+                    "short_label": "surface processes",
+                    "weight_share": 0.1
+                },
+                {
+                    "kind": "gap",
+                    "dimension": "subsurface_habitability",
+                    "text": "Subsurface and habitability context carries 10% of this profile but has no comparable evidence (not comparable).",
+                    "short_label": "subsurface and habitability context",
+                    "weight_share": 0.1
+                }
+            ],
+            "terrain_baseline": {
+                "method": "terrain-v3.0",
+                "index": 34.1,
+                "rank": 2
+            },
+            "sensitivity": {
+                "tested_configurations": 9,
+                "index_range": [
+                    22.6,
+                    32.4
+                ],
+                "rank_range": [
+                    2,
+                    2
+                ],
+                "notice": "Deterministic perturbation of profile weights (\u00c2\u00b120%), thermal tolerances (\u00c2\u00b120%) and the terrain-v3 tested range. Not a confidence interval."
+            },
+            "explanation": "Upper Mustang scores 27.9/100 on terrain shape + surface temperature, which covers 50% of the Balanced science weight. Largest mismatch: slope distribution differs (median 16.9\u00c2\u00b0 vs 1.8\u00c2\u00b0 at Jezero).",
+            "not_assessed": [
+                "site access and permits",
+                "safe traversal",
+                "logistics",
+                "landing or base suitability"
+            ]
+        },
+        {
+            "site_id": "earth-ladakh",
+            "site_name": "Ladakh",
+            "rank": 3,
+            "ranking_status": "ranked",
+            "index": 22.0,
+            "backed_weight_fraction": 0.5,
+            "scoring_basis": [
+                "terrain",
+                "temperature"
+            ],
+            "evidence_quality": "limited",
+            "dimensions": [
+                {
+                    "dimension": "terrain",
+                    "label": "Terrain shape",
+                    "profile_weight": 0.35,
+                    "status": "measured",
+                    "quality": "moderate",
+                    "similarity": 0.24762117523635263,
+                    "used_in_score": true,
+                    "reason": "terrain-v3.0 distributions at 60/120/240 m on integrity-checked artifacts.",
+                    "features": [
+                        {
+                            "dimension": "terrain",
+                            "feature": "elevation_relative_m",
+                            "label": "Relative-elevation distribution",
+                            "reference_value": 58.924049377441406,
+                            "candidate_value": 420.52398681640625,
+                            "difference": 361.6,
+                            "units": "m",
+                            "similarity": 0.12463731656792157,
+                            "weight_in_dimension": 0.15
+                        },
+                        {
+                            "dimension": "terrain",
+                            "feature": "slope_deg",
+                            "label": "Slope distribution",
+                            "reference_value": 1.8282084238231922,
+                            "candidate_value": 24.234600454854085,
+                            "difference": 22.41,
+                            "units": "\u00c2\u00b0",
+                            "similarity": 0.14687578067133444,
+                            "weight_in_dimension": 0.3
+                        },
+                        {
+                            "dimension": "terrain",
+                            "feature": "roughness_m",
+                            "label": "Roughness distribution (300 m window)",
+                            "reference_value": 3.640102101230172,
+                            "candidate_value": 34.30979540036995,
+                            "difference": 30.67,
+                            "units": "m",
+                            "similarity": 0.4147820207922256,
+                            "weight_in_dimension": 0.2
+                        },
+                        {
+                            "dimension": "terrain",
+                            "feature": "local_relief_m",
+                            "label": "Local relief distribution (1 km window)",
+                            "reference_value": 33.659912109375,
+                            "candidate_value": 388.241943359375,
+                            "difference": 354.58,
+                            "units": "m",
+                            "similarity": 0.29116125540376836,
+                            "weight_in_dimension": 0.35
+                        }
+                    ]
+                },
+                {
+                    "dimension": "temperature",
+                    "label": "Surface temperature",
+                    "profile_weight": 0.15,
+                    "status": "measured",
+                    "quality": "limited",
+                    "similarity": 0.15521656488589508,
+                    "used_in_score": true,
+                    "reason": "Matched local solar times and full annual cycles; point sensor (Mars) versus AOI mean (Earth).",
+                    "features": [
+                        {
+                            "dimension": "temperature",
+                            "feature": "diurnal_range_p50_k",
+                            "label": "Diurnal range (annual median)",
+                            "reference_value": 74.22,
+                            "candidate_value": 26.46,
+                            "difference": -47.76,
+                            "units": "K",
+                            "similarity": 0.006289158506310677,
+                            "weight_in_dimension": 0.5
+                        },
+                        {
+                            "dimension": "temperature",
+                            "feature": "night_temperature_p50_k",
+                            "label": "Night skin temperature (annual median)",
+                            "reference_value": 196.26,
+                            "candidate_value": 268.52,
+                            "difference": 72.26,
+                            "units": "K",
+                            "similarity": 0.015341310138624172,
+                            "weight_in_dimension": 0.25
+                        },
+                        {
+                            "dimension": "temperature",
+                            "feature": "day_temperature_p50_k",
+                            "label": "Day skin temperature (annual median)",
+                            "reference_value": 269.6,
+                            "candidate_value": 295.16,
+                            "difference": 25.56,
+                            "units": "K",
+                            "similarity": 0.5929466323923348,
+                            "weight_in_dimension": 0.25
+                        }
+                    ]
+                },
+                {
+                    "dimension": "geology",
+                    "label": "Geology and mineralogy",
+                    "profile_weight": 0.2,
+                    "status": "not_comparable",
+                    "quality": "none",
+                    "similarity": null,
+                    "used_in_score": false,
+                    "reason": "No mineral-class product has been processed for this AOI. The planned source, EMIT L2B mineral identification, needs NASA Earthdata access, and its coverage of this exact AOI is unverified. A true-colour image is not mineral evidence.",
+                    "features": []
+                },
+                {
+                    "dimension": "water_ice",
+                    "label": "Water, ice and resources",
+                    "profile_weight": 0.1,
+                    "status": "missing",
+                    "quality": "none",
+                    "similarity": null,
+                    "used_in_score": false,
+                    "reason": "No water, ice or resource observation has been processed for this AOI. A non-detection would not show absence.",
+                    "features": []
+                },
+                {
+                    "dimension": "surface_processes",
+                    "label": "Surface processes",
+                    "profile_weight": 0.1,
+                    "status": "missing",
+                    "quality": "none",
+                    "similarity": null,
+                    "used_in_score": false,
+                    "reason": "No process indicators have been processed for either body: no Sentinel-1/2 indices and no mapped Mars landforms. The Sentinel-2 crop is display imagery only.",
+                    "features": []
+                },
+                {
+                    "dimension": "subsurface_habitability",
+                    "label": "Subsurface and habitability context",
+                    "profile_weight": 0.1,
+                    "status": "not_comparable",
+                    "quality": "none",
+                    "similarity": null,
+                    "used_in_score": false,
+                    "reason": "No comparable subsurface product exists for this AOI. TerraLuna makes no life-detection or habitability claim.",
+                    "features": []
+                }
+            ],
+            "factors": [
+                {
+                    "kind": "hurt",
+                    "dimension": "terrain",
+                    "text": "Slope distribution differs (median 24.2\u00c2\u00b0 vs 1.8\u00c2\u00b0 at Jezero).",
+                    "short_label": "slope",
+                    "weight_share": 0.21
+                },
+                {
+                    "kind": "hurt",
+                    "dimension": "terrain",
+                    "text": "Local relief distribution (1 km window) differs (median 388.2 m vs 33.7 m at Jezero).",
+                    "short_label": "local relief",
+                    "weight_share": 0.245
+                },
+                {
+                    "kind": "hurt",
+                    "dimension": "temperature",
+                    "text": "Diurnal range (annual median) differs (26.5 K vs 74.2 K at Jezero).",
+                    "short_label": "day\u00e2\u20ac\u201cnight temperature range",
+                    "weight_share": 0.15
+                },
+                {
+                    "kind": "gap",
+                    "dimension": "geology",
+                    "text": "Geology and mineralogy carries 20% of this profile but has no comparable evidence (not comparable).",
+                    "short_label": "geology and mineralogy",
+                    "weight_share": 0.2
+                },
+                {
+                    "kind": "gap",
+                    "dimension": "water_ice",
+                    "text": "Water, ice and resources carries 10% of this profile but has no comparable evidence (missing).",
+                    "short_label": "water, ice and resources",
+                    "weight_share": 0.1
+                },
+                {
+                    "kind": "gap",
+                    "dimension": "surface_processes",
+                    "text": "Surface processes carries 10% of this profile but has no comparable evidence (missing).",
+                    "short_label": "surface processes",
+                    "weight_share": 0.1
+                },
+                {
+                    "kind": "gap",
+                    "dimension": "subsurface_habitability",
+                    "text": "Subsurface and habitability context carries 10% of this profile but has no comparable evidence (not comparable).",
+                    "short_label": "subsurface and habitability context",
+                    "weight_share": 0.1
+                }
+            ],
+            "terrain_baseline": {
+                "method": "terrain-v3.0",
+                "index": 24.8,
+                "rank": 3
+            },
+            "sensitivity": {
+                "tested_configurations": 9,
+                "index_range": [
+                    17.3,
+                    26.2
+                ],
+                "rank_range": [
+                    3,
+                    3
+                ],
+                "notice": "Deterministic perturbation of profile weights (\u00c2\u00b120%), thermal tolerances (\u00c2\u00b120%) and the terrain-v3 tested range. Not a confidence interval."
+            },
+            "explanation": "Ladakh scores 22.0/100 on terrain shape + surface temperature, which covers 50% of the Balanced science weight. Largest mismatch: slope distribution differs (median 24.2\u00c2\u00b0 vs 1.8\u00c2\u00b0 at Jezero).",
+            "not_assessed": [
+                "site access and permits",
+                "safe traversal",
+                "logistics",
+                "landing or base suitability"
+            ]
+        }
+    ],
+    "generated_at": "2026-11-14T13:50:08.987597Z",
+    "mode": "prepared_artifacts",
+    "notice": "Profile weights and thermal tolerances are transparent engineering defaults, not scientific constants. The index is not a probability, a confidence value or a percentage of identity."
+}

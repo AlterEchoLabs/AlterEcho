@@ -1,0 +1,109 @@
+{
+  "method_version": "analogue-method-v1.0",
+  "terrain_method": "terrain-v5.0",
+  "status": "experimental_research_method",
+  "review_status": "not_validated_against_expert_labels_or_field_data",
+  "comparison_definition": "Every result is conditional on (Earth AOI E, planetary reference AOI P, task profile T, epoch or process H, method version V). Valid narrow claim: at the specified 10 km windows and tested scale, site E resembles reference P on the measured descriptors for task T.",
+  "notice": "Indices are project-defined bounded indices on the stated measurements. They are not probabilities, confidence levels, percentages of identity, NASA standards or mission-suitability ratings.",
+  "formulas": {
+    "scalar_distance": "d_k = |x_E,k - x_P,k|   (same units on both bodies)",
+    "distribution_distance": "d_k = W1(F_E,k, F_P,k) = integral_0^1 |F_E,k^-1(u) - F_P,k^-1(u)| du   (equal-area cells, 500 midpoint quantiles)",
+    "feature_similarity": "s_k = exp(-ln 2 * (d_k / tau_k)^2)   d = 0 -> 1, d = tau -> 0.5, d = 2 tau -> 0.0625",
+    "family_score": "S_g = sum_k a_k|g * s_k   (nonredundant features; a_k|g sum to 1; every required feature must be eligible)",
+    "observed_index": "100 * sum_g w_g I_g S_g / sum_g w_g I_g   (undefined when no family qualifies)",
+    "evidence_coverage": "sum_g w_g I_g   (share of the planned profile weight that is measured and comparable)"
+  },
+  "parameters": {
+    "d_k": "Distance between the Earth and planetary measurement of feature k, in the feature's own units (degrees or metres).",
+    "tau_k": "Material-difference tolerance in the same units: the median W1 between unselected pairs of Earth land windows (Earth terrain contrast), accepted only if it is at least 3 times the resolution floor.",
+    "delta_k": "Resolution floor: what moving the reference 2 km and changing the DEM product alone produce. Differences at or below it cannot separate sites.",
+    "s_k": "Feature similarity in [0, 1].",
+    "a_k|g": "Weight of feature k inside family g (equal across nonredundant scored features).",
+    "w_g": "Planned weight of family g in the task profile. Provisional preferences from analog-evidence-v2, awaiting independent scientific review.",
+    "I_g": "1 when family g passes its comparability and quality rules for both AOIs, otherwise 0 with a recorded reason.",
+    "S_g": "Family score in [0, 1]."
+  },
+  "primary_scale_m": 60,
+  "sensitivity_scales_m": [120, 240],
+  "minimum_feature_coverage": 0.9,
+  "families": {
+    "terrain": {"label": "F1 Terrain morphology", "scorable": true, "method": "terrain-v5.0",
+      "epoch": "Present-day surface form (SRTM February 2000; CTX stereo 2006 onward; LOLA 2009 onward).",
+      "comparability_rules": ["Integrity-checked DEM on both bodies, in metres", "Same 10 km window, 60 m grid, 1.2 km halo and kernels", "At least 90 % valid cells for every scored feature on both AOIs", "Tolerance at least 3x the resolution floor", "No known contamination of the window"],
+      "required": "every scored feature"},
+    "geology": {"label": "F2 Geology and mineralogy", "scorable": true, "method": null, "epoch": "Depositional and alteration history",
+      "comparability_rules": ["Verified mineral abundances, lithology or spectral features at the exact AOI on both bodies", "True-colour imagery alone does not quantify mineralogy"]},
+    "temperature": {"label": "F3 Thermal environment", "scorable": true, "method": "thermal comparability audit",
+      "epoch": "Present-day climate (not the ancient Jezero lake)",
+      "comparability_rules": ["Same physical quantity (skin, air or subsurface)", "Matching spatial support, local time, season and sampling", "Quality flags applied"]},
+    "water_ice": {"label": "F4 Water and ice", "scorable": true, "method": null, "epoch": "Occurrence, depth and persistence",
+      "comparability_rules": ["Mapped occurrence with depth, persistence and detection limit at a comparable scale"]},
+    "surface_processes": {"label": "F5 Surface processes", "scorable": true, "method": null, "epoch": "Active or past aeolian, fluvial, volcanic, ice or impact processes",
+      "comparability_rules": ["Documented process descriptors for both AOIs; similar appearance does not establish a shared process"]},
+    "subsurface_habitability": {"label": "F6 Subsurface, habitability and biology", "scorable": true, "method": null, "epoch": "Preservation and sampling conditions",
+      "comparability_rules": ["Task-specific cave, ice, chemistry or preservation evidence for the exact AOI"]},
+    "field_test_suitability": {"label": "F7 Field-test operations", "scorable": false, "method": "evidence record only",
+      "epoch": "Present-day access, permits, logistics, soil and rock properties",
+      "comparability_rules": ["Reported separately; never part of a planetary-science index", "A 60 m DEM cannot establish wheel-scale mobility, base suitability or landing safety"]}
+  },
+  "aoi_exclusions": {
+    "earth-atacama": {"reason": "The window contains a large industrial complex (pads, buildings, graded ground) visible in Sentinel-2 L2A S2B_MSIL2A_20260927T144729_R139_T19KDP. WorldCover 2021 classes it as bare ground, so it cannot be masked. Replaced by earth-atacama-south, chosen by a rule fixed before its terrain was measured.",
+                      "replacement": "earth-atacama-south"}
+  },
+  "profiles": {
+    "terrain_analogy": {
+      "label": "Terrain analogy", "rankable": true,
+      "question": "Which processed Earth windows match the reference window's landform shape (slope and relative-elevation distributions) at a 60 m grid?",
+      "task_critical": ["terrain"], "weights": {"terrain": 1.0},
+      "permitted_conclusion": "At the specified 10 km windows and the 60 m grid, this Earth window resembles the reference window on the measured terrain features.",
+      "scope_line": "This result covers terrain only. Geology, soil strength and mission suitability have not been established.",
+      "not_assessed": ["geology and mineralogy", "temperature", "water and ice", "surface processes", "habitability", "access, safety and logistics", "wheel-scale traversability"]
+    },
+    "balanced_science": {
+      "label": "Balanced science", "rankable": false,
+      "question": "Which Earth windows are the most useful general analogs across landform, materials and environment?",
+      "task_critical": ["terrain", "geology"],
+      "weights": {"terrain": 0.3, "geology": 0.25, "temperature": 0.1, "water_ice": 0.15, "surface_processes": 0.1, "subsurface_habitability": 0.1},
+      "permitted_conclusion": "No Balanced science result is given until geology is measured comparably. Terrain findings are shown as partial evidence.",
+      "scope_line": "Partial evidence only. Geology, water and ice, surface processes and habitability are not measured, so there is no overall result or ranking.",
+      "not_assessed": ["geology and mineralogy", "water and ice", "surface processes", "habitability", "access, safety and logistics"]
+    },
+    "rover_mobility": {
+      "label": "Rover mobility", "rankable": false,
+      "question": "Which Earth windows are useful for testing rover mobility on terrain like the reference window?",
+      "task_critical": ["terrain", "field_test_suitability"], "weights": {"terrain": 0.8, "surface_processes": 0.2},
+      "permitted_conclusion": "Broad 60 m terrain context only. No traversability, hazard or safety conclusion.",
+      "scope_line": "A 60 m elevation grid cannot see wheel-scale obstacles, rock hazards or soil bearing strength. No rover-mobility conclusion is possible yet.",
+      "not_assessed": ["wheel-scale traversability (needs 1 m or finer terrain)", "rock size and hazard", "soil bearing strength and trafficability", "access, permits and safety"]
+    },
+    "biosignature_fieldwork": {
+      "label": "Biosignature fieldwork", "rankable": false,
+      "question": "Which Earth windows are useful for testing biosignature research methods relevant to the reference site? This makes no claim about life.",
+      "task_critical": ["geology", "water_ice", "subsurface_habitability"],
+      "weights": {"geology": 0.35, "water_ice": 0.25, "subsurface_habitability": 0.2, "temperature": 0.1, "terrain": 0.1},
+      "permitted_conclusion": "Not assessed: there is no AOI-level evidence for minerals, depositional process or preservation and sampling conditions.",
+      "scope_line": "Research done elsewhere in a region is context, not evidence about this window. No claim is made that life has been observed on Mars.",
+      "not_assessed": ["minerals and depositional process at this window", "preservation and sampling conditions", "biology", "contamination control", "access and permits"]
+    },
+    "mars_base_field_testing": {
+      "label": "Mars-base field testing", "rankable": false,
+      "question": "Which Earth windows are useful for testing surface equipment under terrain and thermal conditions like the reference site? This is not a landing, construction or base-siting recommendation.",
+      "task_critical": ["terrain", "temperature", "field_test_suitability"],
+      "weights": {"terrain": 0.35, "temperature": 0.35, "water_ice": 0.15, "subsurface_habitability": 0.15},
+      "permitted_conclusion": "Comparable field-test conditions only, kept apart from access, logistics, construction, pressure, gravity and radiation.",
+      "scope_line": "A terrain result is never base or landing-site suitability. Pressure, gravity, radiation, access, logistics and construction are not assessed.",
+      "not_assessed": ["comparable thermal regime (data fail the audit)", "access, permits and logistics", "construction constraints", "atmospheric pressure, gravity and radiation (unavoidable differences)"]
+    }
+  },
+  "physical_limits": {
+    "mars": ["Gravity: Earth 9.81 m/s², Mars 3.71 m/s².", "Surface pressure: Earth about 1013 hPa, Mars about 6 hPa (CO₂).", "Mars has no global magnetic field and a thin atmosphere, so surface radiation is far higher.", "Present-day Mars is not the ancient Jezero lake; today's surface records the result of those processes."],
+    "moon": ["Gravity: Earth 9.81 m/s², Moon 1.62 m/s².", "The Moon has no atmosphere: no wind or water erosion and extreme thermal cycling.", "Lunar polar illumination and permanently shadowed regions have no Earth equivalent.", "Lunar regolith forms by impact gardening, not by weathering."]
+  },
+  "validation_status_short": "Experimental method: not yet validated against expert-labelled analogues or field data.",
+  "validation_status": "Experimental. Tolerances come from Earth terrain contrast and measured resolution limits; the method has not been tested against expert-labelled analogues, negative controls chosen by experts or field outcomes.",
+  "compatibility": {
+    "terrain-v4.0": "Historical. Binned W1 (mass at lower bin edges), exp(-0.5 (d/tau)^2), tau 8 deg / 200 m / 30 m / 150 m from Phase 5, four correlated families averaged over 60/120/240 m. Still served at /api/v2/compare.",
+    "analog-evidence-v1.0": "Historical. Served at /api/evidence/compare.",
+    "migration": "v1.0 differs in: exact quantile W1; ln 2 transform; tau from Earth terrain contrast with a 3x resolution-floor condition; redundant features shown but not scored; 60 m primary grid with 120/240 m as sensitivity; WorldCover built-up exclusion; the contaminated Atacama window excluded and replaced."
+  }
+}

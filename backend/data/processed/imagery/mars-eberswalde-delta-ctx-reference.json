@@ -1,0 +1,51 @@
+{
+  "imagery_id": "mars-eberswalde-delta-ctx-reference",
+  "site_id": "mars-eberswalde-delta",
+  "body": "mars",
+  "mode": "reference",
+  "provider": "USGS Astrogeology Science Center",
+  "collection": "MRO CTX controlled DTM orthoimage",
+  "product_id": "B22_018056_1559_XN_24S033W__G01_018557_1555_XN_24S033W",
+  "acquisition_datetime": null,
+  "publication_datetime": "2023-04-20T16:12:26.508Z",
+  "resolution_m": 20.21,
+  "display_resolution_m": 10.0,
+  "cloud_cover_pct": null,
+  "processing_level": "Orthorectified CTX image from the stereo pair",
+  "bbox": [
+    -33.64223,
+    -23.93435,
+    -33.45777,
+    -23.76565
+  ],
+  "aoi_id": "mars-eberswalde-delta-aoi-v1",
+  "preview_url": "/api/imagery-assets/mars-eberswalde-delta-ctx-reference.png",
+  "tile_url": null,
+  "attribution": "USGS Astrogeology Science Center; MRO Context Camera (NASA/JPL/MSSS). CC0-1.0.",
+  "official_source_url": "https://stac.astrogeology.usgs.gov/api/collections/mro_ctx_controlled_usgs_dtms/items/B22_018056_1559_XN_24S033W__G01_018557_1555_XN_24S033W",
+  "source_download_url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/mars/mro/ctx/controlled/usgs/B22_018056_1559_XN_24S033W__G01_018557_1555_XN_24S033W/B22_018056_1559_XN_24S033W__G01_018557_1555_XN_24S033W_orthoimage.tif",
+  "cache_status": "cached",
+  "cache_date": "2026-11-14T18:35:14.583607+00:00",
+  "data_status": "available",
+  "preview_checksum": "21fc06b93f13a4521c6246d199c4cd0fcfe6f9f715ecbf7639d66c110f83abe9",
+  "source_crs": "PROJCS[\"Mars (2015) - Sphere / Ocentric / Equirectangular, clon = 0\",GEOGCS[\"Mars (2015) - Sphere / Ocentric\",DATUM[\"Mar",
+  "native_resolution": [
+    20.209513626390784,
+    20.209513626390784
+  ],
+  "aoi_coverage_fraction": 0.9998,
+  "registration": {
+    "grid": "local equirectangular, true to scale at the window latitude, identical in construction to the terrain grid",
+    "pixel_m": 10.0,
+    "pixels": 1000,
+    "ground_extent_m": [
+      10000.0,
+      10000.0
+    ]
+  },
+  "limitations": [
+    "Grayscale CTX image; it is not a colour photograph.",
+    "The two stereo images were acquired on different dates; the image is display context and never enters a score.",
+    "Shadows depend on the acquisition illumination."
+  ]
+}

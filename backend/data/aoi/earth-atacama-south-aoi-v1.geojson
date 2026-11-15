@@ -1,0 +1,71 @@
+{
+  "type": "Feature",
+  "id": "earth-atacama-south-aoi-v1",
+  "properties": {
+    "aoi_id": "earth-atacama-south-aoi-v1",
+    "site_id": "earth-atacama-south",
+    "version": "1.0",
+    "planetary_body": "earth",
+    "center_latitude": -24.2722,
+    "center_longitude": -69.9005,
+    "width_m": 10000,
+    "height_m": 10000,
+    "selection_rationale": "Uncontaminated replacement for the original Atacama window, which contains a large industrial complex. Moved 8 km due south under a selection rule fixed before any terrain value was computed (see app/scripts/register_atacama_south.py). Arid Andean-foreland terrain with alluvial surfaces and low ridges.",
+    "intended_analog_characteristics": [
+      "local slope distribution",
+      "local relief",
+      "surface roughness"
+    ],
+    "known_limitations": [
+      "The measured window does not represent the complete Atacama Desert",
+      "Unpaved tracks and a survey grid cross the window (narrower than one 60 m cell)",
+      "Atacama life-detection research elsewhere in the desert does not validate this exact window",
+      "Aridity, salts and soil chemistry are not measured by the terrain features"
+    ],
+    "creation_method": "Geodetic display footprint approximated from a 10 km square; processing constructs an exact UTM metric grid around the centre.",
+    "source_references": [
+      "earth-atacama-south-srtmgl1",
+      "atacama-study",
+      "nasa-atacama"
+    ],
+    "planetary_target": "The registered 10 km Jezero reference window under terrain-only comparison.",
+    "analogy_dimensions_not_covered": [
+      "atmosphere",
+      "gravity",
+      "radiation",
+      "geology",
+      "temperature",
+      "habitability"
+    ],
+    "representativeness": "Feature-focused window; it does not represent the whole region.",
+    "known_selection_bias": "Phase 9 replacement chosen by a contamination rule before its terrain was measured; independent AOI review pending.",
+    "supersedes": "earth-atacama-aoi-v1"
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -69.9498,
+          -24.3171
+        ],
+        [
+          -69.8512,
+          -24.3171
+        ],
+        [
+          -69.8512,
+          -24.2273
+        ],
+        [
+          -69.9498,
+          -24.2273
+        ],
+        [
+          -69.9498,
+          -24.3171
+        ]
+      ]
+    ]
+  }
+}

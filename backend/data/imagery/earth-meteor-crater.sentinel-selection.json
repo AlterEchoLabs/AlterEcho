@@ -1,0 +1,27 @@
+{
+  "site_id": "earth-meteor-crater",
+  "aoi_id": "earth-meteor-crater-aoi-v1",
+  "provider": "Copernicus Sentinel-2 L2A via Microsoft Planetary Computer",
+  "collection": "sentinel-2-l2a",
+  "discovered_at": "2026-11-14T15:31:41.245139+00:00",
+  "retrieval_status": "verified_local_rgb_crop",
+  "selected_scene": {
+    "product_id": "S2B_MSIL2A_20261112T181609_R084_T12SVD_20261112T215033",
+    "acquisition_datetime": "2026-11-12T18:16:09.024000Z",
+    "cloud_cover_pct": 1.8e-05,
+    "processing_level": "Sentinel-2 Level-2A",
+    "asset_keys": [
+      "B02",
+      "B03",
+      "B04",
+      "SCL"
+    ],
+    "official_stac_record": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2B_MSIL2A_20261112T181609_R084_T12SVD_20261112T215033",
+    "preview_checksum": "a840f9d1bae3fa82e6f7e48b3e27bde5e2fd4112e887ccbe057c1dd2d379e057",
+    "output_resolution_m": 10.0,
+    "aoi_coverage_fraction": 1.0,
+    "aoi_valid_pixel_fraction": 1.0,
+    "aoi_cloud_fraction": 0.0,
+    "aoi_snow_fraction": 0.0
+  }
+}

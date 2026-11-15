@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-11-14T13:34:44.919919+00:00",
+  "textures": [
+    {
+      "body": "earth",
+      "file": "/textures/earth-blue-marble-4k.jpg",
+      "width": 4096,
+      "height": 2048,
+      "projection": "equirectangular (simple cylindrical), 0\u00b0 longitude at image centre",
+      "title": "Blue Marble: Next Generation with shaded relief and bathymetry (GIBS layer BlueMarble_ShadedRelief_Bathymetry)",
+      "provider": "NASA Earth Observatory Blue Marble, served by NASA GIBS",
+      "source_url": "https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=BlueMarble_ShadedRelief_Bathymetry&STYLES=&CRS=EPSG:4326&BBOX=-90,-180,90,180&WIDTH=4096&HEIGHT=2048&FORMAT=image/jpeg",
+      "landing_page": "https://science.nasa.gov/earth/earth-observatory/the-blue-marble-true-color-global-imagery-at-1km-resolution/",
+      "attribution": "NASA Earth Observatory Blue Marble: Next Generation, via NASA GIBS",
+      "terms": "NASA imagery is generally not subject to copyright in the U.S.; credit NASA. No NASA endorsement implied.",
+      "source_sha256": "ba0d25f05080acf378241a00bf6a96ed9b5d03d13f6018c3c59baf98ff6627a8",
+      "output_sha256": "89853fd0c78aff141c76f3201bc020eaebe27e3e4a1301a1594178307950eaf5",
+      "use": "orientation layer only \u2014 global mosaic, not live imagery, not a site observation, never scored"
+    },
+    {
+      "body": "mars",
+      "file": "/textures/mars-viking-mdim-4k.jpg",
+      "width": 4096,
+      "height": 2048,
+      "projection": "equirectangular (simple cylindrical), 0\u00b0 longitude at image centre",
+      "title": "Mars Viking Colorized Global Mosaic 925 m",
+      "provider": "USGS Astrogeology Science Center / NASA",
+      "source_url": "https://planetarymaps.usgs.gov/mosaic/Mars_Viking_ClrMosaic_global_925m.tif",
+      "landing_page": "https://astrogeology.usgs.gov/search/map/mars_viking_global_color_mosaic_925m",
+      "attribution": "USGS Astrogeology / NASA Viking \u2014 colour mosaic",
+      "terms": "USGS-authored data are public domain; cite USGS Astrogeology.",
+      "source_sha256": "5b3c6bea36cec0ec65b9ce5927db6b1c555c5fae60a227c774f9fcaecdf5bb33",
+      "output_sha256": "189e2f6498d5943c990c2c6b543a91c8e46d232a1125fc80e02cf7bef5d18079",
+      "use": "orientation layer only \u2014 global mosaic, not live imagery, not a site observation, never scored"
+    },
+    {
+      "body": "moon",
+      "file": "/textures/moon-lroc-wac-2k.jpg",
+      "width": 2048,
+      "height": 1024,
+      "projection": "equirectangular (simple cylindrical), 0\u00b0 longitude at image centre",
+      "title": "CGI Moon Kit \u2014 LRO LROC WAC colour map (2k)",
+      "provider": "NASA Scientific Visualization Studio (Ernie Wright) / LRO LROC team",
+      "source_url": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_2k.jpg",
+      "landing_page": "https://svs.gsfc.nasa.gov/4720/",
+      "attribution": "NASA SVS CGI Moon Kit \u2014 LRO LROC WAC",
+      "terms": "NASA SVS media are generally free to use with NASA credit.",
+      "source_sha256": "f7130a1822681fa7512d7dcfd40db8c10b9ba4f06777910348698260ed7a2170",
+      "output_sha256": "d38a7754e07260e6e8b9b56c5f2048d28bb04af2a8308a5d384072b1adb5cf89",
+      "use": "orientation layer only \u2014 global mosaic, not live imagery, not a site observation, never scored"
+    }
+  ]
+}

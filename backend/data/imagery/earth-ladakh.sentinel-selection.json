@@ -1,0 +1,27 @@
+{
+  "site_id": "earth-ladakh",
+  "aoi_id": "earth-ladakh-aoi-v1",
+  "provider": "Copernicus Sentinel-2 L2A via Microsoft Planetary Computer",
+  "collection": "sentinel-2-l2a",
+  "discovered_at": "2026-11-14T15:27:53.944061+00:00",
+  "retrieval_status": "verified_local_rgb_crop",
+  "selected_scene": {
+    "product_id": "S2A_MSIL2A_20251126T053251_R105_T43SGT_20251126T083814",
+    "acquisition_datetime": "2025-11-26T05:32:51.024000Z",
+    "cloud_cover_pct": 0.001297,
+    "processing_level": "Sentinel-2 Level-2A",
+    "asset_keys": [
+      "B02",
+      "B03",
+      "B04",
+      "SCL"
+    ],
+    "official_stac_record": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2A_MSIL2A_20251126T053251_R105_T43SGT_20251126T083814",
+    "preview_checksum": "80125f1fd83e047a25ec856aa49494a8c61321a8eb902ae444467b623a80950f",
+    "output_resolution_m": 10.0,
+    "aoi_coverage_fraction": 1.0,
+    "aoi_valid_pixel_fraction": 1.0,
+    "aoi_cloud_fraction": 0.0,
+    "aoi_snow_fraction": 0.0411
+  }
+}

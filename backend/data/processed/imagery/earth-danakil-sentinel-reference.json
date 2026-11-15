@@ -1,0 +1,54 @@
+{
+  "imagery_id": "earth-danakil-sentinel-2-reference",
+  "site_id": "earth-danakil",
+  "body": "earth",
+  "mode": "reference",
+  "provider": "Copernicus Sentinel-2 L2A via Microsoft Planetary Computer",
+  "collection": "sentinel-2-l2a",
+  "product_id": "S2C_MSIL2A_20251203T074311_R092_T37PFR_20251203T113611",
+  "acquisition_datetime": "2025-12-03T07:43:11.025000Z",
+  "publication_datetime": null,
+  "resolution_m": 10,
+  "cloud_cover_pct": 0.002804,
+  "processing_level": "Level-2A surface reflectance, true colour B04/B03/B02, 2-98 % stretch",
+  "bbox": [
+    40.2526,
+    14.1968,
+    40.3452,
+    14.2866
+  ],
+  "aoi_id": "earth-danakil-aoi-v1",
+  "preview_url": "/api/imagery-assets/earth-danakil-sentinel-reference.png",
+  "tile_url": null,
+  "attribution": "Contains modified Copernicus Sentinel data (2025), processed via Microsoft Planetary Computer",
+  "official_source_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2C_MSIL2A_20251203T074311_R092_T37PFR_20251203T113611",
+  "source_download_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2C_MSIL2A_20251203T074311_R092_T37PFR_20251203T113611",
+  "cache_status": "verified_local_crop",
+  "cache_date": "2026-11-14T15:28:35.277246+00:00",
+  "data_status": "available",
+  "limitations": [
+    "Display imagery only; the score uses the elevation model, not these pixels.",
+    "Scene-wide cloud is the catalog value for the whole ~110 km tile; AOI cloud and snow come from the SCL band over the AOI.",
+    "Footprint coverage is the share of the AOI inside the scene. It is not a clear-sky fraction."
+  ],
+  "display_resolution_m": 10.0,
+  "aoi_coverage_fraction": 1.0,
+  "aoi_valid_pixel_fraction": 1.0,
+  "aoi_cloud_fraction": 0.0,
+  "aoi_snow_fraction": 0.0,
+  "aoi_coverage_meaning": "Share of the AOI footprint inside the scene with valid data. It is NOT a clear-sky fraction.",
+  "aoi_statistics_method": "SCL band (20 m) warped with nearest neighbour onto the AOI grid: cloud = classes 3, 8, 9, 10; snow = 11; invalid = 0, 1.",
+  "registration": {
+    "grid": "AOI-centred UTM square identical in construction to the terrain analysis grid",
+    "crs": "EPSG:32637",
+    "pixel_m": 10.0,
+    "pixels": 1000
+  },
+  "preview_checksum": "385b4f61c08f5c07285c85bf18f37fcad424b5a3737ca0e64c63ab62ab257338",
+  "source_crs": "EPSG:32637",
+  "native_resolution": [
+    10.0,
+    10.0
+  ],
+  "selection_rejections": []
+}

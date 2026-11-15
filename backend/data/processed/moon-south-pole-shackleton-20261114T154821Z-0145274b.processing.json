@@ -1,0 +1,45 @@
+{
+  "processing_run_id": "moon-south-pole-shackleton-20261114T154821Z-0145274b",
+  "timestamp": "2026-11-14T15:48:22.419171+00:00",
+  "site_id": "moon-south-pole-shackleton",
+  "source_id": "moon-south-pole-shackleton-lola-ldem",
+  "source_checksum": "60cdb4d19a3a955e70bd5920a569fac94a3e32d840736f34aac72803605d0032",
+  "aoi_version": "1.0",
+  "methodology_version": "terrain-v2.0",
+  "software_version": "0.2.0",
+  "native_resolution": [
+    20.0,
+    20.0
+  ],
+  "target_resolution": 60.0,
+  "source_crs": "PROJCS[\"POLAR_STEREOGRAPHIC MOON\",GEOGCS[\"GCS_MOON\",DATUM[\"D_MOON\",SPHEROID[\"MOON\",1737400,0]],PRIMEM[\"Reference_Meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Polar_Stereographic\"],PARAMETER[\"latitude_of_origin\",-90],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1],AXIS[\"Easting\",NORTH],AXIS[\"Northing\",NORTH]]",
+  "processing_crs": "PROJCS[\"POLAR_STEREOGRAPHIC MOON\",GEOGCS[\"GCS_MOON\",DATUM[\"D_MOON\",SPHEROID[\"MOON\",1737400,0]],PRIMEM[\"Reference_Meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Polar_Stereographic\"],PARAMETER[\"latitude_of_origin\",-90],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1],AXIS[\"Easting\",NORTH],AXIS[\"Northing\",NORTH]]",
+  "resampling_method": "bilinear",
+  "nodata_handling": "Source nodata is propagated to NaN and excluded from every metric",
+  "requested_analysis_window_m": [
+    10000.0,
+    10000.0
+  ],
+  "actual_analysis_window_m": [
+    10020.0,
+    10020.0
+  ],
+  "grid_dimensions": [
+    167,
+    167
+  ],
+  "metric_configuration": {
+    "methodology_version": "terrain-v2.0",
+    "slope_method": "central differences using metric x/y spacing",
+    "local_relief_definition": "local maximum minus local minimum",
+    "local_relief_neighborhood_m": 1000.0,
+    "local_relief_window_pixels": 17,
+    "roughness_definition": "local elevation standard deviation",
+    "roughness_neighborhood_m": 300.0,
+    "roughness_window_pixels": 5
+  },
+  "output_summary": "data\\processed\\moon-south-pole-shackleton.terrain.json",
+  "output_checksum": "bde027f81f7587f7454d8d804c7b307d079fdcd0f0ff3da0d7fad7e1ea0e4791",
+  "quality_passed": true,
+  "warnings": []
+}

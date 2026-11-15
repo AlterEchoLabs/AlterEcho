@@ -1,0 +1,13 @@
+{
+  "site_id": "mars-gusev-plains",
+  "resolution_m": 30.0,
+  "pixels": 334,
+  "hillshade": {
+    "azimuth_deg": 315,
+    "altitude_deg": 45
+  },
+  "slope_ramp": "linear 0-35 degrees, fixed across sites",
+  "slope_p50_deg": 3.77,
+  "source_sha256": "05c903c17573975c89d98fd1f0280ee80d0027d067461026611470ce4af35fd8",
+  "purpose": "visualisation only; numeric analysis uses terrain-v3/v4"
+}

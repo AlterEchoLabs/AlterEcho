@@ -1,0 +1,91 @@
+{
+  "model_version": "analog-evidence-v1.0",
+  "review_status": "provisional_pending_expert_review",
+  "notice": "Profile weights and thermal tolerances are transparent engineering defaults, not scientific constants. The index is not a probability, a confidence value or a percentage of identity.",
+  "terrain_baseline_method": "terrain-v3.0",
+  "dimensions": {
+    "terrain": {
+      "label": "Terrain shape",
+      "question": "Do slope, relief, roughness and relative-elevation distributions resemble the reference window at 60, 120 and 240 m?",
+      "scored_by": "terrain-v3.0 Terrain Analogy Index (unchanged, reproducible baseline)"
+    },
+    "temperature": {
+      "label": "Surface temperature",
+      "question": "Does the ground skin temperature at matched local solar times, across a full annual cycle, resemble the reference?",
+      "scored_by": "thermal-lst-v1: Gaussian closeness of annual medians of day and night skin temperature and of the diurnal range"
+    },
+    "geology": {
+      "label": "Geology and mineralogy",
+      "question": "Are documented mineral classes or mapped units comparable?",
+      "scored_by": null
+    },
+    "water_ice": {
+      "label": "Water, ice and resources",
+      "question": "Is there observed water, ice or a resource indicator at comparable scale?",
+      "scored_by": null
+    },
+    "surface_processes": {
+      "label": "Surface processes",
+      "question": "Are aeolian, fluvial, periglacial or other process indicators comparable at matching scale?",
+      "scored_by": null
+    },
+    "subsurface_habitability": {
+      "label": "Subsurface and habitability context",
+      "question": "Is there site-level subsurface or habitability-relevant evidence?",
+      "scored_by": null
+    }
+  },
+  "thermal_comparison": {
+    "method_id": "thermal-lst-v1",
+    "features": {
+      "diurnal_range_p50_k": {"label": "Diurnal range (annual median)", "tolerance_k": 15.0, "weight": 0.5},
+      "night_temperature_p50_k": {"label": "Night skin temperature (annual median)", "tolerance_k": 25.0, "weight": 0.25},
+      "day_temperature_p50_k": {"label": "Day skin temperature (annual median)", "tolerance_k": 25.0, "weight": 0.25}
+    },
+    "formula": "s = exp(-0.5 * ((earth - mars) / tolerance)^2); thermal similarity = weighted mean over features",
+    "rationale": "The diurnal range is weighted highest because it is the least datum-dependent descriptor of thermal extremes. Absolute temperatures are retained so the index cannot hide that no Earth site reaches Martian night temperatures.",
+    "comparability_gates": {
+      "max_local_time_offset_h": 1.0,
+      "min_earth_paired_samples": 30,
+      "min_mars_paired_samples": 8,
+      "min_mars_solar_longitude_span_deg": 270
+    }
+  },
+  "profiles": {
+    "balanced_science": {
+      "label": "Balanced science",
+      "purpose": "General analog research shortlisting across physical dimensions.",
+      "weights": {"terrain": 0.35, "temperature": 0.15, "geology": 0.20, "water_ice": 0.10, "surface_processes": 0.10, "subsurface_habitability": 0.10},
+      "required_dimensions": ["terrain"],
+      "min_backed_weight_fraction": 0.40
+    },
+    "rover_mobility": {
+      "label": "Rover mobility",
+      "purpose": "Research relevance for rover traverse testing. Physical similarity only; safe traversal is not assessed.",
+      "weights": {"terrain": 0.70, "temperature": 0.10, "surface_processes": 0.20},
+      "required_dimensions": ["terrain"],
+      "min_backed_weight_fraction": 0.60
+    },
+    "biosignature_fieldwork": {
+      "label": "Biosignature fieldwork",
+      "purpose": "Analog relevance for biosignature research methods. Makes no claim about life.",
+      "weights": {"geology": 0.35, "water_ice": 0.25, "temperature": 0.15, "subsurface_habitability": 0.15, "terrain": 0.10},
+      "required_dimensions": ["geology", "water_ice"],
+      "min_backed_weight_fraction": 0.50
+    },
+    "mars_base_field_testing": {
+      "label": "Mars-base field testing",
+      "purpose": "Research relevance for testing surface equipment under comparable terrain and thermal stress. Not a landing, construction or base-siting recommendation.",
+      "weights": {"terrain": 0.35, "temperature": 0.35, "water_ice": 0.15, "subsurface_habitability": 0.15},
+      "required_dimensions": ["terrain", "temperature"],
+      "min_backed_weight_fraction": 0.60
+    }
+  },
+  "default_profile": "balanced_science",
+  "sensitivity": {"weight_perturbation_fraction": 0.2, "tolerance_perturbation_fraction": 0.2},
+  "quality_levels": {
+    "moderate": "Real measured inputs with integrity checks; methodology review pending.",
+    "limited": "Real measured inputs, but scale, sampling or footprint differ between bodies.",
+    "none": "No comparable evidence."
+  }
+}

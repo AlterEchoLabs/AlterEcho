@@ -1,0 +1,571 @@
+{
+  "site_id": "earth-hanksville-mdrs",
+  "methodology_version": "terrain-v3.0",
+  "source_summary_methodology": "terrain-v2.0",
+  "core_aoi_id": "earth-hanksville-mdrs-aoi-v1",
+  "core_width_m": 10000.0,
+  "core_height_m": 10000.0,
+  "halo_width_m": 1200.0,
+  "horizontal_units": "metre",
+  "vertical_units": "metre",
+  "vertical_datum": "EGM96 geoid",
+  "nodata_definition": "-32768.0",
+  "resampling_method": "bilinear elevation resampling before derivatives",
+  "scales": {
+    "60": {
+      "resolution_m": 60.0,
+      "metrics": {
+        "elevation_std_m": 45.027137756347656,
+        "slope_mean_deg": 3.8324019711820223,
+        "slope_p50_deg": 2.474413932651588,
+        "slope_p90_deg": 8.873281116542818,
+        "local_relief_mean_m": 57.01971096547782,
+        "local_relief_p50_m": 49.582763671875,
+        "local_relief_p90_m": 100.1662353515625,
+        "roughness_mean": 5.415627762666624,
+        "roughness_p90": 11.85456549950535
+      },
+      "feature_coverage": {
+        "elevation": {
+          "valid_sample_count": 27889,
+          "total_expected_sample_count": 27889,
+          "coverage_fraction": 1.0,
+          "nodata_propagation": "Invalid source cells propagate through the derivative kernel and are excluded",
+          "kernel_edge_exclusions": 0,
+          "quality_flag": "pass"
+        },
+        "slope": {
+          "valid_sample_count": 27889,
+          "total_expected_sample_count": 27889,
+          "coverage_fraction": 1.0,
+          "nodata_propagation": "Invalid source cells propagate through the derivative kernel and are excluded",
+          "kernel_edge_exclusions": 0,
+          "quality_flag": "pass"
+        },
+        "roughness": {
+          "valid_sample_count": 27889,
+          "total_expected_sample_count": 27889,
+          "coverage_fraction": 1.0,
+          "nodata_propagation": "Invalid source cells propagate through the derivative kernel and are excluded",
+          "kernel_edge_exclusions": 0,
+          "quality_flag": "pass"
+        },
+        "local_relief": {
+          "valid_sample_count": 27889,
+          "total_expected_sample_count": 27889,
+          "coverage_fraction": 1.0,
+          "nodata_propagation": "Invalid source cells propagate through the derivative kernel and are excluded",
+          "kernel_edge_exclusions": 0,
+          "quality_flag": "pass"
+        }
+      },
+      "distributions": {
+        "elevation_relative_m": {
+          "feature": "elevation_relative_m",
+          "bin_edges": [
+            -1000.0,
+            -500.0,
+            -250.0,
+            -100.0,
+            -50.0,
+            -20.0,
+            -10.0,
+            0.0,
+            10.0,
+            20.0,
+            50.0,
+            100.0,
+            250.0,
+            500.0,
+            1000.0
+          ],
+          "normalized_counts": [
+            0.0,
+            0.0,
+            0.0,
+            0.06038222955287031,
+            0.20499121517444155,
+            0.10513105525475994,
+            0.12947757180250277,
+            0.12843773530782746,
+            0.09964502133457635,
+            0.15027430169600917,
+            0.03460145577109255,
+            0.0870594141059199,
+            0.0,
+            0.0
+          ],
+          "valid_sample_count": 27889
+        },
+        "slope_deg": {
+          "feature": "slope_deg",
+          "bin_edges": [
+            0.0,
+            1.0,
+            2.0,
+            3.0,
+            5.0,
+            8.0,
+            12.0,
+            18.0,
+            25.0,
+            35.0,
+            50.0,
+            70.0,
+            90.0
+          ],
+          "normalized_counts": [
+            0.12216285990892467,
+            0.2630427767220051,
+            0.21241349636057227,
+            0.17655706550969916,
+            0.10534619383986518,
+            0.07192800028685145,
+            0.03664527232959231,
+            0.008964107712718276,
+            0.0023306680053067517,
+            0.0006095593244648428,
+            0.0,
+            0.0
+          ],
+          "valid_sample_count": 27889
+        },
+        "roughness_m": {
+          "feature": "roughness_m",
+          "bin_edges": [
+            0.0,
+            1.0,
+            2.0,
+            5.0,
+            10.0,
+            20.0,
+            40.0,
+            80.0,
+            160.0,
+            320.0,
+            640.0
+          ],
+          "normalized_counts": [
+            0.006884434723367636,
+            0.15199541037685108,
+            0.49775897307182043,
+            0.19914661694574923,
+            0.12510308723869626,
+            0.018430205457348775,
+            0.000681272186166589,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "valid_sample_count": 27889
+        },
+        "local_relief_m": {
+          "feature": "local_relief_m",
+          "bin_edges": [
+            0.0,
+            5.0,
+            10.0,
+            20.0,
+            50.0,
+            100.0,
+            200.0,
+            400.0,
+            800.0,
+            1600.0,
+            3200.0
+          ],
+          "normalized_counts": [
+            0.0,
+            7.17128617017462e-05,
+            0.03969306895191652,
+            0.46799813546559577,
+            0.3916597941840869,
+            0.10057728853669906,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "valid_sample_count": 27889
+        }
+      }
+    },
+    "120": {
+      "resolution_m": 120.0,
+      "metrics": {
+        "elevation_std_m": 45.03871536254883,
+        "slope_mean_deg": 3.0340850602581044,
+        "slope_p50_deg": 1.951031320622851,
+        "slope_p90_deg": 7.000503777242944,
+        "local_relief_mean_m": 52.711697740619684,
+        "local_relief_p50_m": 44.97576904296875,
+        "local_relief_p90_m": 94.8934326171875,
+        "roughness_mean": 5.475424740316413,
+        "roughness_p90": 12.087669913810519
+      },
+      "feature_coverage": {
+        "elevation": {
+          "valid_sample_count": 7056,
+          "total_expected_sample_count": 7056,
+          "coverage_fraction": 1.0,
+          "nodata_propagation": "Invalid source cells propagate through the derivative kernel and are excluded",
+          "kernel_edge_exclusions": 0,
+          "quality_flag": "pass"
+        },
+        "slope": {
+          "valid_sample_count": 7056,
+          "total_expected_sample_count": 7056,
+          "coverage_fraction": 1.0,
+          "nodata_propagation": "Invalid source cells propagate through the derivative kernel and are excluded",
+          "kernel_edge_exclusions": 0,
+          "quality_flag": "pass"
+        },
+        "roughness": {
+          "valid_sample_count": 7056,
+          "total_expected_sample_count": 7056,
+          "coverage_fraction": 1.0,
+          "nodata_propagation": "Invalid source cells propagate through the derivative kernel and are excluded",
+          "kernel_edge_exclusions": 0,
+          "quality_flag": "pass"
+        },
+        "local_relief": {
+          "valid_sample_count": 7056,
+          "total_expected_sample_count": 7056,
+          "coverage_fraction": 1.0,
+          "nodata_propagation": "Invalid source cells propagate through the derivative kernel and are excluded",
+          "kernel_edge_exclusions": 0,
+          "quality_flag": "pass"
+        }
+      },
+      "distributions": {
+        "elevation_relative_m": {
+          "feature": "elevation_relative_m",
+          "bin_edges": [
+            -1000.0,
+            -500.0,
+            -250.0,
+            -100.0,
+            -50.0,
+            -20.0,
+            -10.0,
+            0.0,
+            10.0,
+            20.0,
+            50.0,
+            100.0,
+            250.0,
+            500.0,
+            1000.0
+          ],
+          "normalized_counts": [
+            0.0,
+            0.0,
+            0.0,
+            0.05895691609977324,
+            0.20762471655328799,
+            0.10331632653061225,
+            0.13010204081632654,
+            0.12953514739229025,
+            0.09948979591836735,
+            0.14852607709750568,
+            0.035147392290249435,
+            0.0873015873015873,
+            0.0,
+            0.0
+          ],
+          "valid_sample_count": 7056
+        },
+        "slope_deg": {
+          "feature": "slope_deg",
+          "bin_edges": [
+            0.0,
+            1.0,
+            2.0,
+            3.0,
+            5.0,
+            8.0,
+            12.0,
+            18.0,
+            25.0,
+            35.0,
+            50.0,
+            70.0,
+            90.0
+          ],
+          "normalized_counts": [
+            0.18494897959183673,
+            0.32922335600907027,
+            0.16680839002267572,
+            0.1393140589569161,
+            0.10671768707482993,
+            0.05243764172335601,
+            0.016723356009070295,
+            0.0036848072562358277,
+            0.0001417233560090703,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "valid_sample_count": 7056
+        },
+        "roughness_m": {
+          "feature": "roughness_m",
+          "bin_edges": [
+            0.0,
+            1.0,
+            2.0,
+            5.0,
+            10.0,
+            20.0,
+            40.0,
+            80.0,
+            160.0,
+            320.0,
+            640.0
+          ],
+          "normalized_counts": [
+            0.02919501133786848,
+            0.15575396825396826,
+            0.45875850340136054,
+            0.20861678004535147,
+            0.12854308390022676,
+            0.01899092970521542,
+            0.0001417233560090703,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "valid_sample_count": 7056
+        },
+        "local_relief_m": {
+          "feature": "local_relief_m",
+          "bin_edges": [
+            0.0,
+            5.0,
+            10.0,
+            20.0,
+            50.0,
+            100.0,
+            200.0,
+            400.0,
+            800.0,
+            1600.0,
+            3200.0
+          ],
+          "normalized_counts": [
+            0.0,
+            0.0021258503401360546,
+            0.06689342403628118,
+            0.5075113378684807,
+            0.34282879818594103,
+            0.080640589569161,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "valid_sample_count": 7056
+        }
+      }
+    },
+    "240": {
+      "resolution_m": 240.0,
+      "metrics": {
+        "elevation_std_m": 44.54521560668945,
+        "slope_mean_deg": 2.3325756665057686,
+        "slope_p50_deg": 1.6447854761460319,
+        "slope_p90_deg": 5.022835417886977,
+        "local_relief_mean_m": 46.90767055520125,
+        "local_relief_p50_m": 38.54388427734375,
+        "local_relief_p90_m": 86.3800048828125,
+        "roughness_mean": 8.473475437112446,
+        "roughness_p90": 17.559969221453898
+      },
+      "feature_coverage": {
+        "elevation": {
+          "valid_sample_count": 1764,
+          "total_expected_sample_count": 1764,
+          "coverage_fraction": 1.0,
+          "nodata_propagation": "Invalid source cells propagate through the derivative kernel and are excluded",
+          "kernel_edge_exclusions": 0,
+          "quality_flag": "pass"
+        },
+        "slope": {
+          "valid_sample_count": 1764,
+          "total_expected_sample_count": 1764,
+          "coverage_fraction": 1.0,
+          "nodata_propagation": "Invalid source cells propagate through the derivative kernel and are excluded",
+          "kernel_edge_exclusions": 0,
+          "quality_flag": "pass"
+        },
+        "roughness": {
+          "valid_sample_count": 1764,
+          "total_expected_sample_count": 1764,
+          "coverage_fraction": 1.0,
+          "nodata_propagation": "Invalid source cells propagate through the derivative kernel and are excluded",
+          "kernel_edge_exclusions": 0,
+          "quality_flag": "pass"
+        },
+        "local_relief": {
+          "valid_sample_count": 1764,
+          "total_expected_sample_count": 1764,
+          "coverage_fraction": 1.0,
+          "nodata_propagation": "Invalid source cells propagate through the derivative kernel and are excluded",
+          "kernel_edge_exclusions": 0,
+          "quality_flag": "pass"
+        }
+      },
+      "distributions": {
+        "elevation_relative_m": {
+          "feature": "elevation_relative_m",
+          "bin_edges": [
+            -1000.0,
+            -500.0,
+            -250.0,
+            -100.0,
+            -50.0,
+            -20.0,
+            -10.0,
+            0.0,
+            10.0,
+            20.0,
+            50.0,
+            100.0,
+            250.0,
+            500.0,
+            1000.0
+          ],
+          "normalized_counts": [
+            0.0,
+            0.0,
+            0.0,
+            0.05215419501133787,
+            0.20975056689342403,
+            0.10657596371882086,
+            0.13151927437641722,
+            0.12981859410430838,
+            0.10090702947845805,
+            0.14569160997732428,
+            0.035147392290249435,
+            0.08843537414965986,
+            0.0,
+            0.0
+          ],
+          "valid_sample_count": 1764
+        },
+        "slope_deg": {
+          "feature": "slope_deg",
+          "bin_edges": [
+            0.0,
+            1.0,
+            2.0,
+            3.0,
+            5.0,
+            8.0,
+            12.0,
+            18.0,
+            25.0,
+            35.0,
+            50.0,
+            70.0,
+            90.0
+          ],
+          "normalized_counts": [
+            0.24263038548752835,
+            0.35487528344671204,
+            0.1536281179138322,
+            0.14852607709750568,
+            0.0782312925170068,
+            0.017573696145124718,
+            0.0045351473922902496,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "valid_sample_count": 1764
+        },
+        "roughness_m": {
+          "feature": "roughness_m",
+          "bin_edges": [
+            0.0,
+            1.0,
+            2.0,
+            5.0,
+            10.0,
+            20.0,
+            40.0,
+            80.0,
+            160.0,
+            320.0,
+            640.0
+          ],
+          "normalized_counts": [
+            0.0005668934240362812,
+            0.03854875283446712,
+            0.336734693877551,
+            0.3429705215419501,
+            0.21145124716553287,
+            0.06689342403628118,
+            0.002834467120181406,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "valid_sample_count": 1764
+        },
+        "local_relief_m": {
+          "feature": "local_relief_m",
+          "bin_edges": [
+            0.0,
+            5.0,
+            10.0,
+            20.0,
+            50.0,
+            100.0,
+            200.0,
+            400.0,
+            800.0,
+            1600.0,
+            3200.0
+          ],
+          "normalized_counts": [
+            0.0,
+            0.0045351473922902496,
+            0.11394557823129252,
+            0.5272108843537415,
+            0.2987528344671202,
+            0.05555555555555555,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "valid_sample_count": 1764
+        }
+      }
+    }
+  },
+  "core_valid_coverage": {
+    "60": 1.0,
+    "120": 1.0,
+    "240": 1.0
+  },
+  "halo_valid_coverage": {
+    "60": 1.0,
+    "120": 1.0,
+    "240": 1.0
+  },
+  "quality_status": "quality_checked",
+  "cross_validation_status": "review_pending",
+  "provenance": {
+    "source_id": "earth-hanksville-mdrs-srtmgl1",
+    "source_checksum": "c71e33cbfedcecb6ab09a43cc37ea33c4acf6b261ea1aa0e6f2207bd7ec98bbc",
+    "source_manifest": "data/manifests/earth-hanksville-mdrs-srtmgl1.json",
+    "aoi_id": "earth-hanksville-mdrs-aoi-v1",
+    "configuration": "app/data/similarity.v3.json",
+    "generated_at": "2026-11-14T15:15:43.673089+00:00"
+  },
+  "warnings": []
+}

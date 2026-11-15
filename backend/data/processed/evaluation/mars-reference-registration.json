@@ -1,0 +1,201 @@
+{
+  "generated_at": "2026-11-14T18:35:14.627427+00:00",
+  "results": [
+    {
+      "id": "mars-gale-aeolis-palus",
+      "status": "accepted",
+      "item": "T01_000815_1749_XN_05S222W__K19_060629_1752_XI_04S222W",
+      "asset": "geoid_adjusted_dem",
+      "core_valid": 0.9994,
+      "halo_valid": 0.9985861061362994,
+      "relief_m": [
+        -4547.0,
+        -4238.3
+      ],
+      "intersection_error": {
+        "median_m": 0.489,
+        "p95_m": 1.496
+      },
+      "checksum": "e258cc973b6e2b221b7b313ba24f333db19fe38453cf9265fa2c4ce8959b88df",
+      "candidates_checked": 11,
+      "selection": [
+        {
+          "item": "T01_000815_1749_XN_05S222W__P22_009571_1756_XI_04S222W",
+          "core_valid": 1.0,
+          "intersection_error_median_m": 47.016
+        },
+        {
+          "item": "T01_000815_1749_XN_05S222W__P21_009149_1752_XI_04S222W",
+          "core_valid": 1.0,
+          "intersection_error_median_m": 68.174
+        },
+        {
+          "item": "T01_000815_1749_XN_05S222W__P18_008147_1749_XN_05S222W",
+          "core_valid": 0.9981,
+          "intersection_error_median_m": 0.624
+        },
+        {
+          "item": "T01_000815_1749_XN_05S222W__N10_066405_1748_XI_05S222W",
+          "core_valid": 0.9907,
+          "intersection_error_median_m": 1.791
+        },
+        {
+          "item": "T01_000815_1749_XN_05S222W__N06_064730_1753_XN_04S222W",
+          "core_valid": 1.0,
+          "intersection_error_median_m": 63.833
+        },
+        {
+          "item": "T01_000815_1749_XN_05S222W__K19_060629_1752_XI_04S222W",
+          "core_valid": 0.9991,
+          "intersection_error_median_m": 0.488
+        }
+      ]
+    },
+    {
+      "id": "mars-insight-elysium",
+      "status": "accepted",
+      "item": "N15_068239_1823_XN_02N224W__F18_042827_1842_XN_04N224W",
+      "asset": "geoid_adjusted_dem",
+      "core_valid": 0.9997,
+      "halo_valid": 0.9993401828636064,
+      "relief_m": [
+        -2724.3,
+        -2588.8
+      ],
+      "intersection_error": {
+        "median_m": 0.438,
+        "p95_m": 1.365
+      },
+      "checksum": "4be42bd3ca7f7bdd7473017851186749dc1d5a86c95b7f5dcf1f7275c4c166bd",
+      "candidates_checked": 11,
+      "selection": [
+        {
+          "item": "N15_068239_1823_XN_02N224W__N03_063385_1867_XI_06N224W",
+          "core_valid": 0.9991,
+          "intersection_error_median_m": 0.584
+        },
+        {
+          "item": "N15_068239_1823_XN_02N224W__F18_042827_1842_XN_04N224W",
+          "core_valid": 0.9997,
+          "intersection_error_median_m": 0.433
+        },
+        {
+          "item": "N13_067632_1860_XI_06N224W__N15_068239_1823_XN_02N224W",
+          "core_valid": 1.0,
+          "intersection_error_median_m": 63.726
+        },
+        {
+          "item": "N13_067632_1860_XI_06N224W__N09_065917_1868_XN_06N224W",
+          "core_valid": 1.0,
+          "intersection_error_median_m": 29.895
+        },
+        {
+          "item": "N13_067632_1860_XI_06N224W__N02_063240_1845_XN_04N224W",
+          "core_valid": 0.9999,
+          "intersection_error_median_m": 0.572
+        },
+        {
+          "item": "N13_067632_1860_XI_06N224W__K21_061684_1823_XN_02N224W",
+          "core_valid": 1.0,
+          "intersection_error_median_m": 132.719
+        }
+      ]
+    },
+    {
+      "id": "mars-gusev-plains",
+      "status": "accepted",
+      "item": "P22_009530_1653_XI_14S184W__P06_003333_1652_XI_14S184W",
+      "asset": "geoid_adjusted_dem",
+      "core_valid": 1.0,
+      "halo_valid": 1.0,
+      "relief_m": [
+        -1963.3,
+        -1828.9
+      ],
+      "intersection_error": {
+        "median_m": 4.228,
+        "p95_m": 6.312
+      },
+      "checksum": "05c903c17573975c89d98fd1f0280ee80d0027d067461026611470ce4af35fd8",
+      "candidates_checked": 30,
+      "selection": [
+        {
+          "item": "P22_009530_1653_XI_14S184W__P06_003333_1652_XI_14S184W",
+          "core_valid": 1.0,
+          "intersection_error_median_m": 4.219
+        },
+        {
+          "item": "P22_009530_1653_XI_14S184W__J18_051911_1653_XN_14S184W",
+          "core_valid": 1.0,
+          "intersection_error_median_m": 103.23
+        },
+        {
+          "item": "P22_009530_1653_XI_14S184W__G09_021925_1653_XN_14S184W",
+          "core_valid": 1.0,
+          "intersection_error_median_m": 111.847
+        },
+        {
+          "item": "P22_009530_1653_XI_14S184W__D20_035230_1655_XN_14S184W",
+          "core_valid": 1.0,
+          "intersection_error_median_m": 90.397
+        },
+        {
+          "item": "P22_009530_1653_XI_14S184W__B18_016677_1653_XN_14S184W",
+          "core_valid": 1.0,
+          "intersection_error_median_m": 69.512
+        }
+      ]
+    },
+    {
+      "id": "mars-eberswalde-delta",
+      "status": "accepted",
+      "item": "B22_018056_1559_XN_24S033W__G01_018557_1555_XN_24S033W",
+      "asset": "dtm",
+      "core_valid": 0.9998,
+      "halo_valid": 1.0,
+      "relief_m": [
+        -1541.9,
+        -1328.8
+      ],
+      "intersection_error": {
+        "median_m": 0.645,
+        "p95_m": 2.541
+      },
+      "checksum": "015a2b904561f184cd11f1a2f33c8003f8cb6992c6f5c987c0eea77062326c71",
+      "candidates_checked": 8,
+      "selection": [
+        {
+          "item": "P01_001336_1560_XI_24S033W__P01_001534_1559_XI_24S033W",
+          "core_valid": 0.9991,
+          "intersection_error_median_m": 0.99
+        },
+        {
+          "item": "J11_049110_1561_XN_23S033W__J11_049176_1560_XN_24S033W",
+          "core_valid": 0.998,
+          "intersection_error_median_m": 0.894
+        },
+        {
+          "item": "J06_047185_1572_XN_22S033W__J06_047119_1572_XN_22S033W",
+          "core_valid": 0.999,
+          "intersection_error_median_m": 1.009
+        },
+        {
+          "item": "G04_019757_1542_XN_25S033W__G05_020034_1543_XN_25S033W",
+          "core_valid": 0.9935,
+          "intersection_error_median_m": 1.561
+        },
+        {
+          "item": "B22_018056_1559_XN_24S033W__G01_018557_1555_XN_24S033W",
+          "core_valid": 1.0,
+          "intersection_error_median_m": 0.639
+        }
+      ]
+    }
+  ],
+  "context": {
+    "mars-gale-aeolis-palus": "Curiosity found evidence of an ancient habitable fluvio-lacustrine environment at Yellowknife Bay, a few kilometres from the landing site (Grotzinger et al. 2014). That finding concerns rocks studied by the rover, not the whole window.",
+    "mars-insight-elysium": "Orbital and lander observations describe a smooth, cratered lava plain with an impact-generated regolith several metres thick (Golombek et al. 2020).",
+    "mars-gusev-plains": "Spirit's traverse showed the plains to be basaltic lava with impact-generated regolith and few signs of water-lain sediments (Golombek et al. 2006).",
+    "mars-eberswalde-delta": "A fan-shaped deposit with meandering, branching channels has been interpreted as evidence of persistent flow and aqueous sedimentation (Malin & Edgett 2003)."
+  }
+}

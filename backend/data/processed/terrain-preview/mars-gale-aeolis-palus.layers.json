@@ -1,0 +1,13 @@
+{
+  "site_id": "mars-gale-aeolis-palus",
+  "resolution_m": 30.0,
+  "pixels": 334,
+  "hillshade": {
+    "azimuth_deg": 315,
+    "altitude_deg": 45
+  },
+  "slope_ramp": "linear 0-35 degrees, fixed across sites",
+  "slope_p50_deg": 2.06,
+  "source_sha256": "e258cc973b6e2b221b7b313ba24f333db19fe38453cf9265fa2c4ce8959b88df",
+  "purpose": "visualisation only; numeric analysis uses terrain-v3/v4"
+}

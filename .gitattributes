@@ -1,0 +1,10 @@
+# Scientific artifacts are checksummed; keep their bytes stable across platforms.
+*.json      text eol=lf
+*.geojson   text eol=lf
+*.sha256    text eol=lf
+*.csv       text eol=lf
+*.png       binary
+*.jpg       binary
+*.webp      binary
+*.glb       binary
+*.tif       binary

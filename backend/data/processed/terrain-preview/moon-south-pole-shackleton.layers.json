@@ -1,0 +1,13 @@
+{
+  "site_id": "moon-south-pole-shackleton",
+  "resolution_m": 30.0,
+  "pixels": 334,
+  "hillshade": {
+    "azimuth_deg": 315,
+    "altitude_deg": 45
+  },
+  "slope_ramp": "linear 0-35 degrees, fixed across sites",
+  "slope_p50_deg": 22.25,
+  "source_sha256": "60cdb4d19a3a955e70bd5920a569fac94a3e32d840736f34aac72803605d0032",
+  "purpose": "visualisation only; numeric analysis uses terrain-v3/v4"
+}

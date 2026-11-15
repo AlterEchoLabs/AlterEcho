@@ -1,0 +1,68 @@
+{
+  "type": "Feature",
+  "id": "earth-danakil-aoi-v1",
+  "properties": {
+    "aoi_id": "earth-danakil-aoi-v1",
+    "site_id": "earth-danakil",
+    "version": "1.0",
+    "planetary_body": "earth",
+    "center_latitude": 14.2417,
+    "center_longitude": 40.2989,
+    "width_m": 10000,
+    "height_m": 10000,
+    "selection_rationale": "Centred on the Dallol dome described as a planetary field analog for hydrothermal and evaporite processes (Cavalazzi et al. 2019). Chosen as a deliberately different landscape: a near-flat salt plain with a low dome.",
+    "intended_analog_characteristics": [
+      "local slope distribution",
+      "local relief",
+      "surface roughness"
+    ],
+    "known_limitations": [
+      "Hydrothermal chemistry and salts are not measured by the terrain index",
+      "The salt plain is very flat; terrain similarity says nothing about mineralogy",
+      "Access is hazardous and seasonally restricted; not assessed here"
+    ],
+    "creation_method": "Geodetic display footprint approximated from a 10 km square; processing constructs an exact UTM metric grid around the centre.",
+    "source_references": [
+      "earth-danakil-srtmgl1",
+      "dallol-study"
+    ],
+    "planetary_target": "The registered 10 km Jezero reference window under terrain-only comparison.",
+    "analogy_dimensions_not_covered": [
+      "atmosphere",
+      "gravity",
+      "radiation",
+      "geology",
+      "temperature",
+      "habitability"
+    ],
+    "representativeness": "Feature-focused window; it does not represent the whole region.",
+    "known_selection_bias": "Phase 7 held-out site: selected for landscape diversity after terrain-v4 parameters were frozen; independent AOI review pending."
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          40.2526,
+          14.1968
+        ],
+        [
+          40.3452,
+          14.1968
+        ],
+        [
+          40.3452,
+          14.2866
+        ],
+        [
+          40.2526,
+          14.2866
+        ],
+        [
+          40.2526,
+          14.1968
+        ]
+      ]
+    ]
+  }
+}

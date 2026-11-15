@@ -1,0 +1,88 @@
+{
+  "model_version": "analog-evidence-v2.0",
+  "review_status": "provisional_pending_expert_review",
+  "terrain_method": "terrain-v4.0",
+  "historical_terrain_method": "terrain-v3.0",
+  "notice": "Indices are similarity indices from 0 to 100 on the stated measurements. They are not probabilities, confidence levels, percentages of identity or complete planetary analogies.",
+  "statuses": {
+    "measured_comparable": "Measured for both the planetary reference and the Earth candidate, with matching units, support and quality rules and a documented comparison method. Only this status can enter an index.",
+    "measured_context_only": "Measured, but the two measurements fail at least one comparability check. Shown for interpretation, never scored.",
+    "source_available_unprocessed": "A suitable public product exists but has not been processed for this AOI.",
+    "missing_earth": "No usable Earth measurement for this AOI.",
+    "missing_planetary": "No usable measurement for the planetary reference AOI.",
+    "incompatible": "Measurements exist but answer different questions or cannot be put on a common basis.",
+    "review_pending": "Processed, awaiting scientific review before it may be used."
+  },
+  "dimensions": {
+    "terrain": {"label": "Terrain and landform", "scorable": true, "method": "terrain-v4.0"},
+    "geology": {"label": "Geology and mineralogy", "scorable": true, "method": null},
+    "temperature": {"label": "Temperature and environmental extremes", "scorable": true, "method": "thermal-lst-v1 (comparability audit required)"},
+    "water_ice": {"label": "Water, ice and resources", "scorable": true, "method": null},
+    "surface_processes": {"label": "Surface processes", "scorable": true, "method": null},
+    "subsurface_habitability": {"label": "Subsurface, habitability and biology", "scorable": true, "method": null},
+    "field_test_suitability": {"label": "Field-test suitability", "scorable": false, "method": "Evidence record only. No numeric operational score is defined or validated."}
+  },
+  "default_profile": "terrain_analogy",
+  "profiles": {
+    "terrain_analogy": {
+      "label": "Terrain analogy",
+      "question": "Which processed Earth windows match the reference window's landform shape (slope, local relief, roughness, relative elevation) at 60, 120 and 240 m?",
+      "required_measurements": ["Slope, local relief, roughness and relative-elevation distributions for both AOIs from integrity-checked DEMs at 60, 120 and 240 m"],
+      "weights": {"terrain": 1.0},
+      "task_critical": ["terrain"],
+      "allowed_missing": ["geology", "temperature", "water_ice", "surface_processes", "subsurface_habitability", "field_test_suitability"],
+      "ranking_conditions": "Same reference AOI, terrain-v4.0, identical feature definitions, 60/120/240 m with a 1.2 km halo, equal family weights, SRTMGL1.003 for every Earth candidate.",
+      "permitted_conclusion": "This Earth AOI matches the selected planetary AOI on the measured terrain features at the tested scales under terrain-v4.0.",
+      "unassessed": ["geology and mineralogy", "temperature", "water and ice", "surface processes", "habitability", "access, safety and logistics", "wheel-scale traversability"]
+    },
+    "balanced_science": {
+      "label": "Balanced science",
+      "question": "Which Earth windows are the most useful general analogs across landform, materials and environment?",
+      "required_measurements": ["Terrain distributions", "Comparable mineral or material classes", "Comparable environmental measurements"],
+      "weights": {"terrain": 0.30, "geology": 0.25, "temperature": 0.10, "water_ice": 0.15, "surface_processes": 0.10, "subsurface_habitability": 0.10},
+      "task_critical": ["terrain", "geology"],
+      "allowed_missing": ["temperature", "water_ice", "surface_processes", "subsurface_habitability"],
+      "ranking_conditions": "Terrain and geology must be measured_comparable for every candidate on one shared basis.",
+      "permitted_conclusion": "Ranked general analog usefulness on the included dimensions only.",
+      "unassessed": ["access, safety and logistics"]
+    },
+    "rover_mobility": {
+      "label": "Rover mobility",
+      "question": "Which Earth windows are useful for testing rover mobility on terrain like the reference window?",
+      "required_measurements": ["Regional terrain shape (60–240 m)", "Wheel-scale terrain (DEM at 1 m or finer) for traversability", "Surface material and trafficability"],
+      "weights": {"terrain": 0.80, "surface_processes": 0.20},
+      "task_critical": ["terrain", "field_test_suitability"],
+      "allowed_missing": ["surface_processes"],
+      "ranking_conditions": "Requires regional terrain plus wheel-scale terrain and trafficability evidence. Wheel-scale evidence is part of field-test suitability, which has no comparable measurement yet.",
+      "permitted_conclusion": "Regional landform similarity only. No traversability or safety conclusion.",
+      "unassessed": ["wheel-scale traversability", "soil trafficability", "access and permits", "safety"]
+    },
+    "biosignature_fieldwork": {
+      "label": "Biosignature fieldwork",
+      "question": "Which Earth windows are useful for testing biosignature research methods relevant to the reference site? This makes no claim about life.",
+      "required_measurements": ["Comparable mineral classes (e.g. carbonates, clays)", "Water/ice or aqueous-alteration evidence", "Habitability-relevant context"],
+      "weights": {"geology": 0.35, "water_ice": 0.25, "subsurface_habitability": 0.20, "temperature": 0.10, "terrain": 0.10},
+      "task_critical": ["geology", "water_ice"],
+      "allowed_missing": ["temperature", "terrain", "subsurface_habitability"],
+      "ranking_conditions": "Geology and water/ice must be measured_comparable.",
+      "permitted_conclusion": "Method-testing relevance on included dimensions only.",
+      "unassessed": ["biology", "access and permits", "contamination control"]
+    },
+    "mars_base_field_testing": {
+      "label": "Mars-base field testing",
+      "question": "Which Earth windows are useful for testing surface equipment under terrain and thermal stress like the reference site? This is not a landing, construction or base-siting recommendation.",
+      "required_measurements": ["Terrain distributions", "Comparable surface temperature regime", "Field-test logistics, access and safety evidence"],
+      "weights": {"terrain": 0.35, "temperature": 0.35, "water_ice": 0.15, "subsurface_habitability": 0.15},
+      "task_critical": ["terrain", "temperature", "field_test_suitability"],
+      "allowed_missing": ["water_ice", "subsurface_habitability"],
+      "ranking_conditions": "Terrain and temperature must be measured_comparable, and field-test suitability must be documented.",
+      "permitted_conclusion": "Equipment-testing relevance on included dimensions only.",
+      "unassessed": ["radiation", "gravity", "atmospheric pressure", "dust"]
+    }
+  },
+  "profile_states": {
+    "ranked": "Every task-critical dimension is measured_comparable for every candidate on one shared basis.",
+    "experimental_partial": "Some task-critical evidence is missing. A partial index on the included dimensions is shown for exploration, without ranks and without a task conclusion.",
+    "not_assessed": "No task-critical dimension has comparable evidence. No index is shown."
+  }
+}

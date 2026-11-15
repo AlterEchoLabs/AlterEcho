@@ -1,0 +1,68 @@
+{
+  "type": "Feature",
+  "id": "mars-insight-elysium-aoi-v1",
+  "properties": {
+    "aoi_id": "mars-insight-elysium-aoi-v1",
+    "site_id": "mars-insight-elysium",
+    "version": "1.0",
+    "planetary_body": "mars",
+    "center_latitude": 4.5024,
+    "center_longitude": 135.6234,
+    "width_m": 10000.0,
+    "height_m": 10000.0,
+    "selection_rationale": "Centred on the InSight lander position (4.5024 N, 135.6234 E); fixed before any terrain value was computed.",
+    "intended_analog_characteristics": [
+      "local slope distribution",
+      "relative elevation distribution"
+    ],
+    "known_limitations": [
+      "A 20 m DTM cannot resolve the metre-scale rocks and hollows described at the lander",
+      "Regolith thickness and mechanical properties are not measured",
+      "Terrain metrics do not establish geology, habitability, safety or radiation"
+    ],
+    "creation_method": "Planetocentric latitude, east-positive longitude on the Mars sphere (R = 3,396,190 m); processing builds a local equirectangular grid true to scale at the window latitude.",
+    "source_references": [
+      "mars-insight-elysium-ctx-dtm",
+      "golombek-2020-insight",
+      "usgs-ctx-dtms"
+    ],
+    "planetary_target": "Reference window for terrain-only comparison with Earth windows.",
+    "analogy_dimensions_not_covered": [
+      "atmosphere",
+      "gravity",
+      "radiation",
+      "geology",
+      "temperature",
+      "habitability"
+    ],
+    "representativeness": "One 10 km window; it does not represent the whole crater or plain.",
+    "known_selection_bias": "Placed at a mission site by a documented rule."
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          135.53879,
+          4.41805
+        ],
+        [
+          135.70801,
+          4.41805
+        ],
+        [
+          135.70801,
+          4.58675
+        ],
+        [
+          135.53879,
+          4.58675
+        ],
+        [
+          135.53879,
+          4.41805
+        ]
+      ]
+    ]
+  }
+}

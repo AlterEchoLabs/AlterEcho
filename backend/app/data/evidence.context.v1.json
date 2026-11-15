@@ -1,0 +1,27 @@
+{
+  "version": "evidence-context-v1",
+  "notice": "Statuses for dimensions that are not measured by TerraLuna. Context statements cite sources and never contribute to a score.",
+  "dimensions": {
+    "geology": {
+      "mars-jezero": {"status": "context_only", "reason": "Jezero's geological units are mapped in USGS SIM 3464 (1:75,000). Those units have not been converted into a descriptor that can be compared with an Earth product.", "source_ids": ["usgs-sim-3464"]},
+      "_earth_default": {"status": "not_comparable", "reason": "No mineral-class product has been processed for this AOI. The planned source, EMIT L2B mineral identification, needs NASA Earthdata access, and its coverage of this exact AOI is unverified. A true-colour image is not mineral evidence.", "source_ids": ["emit-l2b-min"]}
+    },
+    "water_ice": {
+      "mars-jezero": {"status": "context_only", "reason": "Jezero is interpreted in the literature as an ancient lake and delta system. No present-day water or ice observation has been processed for the AOI.", "source_ids": ["nasa-jezero"]},
+      "_earth_default": {"status": "missing", "reason": "No water, ice or resource observation has been processed for this AOI. A non-detection would not show absence."}
+    },
+    "surface_processes": {
+      "_default": {"status": "missing", "reason": "No process indicators have been processed for either body: no Sentinel-1/2 indices and no mapped Mars landforms. The Sentinel-2 crop is display imagery only."}
+    },
+    "subsurface_habitability": {
+      "mars-jezero": {"status": "context_only", "reason": "SHARAD radar and GRS footprints are kilometres to hundreds of kilometres across, coarser than the 10 km AOI. They are regional context only.", "source_ids": ["sharad-pds"]},
+      "_earth_default": {"status": "not_comparable", "reason": "No comparable subsurface product exists for this AOI. TerraLuna makes no life-detection or habitability claim."}
+    }
+  },
+  "operational": {
+    "earth-atacama": {"research_relevance": "Region-level analog research history: Mars-like soil studies and NASA instrument field tests in the hyperarid Atacama.", "aoi_specific": false, "source_ids": ["atacama-study", "nasa-atacama"]},
+    "earth-ladakh": {"research_relevance": "Region-level analog research history: a 2016 multidisciplinary expedition and ISRO's 2025 analog mission at Tso Kar. This AOI is not the Tso Kar site.", "aoi_specific": false, "source_ids": ["ladakh-research", "isro-ladakh"]},
+    "earth-upper-mustang": {"research_relevance": "No peer-reviewed analog study of this window was found. A commercial analog-station proposal has been described publicly; that is not scientific validation.", "aoi_specific": false, "source_ids": ["handoff-candidate-atlas"]},
+    "_not_assessed": ["site access and permits", "safe traversal", "logistics", "landing or base suitability"]
+  }
+}

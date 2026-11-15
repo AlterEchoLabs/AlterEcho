@@ -1,0 +1,3072 @@
+{
+  "methodology_version": "terrain-v4.0",
+  "generated_at": "2026-11-14T15:21:48.060648+00:00",
+  "notice": "Deterministic checks. Ranges are not statistical confidence intervals.",
+  "reference_stability": {
+    "north_2km": {
+      "status": "ok",
+      "index": 99.98,
+      "families": {
+        "slope": 99.98,
+        "local_relief": 100.0,
+        "roughness": 100.0,
+        "relative_elevation": 99.96
+      },
+      "w1_60m": {
+        "slope": 0.171,
+        "local_relief": 1.407,
+        "roughness": 0.223,
+        "relative_elevation": 4.467
+      }
+    },
+    "south_2km": {
+      "status": "ok",
+      "index": 99.96,
+      "families": {
+        "slope": 99.98,
+        "local_relief": 99.99,
+        "roughness": 99.99,
+        "relative_elevation": 99.89
+      },
+      "w1_60m": {
+        "slope": 0.141,
+        "local_relief": 2.854,
+        "roughness": 0.183,
+        "relative_elevation": 6.997
+      }
+    },
+    "east_2km": {
+      "status": "ok",
+      "index": 99.9,
+      "families": {
+        "slope": 99.93,
+        "local_relief": 99.97,
+        "roughness": 99.98,
+        "relative_elevation": 99.72
+      },
+      "w1_60m": {
+        "slope": 0.325,
+        "local_relief": 4.738,
+        "roughness": 0.393,
+        "relative_elevation": 11.336
+      }
+    },
+    "west_2km": {
+      "status": "ok",
+      "index": 99.7,
+      "families": {
+        "slope": 99.74,
+        "local_relief": 99.86,
+        "roughness": 99.94,
+        "relative_elevation": 99.28
+      },
+      "w1_60m": {
+        "slope": 0.571,
+        "local_relief": 10.345,
+        "roughness": 0.754,
+        "relative_elevation": 17.889
+      }
+    },
+    "no_halo": {
+      "status": "ok",
+      "index": 100.0,
+      "families": {
+        "slope": 100.0,
+        "local_relief": 100.0,
+        "roughness": 100.0,
+        "relative_elevation": 100.0
+      },
+      "w1_60m": {
+        "slope": 0.001,
+        "local_relief": 0.845,
+        "roughness": 0.019,
+        "relative_elevation": 0.0
+      }
+    }
+  },
+  "sites": {
+    "earth-upper-mustang": {
+      "nominal": {
+        "status": "ok",
+        "index": 53.31,
+        "families": {
+          "slope": 31.83,
+          "local_relief": 63.11,
+          "roughness": 78.3,
+          "relative_elevation": 40.01
+        },
+        "w1_60m": {
+          "slope": 13.107,
+          "local_relief": 197.512,
+          "roughness": 17.39,
+          "relative_elevation": 202.877
+        }
+      },
+      "north_2km": {
+        "status": "ok",
+        "index": 49.15,
+        "families": {
+          "slope": 29.51,
+          "local_relief": 60.59,
+          "roughness": 77.03,
+          "relative_elevation": 29.47
+        },
+        "w1_60m": {
+          "slope": 13.441,
+          "local_relief": 206.285,
+          "roughness": 17.908,
+          "relative_elevation": 234.418
+        }
+      },
+      "south_2km": {
+        "status": "ok",
+        "index": 58.29,
+        "families": {
+          "slope": 35.61,
+          "local_relief": 65.47,
+          "roughness": 80.37,
+          "relative_elevation": 51.71
+        },
+        "w1_60m": {
+          "slope": 12.437,
+          "local_relief": 189.183,
+          "roughness": 16.251,
+          "relative_elevation": 172.032
+        }
+      },
+      "east_2km": {
+        "status": "ok",
+        "index": 60.97,
+        "families": {
+          "slope": 37.8,
+          "local_relief": 68.32,
+          "roughness": 81.28,
+          "relative_elevation": 56.49
+        },
+        "w1_60m": {
+          "slope": 12.18,
+          "local_relief": 179.978,
+          "roughness": 16.135,
+          "relative_elevation": 160.507
+        }
+      },
+      "west_2km": {
+        "status": "ok",
+        "index": 42.59,
+        "families": {
+          "slope": 22.38,
+          "local_relief": 51.92,
+          "roughness": 72.19,
+          "relative_elevation": 23.89
+        },
+        "w1_60m": {
+          "slope": 14.789,
+          "local_relief": 234.321,
+          "roughness": 19.828,
+          "relative_elevation": 253.694
+        }
+      },
+      "no_halo": {
+        "status": "ok",
+        "index": 53.94,
+        "families": {
+          "slope": 31.67,
+          "local_relief": 65.32,
+          "roughness": 78.77,
+          "relative_elevation": 39.98
+        },
+        "w1_60m": {
+          "slope": 13.12,
+          "local_relief": 190.842,
+          "roughness": 17.247,
+          "relative_elevation": 202.84
+        }
+      },
+      "dem_nasadem": {
+        "status": "ok",
+        "index": 53.73,
+        "families": {
+          "slope": 32.53,
+          "local_relief": 63.54,
+          "roughness": 78.64,
+          "relative_elevation": 40.21
+        },
+        "w1_60m": {
+          "slope": 12.909,
+          "local_relief": 195.599,
+          "roughness": 17.12,
+          "relative_elevation": 202.687
+        },
+        "product": "NASADEM_HGT v001 (reprocessed SRTM; shared lineage with SRTMGL1)",
+        "items": [
+          "NASADEM_HGT_n29e083"
+        ]
+      },
+      "dem_cop-dem-glo-30": {
+        "status": "ok",
+        "index": 52.65,
+        "families": {
+          "slope": 30.22,
+          "local_relief": 62.61,
+          "roughness": 77.64,
+          "relative_elevation": 40.13
+        },
+        "w1_60m": {
+          "slope": 13.559,
+          "local_relief": 199.873,
+          "roughness": 17.865,
+          "relative_elevation": 202.505
+        },
+        "product": "Copernicus DEM GLO-30 (TanDEM-X; independent lineage, surface model)",
+        "items": [
+          "Copernicus_DSM_COG_10_N29_00_E083_00_DEM"
+        ]
+      }
+    },
+    "earth-ladakh": {
+      "nominal": {
+        "status": "ok",
+        "index": 35.19,
+        "families": {
+          "slope": 16.08,
+          "local_relief": 46.66,
+          "roughness": 66.59,
+          "relative_elevation": 11.44
+        },
+        "w1_60m": {
+          "slope": 16.698,
+          "local_relief": 255.031,
+          "roughness": 23.199,
+          "relative_elevation": 311.858
+        }
+      },
+      "north_2km": {
+        "status": "ok",
+        "index": 28.96,
+        "families": {
+          "slope": 11.57,
+          "local_relief": 38.27,
+          "roughness": 61.2,
+          "relative_elevation": 4.79
+        },
+        "w1_60m": {
+          "slope": 17.865,
+          "local_relief": 283.731,
+          "roughness": 25.31,
+          "relative_elevation": 368.542
+        }
+      },
+      "south_2km": {
+        "status": "ok",
+        "index": 43.41,
+        "families": {
+          "slope": 24.09,
+          "local_relief": 57.72,
+          "roughness": 73.4,
+          "relative_elevation": 18.41
+        },
+        "w1_60m": {
+          "slope": 14.865,
+          "local_relief": 217.217,
+          "roughness": 20.364,
+          "relative_elevation": 275.414
+        }
+      },
+      "east_2km": {
+        "status": "ok",
+        "index": 30.66,
+        "families": {
+          "slope": 12.88,
+          "local_relief": 40.15,
+          "roughness": 62.94,
+          "relative_elevation": 6.67
+        },
+        "w1_60m": {
+          "slope": 17.509,
+          "local_relief": 277.56,
+          "roughness": 24.707,
+          "relative_elevation": 349.153
+        }
+      },
+      "west_2km": {
+        "status": "ok",
+        "index": 39.27,
+        "families": {
+          "slope": 18.26,
+          "local_relief": 49.86,
+          "roughness": 68.88,
+          "relative_elevation": 20.09
+        },
+        "w1_60m": {
+          "slope": 16.18,
+          "local_relief": 245.094,
+          "roughness": 22.195,
+          "relative_elevation": 268.835
+        }
+      },
+      "no_halo": {
+        "status": "ok",
+        "index": 35.93,
+        "families": {
+          "slope": 15.98,
+          "local_relief": 48.99,
+          "roughness": 67.32,
+          "relative_elevation": 11.43
+        },
+        "w1_60m": {
+          "slope": 16.708,
+          "local_relief": 248.356,
+          "roughness": 22.966,
+          "relative_elevation": 311.981
+        }
+      },
+      "dem_nasadem": {
+        "status": "ok",
+        "index": 35.43,
+        "families": {
+          "slope": 16.43,
+          "local_relief": 46.9,
+          "roughness": 66.86,
+          "relative_elevation": 11.51
+        },
+        "w1_60m": {
+          "slope": 16.552,
+          "local_relief": 253.631,
+          "roughness": 23.014,
+          "relative_elevation": 311.252
+        },
+        "product": "NASADEM_HGT v001 (reprocessed SRTM; shared lineage with SRTMGL1)",
+        "items": [
+          "NASADEM_HGT_n34e077"
+        ]
+      },
+      "dem_cop-dem-glo-30": {
+        "status": "ok",
+        "index": 34.53,
+        "families": {
+          "slope": 15.11,
+          "local_relief": 45.83,
+          "roughness": 65.72,
+          "relative_elevation": 11.48
+        },
+        "w1_60m": {
+          "slope": 17.18,
+          "local_relief": 258.859,
+          "roughness": 23.786,
+          "relative_elevation": 311.421
+        },
+        "product": "Copernicus DEM GLO-30 (TanDEM-X; independent lineage, surface model)",
+        "items": [
+          "Copernicus_DSM_COG_10_N34_00_E077_00_DEM"
+        ]
+      }
+    },
+    "earth-atacama": {
+      "nominal": {
+        "status": "ok",
+        "index": 99.92,
+        "families": {
+          "slope": 99.83,
+          "local_relief": 99.92,
+          "roughness": 99.98,
+          "relative_elevation": 99.95
+        },
+        "w1_60m": {
+          "slope": 0.524,
+          "local_relief": 7.81,
+          "roughness": 0.485,
+          "relative_elevation": 4.812
+        }
+      },
+      "north_2km": {
+        "status": "ok",
+        "index": 99.67,
+        "families": {
+          "slope": 99.53,
+          "local_relief": 99.81,
+          "roughness": 99.93,
+          "relative_elevation": 99.4
+        },
+        "w1_60m": {
+          "slope": 0.851,
+          "local_relief": 12.491,
+          "roughness": 0.956,
+          "relative_elevation": 16.385
+        }
+      },
+      "south_2km": {
+        "status": "ok",
+        "index": 99.94,
+        "families": {
+          "slope": 99.88,
+          "local_relief": 99.94,
+          "roughness": 99.99,
+          "relative_elevation": 99.96
+        },
+        "w1_60m": {
+          "slope": 0.415,
+          "local_relief": 6.75,
+          "roughness": 0.379,
+          "relative_elevation": 4.278
+        }
+      },
+      "east_2km": {
+        "status": "ok",
+        "index": 99.91,
+        "families": {
+          "slope": 99.98,
+          "local_relief": 99.97,
+          "roughness": 100.0,
+          "relative_elevation": 99.69
+        },
+        "w1_60m": {
+          "slope": 0.178,
+          "local_relief": 4.893,
+          "roughness": 0.194,
+          "relative_elevation": 11.804
+        }
+      },
+      "west_2km": {
+        "status": "ok",
+        "index": 99.81,
+        "families": {
+          "slope": 99.57,
+          "local_relief": 99.82,
+          "roughness": 99.94,
+          "relative_elevation": 99.92
+        },
+        "w1_60m": {
+          "slope": 0.827,
+          "local_relief": 12.417,
+          "roughness": 0.821,
+          "relative_elevation": 5.756
+        }
+      },
+      "no_halo": {
+        "status": "ok",
+        "index": 99.92,
+        "families": {
+          "slope": 99.83,
+          "local_relief": 99.94,
+          "roughness": 99.98,
+          "relative_elevation": 99.95
+        },
+        "w1_60m": {
+          "slope": 0.529,
+          "local_relief": 7.411,
+          "roughness": 0.466,
+          "relative_elevation": 4.813
+        }
+      },
+      "dem_nasadem": {
+        "status": "ok",
+        "index": 99.92,
+        "families": {
+          "slope": 99.84,
+          "local_relief": 99.93,
+          "roughness": 99.98,
+          "relative_elevation": 99.95
+        },
+        "w1_60m": {
+          "slope": 0.513,
+          "local_relief": 7.617,
+          "roughness": 0.472,
+          "relative_elevation": 4.774
+        },
+        "product": "NASADEM_HGT v001 (reprocessed SRTM; shared lineage with SRTMGL1)",
+        "items": [
+          "NASADEM_HGT_s25w070"
+        ]
+      },
+      "dem_cop-dem-glo-30": {
+        "status": "ok",
+        "index": 99.94,
+        "families": {
+          "slope": 99.92,
+          "local_relief": 99.93,
+          "roughness": 99.98,
+          "relative_elevation": 99.95
+        },
+        "w1_60m": {
+          "slope": 0.242,
+          "local_relief": 7.422,
+          "roughness": 0.407,
+          "relative_elevation": 4.843
+        },
+        "product": "Copernicus DEM GLO-30 (TanDEM-X; independent lineage, surface model)",
+        "items": [
+          "Copernicus_DSM_COG_10_S25_00_W070_00_DEM"
+        ]
+      }
+    },
+    "earth-danakil": {
+      "nominal": {
+        "status": "ok",
+        "index": 98.68,
+        "families": {
+          "slope": 98.89,
+          "local_relief": 99.52,
+          "roughness": 99.7,
+          "relative_elevation": 96.63
+        },
+        "w1_60m": {
+          "slope": 1.198,
+          "local_relief": 18.494,
+          "roughness": 1.62,
+          "relative_elevation": 39.208
+        }
+      },
+      "north_2km": {
+        "status": "ok",
+        "index": 98.68,
+        "families": {
+          "slope": 98.9,
+          "local_relief": 99.51,
+          "roughness": 99.69,
+          "relative_elevation": 96.63
+        },
+        "w1_60m": {
+          "slope": 1.19,
+          "local_relief": 18.675,
+          "roughness": 1.617,
+          "relative_elevation": 39.207
+        }
+      },
+      "south_2km": {
+        "status": "ok",
+        "index": 98.69,
+        "families": {
+          "slope": 98.91,
+          "local_relief": 99.53,
+          "roughness": 99.7,
+          "relative_elevation": 96.63
+        },
+        "w1_60m": {
+          "slope": 1.179,
+          "local_relief": 18.314,
+          "roughness": 1.601,
+          "relative_elevation": 39.214
+        }
+      },
+      "east_2km": {
+        "status": "ok",
+        "index": 98.65,
+        "families": {
+          "slope": 98.81,
+          "local_relief": 99.5,
+          "roughness": 99.68,
+          "relative_elevation": 96.62
+        },
+        "w1_60m": {
+          "slope": 1.266,
+          "local_relief": 19.115,
+          "roughness": 1.687,
+          "relative_elevation": 39.229
+        }
+      },
+      "west_2km": {
+        "status": "ok",
+        "index": 98.76,
+        "families": {
+          "slope": 99.08,
+          "local_relief": 99.58,
+          "roughness": 99.73,
+          "relative_elevation": 96.63
+        },
+        "w1_60m": {
+          "slope": 1.024,
+          "local_relief": 17.002,
+          "roughness": 1.453,
+          "relative_elevation": 39.173
+        }
+      },
+      "no_halo": {
+        "status": "ok",
+        "index": 98.68,
+        "families": {
+          "slope": 98.9,
+          "local_relief": 99.51,
+          "roughness": 99.69,
+          "relative_elevation": 96.63
+        },
+        "w1_60m": {
+          "slope": 1.193,
+          "local_relief": 18.661,
+          "roughness": 1.625,
+          "relative_elevation": 39.208
+        }
+      },
+      "dem_nasadem": {
+        "status": "ok",
+        "index": 98.72,
+        "families": {
+          "slope": 98.98,
+          "local_relief": 99.55,
+          "roughness": 99.71,
+          "relative_elevation": 96.63
+        },
+        "w1_60m": {
+          "slope": 1.12,
+          "local_relief": 17.788,
+          "roughness": 1.539,
+          "relative_elevation": 39.149
+        },
+        "product": "NASADEM_HGT v001 (reprocessed SRTM; shared lineage with SRTMGL1)",
+        "items": [
+          "NASADEM_HGT_n14e040"
+        ]
+      },
+      "dem_cop-dem-glo-30": {
+        "status": "ok",
+        "index": 98.43,
+        "families": {
+          "slope": 98.2,
+          "local_relief": 99.31,
+          "roughness": 99.6,
+          "relative_elevation": 96.63
+        },
+        "w1_60m": {
+          "slope": 1.773,
+          "local_relief": 24.663,
+          "roughness": 2.277,
+          "relative_elevation": 39.206
+        },
+        "product": "Copernicus DEM GLO-30 (TanDEM-X; independent lineage, surface model)",
+        "items": [
+          "Copernicus_DSM_COG_10_N14_00_E040_00_DEM"
+        ]
+      }
+    },
+    "earth-craters-of-the-moon": {
+      "nominal": {
+        "status": "ok",
+        "index": 99.79,
+        "families": {
+          "slope": 99.77,
+          "local_relief": 99.91,
+          "roughness": 99.97,
+          "relative_elevation": 99.51
+        },
+        "w1_60m": {
+          "slope": 0.617,
+          "local_relief": 9.355,
+          "roughness": 0.682,
+          "relative_elevation": 14.813
+        }
+      },
+      "north_2km": {
+        "status": "ok",
+        "index": 99.48,
+        "families": {
+          "slope": 99.0,
+          "local_relief": 99.54,
+          "roughness": 99.8,
+          "relative_elevation": 99.59
+        },
+        "w1_60m": {
+          "slope": 1.271,
+          "local_relief": 20.497,
+          "roughness": 1.647,
+          "relative_elevation": 13.447
+        }
+      },
+      "south_2km": {
+        "status": "ok",
+        "index": 99.79,
+        "families": {
+          "slope": 99.83,
+          "local_relief": 99.94,
+          "roughness": 99.97,
+          "relative_elevation": 99.41
+        },
+        "w1_60m": {
+          "slope": 0.51,
+          "local_relief": 7.803,
+          "roughness": 0.604,
+          "relative_elevation": 16.274
+        }
+      },
+      "east_2km": {
+        "status": "ok",
+        "index": 99.8,
+        "families": {
+          "slope": 99.78,
+          "local_relief": 99.94,
+          "roughness": 99.97,
+          "relative_elevation": 99.53
+        },
+        "w1_60m": {
+          "slope": 0.585,
+          "local_relief": 8.262,
+          "roughness": 0.656,
+          "relative_elevation": 14.518
+        }
+      },
+      "west_2km": {
+        "status": "ok",
+        "index": 99.7,
+        "families": {
+          "slope": 99.49,
+          "local_relief": 99.68,
+          "roughness": 99.9,
+          "relative_elevation": 99.75
+        },
+        "w1_60m": {
+          "slope": 0.917,
+          "local_relief": 17.194,
+          "roughness": 1.203,
+          "relative_elevation": 10.626
+        }
+      },
+      "no_halo": {
+        "status": "ok",
+        "index": 99.8,
+        "families": {
+          "slope": 99.78,
+          "local_relief": 99.92,
+          "roughness": 99.97,
+          "relative_elevation": 99.51
+        },
+        "w1_60m": {
+          "slope": 0.616,
+          "local_relief": 8.587,
+          "roughness": 0.678,
+          "relative_elevation": 14.808
+        }
+      },
+      "dem_nasadem": {
+        "status": "ok",
+        "index": 99.79,
+        "families": {
+          "slope": 99.79,
+          "local_relief": 99.92,
+          "roughness": 99.97,
+          "relative_elevation": 99.5
+        },
+        "w1_60m": {
+          "slope": 0.598,
+          "local_relief": 8.898,
+          "roughness": 0.664,
+          "relative_elevation": 14.93
+        },
+        "product": "NASADEM_HGT v001 (reprocessed SRTM; shared lineage with SRTMGL1)",
+        "items": [
+          "NASADEM_HGT_n43w114"
+        ]
+      },
+      "dem_cop-dem-glo-30": {
+        "status": "ok",
+        "index": 99.77,
+        "families": {
+          "slope": 99.71,
+          "local_relief": 99.9,
+          "roughness": 99.96,
+          "relative_elevation": 99.49
+        },
+        "w1_60m": {
+          "slope": 0.732,
+          "local_relief": 9.888,
+          "roughness": 0.784,
+          "relative_elevation": 15.053
+        },
+        "product": "Copernicus DEM GLO-30 (TanDEM-X; independent lineage, surface model)",
+        "items": [
+          "Copernicus_DSM_COG_10_N43_00_W114_00_DEM"
+        ]
+      }
+    },
+    "earth-hanksville-mdrs": {
+      "nominal": {
+        "status": "ok",
+        "index": 99.7,
+        "families": {
+          "slope": 99.34,
+          "local_relief": 99.85,
+          "roughness": 99.9,
+          "relative_elevation": 99.72
+        },
+        "w1_60m": {
+          "slope": 1.079,
+          "local_relief": 12.128,
+          "roughness": 1.302,
+          "relative_elevation": 11.076
+        }
+      },
+      "north_2km": {
+        "status": "ok",
+        "index": 99.57,
+        "families": {
+          "slope": 99.05,
+          "local_relief": 99.82,
+          "roughness": 99.86,
+          "relative_elevation": 99.54
+        },
+        "w1_60m": {
+          "slope": 1.301,
+          "local_relief": 12.778,
+          "roughness": 1.527,
+          "relative_elevation": 14.161
+        }
+      },
+      "south_2km": {
+        "status": "ok",
+        "index": 99.62,
+        "families": {
+          "slope": 99.24,
+          "local_relief": 99.85,
+          "roughness": 99.88,
+          "relative_elevation": 99.5
+        },
+        "w1_60m": {
+          "slope": 1.171,
+          "local_relief": 12.204,
+          "roughness": 1.421,
+          "relative_elevation": 14.702
+        }
+      },
+      "east_2km": {
+        "status": "ok",
+        "index": 99.6,
+        "families": {
+          "slope": 99.23,
+          "local_relief": 99.87,
+          "roughness": 99.89,
+          "relative_elevation": 99.43
+        },
+        "w1_60m": {
+          "slope": 1.17,
+          "local_relief": 11.551,
+          "roughness": 1.375,
+          "relative_elevation": 15.89
+        }
+      },
+      "west_2km": {
+        "status": "ok",
+        "index": 99.85,
+        "families": {
+          "slope": 99.67,
+          "local_relief": 99.92,
+          "roughness": 99.95,
+          "relative_elevation": 99.85
+        },
+        "w1_60m": {
+          "slope": 0.772,
+          "local_relief": 8.71,
+          "roughness": 0.952,
+          "relative_elevation": 8.093
+        }
+      },
+      "no_halo": {
+        "status": "ok",
+        "index": 99.71,
+        "families": {
+          "slope": 99.34,
+          "local_relief": 99.88,
+          "roughness": 99.91,
+          "relative_elevation": 99.72
+        },
+        "w1_60m": {
+          "slope": 1.08,
+          "local_relief": 10.753,
+          "roughness": 1.265,
+          "relative_elevation": 11.083
+        }
+      },
+      "dem_nasadem": {
+        "status": "ok",
+        "index": 99.7,
+        "families": {
+          "slope": 99.34,
+          "local_relief": 99.85,
+          "roughness": 99.9,
+          "relative_elevation": 99.72
+        },
+        "w1_60m": {
+          "slope": 1.068,
+          "local_relief": 11.866,
+          "roughness": 1.274,
+          "relative_elevation": 10.986
+        },
+        "product": "NASADEM_HGT v001 (reprocessed SRTM; shared lineage with SRTMGL1)",
+        "items": [
+          "NASADEM_HGT_n38w111"
+        ]
+      },
+      "dem_cop-dem-glo-30": {
+        "status": "ok",
+        "index": 99.69,
+        "families": {
+          "slope": 99.32,
+          "local_relief": 99.82,
+          "roughness": 99.88,
+          "relative_elevation": 99.73
+        },
+        "w1_60m": {
+          "slope": 1.08,
+          "local_relief": 13.104,
+          "roughness": 1.396,
+          "relative_elevation": 10.761
+        },
+        "product": "Copernicus DEM GLO-30 (TanDEM-X; independent lineage, surface model)",
+        "items": [
+          "Copernicus_DSM_COG_10_N38_00_W111_00_DEM"
+        ]
+      }
+    },
+    "earth-meteor-crater": {
+      "nominal": {
+        "status": "ok",
+        "index": 99.48,
+        "families": {
+          "slope": 99.38,
+          "local_relief": 99.84,
+          "roughness": 99.89,
+          "relative_elevation": 98.81
+        },
+        "w1_60m": {
+          "slope": 0.918,
+          "local_relief": 11.635,
+          "roughness": 1.108,
+          "relative_elevation": 23.154
+        }
+      },
+      "north_2km": {
+        "status": "ok",
+        "index": 99.52,
+        "families": {
+          "slope": 99.38,
+          "local_relief": 99.85,
+          "roughness": 99.89,
+          "relative_elevation": 98.97
+        },
+        "w1_60m": {
+          "slope": 0.929,
+          "local_relief": 11.326,
+          "roughness": 1.109,
+          "relative_elevation": 21.528
+        }
+      },
+      "south_2km": {
+        "status": "ok",
+        "index": 99.46,
+        "families": {
+          "slope": 99.37,
+          "local_relief": 99.84,
+          "roughness": 99.88,
+          "relative_elevation": 98.74
+        },
+        "w1_60m": {
+          "slope": 0.927,
+          "local_relief": 11.426,
+          "roughness": 1.109,
+          "relative_elevation": 23.831
+        }
+      },
+      "east_2km": {
+        "status": "ok",
+        "index": 99.64,
+        "families": {
+          "slope": 99.34,
+          "local_relief": 99.86,
+          "roughness": 99.88,
+          "relative_elevation": 99.47
+        },
+        "w1_60m": {
+          "slope": 0.977,
+          "local_relief": 11.222,
+          "roughness": 1.159,
+          "relative_elevation": 15.471
+        }
+      },
+      "west_2km": {
+        "status": "ok",
+        "index": 99.33,
+        "families": {
+          "slope": 99.29,
+          "local_relief": 99.81,
+          "roughness": 99.87,
+          "relative_elevation": 98.34
+        },
+        "w1_60m": {
+          "slope": 0.973,
+          "local_relief": 12.669,
+          "roughness": 1.176,
+          "relative_elevation": 27.428
+        }
+      },
+      "no_halo": {
+        "status": "ok",
+        "index": 99.48,
+        "families": {
+          "slope": 99.39,
+          "local_relief": 99.83,
+          "roughness": 99.88,
+          "relative_elevation": 98.81
+        },
+        "w1_60m": {
+          "slope": 0.913,
+          "local_relief": 11.869,
+          "roughness": 1.118,
+          "relative_elevation": 23.146
+        }
+      },
+      "dem_nasadem": {
+        "status": "ok",
+        "index": 99.48,
+        "families": {
+          "slope": 99.37,
+          "local_relief": 99.84,
+          "roughness": 99.89,
+          "relative_elevation": 98.82
+        },
+        "w1_60m": {
+          "slope": 0.926,
+          "local_relief": 11.593,
+          "roughness": 1.115,
+          "relative_elevation": 23.083
+        },
+        "product": "NASADEM_HGT v001 (reprocessed SRTM; shared lineage with SRTMGL1)",
+        "items": [
+          "NASADEM_HGT_n35w112",
+          "NASADEM_HGT_n35w111",
+          "NASADEM_HGT_n34w112",
+          "NASADEM_HGT_n34w111"
+        ]
+      },
+      "dem_cop-dem-glo-30": {
+        "status": "not_measured",
+        "reason": "Client error '429 Too Many Requests' for url 'https://planetarycomputer.microsoft.com/api/sas/v1/token/elevationeuwest/copernicus-dem'\nFor more information chec",
+        "product": "Copernicus DEM GLO-30 (TanDEM-X; independent lineage, surface model)"
+      }
+    }
+  },
+  "base_rate": {
+    "windows": [
+      {
+        "window": "N29E083@0.2,0.2",
+        "lat": 29.2,
+        "lon": 83.2,
+        "status": "ok",
+        "index": 40.89,
+        "families": {
+          "slope": 12.59,
+          "local_relief": 43.33,
+          "roughness": 64.42,
+          "relative_elevation": 43.2
+        },
+        "w1_60m": {
+          "slope": 17.537,
+          "local_relief": 266.789,
+          "roughness": 23.551,
+          "relative_elevation": 194.885
+        }
+      },
+      {
+        "window": "N29E083@0.2,0.5",
+        "lat": 29.2,
+        "lon": 83.5,
+        "status": "ok",
+        "index": 63.52,
+        "families": {
+          "slope": 30.58,
+          "local_relief": 61.33,
+          "roughness": 76.82,
+          "relative_elevation": 85.34
+        },
+        "w1_60m": {
+          "slope": 13.04,
+          "local_relief": 202.991,
+          "roughness": 17.857,
+          "relative_elevation": 84.75
+        }
+      },
+      {
+        "window": "N29E083@0.2,0.8",
+        "lat": 29.2,
+        "lon": 83.8,
+        "status": "ok",
+        "index": 35.54,
+        "families": {
+          "slope": 8.44,
+          "local_relief": 33.55,
+          "roughness": 58.19,
+          "relative_elevation": 41.97
+        },
+        "w1_60m": {
+          "slope": 18.832,
+          "local_relief": 304.036,
+          "roughness": 26.212,
+          "relative_elevation": 198.613
+        }
+      },
+      {
+        "window": "N29E083@0.5,0.2",
+        "lat": 29.5,
+        "lon": 83.2,
+        "status": "ok",
+        "index": 22.16,
+        "families": {
+          "slope": 4.18,
+          "local_relief": 24.58,
+          "roughness": 49.22,
+          "relative_elevation": 10.67
+        },
+        "w1_60m": {
+          "slope": 21.992,
+          "local_relief": 343.435,
+          "roughness": 30.951,
+          "relative_elevation": 316.736
+        }
+      },
+      {
+        "window": "N29E083@0.5,0.5",
+        "lat": 29.5,
+        "lon": 83.5,
+        "status": "ok",
+        "index": 91.8,
+        "families": {
+          "slope": 93.32,
+          "local_relief": 96.35,
+          "roughness": 98.34,
+          "relative_elevation": 79.18
+        },
+        "w1_60m": {
+          "slope": 2.955,
+          "local_relief": 54.647,
+          "roughness": 3.948,
+          "relative_elevation": 102.174
+        }
+      },
+      {
+        "window": "N29E083@0.5,0.8",
+        "lat": 29.5,
+        "lon": 83.8,
+        "status": "ok",
+        "index": 66.52,
+        "families": {
+          "slope": 42.08,
+          "local_relief": 70.08,
+          "roughness": 82.5,
+          "relative_elevation": 71.42
+        },
+        "w1_60m": {
+          "slope": 11.046,
+          "local_relief": 172.531,
+          "roughness": 14.971,
+          "relative_elevation": 123.538
+        }
+      },
+      {
+        "window": "N29E083@0.8,0.2",
+        "lat": 29.8,
+        "lon": 83.2,
+        "status": "ok",
+        "index": 97.16,
+        "families": {
+          "slope": 94.06,
+          "local_relief": 97.26,
+          "roughness": 98.62,
+          "relative_elevation": 98.73
+        },
+        "w1_60m": {
+          "slope": 2.95,
+          "local_relief": 48.345,
+          "roughness": 3.939,
+          "relative_elevation": 24.203
+        }
+      },
+      {
+        "window": "N29E083@0.8,0.5",
+        "lat": 29.8,
+        "lon": 83.5,
+        "status": "ok",
+        "index": 93.54,
+        "families": {
+          "slope": 85.2,
+          "local_relief": 94.35,
+          "roughness": 96.71,
+          "relative_elevation": 97.9
+        },
+        "w1_60m": {
+          "slope": 4.919,
+          "local_relief": 69.735,
+          "roughness": 6.33,
+          "relative_elevation": 31.169
+        }
+      },
+      {
+        "window": "N29E083@0.8,0.8",
+        "lat": 29.8,
+        "lon": 83.8,
+        "status": "ok",
+        "index": 85.14,
+        "families": {
+          "slope": 74.95,
+          "local_relief": 89.38,
+          "roughness": 94.25,
+          "relative_elevation": 81.98
+        },
+        "w1_60m": {
+          "slope": 6.462,
+          "local_relief": 96.16,
+          "roughness": 8.187,
+          "relative_elevation": 94.959
+        }
+      },
+      {
+        "window": "N34E077@0.2,0.2",
+        "lat": 34.2,
+        "lon": 77.2,
+        "status": "ok",
+        "index": 25.48,
+        "families": {
+          "slope": 7.35,
+          "local_relief": 33.13,
+          "roughness": 56.75,
+          "relative_elevation": 4.69
+        },
+        "w1_60m": {
+          "slope": 19.528,
+          "local_relief": 301.541,
+          "roughness": 27.005,
+          "relative_elevation": 372.567
+        }
+      },
+      {
+        "window": "N34E077@0.2,0.5",
+        "lat": 34.2,
+        "lon": 77.5,
+        "status": "ok",
+        "index": 31.81,
+        "families": {
+          "slope": 13.22,
+          "local_relief": 40.47,
+          "roughness": 63.6,
+          "relative_elevation": 9.94
+        },
+        "w1_60m": {
+          "slope": 17.396,
+          "local_relief": 277.186,
+          "roughness": 24.301,
+          "relative_elevation": 321.806
+        }
+      },
+      {
+        "window": "N34E077@0.2,0.8",
+        "lat": 34.2,
+        "lon": 77.8,
+        "status": "ok",
+        "index": 30.79,
+        "families": {
+          "slope": 11.68,
+          "local_relief": 35.02,
+          "roughness": 61.19,
+          "relative_elevation": 15.28
+        },
+        "w1_60m": {
+          "slope": 17.19,
+          "local_relief": 295.771,
+          "roughness": 24.73,
+          "relative_elevation": 290.531
+        }
+      },
+      {
+        "window": "N34E077@0.5,0.2",
+        "lat": 34.5,
+        "lon": 77.2,
+        "status": "ok",
+        "index": 28.26,
+        "families": {
+          "slope": 5.98,
+          "local_relief": 27.53,
+          "roughness": 54.11,
+          "relative_elevation": 25.41
+        },
+        "w1_60m": {
+          "slope": 20.052,
+          "local_relief": 329.663,
+          "roughness": 28.034,
+          "relative_elevation": 249.282
+        }
+      },
+      {
+        "window": "N34E077@0.5,0.5",
+        "lat": 34.5,
+        "lon": 77.5,
+        "status": "ok",
+        "index": 18.26,
+        "families": {
+          "slope": 2.79,
+          "local_relief": 18.9,
+          "roughness": 47.3,
+          "relative_elevation": 4.04
+        },
+        "w1_60m": {
+          "slope": 22.442,
+          "local_relief": 371.16,
+          "roughness": 31.312,
+          "relative_elevation": 379.448
+        }
+      },
+      {
+        "window": "N34E077@0.5,0.8",
+        "lat": 34.5,
+        "lon": 77.8,
+        "status": "ok",
+        "index": 14.47,
+        "families": {
+          "slope": 1.46,
+          "local_relief": 11.05,
+          "roughness": 41.09,
+          "relative_elevation": 4.31
+        },
+        "w1_60m": {
+          "slope": 24.386,
+          "local_relief": 428.526,
+          "roughness": 34.53,
+          "relative_elevation": 375.92
+        }
+      },
+      {
+        "window": "N34E077@0.8,0.2",
+        "lat": 34.8,
+        "lon": 77.2,
+        "status": "ok",
+        "index": 11.48,
+        "families": {
+          "slope": 0.91,
+          "local_relief": 8.11,
+          "roughness": 36.4,
+          "relative_elevation": 0.49
+        },
+        "w1_60m": {
+          "slope": 25.533,
+          "local_relief": 457.963,
+          "roughness": 36.536,
+          "relative_elevation": 488.167
+        }
+      },
+      {
+        "window": "N34E077@0.8,0.5",
+        "lat": 34.8,
+        "lon": 77.5,
+        "status": "ok",
+        "index": 18.92,
+        "families": {
+          "slope": 5.85,
+          "local_relief": 16.02,
+          "roughness": 53.54,
+          "relative_elevation": 0.25
+        },
+        "w1_60m": {
+          "slope": 19.362,
+          "local_relief": 391.065,
+          "roughness": 27.802,
+          "relative_elevation": 518.881
+        }
+      },
+      {
+        "window": "N34E077@0.8,0.8",
+        "lat": 34.8,
+        "lon": 77.8,
+        "status": "ok",
+        "index": 27.85,
+        "families": {
+          "slope": 7.12,
+          "local_relief": 19.27,
+          "roughness": 47.26,
+          "relative_elevation": 37.74
+        },
+        "w1_60m": {
+          "slope": 18.929,
+          "local_relief": 370.487,
+          "roughness": 31.203,
+          "relative_elevation": 209.735
+        }
+      },
+      {
+        "window": "S25W070@0.2,0.2",
+        "lat": -24.8,
+        "lon": -69.8,
+        "status": "ok",
+        "index": 99.5,
+        "families": {
+          "slope": 99.87,
+          "local_relief": 99.98,
+          "roughness": 99.97,
+          "relative_elevation": 98.18
+        },
+        "w1_60m": {
+          "slope": 0.415,
+          "local_relief": 3.307,
+          "roughness": 0.621,
+          "relative_elevation": 28.664
+        }
+      },
+      {
+        "window": "S25W070@0.2,0.5",
+        "lat": -24.8,
+        "lon": -69.5,
+        "status": "ok",
+        "index": 99.63,
+        "families": {
+          "slope": 99.83,
+          "local_relief": 99.91,
+          "roughness": 99.98,
+          "relative_elevation": 98.79
+        },
+        "w1_60m": {
+          "slope": 0.415,
+          "local_relief": 8.314,
+          "roughness": 0.441,
+          "relative_elevation": 23.429
+        }
+      },
+      {
+        "window": "S25W070@0.2,0.8",
+        "lat": -24.8,
+        "lon": -69.2,
+        "status": "ok",
+        "index": 79.23,
+        "families": {
+          "slope": 88.38,
+          "local_relief": 93.73,
+          "roughness": 97.28,
+          "relative_elevation": 37.53
+        },
+        "w1_60m": {
+          "slope": 4.011,
+          "local_relief": 71.968,
+          "roughness": 5.153,
+          "relative_elevation": 209.539
+        }
+      },
+      {
+        "window": "S25W070@0.5,0.2",
+        "lat": -24.5,
+        "lon": -69.8,
+        "status": "ok",
+        "index": 99.83,
+        "families": {
+          "slope": 99.82,
+          "local_relief": 99.94,
+          "roughness": 99.96,
+          "relative_elevation": 99.61
+        },
+        "w1_60m": {
+          "slope": 0.445,
+          "local_relief": 7.595,
+          "roughness": 0.647,
+          "relative_elevation": 13.202
+        }
+      },
+      {
+        "window": "S25W070@0.5,0.5",
+        "lat": -24.5,
+        "lon": -69.5,
+        "status": "ok",
+        "index": 99.09,
+        "families": {
+          "slope": 98.77,
+          "local_relief": 99.34,
+          "roughness": 99.75,
+          "relative_elevation": 98.51
+        },
+        "w1_60m": {
+          "slope": 1.236,
+          "local_relief": 23.32,
+          "roughness": 1.546,
+          "relative_elevation": 25.979
+        }
+      },
+      {
+        "window": "S25W070@0.5,0.8",
+        "lat": -24.5,
+        "lon": -69.2,
+        "status": "ok",
+        "index": 76.91,
+        "families": {
+          "slope": 73.22,
+          "local_relief": 86.35,
+          "roughness": 93.67,
+          "relative_elevation": 54.39
+        },
+        "w1_60m": {
+          "slope": 6.55,
+          "local_relief": 109.668,
+          "roughness": 8.353,
+          "relative_elevation": 165.189
+        }
+      },
+      {
+        "window": "S25W070@0.8,0.2",
+        "lat": -24.2,
+        "lon": -69.8,
+        "status": "ok",
+        "index": 99.81,
+        "families": {
+          "slope": 99.88,
+          "local_relief": 99.96,
+          "roughness": 99.97,
+          "relative_elevation": 99.44
+        },
+        "w1_60m": {
+          "slope": 0.388,
+          "local_relief": 5.648,
+          "roughness": 0.539,
+          "relative_elevation": 15.869
+        }
+      },
+      {
+        "window": "S25W070@0.8,0.5",
+        "lat": -24.2,
+        "lon": -69.5,
+        "status": "ok",
+        "index": 92.16,
+        "families": {
+          "slope": 87.28,
+          "local_relief": 93.77,
+          "roughness": 97.19,
+          "relative_elevation": 90.4
+        },
+        "w1_60m": {
+          "slope": 4.29,
+          "local_relief": 72.457,
+          "roughness": 5.396,
+          "relative_elevation": 67.473
+        }
+      },
+      {
+        "window": "S25W070@0.8,0.8",
+        "lat": -24.2,
+        "lon": -69.2,
+        "status": "ok",
+        "index": 85.84,
+        "families": {
+          "slope": 83.94,
+          "local_relief": 92.04,
+          "roughness": 96.5,
+          "relative_elevation": 70.87
+        },
+        "w1_60m": {
+          "slope": 4.992,
+          "local_relief": 83.003,
+          "roughness": 6.281,
+          "relative_elevation": 124.58
+        }
+      },
+      {
+        "window": "N14E040@0.2,0.2",
+        "lat": 14.2,
+        "lon": 40.2,
+        "status": "ok",
+        "index": 78.25,
+        "families": {
+          "slope": 70.44,
+          "local_relief": 89.2,
+          "roughness": 93.55,
+          "relative_elevation": 59.79
+        },
+        "w1_60m": {
+          "slope": 7.56,
+          "local_relief": 99.528,
+          "roughness": 9.597,
+          "relative_elevation": 152.063
+        }
+      },
+      {
+        "window": "N14E040@0.2,0.5",
+        "lat": 14.2,
+        "lon": 40.5,
+        "status": "ok",
+        "index": 98.7,
+        "families": {
+          "slope": 98.92,
+          "local_relief": 99.53,
+          "roughness": 99.69,
+          "relative_elevation": 96.68
+        },
+        "w1_60m": {
+          "slope": 1.084,
+          "local_relief": 17.995,
+          "roughness": 1.472,
+          "relative_elevation": 38.914
+        }
+      },
+      {
+        "window": "N14E040@0.2,0.8",
+        "lat": 14.2,
+        "lon": 40.8,
+        "status": "ok",
+        "index": 90.54,
+        "families": {
+          "slope": 77.17,
+          "local_relief": 93.91,
+          "roughness": 95.57,
+          "relative_elevation": 95.52
+        },
+        "w1_60m": {
+          "slope": 6.73,
+          "local_relief": 75.34,
+          "roughness": 8.37,
+          "relative_elevation": 45.37
+        }
+      },
+      {
+        "window": "N14E040@0.5,0.2",
+        "lat": 14.5,
+        "lon": 40.2,
+        "status": "ok",
+        "index": 98.98,
+        "families": {
+          "slope": 99.49,
+          "local_relief": 99.73,
+          "roughness": 99.82,
+          "relative_elevation": 96.87
+        },
+        "w1_60m": {
+          "slope": 0.4,
+          "local_relief": 12.519,
+          "roughness": 0.867,
+          "relative_elevation": 37.733
+        }
+      },
+      {
+        "window": "N14E040@0.5,0.5",
+        "lat": 14.5,
+        "lon": 40.5,
+        "status": "ok",
+        "index": 99.15,
+        "families": {
+          "slope": 98.03,
+          "local_relief": 99.58,
+          "roughness": 99.68,
+          "relative_elevation": 99.33
+        },
+        "w1_60m": {
+          "slope": 1.867,
+          "local_relief": 19.618,
+          "roughness": 2.257,
+          "relative_elevation": 17.425
+        }
+      },
+      {
+        "window": "N14E040@0.5,0.8",
+        "lat": 14.5,
+        "lon": 40.8,
+        "status": "ok",
+        "index": 99.4,
+        "families": {
+          "slope": 98.25,
+          "local_relief": 99.69,
+          "roughness": 99.79,
+          "relative_elevation": 99.87
+        },
+        "w1_60m": {
+          "slope": 1.934,
+          "local_relief": 17.891,
+          "roughness": 2.107,
+          "relative_elevation": 7.753
+        }
+      },
+      {
+        "window": "N14E040@0.8,0.2",
+        "lat": 14.8,
+        "lon": 40.2,
+        "status": "ok",
+        "index": 99.37,
+        "families": {
+          "slope": 99.88,
+          "local_relief": 99.95,
+          "roughness": 99.96,
+          "relative_elevation": 97.68
+        },
+        "w1_60m": {
+          "slope": 0.331,
+          "local_relief": 3.325,
+          "roughness": 0.202,
+          "relative_elevation": 32.419
+        }
+      },
+      {
+        "window": "N14E040@0.8,0.5",
+        "lat": 14.8,
+        "lon": 40.5,
+        "status": "ok",
+        "index": 99.53,
+        "families": {
+          "slope": 99.47,
+          "local_relief": 99.7,
+          "roughness": 99.87,
+          "relative_elevation": 99.06
+        },
+        "w1_60m": {
+          "slope": 0.696,
+          "local_relief": 15.566,
+          "roughness": 1.084,
+          "relative_elevation": 20.529
+        }
+      },
+      {
+        "window": "N14E040@0.8,0.8",
+        "lat": 14.8,
+        "lon": 40.8,
+        "status": "ok",
+        "index": 98.13,
+        "families": {
+          "slope": 98.1,
+          "local_relief": 99.27,
+          "roughness": 99.57,
+          "relative_elevation": 95.58
+        },
+        "w1_60m": {
+          "slope": 1.803,
+          "local_relief": 25.176,
+          "roughness": 2.336,
+          "relative_elevation": 45.0
+        }
+      },
+      {
+        "window": "N43W114@0.2,0.2",
+        "lat": 43.2,
+        "lon": -113.8,
+        "status": "ok",
+        "index": 99.17,
+        "families": {
+          "slope": 99.21,
+          "local_relief": 99.77,
+          "roughness": 99.85,
+          "relative_elevation": 97.85
+        },
+        "w1_60m": {
+          "slope": 1.032,
+          "local_relief": 13.878,
+          "roughness": 1.227,
+          "relative_elevation": 31.171
+        }
+      },
+      {
+        "window": "N43W114@0.2,0.5",
+        "lat": 43.2,
+        "lon": -113.5,
+        "status": "ok",
+        "index": 99.52,
+        "families": {
+          "slope": 99.48,
+          "local_relief": 99.86,
+          "roughness": 99.9,
+          "relative_elevation": 98.86
+        },
+        "w1_60m": {
+          "slope": 0.854,
+          "local_relief": 11.137,
+          "roughness": 1.039,
+          "relative_elevation": 22.734
+        }
+      },
+      {
+        "window": "N43W114@0.2,0.8",
+        "lat": 43.2,
+        "lon": -113.2,
+        "status": "ok",
+        "index": 99.46,
+        "families": {
+          "slope": 99.17,
+          "local_relief": 99.78,
+          "roughness": 99.84,
+          "relative_elevation": 99.04
+        },
+        "w1_60m": {
+          "slope": 1.09,
+          "local_relief": 13.582,
+          "roughness": 1.287,
+          "relative_elevation": 20.818
+        }
+      },
+      {
+        "window": "N43W114@0.5,0.2",
+        "lat": 43.5,
+        "lon": -113.8,
+        "status": "ok",
+        "index": 78.71,
+        "families": {
+          "slope": 55.66,
+          "local_relief": 82.66,
+          "roughness": 89.16,
+          "relative_elevation": 87.36
+        },
+        "w1_60m": {
+          "slope": 9.57,
+          "local_relief": 127.514,
+          "roughness": 11.993,
+          "relative_elevation": 78.369
+        }
+      },
+      {
+        "window": "N43W114@0.5,0.5",
+        "lat": 43.5,
+        "lon": -113.5,
+        "status": "ok",
+        "index": 99.63,
+        "families": {
+          "slope": 99.55,
+          "local_relief": 99.85,
+          "roughness": 99.92,
+          "relative_elevation": 99.2
+        },
+        "w1_60m": {
+          "slope": 0.81,
+          "local_relief": 11.586,
+          "roughness": 0.997,
+          "relative_elevation": 19.032
+        }
+      },
+      {
+        "window": "N43W114@0.5,0.8",
+        "lat": 43.5,
+        "lon": -113.2,
+        "status": "ok",
+        "index": 99.75,
+        "families": {
+          "slope": 99.72,
+          "local_relief": 99.94,
+          "roughness": 99.95,
+          "relative_elevation": 99.4
+        },
+        "w1_60m": {
+          "slope": 0.689,
+          "local_relief": 7.106,
+          "roughness": 0.83,
+          "relative_elevation": 16.296
+        }
+      },
+      {
+        "window": "N43W114@0.8,0.2",
+        "lat": 43.8,
+        "lon": -113.8,
+        "status": "ok",
+        "index": 69.7,
+        "families": {
+          "slope": 43.36,
+          "local_relief": 75.05,
+          "roughness": 83.97,
+          "relative_elevation": 76.44
+        },
+        "w1_60m": {
+          "slope": 11.132,
+          "local_relief": 155.233,
+          "roughness": 14.566,
+          "relative_elevation": 110.094
+        }
+      },
+      {
+        "window": "N43W114@0.8,0.5",
+        "lat": 43.8,
+        "lon": -113.5,
+        "status": "ok",
+        "index": 77.53,
+        "families": {
+          "slope": 61.32,
+          "local_relief": 84.97,
+          "roughness": 91.04,
+          "relative_elevation": 72.8
+        },
+        "w1_60m": {
+          "slope": 8.66,
+          "local_relief": 116.823,
+          "roughness": 10.826,
+          "relative_elevation": 119.748
+        }
+      },
+      {
+        "window": "N43W114@0.8,0.8",
+        "lat": 43.8,
+        "lon": -113.2,
+        "status": "ok",
+        "index": 59.08,
+        "families": {
+          "slope": 43.75,
+          "local_relief": 70.06,
+          "roughness": 83.58,
+          "relative_elevation": 38.92
+        },
+        "w1_60m": {
+          "slope": 11.043,
+          "local_relief": 172.216,
+          "roughness": 14.903,
+          "relative_elevation": 205.542
+        }
+      },
+      {
+        "window": "N38W111@0.2,0.2",
+        "lat": 38.2,
+        "lon": -110.8,
+        "status": "ok",
+        "index": 85.92,
+        "families": {
+          "slope": 87.48,
+          "local_relief": 93.64,
+          "roughness": 97.22,
+          "relative_elevation": 65.36
+        },
+        "w1_60m": {
+          "slope": 4.414,
+          "local_relief": 73.899,
+          "roughness": 5.698,
+          "relative_elevation": 138.088
+        }
+      },
+      {
+        "window": "N38W111@0.2,0.5",
+        "lat": 38.2,
+        "lon": -110.5,
+        "status": "ok",
+        "index": 90.94,
+        "families": {
+          "slope": 85.58,
+          "local_relief": 94.81,
+          "roughness": 96.58,
+          "relative_elevation": 86.81
+        },
+        "w1_60m": {
+          "slope": 4.79,
+          "local_relief": 67.819,
+          "roughness": 6.681,
+          "relative_elevation": 79.733
+        }
+      },
+      {
+        "window": "N38W111@0.2,0.8",
+        "lat": 38.2,
+        "lon": -110.2,
+        "status": "ok",
+        "index": 75.92,
+        "families": {
+          "slope": 57.43,
+          "local_relief": 83.32,
+          "roughness": 87.81,
+          "relative_elevation": 75.13
+        },
+        "w1_60m": {
+          "slope": 8.862,
+          "local_relief": 121.837,
+          "roughness": 12.436,
+          "relative_elevation": 114.458
+        }
+      },
+      {
+        "window": "N38W111@0.5,0.2",
+        "lat": 38.5,
+        "lon": -110.8,
+        "status": "ok",
+        "index": 99.27,
+        "families": {
+          "slope": 97.93,
+          "local_relief": 99.68,
+          "roughness": 99.71,
+          "relative_elevation": 99.75
+        },
+        "w1_60m": {
+          "slope": 1.953,
+          "local_relief": 18.113,
+          "roughness": 2.249,
+          "relative_elevation": 10.36
+        }
+      },
+      {
+        "window": "N38W111@0.5,0.5",
+        "lat": 38.5,
+        "lon": -110.5,
+        "status": "ok",
+        "index": 99.84,
+        "families": {
+          "slope": 99.69,
+          "local_relief": 99.88,
+          "roughness": 99.94,
+          "relative_elevation": 99.86
+        },
+        "w1_60m": {
+          "slope": 0.644,
+          "local_relief": 10.388,
+          "roughness": 0.873,
+          "relative_elevation": 7.939
+        }
+      },
+      {
+        "window": "N38W111@0.5,0.8",
+        "lat": 38.5,
+        "lon": -110.2,
+        "status": "ok",
+        "index": 99.43,
+        "families": {
+          "slope": 98.94,
+          "local_relief": 99.61,
+          "roughness": 99.78,
+          "relative_elevation": 99.38
+        },
+        "w1_60m": {
+          "slope": 1.268,
+          "local_relief": 19.451,
+          "roughness": 1.767,
+          "relative_elevation": 16.799
+        }
+      },
+      {
+        "window": "N38W111@0.8,0.2",
+        "lat": 38.8,
+        "lon": -110.8,
+        "status": "ok",
+        "index": 96.84,
+        "families": {
+          "slope": 90.98,
+          "local_relief": 98.07,
+          "roughness": 98.42,
+          "relative_elevation": 99.87
+        },
+        "w1_60m": {
+          "slope": 4.053,
+          "local_relief": 42.75,
+          "roughness": 5.056,
+          "relative_elevation": 7.658
+        }
+      },
+      {
+        "window": "N38W111@0.8,0.5",
+        "lat": 38.8,
+        "lon": -110.5,
+        "status": "ok",
+        "index": 82.12,
+        "families": {
+          "slope": 80.78,
+          "local_relief": 93.44,
+          "roughness": 95.85,
+          "relative_elevation": 58.41
+        },
+        "w1_60m": {
+          "slope": 5.813,
+          "local_relief": 76.051,
+          "roughness": 7.608,
+          "relative_elevation": 155.935
+        }
+      },
+      {
+        "window": "N38W111@0.8,0.8",
+        "lat": 38.8,
+        "lon": -110.2,
+        "status": "ok",
+        "index": 99.68,
+        "families": {
+          "slope": 99.69,
+          "local_relief": 99.92,
+          "roughness": 99.95,
+          "relative_elevation": 99.17
+        },
+        "w1_60m": {
+          "slope": 0.706,
+          "local_relief": 8.799,
+          "roughness": 0.855,
+          "relative_elevation": 19.434
+        }
+      },
+      {
+        "window": "N34W112@0.2,0.2",
+        "lat": 34.2,
+        "lon": -111.8,
+        "status": "ok",
+        "index": 86.79,
+        "families": {
+          "slope": 70.99,
+          "local_relief": 91.24,
+          "roughness": 93.93,
+          "relative_elevation": 90.98
+        },
+        "w1_60m": {
+          "slope": 7.573,
+          "local_relief": 89.668,
+          "roughness": 9.419,
+          "relative_elevation": 65.031
+        }
+      },
+      {
+        "window": "N34W112@0.2,0.5",
+        "lat": 34.2,
+        "lon": -111.5,
+        "status": "ok",
+        "index": 67.34,
+        "families": {
+          "slope": 54.4,
+          "local_relief": 81.63,
+          "roughness": 88.61,
+          "relative_elevation": 44.7
+        },
+        "w1_60m": {
+          "slope": 9.865,
+          "local_relief": 132.303,
+          "roughness": 12.594,
+          "relative_elevation": 190.39
+        }
+      },
+      {
+        "window": "N34W112@0.2,0.8",
+        "lat": 34.2,
+        "lon": -111.2,
+        "status": "ok",
+        "index": 69.55,
+        "families": {
+          "slope": 38.79,
+          "local_relief": 76.74,
+          "roughness": 83.12,
+          "relative_elevation": 79.54
+        },
+        "w1_60m": {
+          "slope": 12.839,
+          "local_relief": 153.442,
+          "roughness": 16.282,
+          "relative_elevation": 102.35
+        }
+      },
+      {
+        "window": "N34W112@0.5,0.2",
+        "lat": 34.5,
+        "lon": -111.8,
+        "status": "ok",
+        "index": 98.74,
+        "families": {
+          "slope": 96.97,
+          "local_relief": 98.81,
+          "roughness": 99.42,
+          "relative_elevation": 99.76
+        },
+        "w1_60m": {
+          "slope": 2.154,
+          "local_relief": 31.741,
+          "roughness": 2.719,
+          "relative_elevation": 10.128
+        }
+      },
+      {
+        "window": "N34W112@0.5,0.5",
+        "lat": 34.5,
+        "lon": -111.5,
+        "status": "ok",
+        "index": 91.5,
+        "families": {
+          "slope": 84.22,
+          "local_relief": 95.09,
+          "roughness": 96.4,
+          "relative_elevation": 90.3
+        },
+        "w1_60m": {
+          "slope": 5.091,
+          "local_relief": 65.878,
+          "roughness": 6.786,
+          "relative_elevation": 67.896
+        }
+      },
+      {
+        "window": "N34W112@0.5,0.8",
+        "lat": 34.5,
+        "lon": -111.2,
+        "status": "ok",
+        "index": 96.8,
+        "families": {
+          "slope": 90.18,
+          "local_relief": 98.81,
+          "roughness": 98.52,
+          "relative_elevation": 99.7
+        },
+        "w1_60m": {
+          "slope": 4.472,
+          "local_relief": 34.729,
+          "roughness": 5.325,
+          "relative_elevation": 11.956
+        }
+      },
+      {
+        "window": "N34W112@0.8,0.2",
+        "lat": 34.8,
+        "lon": -111.8,
+        "status": "ok",
+        "index": 90.59,
+        "families": {
+          "slope": 78.22,
+          "local_relief": 91.28,
+          "roughness": 95.07,
+          "relative_elevation": 97.78
+        },
+        "w1_60m": {
+          "slope": 6.089,
+          "local_relief": 89.304,
+          "roughness": 7.936,
+          "relative_elevation": 31.955
+        }
+      },
+      {
+        "window": "N34W112@0.8,0.5",
+        "lat": 34.8,
+        "lon": -111.5,
+        "status": "ok",
+        "index": 96.23,
+        "families": {
+          "slope": 96.91,
+          "local_relief": 98.79,
+          "roughness": 99.4,
+          "relative_elevation": 89.82
+        },
+        "w1_60m": {
+          "slope": 2.125,
+          "local_relief": 32.264,
+          "roughness": 2.675,
+          "relative_elevation": 69.173
+        }
+      },
+      {
+        "window": "N34W112@0.8,0.8",
+        "lat": 34.8,
+        "lon": -111.2,
+        "status": "ok",
+        "index": 99.14,
+        "families": {
+          "slope": 99.82,
+          "local_relief": 99.91,
+          "roughness": 99.96,
+          "relative_elevation": 96.87
+        },
+        "w1_60m": {
+          "slope": 0.47,
+          "local_relief": 8.294,
+          "roughness": 0.669,
+          "relative_elevation": 37.776
+        }
+      },
+      {
+        "window": "N34W111@0.2,0.2",
+        "lat": 34.2,
+        "lon": -110.8,
+        "status": "ok",
+        "index": 92.57,
+        "families": {
+          "slope": 81.48,
+          "local_relief": 95.2,
+          "roughness": 96.44,
+          "relative_elevation": 97.18
+        },
+        "w1_60m": {
+          "slope": 5.867,
+          "local_relief": 65.967,
+          "roughness": 7.305,
+          "relative_elevation": 36.21
+        }
+      },
+      {
+        "window": "N34W111@0.2,0.5",
+        "lat": 34.2,
+        "lon": -110.5,
+        "status": "ok",
+        "index": 83.11,
+        "families": {
+          "slope": 59.61,
+          "local_relief": 87.69,
+          "roughness": 91.04,
+          "relative_elevation": 94.11
+        },
+        "w1_60m": {
+          "slope": 9.457,
+          "local_relief": 107.025,
+          "roughness": 11.584,
+          "relative_elevation": 53.1
+        }
+      },
+      {
+        "window": "N34W111@0.2,0.8",
+        "lat": 34.2,
+        "lon": -110.2,
+        "status": "ok",
+        "index": 96.24,
+        "families": {
+          "slope": 89.97,
+          "local_relief": 97.69,
+          "roughness": 98.33,
+          "relative_elevation": 98.97
+        },
+        "w1_60m": {
+          "slope": 4.295,
+          "local_relief": 46.098,
+          "roughness": 5.096,
+          "relative_elevation": 21.566
+        }
+      },
+      {
+        "window": "N34W111@0.5,0.2",
+        "lat": 34.5,
+        "lon": -110.8,
+        "status": "ok",
+        "index": 97.95,
+        "families": {
+          "slope": 94.25,
+          "local_relief": 99.28,
+          "roughness": 99.07,
+          "relative_elevation": 99.19
+        },
+        "w1_60m": {
+          "slope": 3.232,
+          "local_relief": 25.242,
+          "roughness": 3.908,
+          "relative_elevation": 19.169
+        }
+      },
+      {
+        "window": "N34W111@0.5,0.5",
+        "lat": 34.5,
+        "lon": -110.5,
+        "status": "ok",
+        "index": 99.85,
+        "families": {
+          "slope": 99.91,
+          "local_relief": 99.94,
+          "roughness": 99.98,
+          "relative_elevation": 99.58
+        },
+        "w1_60m": {
+          "slope": 0.356,
+          "local_relief": 7.303,
+          "roughness": 0.414,
+          "relative_elevation": 13.697
+        }
+      },
+      {
+        "window": "N34W111@0.5,0.8",
+        "lat": 34.5,
+        "lon": -110.2,
+        "status": "ok",
+        "index": 99.62,
+        "families": {
+          "slope": 99.85,
+          "local_relief": 99.93,
+          "roughness": 99.96,
+          "relative_elevation": 98.72
+        },
+        "w1_60m": {
+          "slope": 0.452,
+          "local_relief": 8.197,
+          "roughness": 0.724,
+          "relative_elevation": 23.933
+        }
+      },
+      {
+        "window": "N34W111@0.8,0.2",
+        "lat": 34.8,
+        "lon": -110.8,
+        "status": "ok",
+        "index": 99.73,
+        "families": {
+          "slope": 99.72,
+          "local_relief": 99.96,
+          "roughness": 99.95,
+          "relative_elevation": 99.3
+        },
+        "w1_60m": {
+          "slope": 0.623,
+          "local_relief": 4.094,
+          "roughness": 0.793,
+          "relative_elevation": 17.792
+        }
+      },
+      {
+        "window": "N34W111@0.8,0.5",
+        "lat": 34.8,
+        "lon": -110.5,
+        "status": "ok",
+        "index": 99.8,
+        "families": {
+          "slope": 99.71,
+          "local_relief": 99.9,
+          "roughness": 99.92,
+          "relative_elevation": 99.66
+        },
+        "w1_60m": {
+          "slope": 0.573,
+          "local_relief": 9.087,
+          "roughness": 0.866,
+          "relative_elevation": 12.493
+        }
+      },
+      {
+        "window": "N34W111@0.8,0.8",
+        "lat": 34.8,
+        "lon": -110.2,
+        "status": "ok",
+        "index": 99.46,
+        "families": {
+          "slope": 99.53,
+          "local_relief": 99.87,
+          "roughness": 99.9,
+          "relative_elevation": 98.53
+        },
+        "w1_60m": {
+          "slope": 0.788,
+          "local_relief": 10.679,
+          "roughness": 1.02,
+          "relative_elevation": 25.749
+        }
+      },
+      {
+        "window": "N35W112@0.2,0.2",
+        "lat": 35.2,
+        "lon": -111.8,
+        "status": "ok",
+        "index": 99.82,
+        "families": {
+          "slope": 99.67,
+          "local_relief": 99.89,
+          "roughness": 99.94,
+          "relative_elevation": 99.78
+        },
+        "w1_60m": {
+          "slope": 0.714,
+          "local_relief": 9.984,
+          "roughness": 0.858,
+          "relative_elevation": 9.82
+        }
+      },
+      {
+        "window": "N35W112@0.2,0.5",
+        "lat": 35.2,
+        "lon": -111.5,
+        "status": "ok",
+        "index": 99.48,
+        "families": {
+          "slope": 98.89,
+          "local_relief": 99.77,
+          "roughness": 99.85,
+          "relative_elevation": 99.42
+        },
+        "w1_60m": {
+          "slope": 1.409,
+          "local_relief": 14.791,
+          "roughness": 1.602,
+          "relative_elevation": 16.319
+        }
+      },
+      {
+        "window": "N35W112@0.2,0.8",
+        "lat": 35.2,
+        "lon": -111.2,
+        "status": "ok",
+        "index": 99.74,
+        "families": {
+          "slope": 99.45,
+          "local_relief": 99.91,
+          "roughness": 99.89,
+          "relative_elevation": 99.73
+        },
+        "w1_60m": {
+          "slope": 0.89,
+          "local_relief": 9.158,
+          "roughness": 1.055,
+          "relative_elevation": 10.964
+        }
+      },
+      {
+        "window": "N35W112@0.5,0.2",
+        "lat": 35.5,
+        "lon": -111.8,
+        "status": "ok",
+        "index": 98.2,
+        "families": {
+          "slope": 99.11,
+          "local_relief": 99.55,
+          "roughness": 99.81,
+          "relative_elevation": 94.33
+        },
+        "w1_60m": {
+          "slope": 1.07,
+          "local_relief": 18.962,
+          "roughness": 1.363,
+          "relative_elevation": 50.98
+        }
+      },
+      {
+        "window": "N35W112@0.5,0.5",
+        "lat": 35.5,
+        "lon": -111.5,
+        "status": "ok",
+        "index": 99.82,
+        "families": {
+          "slope": 99.96,
+          "local_relief": 99.97,
+          "roughness": 99.99,
+          "relative_elevation": 99.37
+        },
+        "w1_60m": {
+          "slope": 0.178,
+          "local_relief": 4.845,
+          "roughness": 0.283,
+          "relative_elevation": 16.741
+        }
+      },
+      {
+        "window": "N35W112@0.5,0.8",
+        "lat": 35.5,
+        "lon": -111.2,
+        "status": "ok",
+        "index": 99.69,
+        "families": {
+          "slope": 99.96,
+          "local_relief": 99.98,
+          "roughness": 99.99,
+          "relative_elevation": 98.85
+        },
+        "w1_60m": {
+          "slope": 0.215,
+          "local_relief": 4.723,
+          "roughness": 0.348,
+          "relative_elevation": 22.732
+        }
+      },
+      {
+        "window": "N35W112@0.8,0.2",
+        "lat": 35.8,
+        "lon": -111.8,
+        "status": "ok",
+        "index": 99.79,
+        "families": {
+          "slope": 99.9,
+          "local_relief": 99.91,
+          "roughness": 99.97,
+          "relative_elevation": 99.4
+        },
+        "w1_60m": {
+          "slope": 0.367,
+          "local_relief": 9.118,
+          "roughness": 0.575,
+          "relative_elevation": 16.333
+        }
+      },
+      {
+        "window": "N35W112@0.8,0.5",
+        "lat": 35.8,
+        "lon": -111.5,
+        "status": "ok",
+        "index": 99.93,
+        "families": {
+          "slope": 99.91,
+          "local_relief": 99.98,
+          "roughness": 99.98,
+          "relative_elevation": 99.85
+        },
+        "w1_60m": {
+          "slope": 0.352,
+          "local_relief": 3.295,
+          "roughness": 0.382,
+          "relative_elevation": 8.204
+        }
+      },
+      {
+        "window": "N35W112@0.8,0.8",
+        "lat": 35.8,
+        "lon": -111.2,
+        "status": "ok",
+        "index": 99.84,
+        "families": {
+          "slope": 99.88,
+          "local_relief": 99.98,
+          "roughness": 99.99,
+          "relative_elevation": 99.51
+        },
+        "w1_60m": {
+          "slope": 0.487,
+          "local_relief": 3.995,
+          "roughness": 0.471,
+          "relative_elevation": 14.702
+        }
+      },
+      {
+        "window": "N35W111@0.2,0.2",
+        "lat": 35.2,
+        "lon": -110.8,
+        "status": "ok",
+        "index": 98.87,
+        "families": {
+          "slope": 98.86,
+          "local_relief": 99.64,
+          "roughness": 99.75,
+          "relative_elevation": 97.22
+        },
+        "w1_60m": {
+          "slope": 1.332,
+          "local_relief": 17.21,
+          "roughness": 1.683,
+          "relative_elevation": 35.553
+        }
+      },
+      {
+        "window": "N35W111@0.2,0.5",
+        "lat": 35.2,
+        "lon": -110.5,
+        "status": "ok",
+        "index": 99.59,
+        "families": {
+          "slope": 99.27,
+          "local_relief": 99.9,
+          "roughness": 99.92,
+          "relative_elevation": 99.28
+        },
+        "w1_60m": {
+          "slope": 1.241,
+          "local_relief": 10.158,
+          "roughness": 1.308,
+          "relative_elevation": 18.095
+        }
+      },
+      {
+        "window": "N35W111@0.2,0.8",
+        "lat": 35.2,
+        "lon": -110.2,
+        "status": "ok",
+        "index": 99.37,
+        "families": {
+          "slope": 98.76,
+          "local_relief": 99.88,
+          "roughness": 99.92,
+          "relative_elevation": 98.92
+        },
+        "w1_60m": {
+          "slope": 1.724,
+          "local_relief": 11.299,
+          "roughness": 1.463,
+          "relative_elevation": 21.971
+        }
+      },
+      {
+        "window": "N35W111@0.5,0.2",
+        "lat": 35.5,
+        "lon": -110.8,
+        "status": "ok",
+        "index": 99.0,
+        "families": {
+          "slope": 99.08,
+          "local_relief": 99.66,
+          "roughness": 99.77,
+          "relative_elevation": 97.47
+        },
+        "w1_60m": {
+          "slope": 1.122,
+          "local_relief": 16.553,
+          "roughness": 1.487,
+          "relative_elevation": 33.854
+        }
+      },
+      {
+        "window": "N35W111@0.5,0.5",
+        "lat": 35.5,
+        "lon": -110.5,
+        "status": "ok",
+        "index": 99.84,
+        "families": {
+          "slope": 99.88,
+          "local_relief": 99.92,
+          "roughness": 99.97,
+          "relative_elevation": 99.57
+        },
+        "w1_60m": {
+          "slope": 0.387,
+          "local_relief": 8.58,
+          "roughness": 0.646,
+          "relative_elevation": 13.9
+        }
+      },
+      {
+        "window": "N35W111@0.5,0.8",
+        "lat": 35.5,
+        "lon": -110.2,
+        "status": "ok",
+        "index": 99.43,
+        "families": {
+          "slope": 98.66,
+          "local_relief": 99.67,
+          "roughness": 99.8,
+          "relative_elevation": 99.58
+        },
+        "w1_60m": {
+          "slope": 1.508,
+          "local_relief": 17.393,
+          "roughness": 1.631,
+          "relative_elevation": 13.625
+        }
+      },
+      {
+        "window": "N35W111@0.8,0.2",
+        "lat": 35.8,
+        "lon": -110.8,
+        "status": "ok",
+        "index": 99.83,
+        "families": {
+          "slope": 99.66,
+          "local_relief": 99.93,
+          "roughness": 99.95,
+          "relative_elevation": 99.78
+        },
+        "w1_60m": {
+          "slope": 0.738,
+          "local_relief": 7.53,
+          "roughness": 0.715,
+          "relative_elevation": 9.876
+        }
+      },
+      {
+        "window": "N35W111@0.8,0.5",
+        "lat": 35.8,
+        "lon": -110.5,
+        "status": "ok",
+        "index": 99.72,
+        "families": {
+          "slope": 99.37,
+          "local_relief": 99.72,
+          "roughness": 99.87,
+          "relative_elevation": 99.92
+        },
+        "w1_60m": {
+          "slope": 1.004,
+          "local_relief": 15.055,
+          "roughness": 1.298,
+          "relative_elevation": 6.063
+        }
+      },
+      {
+        "window": "N35W111@0.8,0.8",
+        "lat": 35.8,
+        "lon": -110.2,
+        "status": "ok",
+        "index": 99.4,
+        "families": {
+          "slope": 99.6,
+          "local_relief": 99.92,
+          "roughness": 99.92,
+          "relative_elevation": 98.16
+        },
+        "w1_60m": {
+          "slope": 0.744,
+          "local_relief": 7.958,
+          "roughness": 0.955,
+          "relative_elevation": 29.062
+        }
+      }
+    ],
+    "count": 90,
+    "share_at_or_above": {
+      "50": 0.867,
+      "90": 0.667,
+      "95": 0.578,
+      "99": 0.444
+    },
+    "median_index": 98.16,
+    "note": "Unselected windows on a regular grid inside the downloaded SRTM tiles (ocean or void windows are excluded by the coverage gate)."
+  },
+  "redundancy": {
+    "families": [
+      "slope",
+      "local_relief",
+      "roughness",
+      "relative_elevation"
+    ],
+    "spearman_w1_60m": [
+      [
+        1.0,
+        0.974,
+        0.994,
+        0.765
+      ],
+      [
+        0.974,
+        1.0,
+        0.987,
+        0.805
+      ],
+      [
+        0.994,
+        0.987,
+        1.0,
+        0.784
+      ],
+      [
+        0.765,
+        0.805,
+        0.784,
+        1.0
+      ]
+    ],
+    "n_windows": 97,
+    "interpretation": "Values near 1 mean two families rank windows almost identically, so they add little independent evidence."
+  },
+  "mola_vs_ctx": {
+    "scale_m": 480,
+    "window_m": 30000,
+    "mola_product": "Mars_MGS_MOLA_DEM_mosaic_global_463m (USGS)",
+    "ctx_product": "M20_JezeroCrater_CTXDEM_20m (aggregated)",
+    "slope_p50_deg": {
+      "mola": 1.3997421248703692,
+      "ctx": 1.5613315794550708
+    },
+    "local_relief_p50_m": {
+      "mola": 30.110595703125,
+      "ctx": 35.33837890625
+    },
+    "slope_w1_deg": 0.359,
+    "coverage": {
+      "mola": {
+        "480": 1.0
+      },
+      "ctx": {
+        "480": 1.0
+      }
+    },
+    "note": "MOLA cannot validate the 60-240 m analysis scales; this compares regional slope only."
+  },
+  "method_sensitivity": {
+    "configurations": 20,
+    "rank_range": {
+      "earth-upper-mustang": [
+        6,
+        6
+      ],
+      "earth-ladakh": [
+        7,
+        7
+      ],
+      "earth-atacama": [
+        1,
+        1
+      ],
+      "earth-danakil": [
+        5,
+        5
+      ],
+      "earth-craters-of-the-moon": [
+        2,
+        2
+      ],
+      "earth-hanksville-mdrs": [
+        3,
+        3
+      ],
+      "earth-meteor-crater": [
+        4,
+        4
+      ]
+    },
+    "index_range": {
+      "earth-upper-mustang": [
+        49.28,
+        56.59
+      ],
+      "earth-ladakh": [
+        31.14,
+        38.25
+      ],
+      "earth-atacama": [
+        99.9,
+        99.93
+      ],
+      "earth-danakil": [
+        98.22,
+        98.94
+      ],
+      "earth-craters-of-the-moon": [
+        99.72,
+        99.83
+      ],
+      "earth-hanksville-mdrs": [
+        99.61,
+        99.79
+      ],
+      "earth-meteor-crater": [
+        99.31,
+        99.57
+      ]
+    },
+    "rankings": {
+      "nominal": [
+        "earth-atacama",
+        "earth-craters-of-the-moon",
+        "earth-hanksville-mdrs",
+        "earth-meteor-crater",
+        "earth-danakil",
+        "earth-upper-mustang",
+        "earth-ladakh"
+      ],
+      "weight_slope_x0.8": [
+        "earth-atacama",
+        "earth-craters-of-the-moon",
+        "earth-hanksville-mdrs",
+        "earth-meteor-crater",
+        "earth-danakil",
+        "earth-upper-mustang",
+        "earth-ladakh"
+      ],
+      "weight_slope_x1.2": [
+        "earth-atacama",
+        "earth-craters-of-the-moon",
+        "earth-hanksville-mdrs",
+        "earth-meteor-crater",
+        "earth-danakil",
+        "earth-upper-mustang",
+        "earth-ladakh"
+      ],
+      "tau_slope_x0.8": [
+        "earth-atacama",
+        "earth-craters-of-the-moon",
+        "earth-hanksville-mdrs",
+        "earth-meteor-crater",
+        "earth-danakil",
+        "earth-upper-mustang",
+        "earth-ladakh"
+      ],
+      "tau_slope_x1.2": [
+        "earth-atacama",
+        "earth-craters-of-the-moon",
+        "earth-hanksville-mdrs",
+        "earth-meteor-crater",
+        "earth-danakil",
+        "earth-upper-mustang",
+        "earth-ladakh"
+      ],
+      "weight_local_relief_x0.8": [
+        "earth-atacama",
+        "earth-craters-of-the-moon",
+        "earth-hanksville-mdrs",
+        "earth-meteor-crater",
+        "earth-danakil",
+        "earth-upper-mustang",
+        "earth-ladakh"
+      ],
+      "weight_local_relief_x1.2": [
+        "earth-atacama",
+        "earth-craters-of-the-moon",
+        "earth-hanksville-mdrs",
+        "earth-meteor-crater",
+        "earth-danakil",
+        "earth-upper-mustang",
+        "earth-ladakh"
+      ],
+      "tau_local_relief_x0.8": [
+        "earth-atacama",
+        "earth-craters-of-the-moon",
+        "earth-hanksville-mdrs",
+        "earth-meteor-crater",
+        "earth-danakil",
+        "earth-upper-mustang",
+        "earth-ladakh"
+      ],
+      "tau_local_relief_x1.2": [
+        "earth-atacama",
+        "earth-craters-of-the-moon",
+        "earth-hanksville-mdrs",
+        "earth-meteor-crater",
+        "earth-danakil",
+        "earth-upper-mustang",
+        "earth-ladakh"
+      ],
+      "weight_roughness_x0.8": [
+        "earth-atacama",
+        "earth-craters-of-the-moon",
+        "earth-hanksville-mdrs",
+        "earth-meteor-crater",
+        "earth-danakil",
+        "earth-upper-mustang",
+        "earth-ladakh"
+      ],
+      "weight_roughness_x1.2": [
+        "earth-atacama",
+        "earth-craters-of-the-moon",
+        "earth-hanksville-mdrs",
+        "earth-meteor-crater",
+        "earth-danakil",
+        "earth-upper-mustang",
+        "earth-ladakh"
+      ],
+      "tau_roughness_x0.8": [
+        "earth-atacama",
+        "earth-craters-of-the-moon",
+        "earth-hanksville-mdrs",
+        "earth-meteor-crater",
+        "earth-danakil",
+        "earth-upper-mustang",
+        "earth-ladakh"
+      ],
+      "tau_roughness_x1.2": [
+        "earth-atacama",
+        "earth-craters-of-the-moon",
+        "earth-hanksville-mdrs",
+        "earth-meteor-crater",
+        "earth-danakil",
+        "earth-upper-mustang",
+        "earth-ladakh"
+      ],
+      "weight_relative_elevation_x0.8": [
+        "earth-atacama",
+        "earth-craters-of-the-moon",
+        "earth-hanksville-mdrs",
+        "earth-meteor-crater",
+        "earth-danakil",
+        "earth-upper-mustang",
+        "earth-ladakh"
+      ],
+      "weight_relative_elevation_x1.2": [
+        "earth-atacama",
+        "earth-craters-of-the-moon",
+        "earth-hanksville-mdrs",
+        "earth-meteor-crater",
+        "earth-danakil",
+        "earth-upper-mustang",
+        "earth-ladakh"
+      ],
+      "tau_relative_elevation_x0.8": [
+        "earth-atacama",
+        "earth-craters-of-the-moon",
+        "earth-hanksville-mdrs",
+        "earth-meteor-crater",
+        "earth-danakil",
+        "earth-upper-mustang",
+        "earth-ladakh"
+      ],
+      "tau_relative_elevation_x1.2": [
+        "earth-atacama",
+        "earth-craters-of-the-moon",
+        "earth-hanksville-mdrs",
+        "earth-meteor-crater",
+        "earth-danakil",
+        "earth-upper-mustang",
+        "earth-ladakh"
+      ],
+      "scales_equal": [
+        "earth-atacama",
+        "earth-craters-of-the-moon",
+        "earth-hanksville-mdrs",
+        "earth-meteor-crater",
+        "earth-danakil",
+        "earth-upper-mustang",
+        "earth-ladakh"
+      ],
+      "scales_fine_only": [
+        "earth-atacama",
+        "earth-craters-of-the-moon",
+        "earth-hanksville-mdrs",
+        "earth-meteor-crater",
+        "earth-danakil",
+        "earth-upper-mustang",
+        "earth-ladakh"
+      ],
+      "scales_coarse_only": [
+        "earth-atacama",
+        "earth-craters-of-the-moon",
+        "earth-hanksville-mdrs",
+        "earth-meteor-crater",
+        "earth-danakil",
+        "earth-upper-mustang",
+        "earth-ladakh"
+      ]
+    },
+    "ranking_sensitive": false
+  }
+}

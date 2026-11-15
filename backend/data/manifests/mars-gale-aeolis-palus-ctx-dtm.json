@@ -1,0 +1,39 @@
+{
+  "source_id": "mars-gale-aeolis-palus-ctx-dtm",
+  "title": "USGS controlled CTX DTM T01_000815_1749_XN_05S222W__K19_060629_1752_XI_04S222W",
+  "planetary_body": "mars",
+  "provider": "USGS Astrogeology Science Center",
+  "mission": "Mars Reconnaissance Orbiter",
+  "instrument": "Context Camera (CTX)",
+  "product_name": "MRO_CTX_controlled_USGS_DTM",
+  "product_version": "T01_000815_1749_XN_05S222W__K19_060629_1752_XI_04S222W",
+  "source_page_url": "https://stac.astrogeology.usgs.gov/api/collections/mro_ctx_controlled_usgs_dtms/items/T01_000815_1749_XN_05S222W__K19_060629_1752_XI_04S222W",
+  "download_url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/mars/mro/ctx/controlled/usgs/T01_000815_1749_XN_05S222W__K19_060629_1752_XI_04S222W/T01_000815_1749_XN_05S222W__K19_060629_1752_XI_04S222W-DEM-geoid-adj.tif",
+  "doi": "10.5066/P9JKVWR3",
+  "access_date": "2026-11-14",
+  "license_or_use_constraints": "CC0-1.0 (USGS Astrogeology). Cite the product DOI.",
+  "native_resolution": [
+    20.0,
+    20.0
+  ],
+  "native_crs": "PROJCS[\"Mars (2015) - Sphere / Ocentric / Equirectangular, clon = 0\",GEOGCS[\"Mars (2015) - Sphere / Ocentric\",DATUM[\"Mars (2015) - Sphere\",SPHEROID[\"Mars (2015) - Sphere\",3396190,0]],PRIMEM[\"Reference Meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",0],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+  "native_bounds": [
+    137.10916043390748,
+    -5.738462188317168,
+    137.70759942622675,
+    -4.125638870117184
+  ],
+  "native_nodata": -32767.0,
+  "file_size": 1242734,
+  "filename": "mars-gale-aeolis-palus-ctx-dtm-local.tif",
+  "sha256_checksum": "e258cc973b6e2b221b7b313ba24f333db19fe38453cf9265fa2c4ce8959b88df",
+  "citation_text": "USGS Astrogeology Science Center, MRO CTX controlled DTM T01_000815_1749_XN_05S222W__K19_060629_1752_XI_04S222W (asset geoid_adjusted_dem), DOI 10.5066/P9JKVWR3.",
+  "processing_status": "processed",
+  "notes": "Downloaded file was checksummed, inspected, and processed through the terrain-v2.0 pipeline.",
+  "extracted_filename": "mars/mars-gale-aeolis-palus-ctx-dtm-local.tif",
+  "extracted_sha256_checksum": "e258cc973b6e2b221b7b313ba24f333db19fe38453cf9265fa2c4ce8959b88df",
+  "aoi_id": "mars-gale-aeolis-palus-aoi-v1",
+  "tiles": [],
+  "mosaic_filename": null,
+  "mosaic_sha256_checksum": null
+}

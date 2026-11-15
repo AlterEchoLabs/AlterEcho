@@ -1,0 +1,34 @@
+{
+  "site_id": "earth-danakil",
+  "aoi_id": "earth-danakil-aoi-v1",
+  "product": "ESA WorldCover 10 m v200",
+  "collection": "esa-worldcover",
+  "item_ids": [
+    "ESA_WorldCover_10m_2021_v200_N12E039"
+  ],
+  "product_version": "2.0.0",
+  "reference_year": 2021,
+  "pixel_size": "10 m (1/12000 deg)",
+  "provider": "ESA via Microsoft Planetary Computer",
+  "licence": "CC-BY-4.0",
+  "attribution": "\u00a9 ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium",
+  "official_stac_records": [
+    "https://planetarycomputer.microsoft.com/api/stac/v1/collections/esa-worldcover/items/ESA_WorldCover_10m_2021_v200_N12E039"
+  ],
+  "core_pixel_count": 1196547,
+  "class_fractions_core": {
+    "Cropland": 7.9e-05,
+    "Bare / sparse vegetation": 0.996791,
+    "Permanent water bodies": 0.001265,
+    "Herbaceous wetland": 0.001865
+  },
+  "built_up_fraction_core": 0.0,
+  "clip_file": "data/processed/landcover/earth-danakil.worldcover-v200.tif",
+  "clip_sha256": "37763557f1295da3b5d4e779112b3e508834dfb890a9d6b425549edb30b3437d",
+  "limitations": [
+    "WorldCover is a 2021 classification with a stated global accuracy near 77 %; class errors are not quantified per AOI here.",
+    "Mine pits, heaps and graded ground are usually classed as bare/sparse (60), so this check under-detects mining disturbance.",
+    "SRTM elevation dates from February 2000; built-up land mapped in 2021 may postdate the DEM."
+  ],
+  "generated_at": "2026-11-14T17:10:12.833685+00:00"
+}

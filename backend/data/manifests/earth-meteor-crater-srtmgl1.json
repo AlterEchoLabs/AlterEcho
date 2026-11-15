@@ -1,0 +1,76 @@
+{
+  "source_id": "earth-meteor-crater-srtmgl1",
+  "title": "NASA Shuttle Radar Topography Mission Global 1 Arc Second V003",
+  "planetary_body": "earth",
+  "provider": "NASA LP DAAC / USGS EROS",
+  "mission": "Shuttle Radar Topography Mission",
+  "instrument": "SRTM C-band radar",
+  "product_name": "SRTMGL1",
+  "product_version": "003",
+  "source_page_url": "https://search.earthdata.nasa.gov/search?q=SRTMGL1",
+  "download_url": null,
+  "doi": "10.5067/MEaSUREs/SRTM/SRTMGL1.003",
+  "access_date": "2026-11-14",
+  "license_or_use_constraints": "NASA Earthdata authentication may be required; follow LP DAAC data-use and citation guidance.",
+  "native_resolution": [
+    0.0002777777777777778,
+    0.0002777777777777778
+  ],
+  "native_crs": "EPSG:4326",
+  "native_bounds": [
+    -112.00013888888888,
+    33.999861111111116,
+    -109.9998611111111,
+    36.00013888888889
+  ],
+  "native_nodata": -32768.0,
+  "file_size": 43494634,
+  "filename": "N34W112.SRTMGL1.hgt.zip",
+  "sha256_checksum": null,
+  "citation_text": "NASA JPL, NASA Shuttle Radar Topography Mission Global 1 arc second V003, DOI 10.5067/MEaSUREs/SRTM/SRTMGL1.003.",
+  "processing_status": "processed",
+  "notes": "Downloaded file was checksummed, inspected, and processed through the terrain-v2.0 pipeline.",
+  "extracted_filename": null,
+  "extracted_sha256_checksum": null,
+  "aoi_id": "earth-meteor-crater-aoi-v1",
+  "tiles": [
+    {
+      "tile_id": "N34W112",
+      "filename": "N34W112.SRTMGL1.hgt.zip",
+      "download_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/N34W112.SRTMGL1.hgt/N34W112.SRTMGL1.hgt.zip",
+      "sha256_checksum": "eda000d71dd85574ea394a48dbcb998fe4eb93521bbd2aed00d53cad421212a3",
+      "file_size": 13120197,
+      "extracted_filename": "N34W112.hgt",
+      "extracted_sha256_checksum": "f3b0b87a9e2698a1373a54135d86b2288e363e20d9ec1fff6ca2569f3fc4c4ff"
+    },
+    {
+      "tile_id": "N34W111",
+      "filename": "N34W111.SRTMGL1.hgt.zip",
+      "download_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/N34W111.SRTMGL1.hgt/N34W111.SRTMGL1.hgt.zip",
+      "sha256_checksum": "b3f43841514bc5f1ec50e6ab8c4682c0d4bc8ac6915066c8d1ee797f814bcdb1",
+      "file_size": 10378212,
+      "extracted_filename": "N34W111.hgt",
+      "extracted_sha256_checksum": "0464701c48e9148020c6a81a64bb4b1f4e68bcb53107cba25d29d9d5f13b126f"
+    },
+    {
+      "tile_id": "N35W112",
+      "filename": "N35W112.SRTMGL1.hgt.zip",
+      "download_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/N35W112.SRTMGL1.hgt/N35W112.SRTMGL1.hgt.zip",
+      "sha256_checksum": "b7647a7d9901a83ad30c830d2b13d98738a38c322b9ca0c9111541b166ee8b74",
+      "file_size": 10508513,
+      "extracted_filename": "N35W112.hgt",
+      "extracted_sha256_checksum": "18e3befa1464e5580fca9371212e75ed621b4b6848ef8717dad391feb6156486"
+    },
+    {
+      "tile_id": "N35W111",
+      "filename": "N35W111.SRTMGL1.hgt.zip",
+      "download_url": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/N35W111.SRTMGL1.hgt/N35W111.SRTMGL1.hgt.zip",
+      "sha256_checksum": "74eb0fb48ceb2ab6f9c65433c92400def27cfebcec9cb9cd1c809c1d95eef29d",
+      "file_size": 9487712,
+      "extracted_filename": "N35W111.hgt",
+      "extracted_sha256_checksum": "63909ae519ccbd5e360a12b3a884af4c3e7d42670929361ce67778b39352eefa"
+    }
+  ],
+  "mosaic_filename": "earth-meteor-crater-srtmgl1.mosaic.tif",
+  "mosaic_sha256_checksum": "a839e3a03eaec6443087f8729e42a1dffa28dfc352d5d1046b306b6af08197f5"
+}

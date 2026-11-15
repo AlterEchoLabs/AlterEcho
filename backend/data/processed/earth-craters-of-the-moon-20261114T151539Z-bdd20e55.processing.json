@@ -1,0 +1,45 @@
+{
+  "processing_run_id": "earth-craters-of-the-moon-20261114T151539Z-bdd20e55",
+  "timestamp": "2026-11-14T15:15:39.340581+00:00",
+  "site_id": "earth-craters-of-the-moon",
+  "source_id": "earth-craters-of-the-moon-srtmgl1",
+  "source_checksum": "65076c24d022dd70c3b755c63de3665e350f8905dc473cedc2ea929ad8102c0b",
+  "aoi_version": "1.0",
+  "methodology_version": "terrain-v2.0",
+  "software_version": "0.2.0",
+  "native_resolution": [
+    0.0002777777777777778,
+    0.0002777777777777778
+  ],
+  "target_resolution": 60.0,
+  "source_crs": "EPSG:4326",
+  "processing_crs": "EPSG:32612",
+  "resampling_method": "bilinear",
+  "nodata_handling": "Source nodata is propagated to NaN and excluded from every metric",
+  "requested_analysis_window_m": [
+    10000.0,
+    10000.0
+  ],
+  "actual_analysis_window_m": [
+    10020.0,
+    10020.0
+  ],
+  "grid_dimensions": [
+    167,
+    167
+  ],
+  "metric_configuration": {
+    "methodology_version": "terrain-v2.0",
+    "slope_method": "central differences using metric x/y spacing",
+    "local_relief_definition": "local maximum minus local minimum",
+    "local_relief_neighborhood_m": 1000.0,
+    "local_relief_window_pixels": 17,
+    "roughness_definition": "local elevation standard deviation",
+    "roughness_neighborhood_m": 300.0,
+    "roughness_window_pixels": 5
+  },
+  "output_summary": "data\\processed\\earth-craters-of-the-moon.terrain.json",
+  "output_checksum": "a90c690b2a3c931bf0d6fb8229ece9ee58af7051bca2860041eb25792ecb1436",
+  "quality_passed": true,
+  "warnings": []
+}

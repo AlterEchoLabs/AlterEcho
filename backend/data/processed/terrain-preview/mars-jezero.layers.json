@@ -1,0 +1,13 @@
+{
+  "site_id": "mars-jezero",
+  "resolution_m": 30.0,
+  "pixels": 334,
+  "hillshade": {
+    "azimuth_deg": 315,
+    "altitude_deg": 45
+  },
+  "slope_ramp": "linear 0-35 degrees, fixed across sites",
+  "slope_p50_deg": 2.12,
+  "source_sha256": "ba7f706ea1b5d63a562f28a7dcf7a7f3c79bce7f048e6974b57e8a33c30d1ba2",
+  "purpose": "visualisation only; numeric analysis uses terrain-v3/v4"
+}

@@ -1,0 +1,54 @@
+{
+  "imagery_id": "earth-atacama-south-sentinel-2-reference",
+  "site_id": "earth-atacama-south",
+  "body": "earth",
+  "mode": "reference",
+  "provider": "Copernicus Sentinel-2 L2A via Microsoft Planetary Computer",
+  "collection": "sentinel-2-l2a",
+  "product_id": "S2B_MSIL2A_20260927T144729_R139_T19KDP_20260927T195914",
+  "acquisition_datetime": "2026-09-27T14:47:29.024000Z",
+  "publication_datetime": null,
+  "resolution_m": 10,
+  "cloud_cover_pct": 0.000238,
+  "processing_level": "Level-2A surface reflectance, true colour B04/B03/B02, 2-98 % stretch",
+  "bbox": [
+    -69.9498,
+    -24.3171,
+    -69.8512,
+    -24.2273
+  ],
+  "aoi_id": "earth-atacama-south-aoi-v1",
+  "preview_url": "/api/imagery-assets/earth-atacama-south-sentinel-reference.png",
+  "tile_url": null,
+  "attribution": "Contains modified Copernicus Sentinel data (2026), processed via Microsoft Planetary Computer",
+  "official_source_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2B_MSIL2A_20260927T144729_R139_T19KDP_20260927T195914",
+  "source_download_url": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2B_MSIL2A_20260927T144729_R139_T19KDP_20260927T195914",
+  "cache_status": "verified_local_crop",
+  "cache_date": "2026-11-14T17:14:44.599416+00:00",
+  "data_status": "available",
+  "limitations": [
+    "Display imagery only; the score uses the elevation model, not these pixels.",
+    "Scene-wide cloud is the catalog value for the whole ~110 km tile; AOI cloud and snow come from the SCL band over the AOI.",
+    "Footprint coverage is the share of the AOI inside the scene. It is not a clear-sky fraction."
+  ],
+  "display_resolution_m": 10.0,
+  "aoi_coverage_fraction": 1.0,
+  "aoi_valid_pixel_fraction": 1.0,
+  "aoi_cloud_fraction": 0.0,
+  "aoi_snow_fraction": 0.0,
+  "aoi_coverage_meaning": "Share of the AOI footprint inside the scene with valid data. It is NOT a clear-sky fraction.",
+  "aoi_statistics_method": "SCL band (20 m) warped with nearest neighbour onto the AOI grid: cloud = classes 3, 8, 9, 10; snow = 11; invalid = 0, 1.",
+  "registration": {
+    "grid": "AOI-centred UTM square identical in construction to the terrain analysis grid",
+    "crs": "EPSG:32719",
+    "pixel_m": 10.0,
+    "pixels": 1000
+  },
+  "preview_checksum": "4bd488284c91aae21169947cc9ca4f712cae1789ad30f6c7091f986d2914f2b0",
+  "source_crs": "EPSG:32719",
+  "native_resolution": [
+    10.0,
+    10.0
+  ],
+  "selection_rejections": []
+}

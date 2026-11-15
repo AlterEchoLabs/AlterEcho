@@ -1,0 +1,38 @@
+{
+  "site_id": "earth-ladakh",
+  "aoi_id": "earth-ladakh-aoi-v1",
+  "product": "ESA WorldCover 10 m v200",
+  "collection": "esa-worldcover",
+  "item_ids": [
+    "ESA_WorldCover_10m_2021_v200_N33E075"
+  ],
+  "product_version": "2.0.0",
+  "reference_year": 2021,
+  "pixel_size": "10 m (1/12000 deg)",
+  "provider": "ESA via Microsoft Planetary Computer",
+  "licence": "CC-BY-4.0",
+  "attribution": "\u00a9 ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium",
+  "official_stac_records": [
+    "https://planetarycomputer.microsoft.com/api/stac/v1/collections/esa-worldcover/items/ESA_WorldCover_10m_2021_v200_N33E075"
+  ],
+  "core_pixel_count": 1404000,
+  "class_fractions_core": {
+    "Tree cover": 0.000313,
+    "Grassland": 0.109134,
+    "Cropland": 9.3e-05,
+    "Built-up": 0.01622,
+    "Bare / sparse vegetation": 0.821916,
+    "Snow and ice": 2.9e-05,
+    "Permanent water bodies": 6.3e-05,
+    "Moss and lichen": 0.052232
+  },
+  "built_up_fraction_core": 0.01622,
+  "clip_file": "data/processed/landcover/earth-ladakh.worldcover-v200.tif",
+  "clip_sha256": "72d233b428848c611c0745dec6eed88278b63215202b0acf4737b97bcf3131ea",
+  "limitations": [
+    "WorldCover is a 2021 classification with a stated global accuracy near 77 %; class errors are not quantified per AOI here.",
+    "Mine pits, heaps and graded ground are usually classed as bare/sparse (60), so this check under-detects mining disturbance.",
+    "SRTM elevation dates from February 2000; built-up land mapped in 2021 may postdate the DEM."
+  ],
+  "generated_at": "2026-11-14T17:10:08.297900+00:00"
+}

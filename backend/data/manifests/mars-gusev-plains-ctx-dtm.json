@@ -1,0 +1,39 @@
+{
+  "source_id": "mars-gusev-plains-ctx-dtm",
+  "title": "USGS controlled CTX DTM P22_009530_1653_XI_14S184W__P06_003333_1652_XI_14S184W",
+  "planetary_body": "mars",
+  "provider": "USGS Astrogeology Science Center",
+  "mission": "Mars Reconnaissance Orbiter",
+  "instrument": "Context Camera (CTX)",
+  "product_name": "MRO_CTX_controlled_USGS_DTM",
+  "product_version": "P22_009530_1653_XI_14S184W__P06_003333_1652_XI_14S184W",
+  "source_page_url": "https://stac.astrogeology.usgs.gov/api/collections/mro_ctx_controlled_usgs_dtms/items/P22_009530_1653_XI_14S184W__P06_003333_1652_XI_14S184W",
+  "download_url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/mars/mro/ctx/controlled/usgs/P22_009530_1653_XI_14S184W__P06_003333_1652_XI_14S184W/P22_009530_1653_XI_14S184W__P06_003333_1652_XI_14S184W-DEM-geoid-adj.tif",
+  "doi": "10.5066/P9JKVWR3",
+  "access_date": "2026-11-14",
+  "license_or_use_constraints": "CC0-1.0 (USGS Astrogeology). Cite the product DOI.",
+  "native_resolution": [
+    20.0,
+    20.0
+  ],
+  "native_crs": "PROJCS[\"Mars (2015) - Sphere / Ocentric / Equirectangular, clon = 0\",GEOGCS[\"Mars (2015) - Sphere / Ocentric\",DATUM[\"Mars (2015) - Sphere\",SPHEROID[\"Mars (2015) - Sphere\",3396190,0]],PRIMEM[\"Reference Meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",0],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+  "native_bounds": [
+    175.23202050351412,
+    -15.039148734824215,
+    175.7578297653357,
+    -14.165753194280958
+  ],
+  "native_nodata": -32767.0,
+  "file_size": 1370122,
+  "filename": "mars-gusev-plains-ctx-dtm-local.tif",
+  "sha256_checksum": "05c903c17573975c89d98fd1f0280ee80d0027d067461026611470ce4af35fd8",
+  "citation_text": "USGS Astrogeology Science Center, MRO CTX controlled DTM P22_009530_1653_XI_14S184W__P06_003333_1652_XI_14S184W (asset geoid_adjusted_dem), DOI 10.5066/P9JKVWR3.",
+  "processing_status": "processed",
+  "notes": "Downloaded file was checksummed, inspected, and processed through the terrain-v2.0 pipeline.",
+  "extracted_filename": "mars/mars-gusev-plains-ctx-dtm-local.tif",
+  "extracted_sha256_checksum": "05c903c17573975c89d98fd1f0280ee80d0027d067461026611470ce4af35fd8",
+  "aoi_id": "mars-gusev-plains-aoi-v1",
+  "tiles": [],
+  "mosaic_filename": null,
+  "mosaic_sha256_checksum": null
+}

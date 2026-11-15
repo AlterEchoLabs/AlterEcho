@@ -1,0 +1,35 @@
+{
+  "site_id": "earth-craters-of-the-moon",
+  "aoi_id": "earth-craters-of-the-moon-aoi-v1",
+  "product": "ESA WorldCover 10 m v200",
+  "collection": "esa-worldcover",
+  "item_ids": [
+    "ESA_WorldCover_10m_2021_v200_N42W114"
+  ],
+  "product_version": "2.0.0",
+  "reference_year": 2021,
+  "pixel_size": "10 m (1/12000 deg)",
+  "provider": "ESA via Microsoft Planetary Computer",
+  "licence": "CC-BY-4.0",
+  "attribution": "\u00a9 ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium",
+  "official_stac_records": [
+    "https://planetarycomputer.microsoft.com/api/stac/v1/collections/esa-worldcover/items/ESA_WorldCover_10m_2021_v200_N42W114"
+  ],
+  "core_pixel_count": 1597191,
+  "class_fractions_core": {
+    "Tree cover": 0.047039,
+    "Shrubland": 0.017677,
+    "Grassland": 0.326507,
+    "Built-up": 0.000892,
+    "Bare / sparse vegetation": 0.607884
+  },
+  "built_up_fraction_core": 0.000892,
+  "clip_file": "data/processed/landcover/earth-craters-of-the-moon.worldcover-v200.tif",
+  "clip_sha256": "e68c7c66d6c7553e3b6e65dc307e21ec90ea3be75647479451fcda9ca69f88e0",
+  "limitations": [
+    "WorldCover is a 2021 classification with a stated global accuracy near 77 %; class errors are not quantified per AOI here.",
+    "Mine pits, heaps and graded ground are usually classed as bare/sparse (60), so this check under-detects mining disturbance.",
+    "SRTM elevation dates from February 2000; built-up land mapped in 2021 may postdate the DEM."
+  ],
+  "generated_at": "2026-11-14T17:10:15.662169+00:00"
+}

@@ -1,0 +1,35 @@
+{
+  "site_id": "earth-atacama",
+  "aoi_id": "earth-atacama-aoi-v1",
+  "product": "ESA WorldCover 10 m v200",
+  "collection": "esa-worldcover",
+  "item_ids": [
+    "ESA_WorldCover_10m_2021_v200_S27W072"
+  ],
+  "product_version": "2.0.0",
+  "reference_year": 2021,
+  "pixel_size": "10 m (1/12000 deg)",
+  "provider": "ESA via Microsoft Planetary Computer",
+  "licence": "CC-BY-4.0",
+  "attribution": "\u00a9 ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium",
+  "official_stac_records": [
+    "https://planetarycomputer.microsoft.com/api/stac/v1/collections/esa-worldcover/items/ESA_WorldCover_10m_2021_v200_S27W072"
+  ],
+  "core_pixel_count": 1275480,
+  "class_fractions_core": {
+    "Tree cover": 1.3e-05,
+    "Shrubland": 6e-06,
+    "Grassland": 2e-06,
+    "Built-up": 1.4e-05,
+    "Bare / sparse vegetation": 0.999965
+  },
+  "built_up_fraction_core": 1.4e-05,
+  "clip_file": "data/processed/landcover/earth-atacama.worldcover-v200.tif",
+  "clip_sha256": "1ff58083a6ebe92ec23d63056263f4ccd3f6f4f97b603abad1cf404e1503e729",
+  "limitations": [
+    "WorldCover is a 2021 classification with a stated global accuracy near 77 %; class errors are not quantified per AOI here.",
+    "Mine pits, heaps and graded ground are usually classed as bare/sparse (60), so this check under-detects mining disturbance.",
+    "SRTM elevation dates from February 2000; built-up land mapped in 2021 may postdate the DEM."
+  ],
+  "generated_at": "2026-11-14T17:10:10.858652+00:00"
+}

@@ -1,0 +1,37 @@
+{
+  "site_id": "earth-hanksville-mdrs",
+  "aoi_id": "earth-hanksville-mdrs-aoi-v1",
+  "product": "ESA WorldCover 10 m v200",
+  "collection": "esa-worldcover",
+  "item_ids": [
+    "ESA_WorldCover_10m_2021_v200_N36W111"
+  ],
+  "product_version": "2.0.0",
+  "reference_year": 2021,
+  "pixel_size": "10 m (1/12000 deg)",
+  "provider": "ESA via Microsoft Planetary Computer",
+  "licence": "CC-BY-4.0",
+  "attribution": "\u00a9 ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium",
+  "official_stac_records": [
+    "https://planetarycomputer.microsoft.com/api/stac/v1/collections/esa-worldcover/items/ESA_WorldCover_10m_2021_v200_N36W111"
+  ],
+  "core_pixel_count": 1480875,
+  "class_fractions_core": {
+    "Tree cover": 5.1e-05,
+    "Shrubland": 0.046005,
+    "Grassland": 0.018447,
+    "Cropland": 0.002612,
+    "Built-up": 0.000674,
+    "Bare / sparse vegetation": 0.931828,
+    "Permanent water bodies": 0.000382
+  },
+  "built_up_fraction_core": 0.000674,
+  "clip_file": "data/processed/landcover/earth-hanksville-mdrs.worldcover-v200.tif",
+  "clip_sha256": "397f564441a31429200c70667560b2ac46bc00b40d67ee70ffc294eedaa780cd",
+  "limitations": [
+    "WorldCover is a 2021 classification with a stated global accuracy near 77 %; class errors are not quantified per AOI here.",
+    "Mine pits, heaps and graded ground are usually classed as bare/sparse (60), so this check under-detects mining disturbance.",
+    "SRTM elevation dates from February 2000; built-up land mapped in 2021 may postdate the DEM."
+  ],
+  "generated_at": "2026-11-14T17:10:17.608814+00:00"
+}

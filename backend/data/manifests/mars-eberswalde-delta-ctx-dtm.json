@@ -1,0 +1,39 @@
+{
+  "source_id": "mars-eberswalde-delta-ctx-dtm",
+  "title": "USGS controlled CTX DTM B22_018056_1559_XN_24S033W__G01_018557_1555_XN_24S033W",
+  "planetary_body": "mars",
+  "provider": "USGS Astrogeology Science Center",
+  "mission": "Mars Reconnaissance Orbiter",
+  "instrument": "Context Camera (CTX)",
+  "product_name": "MRO_CTX_controlled_USGS_DTM",
+  "product_version": "B22_018056_1559_XN_24S033W__G01_018557_1555_XN_24S033W",
+  "source_page_url": "https://stac.astrogeology.usgs.gov/api/collections/mro_ctx_controlled_usgs_dtms/items/B22_018056_1559_XN_24S033W__G01_018557_1555_XN_24S033W",
+  "download_url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/mars/mro/ctx/controlled/usgs/B22_018056_1559_XN_24S033W__G01_018557_1555_XN_24S033W/B22_018056_1559_XN_24S033W__G01_018557_1555_XN_24S033W_dtm.tif",
+  "doi": "10.5066/P9JKVWR3",
+  "access_date": "2026-11-14",
+  "license_or_use_constraints": "CC0-1.0 (USGS Astrogeology). Cite the product DOI.",
+  "native_resolution": [
+    20.209513626390784,
+    20.209513626390784
+  ],
+  "native_crs": "PROJCS[\"Mars (2015) - Sphere / Ocentric / Equirectangular, clon = 0\",GEOGCS[\"Mars (2015) - Sphere / Ocentric\",DATUM[\"Mars (2015) - Sphere\",SPHEROID[\"Mars (2015) - Sphere\",3396190,0]],PRIMEM[\"Reference Meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",0],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+  "native_bounds": [
+    -33.744129561369334,
+    -25.24032877396134,
+    -33.0379707730811,
+    -23.3561613411625
+  ],
+  "native_nodata": -32767.0,
+  "file_size": 1399901,
+  "filename": "mars-eberswalde-delta-ctx-dtm-local.tif",
+  "sha256_checksum": "015a2b904561f184cd11f1a2f33c8003f8cb6992c6f5c987c0eea77062326c71",
+  "citation_text": "USGS Astrogeology Science Center, MRO CTX controlled DTM B22_018056_1559_XN_24S033W__G01_018557_1555_XN_24S033W (asset dtm), DOI 10.5066/P9JKVWR3.",
+  "processing_status": "processed",
+  "notes": "Downloaded file was checksummed, inspected, and processed through the terrain-v2.0 pipeline.",
+  "extracted_filename": "mars/mars-eberswalde-delta-ctx-dtm-local.tif",
+  "extracted_sha256_checksum": "015a2b904561f184cd11f1a2f33c8003f8cb6992c6f5c987c0eea77062326c71",
+  "aoi_id": "mars-eberswalde-delta-aoi-v1",
+  "tiles": [],
+  "mosaic_filename": null,
+  "mosaic_sha256_checksum": null
+}

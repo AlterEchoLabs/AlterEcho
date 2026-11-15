@@ -1,0 +1,51 @@
+{
+  "imagery_id": "mars-gusev-plains-ctx-reference",
+  "site_id": "mars-gusev-plains",
+  "body": "mars",
+  "mode": "reference",
+  "provider": "USGS Astrogeology Science Center",
+  "collection": "MRO CTX controlled DTM orthoimage",
+  "product_id": "P22_009530_1653_XI_14S184W__P06_003333_1652_XI_14S184W",
+  "acquisition_datetime": null,
+  "publication_datetime": "2024-11-18T13:39:38.537Z",
+  "resolution_m": 20.0,
+  "display_resolution_m": 10.0,
+  "cloud_cover_pct": null,
+  "processing_level": "Orthorectified CTX image from the stereo pair",
+  "bbox": [
+    175.38544,
+    -14.65275,
+    175.55976,
+    -14.48405
+  ],
+  "aoi_id": "mars-gusev-plains-aoi-v1",
+  "preview_url": "/api/imagery-assets/mars-gusev-plains-ctx-reference.png",
+  "tile_url": null,
+  "attribution": "USGS Astrogeology Science Center; MRO Context Camera (NASA/JPL/MSSS). CC0-1.0.",
+  "official_source_url": "https://stac.astrogeology.usgs.gov/api/collections/mro_ctx_controlled_usgs_dtms/items/P22_009530_1653_XI_14S184W__P06_003333_1652_XI_14S184W",
+  "source_download_url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/mars/mro/ctx/controlled/usgs/P22_009530_1653_XI_14S184W__P06_003333_1652_XI_14S184W/P22_009530_1653_XI_14S184W__P06_003333_1652_XI_14S184W-DRG.tif",
+  "cache_status": "cached",
+  "cache_date": "2026-11-14T18:33:42.979198+00:00",
+  "data_status": "available",
+  "preview_checksum": "c0901b8175ebc2eeca7646130c6707f2e2a72938bdf98d1a61184784fb9ac99c",
+  "source_crs": "PROJCS[\"Mars (2015) - Sphere / Ocentric / Equirectangular, clon = 0\",GEOGCS[\"Mars (2015) - Sphere / Ocentric\",DATUM[\"Mar",
+  "native_resolution": [
+    20.0,
+    20.0
+  ],
+  "aoi_coverage_fraction": 1.0,
+  "registration": {
+    "grid": "local equirectangular, true to scale at the window latitude, identical in construction to the terrain grid",
+    "pixel_m": 10.0,
+    "pixels": 1000,
+    "ground_extent_m": [
+      10000.0,
+      10000.0
+    ]
+  },
+  "limitations": [
+    "Grayscale CTX image; it is not a colour photograph.",
+    "The two stereo images were acquired on different dates; the image is display context and never enters a score.",
+    "Shadows depend on the acquisition illumination."
+  ]
+}

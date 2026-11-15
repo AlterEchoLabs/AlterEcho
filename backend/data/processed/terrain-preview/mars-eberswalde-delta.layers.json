@@ -1,0 +1,13 @@
+{
+  "site_id": "mars-eberswalde-delta",
+  "resolution_m": 30.0,
+  "pixels": 334,
+  "hillshade": {
+    "azimuth_deg": 315,
+    "altitude_deg": 45
+  },
+  "slope_ramp": "linear 0-35 degrees, fixed across sites",
+  "slope_p50_deg": 2.87,
+  "source_sha256": "015a2b904561f184cd11f1a2f33c8003f8cb6992c6f5c987c0eea77062326c71",
+  "purpose": "visualisation only; numeric analysis uses terrain-v3/v4"
+}

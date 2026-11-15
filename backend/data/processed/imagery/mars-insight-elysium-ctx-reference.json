@@ -1,0 +1,51 @@
+{
+  "imagery_id": "mars-insight-elysium-ctx-reference",
+  "site_id": "mars-insight-elysium",
+  "body": "mars",
+  "mode": "reference",
+  "provider": "USGS Astrogeology Science Center",
+  "collection": "MRO CTX controlled DTM orthoimage",
+  "product_id": "N15_068239_1823_XN_02N224W__F18_042827_1842_XN_04N224W",
+  "acquisition_datetime": null,
+  "publication_datetime": "2025-02-23T07:07:33.344Z",
+  "resolution_m": 20.0,
+  "display_resolution_m": 10.0,
+  "cloud_cover_pct": null,
+  "processing_level": "Orthorectified CTX image from the stereo pair",
+  "bbox": [
+    135.53879,
+    4.41805,
+    135.70801,
+    4.58675
+  ],
+  "aoi_id": "mars-insight-elysium-aoi-v1",
+  "preview_url": "/api/imagery-assets/mars-insight-elysium-ctx-reference.png",
+  "tile_url": null,
+  "attribution": "USGS Astrogeology Science Center; MRO Context Camera (NASA/JPL/MSSS). CC0-1.0.",
+  "official_source_url": "https://stac.astrogeology.usgs.gov/api/collections/mro_ctx_controlled_usgs_dtms/items/N15_068239_1823_XN_02N224W__F18_042827_1842_XN_04N224W",
+  "source_download_url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/mars/mro/ctx/controlled/usgs/N15_068239_1823_XN_02N224W__F18_042827_1842_XN_04N224W/N15_068239_1823_XN_02N224W__F18_042827_1842_XN_04N224W-DRG.tif",
+  "cache_status": "cached",
+  "cache_date": "2026-11-14T18:28:43.942565+00:00",
+  "data_status": "available",
+  "preview_checksum": "12f58f34834c3a835e397284933bc1fae8831d2b637941137b6792e9ac608417",
+  "source_crs": "PROJCS[\"Mars (2015) - Sphere / Ocentric / Equirectangular, clon = 0\",GEOGCS[\"Mars (2015) - Sphere / Ocentric\",DATUM[\"Mar",
+  "native_resolution": [
+    20.0,
+    20.0
+  ],
+  "aoi_coverage_fraction": 0.9997,
+  "registration": {
+    "grid": "local equirectangular, true to scale at the window latitude, identical in construction to the terrain grid",
+    "pixel_m": 10.0,
+    "pixels": 1000,
+    "ground_extent_m": [
+      10000.0,
+      10000.0
+    ]
+  },
+  "limitations": [
+    "Grayscale CTX image; it is not a colour photograph.",
+    "The two stereo images were acquired on different dates; the image is display context and never enters a score.",
+    "Shadows depend on the acquisition illumination."
+  ]
+}

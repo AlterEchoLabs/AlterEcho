@@ -1,0 +1,45 @@
+{
+  "processing_run_id": "earth-danakil-20261114T151536Z-87365448",
+  "timestamp": "2026-11-14T15:15:36.610362+00:00",
+  "site_id": "earth-danakil",
+  "source_id": "earth-danakil-srtmgl1",
+  "source_checksum": "a7f37842278d203a63300480201cb7b8db147ed5f05ae30caa164137decc88be",
+  "aoi_version": "1.0",
+  "methodology_version": "terrain-v2.0",
+  "software_version": "0.2.0",
+  "native_resolution": [
+    0.0002777777777777778,
+    0.0002777777777777778
+  ],
+  "target_resolution": 60.0,
+  "source_crs": "EPSG:4326",
+  "processing_crs": "EPSG:32637",
+  "resampling_method": "bilinear",
+  "nodata_handling": "Source nodata is propagated to NaN and excluded from every metric",
+  "requested_analysis_window_m": [
+    10000.0,
+    10000.0
+  ],
+  "actual_analysis_window_m": [
+    10020.0,
+    10020.0
+  ],
+  "grid_dimensions": [
+    167,
+    167
+  ],
+  "metric_configuration": {
+    "methodology_version": "terrain-v2.0",
+    "slope_method": "central differences using metric x/y spacing",
+    "local_relief_definition": "local maximum minus local minimum",
+    "local_relief_neighborhood_m": 1000.0,
+    "local_relief_window_pixels": 17,
+    "roughness_definition": "local elevation standard deviation",
+    "roughness_neighborhood_m": 300.0,
+    "roughness_window_pixels": 5
+  },
+  "output_summary": "data\\processed\\earth-danakil.terrain.json",
+  "output_checksum": "fe6a15a9881aed9adcd62b56ea6718c57a9441531882a73ce0b3a1693d92e168",
+  "quality_passed": true,
+  "warnings": []
+}

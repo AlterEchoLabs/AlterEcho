@@ -1,0 +1,39 @@
+{
+  "source_id": "mars-insight-elysium-ctx-dtm",
+  "title": "USGS controlled CTX DTM N15_068239_1823_XN_02N224W__F18_042827_1842_XN_04N224W",
+  "planetary_body": "mars",
+  "provider": "USGS Astrogeology Science Center",
+  "mission": "Mars Reconnaissance Orbiter",
+  "instrument": "Context Camera (CTX)",
+  "product_name": "MRO_CTX_controlled_USGS_DTM",
+  "product_version": "N15_068239_1823_XN_02N224W__F18_042827_1842_XN_04N224W",
+  "source_page_url": "https://stac.astrogeology.usgs.gov/api/collections/mro_ctx_controlled_usgs_dtms/items/N15_068239_1823_XN_02N224W__F18_042827_1842_XN_04N224W",
+  "download_url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/mars/mro/ctx/controlled/usgs/N15_068239_1823_XN_02N224W__F18_042827_1842_XN_04N224W/N15_068239_1823_XN_02N224W__F18_042827_1842_XN_04N224W-DEM-geoid-adj.tif",
+  "doi": "10.5066/P9JKVWR3",
+  "access_date": "2026-11-14",
+  "license_or_use_constraints": "CC0-1.0 (USGS Astrogeology). Cite the product DOI.",
+  "native_resolution": [
+    20.0,
+    20.0
+  ],
+  "native_crs": "PROJCS[\"Mars (2015) - Sphere / Ocentric / Equirectangular, clon = 0\",GEOGCS[\"Mars (2015) - Sphere / Ocentric\",DATUM[\"Mars (2015) - Sphere\",SPHEROID[\"Mars (2015) - Sphere\",3396190,0]],PRIMEM[\"Reference Meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",0],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+  "native_bounds": [
+    135.38963496808628,
+    3.739384247521796,
+    135.98642312500385,
+    4.720060881406027
+  ],
+  "native_nodata": -32767.0,
+  "file_size": 1327894,
+  "filename": "mars-insight-elysium-ctx-dtm-local.tif",
+  "sha256_checksum": "4be42bd3ca7f7bdd7473017851186749dc1d5a86c95b7f5dcf1f7275c4c166bd",
+  "citation_text": "USGS Astrogeology Science Center, MRO CTX controlled DTM N15_068239_1823_XN_02N224W__F18_042827_1842_XN_04N224W (asset geoid_adjusted_dem), DOI 10.5066/P9JKVWR3.",
+  "processing_status": "processed",
+  "notes": "Downloaded file was checksummed, inspected, and processed through the terrain-v2.0 pipeline.",
+  "extracted_filename": "mars/mars-insight-elysium-ctx-dtm-local.tif",
+  "extracted_sha256_checksum": "4be42bd3ca7f7bdd7473017851186749dc1d5a86c95b7f5dcf1f7275c4c166bd",
+  "aoi_id": "mars-insight-elysium-aoi-v1",
+  "tiles": [],
+  "mosaic_filename": null,
+  "mosaic_sha256_checksum": null
+}

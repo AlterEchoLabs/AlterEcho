@@ -1,0 +1,45 @@
+{
+  "processing_run_id": "earth-hanksville-mdrs-20261114T151541Z-8d036107",
+  "timestamp": "2026-11-14T15:15:42.175363+00:00",
+  "site_id": "earth-hanksville-mdrs",
+  "source_id": "earth-hanksville-mdrs-srtmgl1",
+  "source_checksum": "c71e33cbfedcecb6ab09a43cc37ea33c4acf6b261ea1aa0e6f2207bd7ec98bbc",
+  "aoi_version": "1.0",
+  "methodology_version": "terrain-v2.0",
+  "software_version": "0.2.0",
+  "native_resolution": [
+    0.0002777777777777778,
+    0.0002777777777777778
+  ],
+  "target_resolution": 60.0,
+  "source_crs": "EPSG:4326",
+  "processing_crs": "EPSG:32612",
+  "resampling_method": "bilinear",
+  "nodata_handling": "Source nodata is propagated to NaN and excluded from every metric",
+  "requested_analysis_window_m": [
+    10000.0,
+    10000.0
+  ],
+  "actual_analysis_window_m": [
+    10020.0,
+    10020.0
+  ],
+  "grid_dimensions": [
+    167,
+    167
+  ],
+  "metric_configuration": {
+    "methodology_version": "terrain-v2.0",
+    "slope_method": "central differences using metric x/y spacing",
+    "local_relief_definition": "local maximum minus local minimum",
+    "local_relief_neighborhood_m": 1000.0,
+    "local_relief_window_pixels": 17,
+    "roughness_definition": "local elevation standard deviation",
+    "roughness_neighborhood_m": 300.0,
+    "roughness_window_pixels": 5
+  },
+  "output_summary": "data\\processed\\earth-hanksville-mdrs.terrain.json",
+  "output_checksum": "7a299cb205f32668ad5ff2c566646f1041c166ab07441a6e64ae2aff636d51ae",
+  "quality_passed": true,
+  "warnings": []
+}

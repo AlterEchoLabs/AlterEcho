@@ -1,0 +1,68 @@
+{
+  "type": "Feature",
+  "id": "earth-craters-of-the-moon-aoi-v1",
+  "properties": {
+    "aoi_id": "earth-craters-of-the-moon-aoi-v1",
+    "site_id": "earth-craters-of-the-moon",
+    "version": "1.0",
+    "planetary_body": "earth",
+    "center_latitude": 43.42,
+    "center_longitude": -113.55,
+    "width_m": 10000,
+    "height_m": 10000,
+    "selection_rationale": "Basaltic volcanic terrain used by NASA's BASALT field campaigns (Lim et al. 2019). The window covers the northern lava field and cinder-cone area; it is not claimed to coincide with specific BASALT sample sites.",
+    "intended_analog_characteristics": [
+      "local slope distribution",
+      "local relief",
+      "surface roughness"
+    ],
+    "known_limitations": [
+      "Region-level BASALT research does not validate this exact window",
+      "Basalt composition and vesicularity are not measured by the terrain index",
+      "National monument rules govern access; not assessed here"
+    ],
+    "creation_method": "Geodetic display footprint approximated from a 10 km square; processing constructs an exact UTM metric grid around the centre.",
+    "source_references": [
+      "earth-craters-of-the-moon-srtmgl1",
+      "basalt-lim-2019"
+    ],
+    "planetary_target": "The registered 10 km Jezero reference window under terrain-only comparison.",
+    "analogy_dimensions_not_covered": [
+      "atmosphere",
+      "gravity",
+      "radiation",
+      "geology",
+      "temperature",
+      "habitability"
+    ],
+    "representativeness": "Feature-focused window; it does not represent the whole region.",
+    "known_selection_bias": "Phase 7 held-out site: selected for landscape diversity after terrain-v4 parameters were frozen; independent AOI review pending."
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -113.6118,
+          43.3751
+        ],
+        [
+          -113.4882,
+          43.3751
+        ],
+        [
+          -113.4882,
+          43.4649
+        ],
+        [
+          -113.6118,
+          43.4649
+        ],
+        [
+          -113.6118,
+          43.3751
+        ]
+      ]
+    ]
+  }
+}

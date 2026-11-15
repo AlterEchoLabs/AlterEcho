@@ -1,0 +1,38 @@
+{
+  "site_id": "earth-upper-mustang",
+  "aoi_id": "earth-upper-mustang-aoi-v1",
+  "product": "ESA WorldCover 10 m v200",
+  "collection": "esa-worldcover",
+  "item_ids": [
+    "ESA_WorldCover_10m_2021_v200_N27E081"
+  ],
+  "product_version": "2.0.0",
+  "reference_year": 2021,
+  "pixel_size": "10 m (1/12000 deg)",
+  "provider": "ESA via Microsoft Planetary Computer",
+  "licence": "CC-BY-4.0",
+  "attribution": "\u00a9 ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium",
+  "official_stac_records": [
+    "https://planetarycomputer.microsoft.com/api/stac/v1/collections/esa-worldcover/items/ESA_WorldCover_10m_2021_v200_N27E081"
+  ],
+  "core_pixel_count": 1332720,
+  "class_fractions_core": {
+    "Tree cover": 0.00026,
+    "Grassland": 0.246671,
+    "Cropland": 0.004867,
+    "Built-up": 0.000207,
+    "Bare / sparse vegetation": 0.732759,
+    "Snow and ice": 0.000782,
+    "Permanent water bodies": 0.001314,
+    "Moss and lichen": 0.01314
+  },
+  "built_up_fraction_core": 0.000207,
+  "clip_file": "data/processed/landcover/earth-upper-mustang.worldcover-v200.tif",
+  "clip_sha256": "6448972dad52173ff35f0daf5c054759280e6ab09900122d9a8ed9c0da12a526",
+  "limitations": [
+    "WorldCover is a 2021 classification with a stated global accuracy near 77 %; class errors are not quantified per AOI here.",
+    "Mine pits, heaps and graded ground are usually classed as bare/sparse (60), so this check under-detects mining disturbance.",
+    "SRTM elevation dates from February 2000; built-up land mapped in 2021 may postdate the DEM."
+  ],
+  "generated_at": "2026-11-14T17:10:00.286029+00:00"
+}

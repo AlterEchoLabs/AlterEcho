@@ -1,0 +1,51 @@
+{
+  "imagery_id": "mars-gale-aeolis-palus-ctx-reference",
+  "site_id": "mars-gale-aeolis-palus",
+  "body": "mars",
+  "mode": "reference",
+  "provider": "USGS Astrogeology Science Center",
+  "collection": "MRO CTX controlled DTM orthoimage",
+  "product_id": "T01_000815_1749_XN_05S222W__K19_060629_1752_XI_04S222W",
+  "acquisition_datetime": null,
+  "publication_datetime": "2024-11-19T04:06:55.101Z",
+  "resolution_m": 20.0,
+  "display_resolution_m": 10.0,
+  "cloud_cover_pct": null,
+  "processing_level": "Orthorectified CTX image from the stereo pair",
+  "bbox": [
+    137.35708,
+    -4.64685,
+    137.52632,
+    -4.47815
+  ],
+  "aoi_id": "mars-gale-aeolis-palus-aoi-v1",
+  "preview_url": "/api/imagery-assets/mars-gale-aeolis-palus-ctx-reference.png",
+  "tile_url": null,
+  "attribution": "USGS Astrogeology Science Center; MRO Context Camera (NASA/JPL/MSSS). CC0-1.0.",
+  "official_source_url": "https://stac.astrogeology.usgs.gov/api/collections/mro_ctx_controlled_usgs_dtms/items/T01_000815_1749_XN_05S222W__K19_060629_1752_XI_04S222W",
+  "source_download_url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/mars/mro/ctx/controlled/usgs/T01_000815_1749_XN_05S222W__K19_060629_1752_XI_04S222W/T01_000815_1749_XN_05S222W__K19_060629_1752_XI_04S222W-DRG.tif",
+  "cache_status": "cached",
+  "cache_date": "2026-11-14T18:27:03.729798+00:00",
+  "data_status": "available",
+  "preview_checksum": "fa9ed35a2d87f146956cca719ab8059980c6661cc66213833e9c6fbe44084cce",
+  "source_crs": "PROJCS[\"Mars (2015) - Sphere / Ocentric / Equirectangular, clon = 0\",GEOGCS[\"Mars (2015) - Sphere / Ocentric\",DATUM[\"Mar",
+  "native_resolution": [
+    20.0,
+    20.0
+  ],
+  "aoi_coverage_fraction": 0.9994,
+  "registration": {
+    "grid": "local equirectangular, true to scale at the window latitude, identical in construction to the terrain grid",
+    "pixel_m": 10.0,
+    "pixels": 1000,
+    "ground_extent_m": [
+      10000.0,
+      10000.0
+    ]
+  },
+  "limitations": [
+    "Grayscale CTX image; it is not a colour photograph.",
+    "The two stereo images were acquired on different dates; the image is display context and never enters a score.",
+    "Shadows depend on the acquisition illumination."
+  ]
+}

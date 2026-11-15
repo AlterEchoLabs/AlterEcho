@@ -1,0 +1,13 @@
+{
+  "site_id": "earth-upper-mustang",
+  "resolution_m": 30.0,
+  "pixels": 334,
+  "hillshade": {
+    "azimuth_deg": 315,
+    "altitude_deg": 45
+  },
+  "slope_ramp": "linear 0-35 degrees, fixed across sites",
+  "slope_p50_deg": 18.33,
+  "source_sha256": "7ab9f9c07f8a43f96fcd1e00dabb269a88221df1fed1445f58d49857ef08ca7b",
+  "purpose": "visualisation only; numeric analysis uses terrain-v3/v4"
+}

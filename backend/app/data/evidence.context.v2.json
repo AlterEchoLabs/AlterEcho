@@ -1,0 +1,46 @@
+{
+  "version": "evidence-context-v2",
+  "notice": "Pair-level statuses for dimensions TerraLuna does not score. Region-level research is never presented as a measurement of the exact AOI.",
+  "pair_status": {
+    "geology": {
+      "default": {"status": "source_available_unprocessed", "earth": "EMIT L2B mineral identification (EMITL2BMIN.001, NASA Earthdata login) or regional geological maps could support this, but nothing has been processed for this AOI and EMIT coverage of the exact window is unverified. A true-colour image is not mineral evidence.",
+                   "planetary": "Jezero's units are mapped in USGS SIM 3464 (1:75,000). The mapped units have not been converted into a descriptor comparable with an Earth product.", "source_ids": ["usgs-sim-3464", "emit-l2b-min"]}
+    },
+    "water_ice": {
+      "default": {"status": "missing_planetary", "earth": "Current snow cover over the AOI is measured on one date from the Sentinel-2 scene classification (see imagery). That is a present-day Earth condition.",
+                   "planetary": "Jezero is interpreted as an ancient lake and delta system. No present-day water or ice observation has been processed for the reference AOI, and ancient water is not comparable with current snow.", "source_ids": ["nasa-jezero"]}
+    },
+    "surface_processes": {
+      "default": {"status": "source_available_unprocessed", "earth": "Sentinel-1/2 process indicators (aeolian, fluvial, volcanic) have not been processed.",
+                   "planetary": "Mapped Mars landforms (CTX/HiRISE) have not been converted into process indicators. Jezero's fluvial and deltaic processes are ancient; most Earth processes considered here are active.", "source_ids": []}
+    },
+    "subsurface_habitability": {
+      "default": {"status": "missing_earth", "earth": "No subsurface or habitability measurement of this AOI. Region-level published research, if any, is listed under research context and is not a measurement of this window.",
+                   "planetary": "SHARAD radar and GRS footprints are kilometres to hundreds of kilometres across, coarser than the 10 km AOI: regional context only.", "source_ids": ["sharad-pds"]}
+    }
+  },
+  "field_test": {
+    "_fields": ["test_goal_fit", "terrain_detail", "access_and_permits", "logistics", "safety", "environmental_constraints"],
+    "_default": {
+      "test_goal_fit": {"value": "unknown", "note": "No field-test goal has been matched to this AOI."},
+      "terrain_detail": {"value": "SRTMGL1 ~30 m posting", "note": "Adequate for regional landform screening. Wheel-scale (≤1 m) terrain for traversability is not available in TerraLuna."},
+      "access_and_permits": {"value": "unknown", "note": "Not checked."},
+      "logistics": {"value": "unknown", "note": "Not checked."},
+      "safety": {"value": "unknown", "note": "Not checked."},
+      "environmental_constraints": {"value": "unknown", "note": "Not checked."}
+    },
+    "earth-danakil": {"safety": {"value": "documented hazards", "note": "Published field work describes extreme heat and hydrothermal hazards at Dallol (Cavalazzi et al. 2019). Current conditions are not assessed.", "source_ids": ["dallol-study"]}},
+    "earth-craters-of-the-moon": {"access_and_permits": {"value": "protected area", "note": "The lava field lies within Craters of the Moon National Monument and Preserve; research permit requirements were not verified."}},
+    "earth-meteor-crater": {"access_and_permits": {"value": "privately managed", "note": "The crater is a privately managed site; research access terms were not verified."}},
+    "mars-jezero": {"terrain_detail": {"value": "CTX DEM 20 m posting", "note": "Matches the Earth analysis scales. HiRISE DTMs (~1 m) exist for parts of Jezero but are not processed here."}}
+  },
+  "research_context": {
+    "earth-atacama": {"text": "Region-level: Mars-like soil studies near Yungay and NASA life-detection instrument tests in the hyperarid core. This AOI lies about 15 km from Yungay, but those studies did not measure this exact window. The window also contains built infrastructure.", "aoi_specific": false, "source_ids": ["atacama-study", "nasa-atacama"]},
+    "earth-ladakh": {"text": "Region-level: a 2016 multidisciplinary expedition and ISRO's 2025 analog mission at Tso Kar. This AOI (34.20° N, 77.60° E) is not the Tso Kar site.", "aoi_specific": false, "source_ids": ["ladakh-research", "isro-ladakh"]},
+    "earth-upper-mustang": {"text": "No peer-reviewed analog study of this window was found. A commercial analog-station proposal has been described publicly; that is not scientific validation.", "aoi_specific": false, "source_ids": ["handoff-candidate-atlas"]},
+    "earth-danakil": {"text": "Window-level: the AOI is centred on the Dallol dome characterised as a planetary field analog for hydrothermal and evaporite processes (Cavalazzi et al. 2019). Those processes are not measured by TerraLuna.", "aoi_specific": true, "source_ids": ["dallol-study"]},
+    "earth-craters-of-the-moon": {"text": "Region-level: NASA BASALT campaigns used Craters of the Moon lava flows as Mars basalt analogs (Lim et al. 2019). This window is not claimed to match their sample sites.", "aoi_specific": false, "source_ids": ["basalt-lim-2019"]},
+    "earth-hanksville-mdrs": {"text": "Window-level: the AOI is centred on the Mars Desert Research Station, an operational analog station. Its operational use does not establish physical similarity.", "aoi_specific": true, "source_ids": ["mdrs-station"]},
+    "earth-meteor-crater": {"text": "Window-level: Barringer (Meteor) Crater is a well-studied simple impact crater (Kring 2007). It occupies a small part of the 10 km window.", "aoi_specific": true, "source_ids": ["kring-2007-barringer"]}
+  }
+}

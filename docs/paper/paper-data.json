@@ -1,0 +1,405 @@
+{
+  "method_version": "analogue-method-v1.0",
+  "terrain_method": "terrain-v5.0",
+  "status": "experimental_research_method",
+  "software": {
+    "python": "3.13.4",
+    "numpy": "2.3.4",
+    "rasterio": "1.4.3",
+    "gdal": "3.9.3",
+    "fastapi": "0.162.7"
+  },
+  "files": {
+    "method_config": {
+      "path": "backend/app/data/analogue.v1.json",
+      "sha256_lf": "fa0cebded15dd10b7afd8432fe13030debe6fc051c31920a54deddfad2040cd9"
+    },
+    "calibration": {
+      "path": "backend/data/processed/evaluation/analogue-v1-calibration.json",
+      "sha256_lf": "1e0463f39fca804ad3fc908d6e100ad6f180fe8a8e5ca52898235515d2c4ef2f"
+    },
+    "discrimination": {
+      "path": "backend/data/processed/evaluation/analogue-v1-discrimination.json",
+      "sha256_lf": "2698c05fd7138f67ee44111ef183d849513c3feb963fcf8a9af8b9c8241366c5"
+    },
+    "scoring_code": [
+      "backend/app/services/analogue_math.py (similarity, w1_quantile_functions, family_score, observed_index)",
+      "backend/app/services/analogue_v1_service.py (terrain_features, reference_floor, compare)",
+      "backend/app/services/terrain_quantiles.py (measure, quantile_function)"
+    ]
+  },
+  "grid": {
+    "primary_m": 60,
+    "sensitivity_m": [
+      120,
+      240
+    ],
+    "window_m": 10000,
+    "cells_per_side_60m": 167,
+    "halo_m": 1200,
+    "relief_window_m": 1020,
+    "relief_window_cells": 17,
+    "roughness_window_m": 300,
+    "roughness_window_cells": 5,
+    "min_feature_coverage": 0.9,
+    "neighbourhood_min_valid": 0.5,
+    "quantiles": 500
+  },
+  "tau": {
+    "slope": {
+      "60": 5.8058,
+      "120": 5.2405,
+      "240": 4.399,
+      "loto_60": [
+        4.5197,
+        6.3352
+      ]
+    },
+    "relative_elevation": {
+      "60": 77.1038,
+      "120": 77.1272,
+      "240": 76.1866,
+      "loto_60": [
+        55.0633,
+        88.5764
+      ]
+    },
+    "local_relief": {
+      "60": 98.5232,
+      "120": 95.7615,
+      "240": 87.9924,
+      "loto_60": [
+        73.4797,
+        108.2406
+      ]
+    },
+    "roughness": {
+      "60": 8.9318,
+      "120": 9.7064,
+      "240": 16.0271,
+      "loto_60": [
+        6.8902,
+        9.7732
+      ]
+    }
+  },
+  "population": {
+    "windows": 88,
+    "pairs": 3828,
+    "exclusion_radius_m": 10000.0,
+    "regions": {
+      "Afar": 9,
+      "Central Andes": 9,
+      "Himalaya and Tibet": 17,
+      "Western USA": 53
+    },
+    "caveat": "The background windows come from tiles first downloaded for candidate sites: arid and mountainous regions are over-represented, and windows inside one region are spatially correlated. 4 regions, not 88 independent samples."
+  },
+  "redundancy": {
+    "rho": {
+      "slope~relative_elevation": -0.244,
+      "slope~local_relief": 0.985,
+      "slope~roughness": 0.998,
+      "relative_elevation~local_relief": -0.197,
+      "relative_elevation~roughness": -0.238,
+      "local_relief~roughness": 0.99
+    },
+    "threshold": 0.95,
+    "scored": [
+      "slope",
+      "relative_elevation"
+    ],
+    "redundant_with": {
+      "local_relief": "slope",
+      "roughness": "slope"
+    }
+  },
+  "noise_factor": 3.0,
+  "floor_jezero": {
+    "slope": {
+      "placement": 0.676,
+      "dem_product": 0.9559,
+      "combined": 1.1708,
+      "placement_source": "this reference moved 2 km north, south, east and west",
+      "noise_condition_passed": true
+    },
+    "relative_elevation": {
+      "placement": 22.1346,
+      "dem_product": 0.886,
+      "combined": 22.1523,
+      "placement_source": "this reference moved 2 km north, south, east and west",
+      "noise_condition_passed": true
+    }
+  },
+  "dem_floor_pairs": 15,
+  "synthetic": {
+    "tilted_plane_15deg": 2.06,
+    "ridges_150m_2km": 38.23,
+    "fractal_relief_1500m": 21.25,
+    "fractal_relief_300m": 88.39,
+    "identical_copy": 100.0
+  },
+  "background_jezero": {
+    "count": 88,
+    "median": 87.39,
+    "p10": 1.35,
+    "p90": 98.29,
+    "share_at_or_above": {
+      "99": 0.011,
+      "95": 0.341,
+      "90": 0.489,
+      "75": 0.58,
+      "50": 0.67
+    }
+  },
+  "single_feature_jezero": {
+    "slope": {
+      "99": 0.17,
+      "95": 0.42,
+      "90": 0.466,
+      "75": 0.545,
+      "50": 0.636
+    },
+    "relative_elevation": {
+      "99": 0.011,
+      "95": 0.375,
+      "90": 0.489,
+      "75": 0.625,
+      "50": 0.705
+    }
+  },
+  "alt_tau_jezero": {
+    "phase5_tau": {
+      "99": 0.227,
+      "95": 0.5,
+      "90": 0.545,
+      "75": 0.659,
+      "50": 0.773
+    },
+    "tau_x0.5": {
+      "99": 0.0,
+      "95": 0.023,
+      "90": 0.193,
+      "75": 0.42,
+      "50": 0.568
+    },
+    "tau_x2": {
+      "99": 0.25,
+      "95": 0.545,
+      "90": 0.58,
+      "75": 0.693,
+      "50": 0.852
+    }
+  },
+  "loro_tau": {
+    "slope": [
+      3.679,
+      9.422
+    ],
+    "relative_elevation": [
+      42.669,
+      146.698
+    ]
+  },
+  "loro_top_order_stable": true,
+  "background_share_90_mars": {
+    "mars-jezero": 0.489,
+    "mars-eberswalde-delta": 0.455,
+    "mars-gusev-plains": 0.42,
+    "mars-insight-elysium": 0.466,
+    "mars-gale-aeolis-palus": 0.443
+  },
+  "profiles": {
+    "terrain_analogy": {
+      "label": "Terrain analogy",
+      "weights": {
+        "terrain": 1.0
+      },
+      "task_critical": [
+        "terrain"
+      ],
+      "rankable": true
+    },
+    "balanced_science": {
+      "label": "Balanced science",
+      "weights": {
+        "terrain": 0.3,
+        "geology": 0.25,
+        "temperature": 0.1,
+        "water_ice": 0.15,
+        "surface_processes": 0.1,
+        "subsurface_habitability": 0.1
+      },
+      "task_critical": [
+        "terrain",
+        "geology"
+      ],
+      "rankable": false
+    },
+    "rover_mobility": {
+      "label": "Rover mobility",
+      "weights": {
+        "terrain": 0.8,
+        "surface_processes": 0.2
+      },
+      "task_critical": [
+        "terrain",
+        "field_test_suitability"
+      ],
+      "rankable": false
+    },
+    "biosignature_fieldwork": {
+      "label": "Biosignature fieldwork",
+      "weights": {
+        "geology": 0.35,
+        "water_ice": 0.25,
+        "subsurface_habitability": 0.2,
+        "temperature": 0.1,
+        "terrain": 0.1
+      },
+      "task_critical": [
+        "geology",
+        "water_ice",
+        "subsurface_habitability"
+      ],
+      "rankable": false
+    },
+    "mars_base_field_testing": {
+      "label": "Mars-base field testing",
+      "weights": {
+        "terrain": 0.35,
+        "temperature": 0.35,
+        "water_ice": 0.15,
+        "subsurface_habitability": 0.15
+      },
+      "task_critical": [
+        "terrain",
+        "temperature",
+        "field_test_suitability"
+      ],
+      "rankable": false
+    }
+  },
+  "example": {
+    "earth": {
+      "site_id": "earth-atacama-south",
+      "name": "Atacama Desert (south window)",
+      "aoi_id": "earth-atacama-south-aoi-v1",
+      "center": [
+        -24.2722,
+        -69.9005
+      ],
+      "dem": "SRTMGL1.003",
+      "tile": "S25W070",
+      "dem_sha256": "31ff152bdf6000f313f122a8872d68aecb332ab688f3697933dec4c5abb0c11c",
+      "doi": "10.5067/MEaSUREs/SRTM/SRTMGL1.003",
+      "grid_crs": "UTM zone 19S (EPSG:32719)",
+      "mask": "ESA WorldCover v200 2021: cells ≥ 50 % built-up excluded",
+      "mask_clip_sha256": "c9904d385223abc9ceab2ad703833a50dcffb1f25df32a3823b3b846927ca67a",
+      "excluded_fraction_60m": 0.0
+    },
+    "reference": {
+      "site_id": "mars-jezero",
+      "name": "Jezero Crater",
+      "aoi_id": "mars-jezero-aoi-v1",
+      "center": [
+        18.44,
+        77.45
+      ],
+      "dem": "M20_JezeroCrater_CTXDEM_20m",
+      "dem_sha256": "ba7f706ea1b5d63a562f28a7dcf7a7f3c79bce7f048e6974b57e8a33c30d1ba2",
+      "doi": "10.5066/P906QQT8",
+      "grid_crs": "Mars-sphere equirectangular, true scale at 18.4663 N (native CTX DEM grid)"
+    },
+    "features": {
+      "slope": {
+        "label": "Slope distribution",
+        "units": "degrees",
+        "earth_median": 2.695,
+        "earth_p90": 6.2132,
+        "reference_median": 1.8282,
+        "reference_p90": 5.2368,
+        "earth_coverage": 1.0,
+        "reference_coverage": 1.0,
+        "d": 0.8224898,
+        "tau": 5.8058,
+        "d_over_tau": 0.141666919,
+        "s": 0.986185184,
+        "weight": 0.5,
+        "contribution": 49.309259,
+        "delta": 1.1708,
+        "within_floor": true,
+        "earth_summary": "2.69° median, 6.22° p90",
+        "reference_summary": "1.83° median, 5.24° p90"
+      },
+      "relative_elevation": {
+        "label": "Relative elevation distribution",
+        "units": "metres",
+        "earth_median": 0.0,
+        "earth_p90": 44.9594,
+        "reference_median": 0.0,
+        "reference_p90": 105.8613,
+        "earth_coverage": 1.0,
+        "reference_coverage": 1.0,
+        "d": 15.6373118,
+        "tau": 77.1038,
+        "d_over_tau": 0.202808575,
+        "s": 0.97189252,
+        "weight": 0.5,
+        "contribution": 48.594626,
+        "delta": 22.1523,
+        "within_floor": true,
+        "earth_summary": "-80.2 to 44.9 m (p10–p90)",
+        "reference_summary": "-58.9 to 105.9 m (p10–p90)"
+      }
+    },
+    "diagnostics": {
+      "local_relief": {
+        "d": 11.9553,
+        "units": "metres"
+      },
+      "roughness": {
+        "d": 1.0207,
+        "units": "metres"
+      }
+    },
+    "family_score": 0.979038852,
+    "observed_index_full": 97.903885,
+    "observed_index_api": 97.9,
+    "coverage": 1.0,
+    "displayed_s": {
+      "slope": 0.9862,
+      "relative_elevation": 0.9719
+    },
+    "index_from_displayed_s": 97.905,
+    "service_family_score": 0.979038852,
+    "agreement_abs": 0.0,
+    "resolution": "unresolved_from_reference",
+    "background_share": 0.17,
+    "tie_group_size": 5,
+    "rank": 1,
+    "index_range": [
+      93.12,
+      98.65
+    ],
+    "scenarios": 17,
+    "exact_w1_check": {
+      "slope": {
+        "exact_all_cells": 0.822029,
+        "quantile_500": 0.82249,
+        "abs_difference": 0.000461,
+        "relative_difference": 0.00056,
+        "cells_earth": 27889,
+        "cells_reference": 27889
+      },
+      "relative_elevation": {
+        "exact_all_cells": 15.64659,
+        "quantile_500": 15.637312,
+        "abs_difference": 0.009278,
+        "relative_difference": 0.000593,
+        "cells_earth": 27889,
+        "cells_reference": 27889
+      }
+    }
+  }
+}

@@ -1,0 +1,170 @@
+[
+  {
+    "id": "nasa-jezero",
+    "title": "NASA - Jezero Crater",
+    "url": "https://science.nasa.gov/mars/mars-exploration/mars-2020-perseverance/mission-overview/jezero-crater/",
+    "role": "reference context"
+  },
+  {
+    "id": "usgs-jezero-dem",
+    "title": "USGS Mars 2020 landing-site terrain products",
+    "url": "https://www.usgs.gov/data/mars-2020-terrain-relative-navigation-ctx-dtm-mosaic",
+    "role": "processed DEM source"
+  },
+  {
+    "id": "handoff-candidate-atlas",
+    "title": "AlterEcho research handoff candidate atlas",
+    "url": "about:local-research-handoff",
+    "role": "project hypothesis"
+  },
+  {
+    "id": "ladakh-research",
+    "title": "Ladakh analogue research",
+    "url": "https://doi.org/10.1017/S1473550419000119",
+    "role": "analog context"
+  },
+  {
+    "id": "isro-ladakh",
+    "title": "ISRO Space Analog Mission in Tso Kar Valley",
+    "url": "https://www.isro.gov.in/ISRO_EN/Space_Analog_Mission.html",
+    "role": "operational context"
+  },
+  {
+    "id": "atacama-study",
+    "title": "Mars-like soils in the Atacama Desert",
+    "url": "https://doi.org/10.1126/science.1089143",
+    "role": "analog context"
+  },
+  {
+    "id": "nasa-atacama",
+    "title": "NASA JPL Atacama instrument field test",
+    "url": "https://www.jpl.nasa.gov/news/detecting-life-in-the-ultra-dry-atacama-desert/",
+    "role": "analog context"
+  },
+  {
+    "id": "raven-holuhraun",
+    "title": "RAVEN Holuhraun field site",
+    "url": "https://raven.lpl.arizona.edu/field-site-holuhraun-iceland",
+    "role": "analog context"
+  },
+  {
+    "id": "holuhraun-study",
+    "title": "Holuhraun as a planetary analog",
+    "url": "https://doi.org/10.3847/PSJ/adb5f1",
+    "role": "analog context"
+  },
+  {
+    "id": "nasa-astrobiology-sites",
+    "title": "NASA Astrobiology field sites",
+    "url": "https://astrobiology.nasa.gov/research-locations/",
+    "role": "analog context"
+  },
+  {
+    "id": "usap-taylor-valley",
+    "title": "US Antarctic Program field camps",
+    "url": "https://www.usap.gov/sciencesupport/scienceplanningsummaries/2026_2027/fieldcamps.cfm",
+    "role": "display locator context"
+  },
+  {
+    "id": "dallol-study",
+    "title": "Dallol geothermal planetary field analog",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6459281/",
+    "role": "analog context"
+  },
+  {
+    "id": "usgs-sim-3464",
+    "title": "Sun & Stack (2020), Geologic map of Jezero crater and the Nili Planum region, Mars (USGS SIM 3464)",
+    "url": "https://doi.org/10.3133/sim3464",
+    "role": "geology context"
+  },
+  {
+    "id": "emit-l2b-min",
+    "title": "EMIT L2B Estimated Mineral Identification and Band Depth (EMITL2BMIN.001)",
+    "url": "https://doi.org/10.5067/EMIT/EMITL2BMIN.001",
+    "role": "planned Earth mineral source"
+  },
+  {
+    "id": "sharad-pds",
+    "title": "MRO SHARAD radar archive (PDS Geosciences Node)",
+    "url": "https://pds-geosciences.wustl.edu/missions/mro/sharad.htm",
+    "role": "subsurface context"
+  },
+  {
+    "id": "modis-myd11a2",
+    "title": "MODIS/Aqua Land Surface Temperature 8-Day L3 Global 1km (MYD11A2.061)",
+    "url": "https://doi.org/10.5067/MODIS/MYD11A2.061",
+    "role": "Earth thermal evidence"
+  },
+  {
+    "id": "meda-pds",
+    "title": "Mars 2020 MEDA calibrated environmental data (PDS4 bundle mars2020_meda)",
+    "url": "https://pds-atmospheres.nmsu.edu/PDS/data/PDS4/Mars2020/mars2020_meda/",
+    "role": "Mars thermal evidence"
+  },
+  {
+    "id": "m20-waypoints",
+    "title": "Mars 2020 rover waypoints (NASA/JPL MMGIS)",
+    "url": "https://mars.nasa.gov/mmgis-maps/M20/Layers/json/M20_waypoints.json",
+    "role": "rover position provenance"
+  },
+  {
+    "id": "sentinel-2-pc",
+    "title": "Sentinel-2 Level-2A via Microsoft Planetary Computer",
+    "url": "https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a",
+    "role": "display imagery"
+  },
+  {
+    "id": "basalt-lim-2019",
+    "title": "Lim et al. (2019) Basaltic terrains in Idaho and Hawai'i as planetary analogs for Mars geology and astrobiology, Astrobiology 19(3)",
+    "url": "https://doi.org/10.1089/ast.2018.1847",
+    "role": "analog context (region level)"
+  },
+  {
+    "id": "mdrs-station",
+    "title": "The Mars Society \u2014 Mars Desert Research Station",
+    "url": "https://mdrs.marssociety.org/",
+    "role": "operational analog context"
+  },
+  {
+    "id": "kring-2007-barringer",
+    "title": "Kring, D. A. (2007) Guidebook to the Geology of Barringer Meteorite Crater, Arizona. LPI Contribution 1355",
+    "url": "https://www.lpi.usra.edu/publications/books/barringer_crater_guidebook/",
+    "role": "impact geology context"
+  },
+  {
+    "id": "lola-pds",
+    "title": "LRO LOLA Gridded Data Records (PDS Geosciences Node)",
+    "url": "https://pds-geosciences.wustl.edu/missions/lro/lola.htm",
+    "role": "lunar terrain source"
+  },
+  {
+    "id": "grotzinger-2014-gale",
+    "title": "Grotzinger et al. (2014) A habitable fluvio-lacustrine environment at Yellowknife Bay, Gale Crater, Mars. Science 343, 1242777",
+    "url": "https://doi.org/10.1126/science.1242777",
+    "role": "mission context (rover scale)"
+  },
+  {
+    "id": "golombek-2020-insight",
+    "title": "Golombek et al. (2020) Geology of the InSight landing site on Mars. Nature Communications 11, 1014",
+    "url": "https://doi.org/10.1038/s41467-020-14679-1",
+    "role": "landing-site context"
+  },
+  {
+    "id": "golombek-2006-gusev",
+    "title": "Golombek et al. (2006) Geology of the Gusev cratered plains from the Spirit rover transverse. JGR Planets 111, E02S07",
+    "url": "https://doi.org/10.1029/2005JE002503",
+    "role": "mission context (rover scale)"
+  },
+  {
+    "id": "malin-edgett-2003-eberswalde",
+    "title": "Malin & Edgett (2003) Evidence for persistent flow and aqueous sedimentation on early Mars. Science 302, 1931-1934",
+    "url": "https://doi.org/10.1126/science.1090544",
+    "role": "geomorphic context (regional)"
+  },
+  {
+    "id": "usgs-ctx-dtms",
+    "title": "USGS Astrogeology: Mars Reconnaissance Orbiter Context Camera controlled digital terrain models (STAC mro_ctx_controlled_usgs_dtms), DOI 10.5066/P9JKVWR3",
+    "url": "https://stac.astrogeology.usgs.gov/docs/data/mars/ctxdtms/",
+    "role": "planetary elevation input"
+  }
+]

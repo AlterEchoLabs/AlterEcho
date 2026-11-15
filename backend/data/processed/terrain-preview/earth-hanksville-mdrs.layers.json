@@ -1,0 +1,13 @@
+{
+  "site_id": "earth-hanksville-mdrs",
+  "resolution_m": 30.0,
+  "pixels": 334,
+  "hillshade": {
+    "azimuth_deg": 315,
+    "altitude_deg": 45
+  },
+  "slope_ramp": "linear 0-35 degrees, fixed across sites",
+  "slope_p50_deg": 3.34,
+  "source_sha256": "c71e33cbfedcecb6ab09a43cc37ea33c4acf6b261ea1aa0e6f2207bd7ec98bbc",
+  "purpose": "visualisation only; numeric analysis uses terrain-v3/v4"
+}

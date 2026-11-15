@@ -1,0 +1,393 @@
+{
+  "methodology_version": "analogue-method-v1.0",
+  "terrain_method": "terrain-v5.0",
+  "generated_at": "2026-11-14T17:27:13.271728+00:00",
+  "notice": "Deterministic calibration. Ranges are scenario sensitivities, not confidence intervals. Candidate windows were known from earlier phases; the rules use only the reference, DEM-product pairs and unselected windows.",
+  "rules": {
+    "redundancy_rho": 0.95,
+    "noise_factor": 3.0,
+    "population_exclusion_radius_m": 10000.0,
+    "primary_scale_m": 60,
+    "quantiles": 500
+  },
+  "resolution_floor": {
+    "slope": {
+      "placement": 0.676,
+      "dem_product": 0.9559,
+      "combined": 1.1708,
+      "dem_pairs": 15
+    },
+    "local_relief": {
+      "placement": 14.0925,
+      "dem_product": 7.7502,
+      "combined": 16.0831,
+      "dem_pairs": 15
+    },
+    "roughness": {
+      "placement": 1.0178,
+      "dem_product": 1.07,
+      "combined": 1.4767,
+      "dem_pairs": 15
+    },
+    "relative_elevation": {
+      "placement": 22.1346,
+      "dem_product": 0.886,
+      "combined": 22.1523,
+      "dem_pairs": 15
+    }
+  },
+  "redundancy": {
+    "spearman_medians_60m": {
+      "slope~relative_elevation": -0.244,
+      "slope~local_relief": 0.985,
+      "slope~roughness": 0.998,
+      "relative_elevation~local_relief": -0.197,
+      "relative_elevation~roughness": -0.238,
+      "local_relief~roughness": 0.99
+    },
+    "scored": [
+      "slope",
+      "relative_elevation"
+    ],
+    "redundant_with": {
+      "local_relief": "slope",
+      "roughness": "slope"
+    },
+    "population_windows": 88
+  },
+  "tau": {
+    "slope": {
+      "60": 5.8058,
+      "120": 5.2405,
+      "240": 4.399,
+      "leave_one_tile_out_60": [
+        4.5197,
+        6.3352
+      ],
+      "noise_condition": {
+        "delta_60": 1.1708,
+        "required_min": 3.5124,
+        "passed": true
+      }
+    },
+    "local_relief": {
+      "60": 98.5232,
+      "120": 95.7615,
+      "240": 87.9924,
+      "leave_one_tile_out_60": [
+        73.4797,
+        108.2406
+      ],
+      "noise_condition": {
+        "delta_60": 16.0831,
+        "required_min": 48.2493,
+        "passed": true
+      }
+    },
+    "roughness": {
+      "60": 8.9318,
+      "120": 9.7064,
+      "240": 16.0271,
+      "leave_one_tile_out_60": [
+        6.8902,
+        9.7732
+      ],
+      "noise_condition": {
+        "delta_60": 1.4767,
+        "required_min": 4.4301,
+        "passed": true
+      }
+    },
+    "relative_elevation": {
+      "60": 77.1038,
+      "120": 77.1272,
+      "240": 76.1866,
+      "leave_one_tile_out_60": [
+        55.0633,
+        88.5764
+      ],
+      "noise_condition": {
+        "delta_60": 22.1523,
+        "required_min": 66.4569,
+        "passed": true
+      }
+    }
+  },
+  "synthetic_negatives": {
+    "tilted_plane_15deg": {
+      "expectation": "negative: uniform 15 deg slope",
+      "index_vs_jezero": 2.06,
+      "w1": {
+        "slope": 12.455,
+        "local_relief": 216.297,
+        "roughness": 19.1,
+        "relative_elevation": 627.083
+      }
+    },
+    "ridges_150m_2km": {
+      "expectation": "negative: regular 150 m ridges every 2 km",
+      "index_vs_jezero": 38.23,
+      "w1": {
+        "slope": 13.756,
+        "local_relief": 198.19,
+        "roughness": 21.806,
+        "relative_elevation": 50.343
+      }
+    },
+    "fractal_relief_1500m": {
+      "expectation": "negative: rough fractal relief 1,500 m",
+      "index_vs_jezero": 21.25,
+      "w1": {
+        "slope": 22.814,
+        "local_relief": 321.343,
+        "roughness": 34.006,
+        "relative_elevation": 85.676
+      }
+    },
+    "fractal_relief_300m": {
+      "expectation": "look-alike: gentle fractal relief 300 m with slope and relief distributions close to Jezero's; a high value is expected and shows that distributions ignore spatial arrangement",
+      "index_vs_jezero": 88.39,
+      "w1": {
+        "slope": 3.152,
+        "local_relief": 31.521,
+        "roughness": 3.969,
+        "relative_elevation": 20.4
+      }
+    },
+    "identical_copy": {
+      "index_vs_jezero": 100.0
+    }
+  },
+  "base_rate": {
+    "count": 88,
+    "median_index": 87.38,
+    "share_at_or_above": {
+      "99": 0.011,
+      "95": 0.341,
+      "90": 0.489,
+      "50": 0.67
+    }
+  },
+  "remote_dem_status": {
+    "earth-upper-mustang:nasadem": "measured",
+    "earth-upper-mustang:cop-dem-glo-30": "measured",
+    "earth-ladakh:nasadem": "measured",
+    "earth-ladakh:cop-dem-glo-30": "measured",
+    "earth-atacama:nasadem": "measured",
+    "earth-atacama:cop-dem-glo-30": "measured",
+    "earth-atacama-south:nasadem": "measured",
+    "earth-atacama-south:cop-dem-glo-30": "measured",
+    "earth-danakil:nasadem": "measured",
+    "earth-danakil:cop-dem-glo-30": "measured",
+    "earth-craters-of-the-moon:nasadem": "measured",
+    "earth-craters-of-the-moon:cop-dem-glo-30": "measured",
+    "earth-hanksville-mdrs:nasadem": "measured",
+    "earth-hanksville-mdrs:cop-dem-glo-30": "measured",
+    "earth-meteor-crater:nasadem": "measured",
+    "earth-meteor-crater:cop-dem-glo-30": "not measured: HTTPStatusError"
+  },
+  "population": {
+    "windows": [
+      "N14E040@0.2,0.2",
+      "N14E040@0.2,0.5",
+      "N14E040@0.2,0.8",
+      "N14E040@0.5,0.2",
+      "N14E040@0.5,0.5",
+      "N14E040@0.5,0.8",
+      "N14E040@0.8,0.2",
+      "N14E040@0.8,0.5",
+      "N14E040@0.8,0.8",
+      "N29E083@0.2,0.2",
+      "N29E083@0.2,0.5",
+      "N29E083@0.2,0.8",
+      "N29E083@0.5,0.2",
+      "N29E083@0.5,0.5",
+      "N29E083@0.5,0.8",
+      "N29E083@0.8,0.2",
+      "N29E083@0.8,0.5",
+      "N29E083@0.8,0.8",
+      "N34E077@0.2,0.2",
+      "N34E077@0.2,0.8",
+      "N34E077@0.5,0.2",
+      "N34E077@0.5,0.5",
+      "N34E077@0.5,0.8",
+      "N34E077@0.8,0.2",
+      "N34E077@0.8,0.5",
+      "N34E077@0.8,0.8",
+      "N34W111@0.2,0.2",
+      "N34W111@0.2,0.5",
+      "N34W111@0.2,0.8",
+      "N34W111@0.5,0.2",
+      "N34W111@0.5,0.5",
+      "N34W111@0.5,0.8",
+      "N34W111@0.8,0.2",
+      "N34W111@0.8,0.5",
+      "N34W111@0.8,0.8",
+      "N34W112@0.2,0.2",
+      "N34W112@0.2,0.5",
+      "N34W112@0.2,0.8",
+      "N34W112@0.5,0.2",
+      "N34W112@0.5,0.5",
+      "N34W112@0.5,0.8",
+      "N34W112@0.8,0.2",
+      "N34W112@0.8,0.5",
+      "N34W112@0.8,0.8",
+      "N35W111@0.2,0.2",
+      "N35W111@0.2,0.5",
+      "N35W111@0.2,0.8",
+      "N35W111@0.5,0.2",
+      "N35W111@0.5,0.5",
+      "N35W111@0.5,0.8",
+      "N35W111@0.8,0.2",
+      "N35W111@0.8,0.5",
+      "N35W111@0.8,0.8",
+      "N35W112@0.2,0.2",
+      "N35W112@0.2,0.5",
+      "N35W112@0.2,0.8",
+      "N35W112@0.5,0.2",
+      "N35W112@0.5,0.5",
+      "N35W112@0.5,0.8",
+      "N35W112@0.8,0.2",
+      "N35W112@0.8,0.5",
+      "N35W112@0.8,0.8",
+      "N38W111@0.2,0.2",
+      "N38W111@0.2,0.5",
+      "N38W111@0.2,0.8",
+      "N38W111@0.5,0.2",
+      "N38W111@0.5,0.5",
+      "N38W111@0.5,0.8",
+      "N38W111@0.8,0.2",
+      "N38W111@0.8,0.5",
+      "N38W111@0.8,0.8",
+      "N43W114@0.2,0.2",
+      "N43W114@0.2,0.5",
+      "N43W114@0.2,0.8",
+      "N43W114@0.5,0.2",
+      "N43W114@0.5,0.8",
+      "N43W114@0.8,0.2",
+      "N43W114@0.8,0.5",
+      "N43W114@0.8,0.8",
+      "S25W070@0.2,0.2",
+      "S25W070@0.2,0.5",
+      "S25W070@0.2,0.8",
+      "S25W070@0.5,0.2",
+      "S25W070@0.5,0.5",
+      "S25W070@0.5,0.8",
+      "S25W070@0.8,0.2",
+      "S25W070@0.8,0.5",
+      "S25W070@0.8,0.8"
+    ],
+    "excluded_near_candidates": [
+      "N34E077@0.2,0.5",
+      "N43W114@0.5,0.5"
+    ]
+  },
+  "dem_w1_60m": {
+    "earth-upper-mustang": {
+      "nasadem": {
+        "slope": 0.2464,
+        "local_relief": 1.9378,
+        "roughness": 0.3416,
+        "relative_elevation": 0.5603
+      },
+      "cop-dem-glo-30": {
+        "slope": 0.6099,
+        "local_relief": 4.3037,
+        "roughness": 0.7239,
+        "relative_elevation": 0.8181
+      }
+    },
+    "earth-ladakh": {
+      "nasadem": {
+        "slope": 0.1748,
+        "local_relief": 1.5571,
+        "roughness": 0.2289,
+        "relative_elevation": 0.469
+      },
+      "cop-dem-glo-30": {
+        "slope": 0.6413,
+        "local_relief": 4.5753,
+        "roughness": 0.8186,
+        "relative_elevation": 0.6138
+      }
+    },
+    "earth-atacama": {
+      "nasadem": {
+        "slope": 0.0191,
+        "local_relief": 0.2382,
+        "roughness": 0.0176,
+        "relative_elevation": 0.1663
+      },
+      "cop-dem-glo-30": {
+        "slope": 0.3704,
+        "local_relief": 1.9086,
+        "roughness": 0.382,
+        "relative_elevation": 0.4951
+      }
+    },
+    "earth-atacama-south": {
+      "nasadem": {
+        "slope": 0.0183,
+        "local_relief": 0.2041,
+        "roughness": 0.0135,
+        "relative_elevation": 0.1397
+      },
+      "cop-dem-glo-30": {
+        "slope": 0.5556,
+        "local_relief": 3.1479,
+        "roughness": 0.5744,
+        "relative_elevation": 0.3773
+      }
+    },
+    "earth-danakil": {
+      "nasadem": {
+        "slope": 0.0853,
+        "local_relief": 1.4303,
+        "roughness": 0.0977,
+        "relative_elevation": 0.0937
+      },
+      "cop-dem-glo-30": {
+        "slope": 0.9559,
+        "local_relief": 7.7502,
+        "roughness": 1.07,
+        "relative_elevation": 0.886
+      }
+    },
+    "earth-craters-of-the-moon": {
+      "nasadem": {
+        "slope": 0.0278,
+        "local_relief": 0.3846,
+        "roughness": 0.0352,
+        "relative_elevation": 0.2198
+      },
+      "cop-dem-glo-30": {
+        "slope": 0.1359,
+        "local_relief": 0.7837,
+        "roughness": 0.1379,
+        "relative_elevation": 0.3592
+      }
+    },
+    "earth-hanksville-mdrs": {
+      "nasadem": {
+        "slope": 0.0418,
+        "local_relief": 0.2205,
+        "roughness": 0.0418,
+        "relative_elevation": 0.0959
+      },
+      "cop-dem-glo-30": {
+        "slope": 0.3791,
+        "local_relief": 1.4023,
+        "roughness": 0.4086,
+        "relative_elevation": 0.3272
+      }
+    },
+    "earth-meteor-crater": {
+      "nasadem": {
+        "slope": 0.0123,
+        "local_relief": 0.1156,
+        "roughness": 0.0123,
+        "relative_elevation": 0.1445
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "type": "Feature",
+  "id": "moon-south-pole-shackleton-aoi-v1",
+  "properties": {
+    "aoi_id": "moon-south-pole-shackleton-aoi-v1",
+    "site_id": "moon-south-pole-shackleton",
+    "version": "1.0",
+    "planetary_body": "moon",
+    "center_latitude": -90.0,
+    "center_longitude": 0.0,
+    "width_m": 10000,
+    "height_m": 10000,
+    "selection_rationale": "10 km square centred on the lunar south pole, which lies on or very near Shackleton crater's rim. It spans the rim crest, part of the inner wall and the outer plateau. Chosen before any Earth comparison was run.",
+    "intended_analog_characteristics": [
+      "local slope distribution",
+      "local relief",
+      "surface roughness"
+    ],
+    "known_limitations": [
+      "Mixes rim, steep inner wall and plateau terrain",
+      "26.6% of core cells have no LOLA shot and are interpolated",
+      "Illumination, permanent shadow and volatiles are not assessed"
+    ],
+    "creation_method": "Square defined in the LOLA polar stereographic grid (metres) around the pole; the lon/lat ring is a display approximation only.",
+    "source_references": [
+      "moon-south-pole-shackleton-lola-ldem"
+    ],
+    "planetary_target": "Lunar south-pole reference window (limited terrain comparison).",
+    "analogy_dimensions_not_covered": [
+      "illumination",
+      "temperature",
+      "volatiles",
+      "regolith",
+      "radiation",
+      "gravity"
+    ],
+    "representativeness": "One 10 km window at the pole; not representative of the wider south-polar region.",
+    "known_selection_bias": "Chosen for its relevance to lunar surface-presence studies, not for expected Earth similarity.",
+    "lola_measured_cell_fraction": 0.7339
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -135.0,
+          -89.76681
+        ],
+        [
+          135.0,
+          -89.76681
+        ],
+        [
+          45.0,
+          -89.76681
+        ],
+        [
+          -45.0,
+          -89.76681
+        ],
+        [
+          -135.0,
+          -89.76681
+        ]
+      ]
+    ]
+  }
+}

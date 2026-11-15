@@ -1,0 +1,68 @@
+{
+  "type": "Feature",
+  "id": "mars-gusev-plains-aoi-v1",
+  "properties": {
+    "aoi_id": "mars-gusev-plains-aoi-v1",
+    "site_id": "mars-gusev-plains",
+    "version": "1.0",
+    "planetary_body": "mars",
+    "center_latitude": -14.5684,
+    "center_longitude": 175.4726,
+    "width_m": 10000.0,
+    "height_m": 10000.0,
+    "selection_rationale": "Centred on the Spirit landing site (14.5684 S, 175.4726 E); the window includes the western Columbia Hills. Fixed before any terrain value was computed.",
+    "intended_analog_characteristics": [
+      "local slope distribution",
+      "relative elevation distribution"
+    ],
+    "known_limitations": [
+      "The window mixes plains and part of the Columbia Hills",
+      "Rover-scale observations do not validate window-scale statistics",
+      "Terrain metrics do not establish geology, habitability, safety or radiation"
+    ],
+    "creation_method": "Planetocentric latitude, east-positive longitude on the Mars sphere (R = 3,396,190 m); processing builds a local equirectangular grid true to scale at the window latitude.",
+    "source_references": [
+      "mars-gusev-plains-ctx-dtm",
+      "golombek-2006-gusev",
+      "usgs-ctx-dtms"
+    ],
+    "planetary_target": "Reference window for terrain-only comparison with Earth windows.",
+    "analogy_dimensions_not_covered": [
+      "atmosphere",
+      "gravity",
+      "radiation",
+      "geology",
+      "temperature",
+      "habitability"
+    ],
+    "representativeness": "One 10 km window; it does not represent the whole crater or plain.",
+    "known_selection_bias": "Placed at a mission site by a documented rule."
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          175.38544,
+          -14.65275
+        ],
+        [
+          175.55976,
+          -14.65275
+        ],
+        [
+          175.55976,
+          -14.48405
+        ],
+        [
+          175.38544,
+          -14.48405
+        ],
+        [
+          175.38544,
+          -14.65275
+        ]
+      ]
+    ]
+  }
+}

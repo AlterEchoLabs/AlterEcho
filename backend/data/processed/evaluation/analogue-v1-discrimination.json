@@ -1,0 +1,2153 @@
+{
+  "methodology_version": "analogue-method-v1.0",
+  "generated_at": "2026-11-14T18:37:42.856480+00:00",
+  "notice": "Discrimination analysis. Ranges and shares describe tested scenarios and an unselected background sample; they are not confidence intervals.",
+  "population": {
+    "windows": 88,
+    "regions": {
+      "Afar": 9,
+      "Central Andes": 9,
+      "Himalaya and Tibet": 17,
+      "Western USA": 53
+    },
+    "caveat": "The background windows come from tiles first downloaded for candidate sites: arid and mountainous regions are over-represented, and windows inside one region are spatially correlated. 4 regions, not 88 independent samples."
+  },
+  "references": {
+    "mars-jezero": {
+      "resolution_floor": {
+        "slope": {
+          "placement": 0.676,
+          "dem_product": 0.9559,
+          "combined": 1.1708,
+          "noise_condition_passed": true
+        },
+        "local_relief": {
+          "placement": 14.0925,
+          "dem_product": 7.7502,
+          "combined": 16.0831,
+          "noise_condition_passed": true
+        },
+        "roughness": {
+          "placement": 1.0178,
+          "dem_product": 1.07,
+          "combined": 1.4767,
+          "noise_condition_passed": true
+        },
+        "relative_elevation": {
+          "placement": 22.1346,
+          "dem_product": 0.886,
+          "combined": 22.1523,
+          "noise_condition_passed": true
+        }
+      },
+      "background": {
+        "count": 88,
+        "median": 87.39,
+        "p10": 1.35,
+        "p90": 98.29,
+        "share_at_or_above": {
+          "99": 0.011,
+          "95": 0.341,
+          "90": 0.489,
+          "75": 0.58,
+          "50": 0.67
+        }
+      },
+      "background_by_region": {
+        "Afar": {
+          "count": 9,
+          "median": 91.55,
+          "p10": 42.73,
+          "p90": 94.93,
+          "share_at_or_above": {
+            "99": 0.0,
+            "95": 0.111,
+            "90": 0.556,
+            "75": 0.778,
+            "50": 0.889
+          }
+        },
+        "Central Andes": {
+          "count": 9,
+          "median": 95.48,
+          "p10": 29.24,
+          "p90": 98.37,
+          "share_at_or_above": {
+            "99": 0.0,
+            "95": 0.556,
+            "90": 0.556,
+            "75": 0.556,
+            "50": 0.667
+          }
+        },
+        "Himalaya and Tibet": {
+          "count": 17,
+          "median": 0.25,
+          "p10": 0.0,
+          "p90": 59.9,
+          "share_at_or_above": {
+            "99": 0.0,
+            "95": 0.0,
+            "90": 0.0,
+            "75": 0.059,
+            "50": 0.176
+          }
+        },
+        "Western USA": {
+          "count": 53,
+          "median": 94.22,
+          "p10": 22.78,
+          "p90": 98.34,
+          "share_at_or_above": {
+            "99": 0.019,
+            "95": 0.453,
+            "90": 0.623,
+            "75": 0.717,
+            "50": 0.792
+          }
+        }
+      },
+      "single_feature": {
+        "slope": {
+          "count": 88,
+          "median": 88.31,
+          "p10": 0.01,
+          "p90": 99.54,
+          "share_at_or_above": {
+            "99": 0.17,
+            "95": 0.42,
+            "90": 0.466,
+            "75": 0.545,
+            "50": 0.636
+          }
+        },
+        "relative_elevation": {
+          "count": 88,
+          "median": 89.58,
+          "p10": 0.51,
+          "p90": 98.32,
+          "share_at_or_above": {
+            "99": 0.011,
+            "95": 0.375,
+            "90": 0.489,
+            "75": 0.625,
+            "50": 0.705
+          }
+        }
+      },
+      "alternative_tolerances": {
+        "phase5_tau": {
+          "background": {
+            "count": 88,
+            "median": 95.17,
+            "p10": 18.09,
+            "p90": 99.43,
+            "share_at_or_above": {
+              "99": 0.227,
+              "95": 0.5,
+              "90": 0.545,
+              "75": 0.659,
+              "50": 0.773
+            }
+          },
+          "candidates": {
+            "earth-upper-mustang": 15.26,
+            "earth-ladakh": 3.89,
+            "earth-atacama": 99.76,
+            "earth-atacama-south": 99.26,
+            "earth-danakil": 96.31,
+            "earth-craters-of-the-moon": 99.4,
+            "earth-hanksville-mdrs": 98.88,
+            "earth-meteor-crater": 98.39
+          }
+        },
+        "tau_x0.5": {
+          "background": {
+            "count": 88,
+            "median": 62.58,
+            "p10": 0.0,
+            "p90": 93.4,
+            "share_at_or_above": {
+              "99": 0.0,
+              "95": 0.023,
+              "90": 0.193,
+              "75": 0.42,
+              "50": 0.568
+            }
+          },
+          "candidates": {
+            "earth-upper-mustang": 0.0,
+            "earth-ladakh": 0.0,
+            "earth-atacama": 97.72,
+            "earth-atacama-south": 91.9,
+            "earth-danakil": 64.5,
+            "earth-craters-of-the-moon": 93.16,
+            "earth-hanksville-mdrs": 89.92,
+            "earth-meteor-crater": 82.27
+          }
+        },
+        "tau_x2": {
+          "background": {
+            "count": 88,
+            "median": 96.57,
+            "p10": 23.41,
+            "p90": 99.57,
+            "share_at_or_above": {
+              "99": 0.25,
+              "95": 0.545,
+              "90": 0.58,
+              "75": 0.693,
+              "50": 0.852
+            }
+          },
+          "candidates": {
+            "earth-upper-mustang": 27.17,
+            "earth-ladakh": 10.09,
+            "earth-atacama": 99.86,
+            "earth-atacama-south": 99.47,
+            "earth-danakil": 96.95,
+            "earth-craters-of-the-moon": 99.55,
+            "earth-hanksville-mdrs": 99.34,
+            "earth-meteor-crater": 98.75
+          }
+        }
+      },
+      "candidates": {
+        "earth-upper-mustang": {
+          "index": 0.57,
+          "background_share_at_or_above": 0.898
+        },
+        "earth-ladakh": {
+          "index": 0.01,
+          "background_share_at_or_above": 0.932
+        },
+        "earth-atacama": {
+          "index": 99.42,
+          "background_share_at_or_above": 0.0
+        },
+        "earth-atacama-south": {
+          "index": 97.9,
+          "background_share_at_or_above": 0.17
+        },
+        "earth-danakil": {
+          "index": 88.61,
+          "background_share_at_or_above": 0.5
+        },
+        "earth-craters-of-the-moon": {
+          "index": 98.23,
+          "background_share_at_or_above": 0.114
+        },
+        "earth-hanksville-mdrs": {
+          "index": 97.38,
+          "background_share_at_or_above": 0.193
+        },
+        "earth-meteor-crater": {
+          "index": 95.12,
+          "background_share_at_or_above": 0.341
+        }
+      },
+      "leave_one_region_out": {
+        "Afar": {
+          "tau": {
+            "slope": 6.083,
+            "relative_elevation": 82.742
+          },
+          "held_out_windows": 9,
+          "held_out_background": {
+            "count": 9,
+            "median": 92.57,
+            "p10": 45.9,
+            "p90": 95.56,
+            "share_at_or_above": {
+              "99": 0.0,
+              "95": 0.222,
+              "90": 0.667,
+              "75": 0.778,
+              "50": 0.889
+            }
+          },
+          "candidate_order": [
+            "earth-atacama",
+            "earth-craters-of-the-moon",
+            "earth-atacama-south",
+            "earth-hanksville-mdrs",
+            "earth-meteor-crater",
+            "earth-danakil",
+            "earth-upper-mustang",
+            "earth-ladakh"
+          ]
+        },
+        "Central Andes": {
+          "tau": {
+            "slope": 6.297,
+            "relative_elevation": 77.51
+          },
+          "held_out_windows": 9,
+          "held_out_background": {
+            "count": 9,
+            "median": 95.81,
+            "p10": 31.71,
+            "p90": 98.43,
+            "share_at_or_above": {
+              "99": 0.0,
+              "95": 0.556,
+              "90": 0.556,
+              "75": 0.556,
+              "50": 0.667
+            }
+          },
+          "candidate_order": [
+            "earth-atacama",
+            "earth-craters-of-the-moon",
+            "earth-atacama-south",
+            "earth-hanksville-mdrs",
+            "earth-meteor-crater",
+            "earth-danakil",
+            "earth-upper-mustang",
+            "earth-ladakh"
+          ]
+        },
+        "Himalaya and Tibet": {
+          "tau": {
+            "slope": 3.679,
+            "relative_elevation": 42.669
+          },
+          "held_out_windows": 17,
+          "held_out_background": {
+            "count": 17,
+            "median": 0.0,
+            "p10": 0.0,
+            "p90": 31.9,
+            "share_at_or_above": {
+              "99": 0.0,
+              "95": 0.0,
+              "90": 0.0,
+              "75": 0.0,
+              "50": 0.059
+            }
+          },
+          "candidate_order": [
+            "earth-atacama",
+            "earth-craters-of-the-moon",
+            "earth-atacama-south",
+            "earth-hanksville-mdrs",
+            "earth-meteor-crater",
+            "earth-danakil",
+            "earth-upper-mustang",
+            "earth-ladakh"
+          ]
+        },
+        "Western USA": {
+          "tau": {
+            "slope": 9.422,
+            "relative_elevation": 146.698
+          },
+          "held_out_windows": 53,
+          "held_out_background": {
+            "count": 53,
+            "median": 97.81,
+            "p10": 55.08,
+            "p90": 99.5,
+            "share_at_or_above": {
+              "99": 0.302,
+              "95": 0.623,
+              "90": 0.717,
+              "75": 0.792,
+              "50": 0.925
+            }
+          },
+          "candidate_order": [
+            "earth-atacama",
+            "earth-craters-of-the-moon",
+            "earth-atacama-south",
+            "earth-hanksville-mdrs",
+            "earth-meteor-crater",
+            "earth-danakil",
+            "earth-upper-mustang",
+            "earth-ladakh"
+          ]
+        }
+      }
+    },
+    "mars-eberswalde-delta": {
+      "resolution_floor": {
+        "slope": {
+          "placement": 0.2821,
+          "dem_product": 0.9559,
+          "combined": 0.9967,
+          "noise_condition_passed": true
+        },
+        "local_relief": {
+          "placement": 4.0726,
+          "dem_product": 7.7502,
+          "combined": 8.7551,
+          "noise_condition_passed": true
+        },
+        "roughness": {
+          "placement": 0.4294,
+          "dem_product": 1.07,
+          "combined": 1.153,
+          "noise_condition_passed": true
+        },
+        "relative_elevation": {
+          "placement": 17.4502,
+          "dem_product": 0.886,
+          "combined": 17.4726,
+          "noise_condition_passed": true
+        }
+      },
+      "background": {
+        "count": 88,
+        "median": 86.82,
+        "p10": 1.53,
+        "p90": 97.27,
+        "share_at_or_above": {
+          "99": 0.0,
+          "95": 0.227,
+          "90": 0.455,
+          "75": 0.58,
+          "50": 0.67
+        }
+      },
+      "background_by_region": {
+        "Afar": {
+          "count": 9,
+          "median": 87.14,
+          "p10": 44.47,
+          "p90": 92.06,
+          "share_at_or_above": {
+            "99": 0.0,
+            "95": 0.0,
+            "90": 0.333,
+            "75": 0.778,
+            "50": 0.889
+          }
+        },
+        "Central Andes": {
+          "count": 9,
+          "median": 95.8,
+          "p10": 34.65,
+          "p90": 97.44,
+          "share_at_or_above": {
+            "99": 0.0,
+            "95": 0.556,
+            "90": 0.556,
+            "75": 0.556,
+            "50": 0.667
+          }
+        },
+        "Himalaya and Tibet": {
+          "count": 17,
+          "median": 0.28,
+          "p10": 0.0,
+          "p90": 64.25,
+          "share_at_or_above": {
+            "99": 0.0,
+            "95": 0.0,
+            "90": 0.0,
+            "75": 0.059,
+            "50": 0.176
+          }
+        },
+        "Western USA": {
+          "count": 53,
+          "median": 92.53,
+          "p10": 27.04,
+          "p90": 97.4,
+          "share_at_or_above": {
+            "99": 0.0,
+            "95": 0.283,
+            "90": 0.604,
+            "75": 0.717,
+            "50": 0.792
+          }
+        }
+      },
+      "single_feature": {
+        "slope": {
+          "count": 88,
+          "median": 89.77,
+          "p10": 0.03,
+          "p90": 98.99,
+          "share_at_or_above": {
+            "99": 0.102,
+            "95": 0.364,
+            "90": 0.5,
+            "75": 0.557,
+            "50": 0.67
+          }
+        },
+        "relative_elevation": {
+          "count": 88,
+          "median": 86.84,
+          "p10": 0.57,
+          "p90": 96.93,
+          "share_at_or_above": {
+            "99": 0.0,
+            "95": 0.25,
+            "90": 0.386,
+            "75": 0.636,
+            "50": 0.705
+          }
+        }
+      },
+      "alternative_tolerances": {
+        "phase5_tau": {
+          "background": {
+            "count": 88,
+            "median": 95.07,
+            "p10": 19.39,
+            "p90": 99.08,
+            "share_at_or_above": {
+              "99": 0.125,
+              "95": 0.5,
+              "90": 0.58,
+              "75": 0.659,
+              "50": 0.795
+            }
+          },
+          "candidates": {
+            "earth-upper-mustang": 16.93,
+            "earth-ladakh": 4.33,
+            "earth-atacama": 99.03,
+            "earth-atacama-south": 99.5,
+            "earth-danakil": 94.32,
+            "earth-craters-of-the-moon": 98.23,
+            "earth-hanksville-mdrs": 98.7,
+            "earth-meteor-crater": 96.71
+          }
+        },
+        "tau_x0.5": {
+          "background": {
+            "count": 88,
+            "median": 58.63,
+            "p10": 0.0,
+            "p90": 89.57,
+            "share_at_or_above": {
+              "99": 0.0,
+              "95": 0.023,
+              "90": 0.091,
+              "75": 0.375,
+              "50": 0.568
+            }
+          },
+          "candidates": {
+            "earth-upper-mustang": 0.0,
+            "earth-ladakh": 0.0,
+            "earth-atacama": 87.6,
+            "earth-atacama-south": 93.6,
+            "earth-danakil": 52.51,
+            "earth-craters-of-the-moon": 81.62,
+            "earth-hanksville-mdrs": 83.96,
+            "earth-meteor-crater": 70.78
+          }
+        },
+        "tau_x2": {
+          "background": {
+            "count": 88,
+            "median": 96.47,
+            "p10": 24.73,
+            "p90": 99.31,
+            "share_at_or_above": {
+              "99": 0.193,
+              "95": 0.557,
+              "90": 0.625,
+              "75": 0.705,
+              "50": 0.852
+            }
+          },
+          "candidates": {
+            "earth-upper-mustang": 29.73,
+            "earth-ladakh": 11.5,
+            "earth-atacama": 99.13,
+            "earth-atacama-south": 99.58,
+            "earth-danakil": 95.86,
+            "earth-craters-of-the-moon": 98.72,
+            "earth-hanksville-mdrs": 98.83,
+            "earth-meteor-crater": 97.86
+          }
+        }
+      },
+      "candidates": {
+        "earth-upper-mustang": {
+          "index": 0.88,
+          "background_share_at_or_above": 0.898
+        },
+        "earth-ladakh": {
+          "index": 0.03,
+          "background_share_at_or_above": 0.932
+        },
+        "earth-atacama": {
+          "index": 96.61,
+          "background_share_at_or_above": 0.159
+        },
+        "earth-atacama-south": {
+          "index": 98.34,
+          "background_share_at_or_above": 0.023
+        },
+        "earth-danakil": {
+          "index": 84.58,
+          "background_share_at_or_above": 0.534
+        },
+        "earth-craters-of-the-moon": {
+          "index": 95.0,
+          "background_share_at_or_above": 0.227
+        },
+        "earth-hanksville-mdrs": {
+          "index": 95.46,
+          "background_share_at_or_above": 0.227
+        },
+        "earth-meteor-crater": {
+          "index": 91.72,
+          "background_share_at_or_above": 0.398
+        }
+      },
+      "leave_one_region_out": {
+        "Afar": {
+          "tau": {
+            "slope": 6.083,
+            "relative_elevation": 82.742
+          },
+          "held_out_windows": 9,
+          "held_out_background": {
+            "count": 9,
+            "median": 88.6,
+            "p10": 47.94,
+            "p90": 92.95,
+            "share_at_or_above": {
+              "99": 0.0,
+              "95": 0.0,
+              "90": 0.444,
+              "75": 0.778,
+              "50": 0.889
+            }
+          },
+          "candidate_order": [
+            "earth-atacama-south",
+            "earth-atacama",
+            "earth-hanksville-mdrs",
+            "earth-craters-of-the-moon",
+            "earth-meteor-crater",
+            "earth-danakil",
+            "earth-upper-mustang",
+            "earth-ladakh"
+          ]
+        },
+        "Central Andes": {
+          "tau": {
+            "slope": 6.297,
+            "relative_elevation": 77.51
+          },
+          "held_out_windows": 9,
+          "held_out_background": {
+            "count": 9,
+            "median": 96.13,
+            "p10": 36.68,
+            "p90": 97.7,
+            "share_at_or_above": {
+              "99": 0.0,
+              "95": 0.556,
+              "90": 0.556,
+              "75": 0.556,
+              "50": 0.667
+            }
+          },
+          "candidate_order": [
+            "earth-atacama-south",
+            "earth-atacama",
+            "earth-hanksville-mdrs",
+            "earth-craters-of-the-moon",
+            "earth-meteor-crater",
+            "earth-danakil",
+            "earth-upper-mustang",
+            "earth-ladakh"
+          ]
+        },
+        "Himalaya and Tibet": {
+          "tau": {
+            "slope": 3.679,
+            "relative_elevation": 42.669
+          },
+          "held_out_windows": 17,
+          "held_out_background": {
+            "count": 17,
+            "median": 0.0,
+            "p10": 0.0,
+            "p90": 37.13,
+            "share_at_or_above": {
+              "99": 0.0,
+              "95": 0.0,
+              "90": 0.0,
+              "75": 0.0,
+              "50": 0.059
+            }
+          },
+          "candidate_order": [
+            "earth-atacama-south",
+            "earth-atacama",
+            "earth-hanksville-mdrs",
+            "earth-craters-of-the-moon",
+            "earth-meteor-crater",
+            "earth-danakil",
+            "earth-upper-mustang",
+            "earth-ladakh"
+          ]
+        },
+        "Western USA": {
+          "tau": {
+            "slope": 9.422,
+            "relative_elevation": 146.698
+          },
+          "held_out_windows": 53,
+          "held_out_background": {
+            "count": 53,
+            "median": 97.79,
+            "p10": 58.79,
+            "p90": 99.22,
+            "share_at_or_above": {
+              "99": 0.208,
+              "95": 0.66,
+              "90": 0.717,
+              "75": 0.792,
+              "50": 0.962
+            }
+          },
+          "candidate_order": [
+            "earth-atacama-south",
+            "earth-atacama",
+            "earth-hanksville-mdrs",
+            "earth-craters-of-the-moon",
+            "earth-meteor-crater",
+            "earth-danakil",
+            "earth-upper-mustang",
+            "earth-ladakh"
+          ]
+        }
+      }
+    },
+    "mars-gusev-plains": {
+      "resolution_floor": {
+        "slope": {
+          "placement": 0.1317,
+          "dem_product": 0.9559,
+          "combined": 0.9649,
+          "noise_condition_passed": true
+        },
+        "local_relief": {
+          "placement": 3.0975,
+          "dem_product": 7.7502,
+          "combined": 8.3463,
+          "noise_condition_passed": true
+        },
+        "roughness": {
+          "placement": 0.1914,
+          "dem_product": 1.07,
+          "combined": 1.087,
+          "noise_condition_passed": true
+        },
+        "relative_elevation": {
+          "placement": 3.5742,
+          "dem_product": 0.886,
+          "combined": 3.6824,
+          "noise_condition_passed": true
+        }
+      },
+      "background": {
+        "count": 88,
+        "median": 85.6,
+        "p10": 0.35,
+        "p90": 97.2,
+        "share_at_or_above": {
+          "99": 0.023,
+          "95": 0.352,
+          "90": 0.42,
+          "75": 0.557,
+          "50": 0.625
+        }
+      },
+      "background_by_region": {
+        "Afar": {
+          "count": 9,
+          "median": 91.43,
+          "p10": 32.54,
+          "p90": 98.93,
+          "share_at_or_above": {
+            "99": 0.111,
+            "95": 0.444,
+            "90": 0.667,
+            "75": 0.778,
+            "50": 0.778
+          }
+        },
+        "Central Andes": {
+          "count": 9,
+          "median": 85.05,
+          "p10": 29.01,
+          "p90": 95.8,
+          "share_at_or_above": {
+            "99": 0.0,
+            "95": 0.222,
+            "90": 0.333,
+            "75": 0.556,
+            "50": 0.556
+          }
+        },
+        "Himalaya and Tibet": {
+          "count": 17,
+          "median": 0.05,
+          "p10": 0.0,
+          "p90": 50.96,
+          "share_at_or_above": {
+            "99": 0.0,
+            "95": 0.0,
+            "90": 0.0,
+            "75": 0.0,
+            "50": 0.118
+          }
+        },
+        "Western USA": {
+          "count": 53,
+          "median": 93.85,
+          "p10": 17.28,
+          "p90": 97.62,
+          "share_at_or_above": {
+            "99": 0.019,
+            "95": 0.472,
+            "90": 0.528,
+            "75": 0.698,
+            "50": 0.774
+          }
+        }
+      },
+      "single_feature": {
+        "slope": {
+          "count": 88,
+          "median": 91.28,
+          "p10": 0.02,
+          "p90": 99.16,
+          "share_at_or_above": {
+            "99": 0.114,
+            "95": 0.375,
+            "90": 0.511,
+            "75": 0.557,
+            "50": 0.67
+          }
+        },
+        "relative_elevation": {
+          "count": 88,
+          "median": 80.3,
+          "p10": 0.09,
+          "p90": 99.07,
+          "share_at_or_above": {
+            "99": 0.102,
+            "95": 0.25,
+            "90": 0.409,
+            "75": 0.511,
+            "50": 0.636
+          }
+        }
+      },
+      "alternative_tolerances": {
+        "phase5_tau": {
+          "background": {
+            "count": 88,
+            "median": 95.2,
+            "p10": 12.99,
+            "p90": 98.98,
+            "share_at_or_above": {
+              "99": 0.08,
+              "95": 0.511,
+              "90": 0.534,
+              "75": 0.625,
+              "50": 0.75
+            }
+          },
+          "candidates": {
+            "earth-upper-mustang": 11.59,
+            "earth-ladakh": 2.51,
+            "earth-atacama": 98.84,
+            "earth-atacama-south": 99.08,
+            "earth-danakil": 98.17,
+            "earth-craters-of-the-moon": 98.56,
+            "earth-hanksville-mdrs": 98.99,
+            "earth-meteor-crater": 98.62
+          }
+        },
+        "tau_x0.5": {
+          "background": {
+            "count": 88,
+            "median": 59.05,
+            "p10": 0.0,
+            "p90": 89.41,
+            "share_at_or_above": {
+              "99": 0.0,
+              "95": 0.045,
+              "90": 0.102,
+              "75": 0.386,
+              "50": 0.523
+            }
+          },
+          "candidates": {
+            "earth-upper-mustang": 0.0,
+            "earth-ladakh": 0.0,
+            "earth-atacama": 85.3,
+            "earth-atacama-south": 88.15,
+            "earth-danakil": 86.18,
+            "earth-craters-of-the-moon": 86.42,
+            "earth-hanksville-mdrs": 89.01,
+            "earth-meteor-crater": 89.67
+          }
+        },
+        "tau_x2": {
+          "background": {
+            "count": 88,
+            "median": 95.98,
+            "p10": 17.89,
+            "p90": 99.29,
+            "share_at_or_above": {
+              "99": 0.273,
+              "95": 0.523,
+              "90": 0.58,
+              "75": 0.67,
+              "50": 0.841
+            }
+          },
+          "candidates": {
+            "earth-upper-mustang": 23.78,
+            "earth-ladakh": 8.99,
+            "earth-atacama": 98.94,
+            "earth-atacama-south": 99.17,
+            "earth-danakil": 99.04,
+            "earth-craters-of-the-moon": 99.09,
+            "earth-hanksville-mdrs": 99.27,
+            "earth-meteor-crater": 99.3
+          }
+        }
+      },
+      "candidates": {
+        "earth-upper-mustang": {
+          "index": 0.53,
+          "background_share_at_or_above": 0.875
+        },
+        "earth-ladakh": {
+          "index": 0.02,
+          "background_share_at_or_above": 0.909
+        },
+        "earth-atacama": {
+          "index": 95.87,
+          "background_share_at_or_above": 0.284
+        },
+        "earth-atacama-south": {
+          "index": 96.77,
+          "background_share_at_or_above": 0.17
+        },
+        "earth-danakil": {
+          "index": 96.25,
+          "background_share_at_or_above": 0.261
+        },
+        "earth-craters-of-the-moon": {
+          "index": 96.42,
+          "background_share_at_or_above": 0.227
+        },
+        "earth-hanksville-mdrs": {
+          "index": 97.11,
+          "background_share_at_or_above": 0.114
+        },
+        "earth-meteor-crater": {
+          "index": 97.24,
+          "background_share_at_or_above": 0.102
+        }
+      },
+      "leave_one_region_out": {
+        "Afar": {
+          "tau": {
+            "slope": 6.083,
+            "relative_elevation": 82.742
+          },
+          "held_out_windows": 9,
+          "held_out_background": {
+            "count": 9,
+            "median": 92.18,
+            "p10": 36.37,
+            "p90": 99.03,
+            "share_at_or_above": {
+              "99": 0.111,
+              "95": 0.444,
+              "90": 0.667,
+              "75": 0.778,
+              "50": 0.778
+            }
+          },
+          "candidate_order": [
+            "earth-meteor-crater",
+            "earth-hanksville-mdrs",
+            "earth-atacama-south",
+            "earth-craters-of-the-moon",
+            "earth-danakil",
+            "earth-atacama",
+            "earth-upper-mustang",
+            "earth-ladakh"
+          ]
+        },
+        "Central Andes": {
+          "tau": {
+            "slope": 6.297,
+            "relative_elevation": 77.51
+          },
+          "held_out_windows": 9,
+          "held_out_background": {
+            "count": 9,
+            "median": 85.32,
+            "p10": 31.81,
+            "p90": 95.99,
+            "share_at_or_above": {
+              "99": 0.0,
+              "95": 0.222,
+              "90": 0.333,
+              "75": 0.556,
+              "50": 0.667
+            }
+          },
+          "candidate_order": [
+            "earth-meteor-crater",
+            "earth-hanksville-mdrs",
+            "earth-atacama-south",
+            "earth-danakil",
+            "earth-craters-of-the-moon",
+            "earth-atacama",
+            "earth-upper-mustang",
+            "earth-ladakh"
+          ]
+        },
+        "Himalaya and Tibet": {
+          "tau": {
+            "slope": 3.679,
+            "relative_elevation": 42.669
+          },
+          "held_out_windows": 17,
+          "held_out_background": {
+            "count": 17,
+            "median": 0.0,
+            "p10": 0.0,
+            "p90": 23.53,
+            "share_at_or_above": {
+              "99": 0.0,
+              "95": 0.0,
+              "90": 0.0,
+              "75": 0.0,
+              "50": 0.0
+            }
+          },
+          "candidate_order": [
+            "earth-meteor-crater",
+            "earth-hanksville-mdrs",
+            "earth-danakil",
+            "earth-atacama-south",
+            "earth-craters-of-the-moon",
+            "earth-atacama",
+            "earth-upper-mustang",
+            "earth-ladakh"
+          ]
+        },
+        "Western USA": {
+          "tau": {
+            "slope": 9.422,
+            "relative_elevation": 146.698
+          },
+          "held_out_windows": 53,
+          "held_out_background": {
+            "count": 53,
+            "median": 98.09,
+            "p10": 50.26,
+            "p90": 99.14,
+            "share_at_or_above": {
+              "99": 0.151,
+              "95": 0.623,
+              "90": 0.698,
+              "75": 0.792,
+              "50": 0.887
+            }
+          },
+          "candidate_order": [
+            "earth-hanksville-mdrs",
+            "earth-atacama-south",
+            "earth-meteor-crater",
+            "earth-atacama",
+            "earth-craters-of-the-moon",
+            "earth-danakil",
+            "earth-upper-mustang",
+            "earth-ladakh"
+          ]
+        }
+      }
+    },
+    "mars-insight-elysium": {
+      "resolution_floor": {
+        "slope": {
+          "placement": 0.1119,
+          "dem_product": 0.9559,
+          "combined": 0.9624,
+          "noise_condition_passed": true
+        },
+        "local_relief": {
+          "placement": 1.4547,
+          "dem_product": 7.7502,
+          "combined": 7.8855,
+          "noise_condition_passed": true
+        },
+        "roughness": {
+          "placement": 0.1433,
+          "dem_product": 1.07,
+          "combined": 1.0796,
+          "noise_condition_passed": true
+        },
+        "relative_elevation": {
+          "placement": 3.6643,
+          "dem_product": 0.886,
+          "combined": 3.7699,
+          "noise_condition_passed": true
+        }
+      },
+      "background": {
+        "count": 88,
+        "median": 88.4,
+        "p10": 0.51,
+        "p90": 97.66,
+        "share_at_or_above": {
+          "99": 0.011,
+          "95": 0.352,
+          "90": 0.466,
+          "75": 0.58,
+          "50": 0.659
+        }
+      },
+      "background_by_region": {
+        "Afar": {
+          "count": 9,
+          "median": 91.9,
+          "p10": 37.41,
+          "p90": 97.18,
+          "share_at_or_above": {
+            "99": 0.0,
+            "95": 0.333,
+            "90": 0.667,
+            "75": 0.778,
+            "50": 0.778
+          }
+        },
+        "Central Andes": {
+          "count": 9,
+          "median": 88.95,
+          "p10": 32.6,
+          "p90": 96.66,
+          "share_at_or_above": {
+            "99": 0.0,
+            "95": 0.222,
+            "90": 0.444,
+            "75": 0.556,
+            "50": 0.667
+          }
+        },
+        "Himalaya and Tibet": {
+          "count": 17,
+          "median": 0.07,
+          "p10": 0.0,
+          "p90": 55.36,
+          "share_at_or_above": {
+            "99": 0.0,
+            "95": 0.0,
+            "90": 0.0,
+            "75": 0.059,
+            "50": 0.176
+          }
+        },
+        "Western USA": {
+          "count": 53,
+          "median": 94.84,
+          "p10": 20.93,
+          "p90": 98.11,
+          "share_at_or_above": {
+            "99": 0.019,
+            "95": 0.491,
+            "90": 0.585,
+            "75": 0.717,
+            "50": 0.792
+          }
+        }
+      },
+      "single_feature": {
+        "slope": {
+          "count": 88,
+          "median": 90.55,
+          "p10": 0.03,
+          "p90": 98.19,
+          "share_at_or_above": {
+            "99": 0.023,
+            "95": 0.33,
+            "90": 0.5,
+            "75": 0.557,
+            "50": 0.67
+          }
+        },
+        "relative_elevation": {
+          "count": 88,
+          "median": 86.61,
+          "p10": 0.15,
+          "p90": 99.07,
+          "share_at_or_above": {
+            "99": 0.114,
+            "95": 0.398,
+            "90": 0.443,
+            "75": 0.568,
+            "50": 0.648
+          }
+        }
+      },
+      "alternative_tolerances": {
+        "phase5_tau": {
+          "background": {
+            "count": 88,
+            "median": 95.55,
+            "p10": 14.44,
+            "p90": 99.16,
+            "share_at_or_above": {
+              "99": 0.136,
+              "95": 0.511,
+              "90": 0.557,
+              "75": 0.659,
+              "50": 0.773
+            }
+          },
+          "candidates": {
+            "earth-upper-mustang": 13.14,
+            "earth-ladakh": 2.96,
+            "earth-atacama": 99.22,
+            "earth-atacama-south": 99.48,
+            "earth-danakil": 97.01,
+            "earth-craters-of-the-moon": 98.33,
+            "earth-hanksville-mdrs": 99.13,
+            "earth-meteor-crater": 97.98
+          }
+        },
+        "tau_x0.5": {
+          "background": {
+            "count": 88,
+            "median": 64.49,
+            "p10": 0.0,
+            "p90": 91.0,
+            "share_at_or_above": {
+              "99": 0.0,
+              "95": 0.023,
+              "90": 0.17,
+              "75": 0.409,
+              "50": 0.534
+            }
+          },
+          "candidates": {
+            "earth-upper-mustang": 0.0,
+            "earth-ladakh": 0.0,
+            "earth-atacama": 90.7,
+            "earth-atacama-south": 93.66,
+            "earth-danakil": 76.56,
+            "earth-craters-of-the-moon": 87.35,
+            "earth-hanksville-mdrs": 92.13,
+            "earth-meteor-crater": 86.32
+          }
+        },
+        "tau_x2": {
+          "background": {
+            "count": 88,
+            "median": 96.88,
+            "p10": 19.68,
+            "p90": 99.41,
+            "share_at_or_above": {
+              "99": 0.273,
+              "95": 0.534,
+              "90": 0.58,
+              "75": 0.682,
+              "50": 0.852
+            }
+          },
+          "candidates": {
+            "earth-upper-mustang": 25.74,
+            "earth-ladakh": 9.9,
+            "earth-atacama": 99.38,
+            "earth-atacama-south": 99.59,
+            "earth-danakil": 98.31,
+            "earth-craters-of-the-moon": 99.13,
+            "earth-hanksville-mdrs": 99.49,
+            "earth-meteor-crater": 99.02
+          }
+        }
+      },
+      "candidates": {
+        "earth-upper-mustang": {
+          "index": 0.69,
+          "background_share_at_or_above": 0.898
+        },
+        "earth-ladakh": {
+          "index": 0.02,
+          "background_share_at_or_above": 0.92
+        },
+        "earth-atacama": {
+          "index": 97.56,
+          "background_share_at_or_above": 0.125
+        },
+        "earth-atacama-south": {
+          "index": 98.36,
+          "background_share_at_or_above": 0.057
+        },
+        "earth-danakil": {
+          "index": 93.44,
+          "background_share_at_or_above": 0.398
+        },
+        "earth-craters-of-the-moon": {
+          "index": 96.59,
+          "background_share_at_or_above": 0.25
+        },
+        "earth-hanksville-mdrs": {
+          "index": 97.97,
+          "background_share_at_or_above": 0.08
+        },
+        "earth-meteor-crater": {
+          "index": 96.19,
+          "background_share_at_or_above": 0.273
+        }
+      },
+      "leave_one_region_out": {
+        "Afar": {
+          "tau": {
+            "slope": 6.083,
+            "relative_elevation": 82.742
+          },
+          "held_out_windows": 9,
+          "held_out_background": {
+            "count": 9,
+            "median": 92.8,
+            "p10": 41.16,
+            "p90": 97.48,
+            "share_at_or_above": {
+              "99": 0.0,
+              "95": 0.333,
+              "90": 0.667,
+              "75": 0.778,
+              "50": 0.778
+            }
+          },
+          "candidate_order": [
+            "earth-atacama-south",
+            "earth-hanksville-mdrs",
+            "earth-atacama",
+            "earth-craters-of-the-moon",
+            "earth-meteor-crater",
+            "earth-danakil",
+            "earth-upper-mustang",
+            "earth-ladakh"
+          ]
+        },
+        "Central Andes": {
+          "tau": {
+            "slope": 6.297,
+            "relative_elevation": 77.51
+          },
+          "held_out_windows": 9,
+          "held_out_background": {
+            "count": 9,
+            "median": 89.15,
+            "p10": 35.2,
+            "p90": 96.97,
+            "share_at_or_above": {
+              "99": 0.0,
+              "95": 0.222,
+              "90": 0.444,
+              "75": 0.556,
+              "50": 0.667
+            }
+          },
+          "candidate_order": [
+            "earth-atacama-south",
+            "earth-hanksville-mdrs",
+            "earth-atacama",
+            "earth-craters-of-the-moon",
+            "earth-meteor-crater",
+            "earth-danakil",
+            "earth-upper-mustang",
+            "earth-ladakh"
+          ]
+        },
+        "Himalaya and Tibet": {
+          "tau": {
+            "slope": 3.679,
+            "relative_elevation": 42.669
+          },
+          "held_out_windows": 17,
+          "held_out_background": {
+            "count": 17,
+            "median": 0.0,
+            "p10": 0.0,
+            "p90": 28.37,
+            "share_at_or_above": {
+              "99": 0.0,
+              "95": 0.0,
+              "90": 0.0,
+              "75": 0.0,
+              "50": 0.0
+            }
+          },
+          "candidate_order": [
+            "earth-atacama-south",
+            "earth-hanksville-mdrs",
+            "earth-atacama",
+            "earth-craters-of-the-moon",
+            "earth-meteor-crater",
+            "earth-danakil",
+            "earth-upper-mustang",
+            "earth-ladakh"
+          ]
+        },
+        "Western USA": {
+          "tau": {
+            "slope": 9.422,
+            "relative_elevation": 146.698
+          },
+          "held_out_windows": 53,
+          "held_out_background": {
+            "count": 53,
+            "median": 98.08,
+            "p10": 53.18,
+            "p90": 99.35,
+            "share_at_or_above": {
+              "99": 0.245,
+              "95": 0.642,
+              "90": 0.717,
+              "75": 0.792,
+              "50": 0.925
+            }
+          },
+          "candidate_order": [
+            "earth-atacama-south",
+            "earth-hanksville-mdrs",
+            "earth-atacama",
+            "earth-craters-of-the-moon",
+            "earth-meteor-crater",
+            "earth-danakil",
+            "earth-upper-mustang",
+            "earth-ladakh"
+          ]
+        }
+      }
+    },
+    "mars-gale-aeolis-palus": {
+      "resolution_floor": {
+        "slope": {
+          "placement": 0.5383,
+          "dem_product": 0.9559,
+          "combined": 1.097,
+          "noise_condition_passed": true
+        },
+        "local_relief": {
+          "placement": 13.1812,
+          "dem_product": 7.7502,
+          "combined": 15.2909,
+          "noise_condition_passed": true
+        },
+        "roughness": {
+          "placement": 0.8622,
+          "dem_product": 1.07,
+          "combined": 1.3742,
+          "noise_condition_passed": true
+        },
+        "relative_elevation": {
+          "placement": 15.2769,
+          "dem_product": 0.886,
+          "combined": 15.3026,
+          "noise_condition_passed": true
+        }
+      },
+      "background": {
+        "count": 88,
+        "median": 86.74,
+        "p10": 0.59,
+        "p90": 99.35,
+        "share_at_or_above": {
+          "99": 0.148,
+          "95": 0.33,
+          "90": 0.443,
+          "75": 0.534,
+          "50": 0.625
+        }
+      },
+      "background_by_region": {
+        "Afar": {
+          "count": 9,
+          "median": 93.55,
+          "p10": 32.26,
+          "p90": 98.47,
+          "share_at_or_above": {
+            "99": 0.111,
+            "95": 0.444,
+            "90": 0.556,
+            "75": 0.778,
+            "50": 0.778
+          }
+        },
+        "Central Andes": {
+          "count": 9,
+          "median": 86.73,
+          "p10": 24.66,
+          "p90": 98.86,
+          "share_at_or_above": {
+            "99": 0.111,
+            "95": 0.222,
+            "90": 0.444,
+            "75": 0.556,
+            "50": 0.556
+          }
+        },
+        "Himalaya and Tibet": {
+          "count": 17,
+          "median": 0.09,
+          "p10": 0.0,
+          "p90": 48.7,
+          "share_at_or_above": {
+            "99": 0.0,
+            "95": 0.0,
+            "90": 0.0,
+            "75": 0.0,
+            "50": 0.118
+          }
+        },
+        "Western USA": {
+          "count": 53,
+          "median": 92.86,
+          "p10": 16.84,
+          "p90": 99.55,
+          "share_at_or_above": {
+            "99": 0.208,
+            "95": 0.434,
+            "90": 0.566,
+            "75": 0.66,
+            "50": 0.774
+          }
+        }
+      },
+      "single_feature": {
+        "slope": {
+          "count": 88,
+          "median": 82.5,
+          "p10": 0.01,
+          "p90": 99.76,
+          "share_at_or_above": {
+            "99": 0.216,
+            "95": 0.364,
+            "90": 0.432,
+            "75": 0.523,
+            "50": 0.602
+          }
+        },
+        "relative_elevation": {
+          "count": 88,
+          "median": 88.83,
+          "p10": 0.18,
+          "p90": 99.34,
+          "share_at_or_above": {
+            "99": 0.148,
+            "95": 0.398,
+            "90": 0.5,
+            "75": 0.58,
+            "50": 0.648
+          }
+        }
+      },
+      "alternative_tolerances": {
+        "phase5_tau": {
+          "background": {
+            "count": 88,
+            "median": 94.19,
+            "p10": 14.07,
+            "p90": 99.75,
+            "share_at_or_above": {
+              "99": 0.25,
+              "95": 0.477,
+              "90": 0.534,
+              "75": 0.614,
+              "50": 0.727
+            }
+          },
+          "candidates": {
+            "earth-upper-mustang": 11.63,
+            "earth-ladakh": 2.68,
+            "earth-atacama": 98.83,
+            "earth-atacama-south": 98.61,
+            "earth-danakil": 98.99,
+            "earth-craters-of-the-moon": 99.46,
+            "earth-hanksville-mdrs": 97.98,
+            "earth-meteor-crater": 99.77
+          }
+        },
+        "tau_x0.5": {
+          "background": {
+            "count": 88,
+            "median": 57.91,
+            "p10": 0.0,
+            "p90": 97.44,
+            "share_at_or_above": {
+              "99": 0.0,
+              "95": 0.17,
+              "90": 0.25,
+              "75": 0.409,
+              "50": 0.523
+            }
+          },
+          "candidates": {
+            "earth-upper-mustang": 0.0,
+            "earth-ladakh": 0.0,
+            "earth-atacama": 89.05,
+            "earth-atacama-south": 88.53,
+            "earth-danakil": 87.79,
+            "earth-craters-of-the-moon": 95.64,
+            "earth-hanksville-mdrs": 85.77,
+            "earth-meteor-crater": 97.65
+          }
+        },
+        "tau_x2": {
+          "background": {
+            "count": 88,
+            "median": 96.47,
+            "p10": 18.98,
+            "p90": 99.84,
+            "share_at_or_above": {
+              "99": 0.318,
+              "95": 0.511,
+              "90": 0.58,
+              "75": 0.67,
+              "50": 0.852
+            }
+          },
+          "candidates": {
+            "earth-upper-mustang": 22.72,
+            "earth-ladakh": 8.11,
+            "earth-atacama": 99.28,
+            "earth-atacama-south": 99.23,
+            "earth-danakil": 99.16,
+            "earth-craters-of-the-moon": 99.72,
+            "earth-hanksville-mdrs": 98.99,
+            "earth-meteor-crater": 99.85
+          }
+        }
+      },
+      "candidates": {
+        "earth-upper-mustang": {
+          "index": 0.31,
+          "background_share_at_or_above": 0.898
+        },
+        "earth-ladakh": {
+          "index": 0.01,
+          "background_share_at_or_above": 0.932
+        },
+        "earth-atacama": {
+          "index": 97.14,
+          "background_share_at_or_above": 0.261
+        },
+        "earth-atacama-south": {
+          "index": 96.97,
+          "background_share_at_or_above": 0.273
+        },
+        "earth-danakil": {
+          "index": 96.71,
+          "background_share_at_or_above": 0.273
+        },
+        "earth-craters-of-the-moon": {
+          "index": 98.88,
+          "background_share_at_or_above": 0.159
+        },
+        "earth-hanksville-mdrs": {
+          "index": 96.06,
+          "background_share_at_or_above": 0.318
+        },
+        "earth-meteor-crater": {
+          "index": 99.41,
+          "background_share_at_or_above": 0.102
+        }
+      },
+      "leave_one_region_out": {
+        "Afar": {
+          "tau": {
+            "slope": 6.083,
+            "relative_elevation": 82.742
+          },
+          "held_out_windows": 9,
+          "held_out_background": {
+            "count": 9,
+            "median": 94.25,
+            "p10": 35.8,
+            "p90": 98.63,
+            "share_at_or_above": {
+              "99": 0.111,
+              "95": 0.444,
+              "90": 0.556,
+              "75": 0.778,
+              "50": 0.778
+            }
+          },
+          "candidate_order": [
+            "earth-meteor-crater",
+            "earth-craters-of-the-moon",
+            "earth-atacama",
+            "earth-atacama-south",
+            "earth-danakil",
+            "earth-hanksville-mdrs",
+            "earth-upper-mustang",
+            "earth-ladakh"
+          ]
+        },
+        "Central Andes": {
+          "tau": {
+            "slope": 6.297,
+            "relative_elevation": 77.51
+          },
+          "held_out_windows": 9,
+          "held_out_background": {
+            "count": 9,
+            "median": 87.44,
+            "p10": 27.34,
+            "p90": 98.87,
+            "share_at_or_above": {
+              "99": 0.111,
+              "95": 0.222,
+              "90": 0.444,
+              "75": 0.556,
+              "50": 0.667
+            }
+          },
+          "candidate_order": [
+            "earth-meteor-crater",
+            "earth-craters-of-the-moon",
+            "earth-atacama",
+            "earth-atacama-south",
+            "earth-danakil",
+            "earth-hanksville-mdrs",
+            "earth-upper-mustang",
+            "earth-ladakh"
+          ]
+        },
+        "Himalaya and Tibet": {
+          "tau": {
+            "slope": 3.679,
+            "relative_elevation": 42.669
+          },
+          "held_out_windows": 17,
+          "held_out_background": {
+            "count": 17,
+            "median": 0.0,
+            "p10": 0.0,
+            "p90": 20.07,
+            "share_at_or_above": {
+              "99": 0.0,
+              "95": 0.0,
+              "90": 0.0,
+              "75": 0.0,
+              "50": 0.0
+            }
+          },
+          "candidate_order": [
+            "earth-meteor-crater",
+            "earth-craters-of-the-moon",
+            "earth-atacama",
+            "earth-atacama-south",
+            "earth-hanksville-mdrs",
+            "earth-danakil",
+            "earth-upper-mustang",
+            "earth-ladakh"
+          ]
+        },
+        "Western USA": {
+          "tau": {
+            "slope": 9.422,
+            "relative_elevation": 146.698
+          },
+          "held_out_windows": 53,
+          "held_out_background": {
+            "count": 53,
+            "median": 97.3,
+            "p10": 48.55,
+            "p90": 99.86,
+            "share_at_or_above": {
+              "99": 0.34,
+              "95": 0.623,
+              "90": 0.66,
+              "75": 0.792,
+              "50": 0.887
+            }
+          },
+          "candidate_order": [
+            "earth-meteor-crater",
+            "earth-craters-of-the-moon",
+            "earth-atacama",
+            "earth-danakil",
+            "earth-atacama-south",
+            "earth-hanksville-mdrs",
+            "earth-upper-mustang",
+            "earth-ladakh"
+          ]
+        }
+      }
+    },
+    "moon-south-pole-shackleton": {
+      "resolution_floor": {
+        "slope": {
+          "placement": 3.2107,
+          "dem_product": 0.9559,
+          "combined": 3.35,
+          "noise_condition_passed": false
+        },
+        "local_relief": {
+          "placement": 85.3156,
+          "dem_product": 7.7502,
+          "combined": 85.6669,
+          "noise_condition_passed": false
+        },
+        "roughness": {
+          "placement": 5.5091,
+          "dem_product": 1.07,
+          "combined": 5.6121,
+          "noise_condition_passed": false
+        },
+        "relative_elevation": {
+          "placement": 194.7187,
+          "dem_product": 0.886,
+          "combined": 194.7207,
+          "noise_condition_passed": false
+        }
+      },
+      "background": {
+        "count": 88,
+        "median": 0.11,
+        "p10": 0.01,
+        "p90": 20.21,
+        "share_at_or_above": {
+          "99": 0.0,
+          "95": 0.0,
+          "90": 0.0,
+          "75": 0.0,
+          "50": 0.0
+        }
+      },
+      "background_by_region": {
+        "Afar": {
+          "count": 9,
+          "median": 0.02,
+          "p10": 0.01,
+          "p90": 3.15,
+          "share_at_or_above": {
+            "99": 0.0,
+            "95": 0.0,
+            "90": 0.0,
+            "75": 0.0,
+            "50": 0.0
+          }
+        },
+        "Central Andes": {
+          "count": 9,
+          "median": 0.05,
+          "p10": 0.01,
+          "p90": 1.38,
+          "share_at_or_above": {
+            "99": 0.0,
+            "95": 0.0,
+            "90": 0.0,
+            "75": 0.0,
+            "50": 0.0
+          }
+        },
+        "Himalaya and Tibet": {
+          "count": 17,
+          "median": 19.89,
+          "p10": 0.68,
+          "p90": 44.62,
+          "share_at_or_above": {
+            "99": 0.0,
+            "95": 0.0,
+            "90": 0.0,
+            "75": 0.0,
+            "50": 0.0
+          }
+        },
+        "Western USA": {
+          "count": 53,
+          "median": 0.05,
+          "p10": 0.01,
+          "p90": 10.59,
+          "share_at_or_above": {
+            "99": 0.0,
+            "95": 0.0,
+            "90": 0.0,
+            "75": 0.0,
+            "50": 0.0
+          }
+        }
+      },
+      "single_feature": {
+        "slope": {
+          "count": 88,
+          "median": 0.22,
+          "p10": 0.02,
+          "p90": 40.4,
+          "share_at_or_above": {
+            "99": 0.0,
+            "95": 0.011,
+            "90": 0.023,
+            "75": 0.034,
+            "50": 0.08
+          }
+        },
+        "relative_elevation": {
+          "count": 88,
+          "median": 0.0,
+          "p10": 0.0,
+          "p90": 0.0,
+          "share_at_or_above": {
+            "99": 0.0,
+            "95": 0.0,
+            "90": 0.0,
+            "75": 0.0,
+            "50": 0.0
+          }
+        }
+      },
+      "alternative_tolerances": {
+        "phase5_tau": {
+          "background": {
+            "count": 88,
+            "median": 1.99,
+            "p10": 0.53,
+            "p90": 35.63,
+            "share_at_or_above": {
+              "99": 0.0,
+              "95": 0.0,
+              "90": 0.0,
+              "75": 0.0,
+              "50": 0.011
+            }
+          },
+          "candidates": {
+            "earth-upper-mustang": 38.59,
+            "earth-ladakh": 50.15,
+            "earth-atacama": 0.97,
+            "earth-atacama-south": 1.08,
+            "earth-danakil": 0.42,
+            "earth-craters-of-the-moon": 0.84,
+            "earth-hanksville-mdrs": 1.28,
+            "earth-meteor-crater": 0.52
+          }
+        },
+        "tau_x0.5": {
+          "background": {
+            "count": 88,
+            "median": 0.0,
+            "p10": 0.0,
+            "p90": 1.33,
+            "share_at_or_above": {
+              "99": 0.0,
+              "95": 0.0,
+              "90": 0.0,
+              "75": 0.0,
+              "50": 0.0
+            }
+          },
+          "candidates": {
+            "earth-upper-mustang": 6.82,
+            "earth-ladakh": 41.37,
+            "earth-atacama": 0.0,
+            "earth-atacama-south": 0.0,
+            "earth-danakil": 0.0,
+            "earth-craters-of-the-moon": 0.0,
+            "earth-hanksville-mdrs": 0.0,
+            "earth-meteor-crater": 0.0
+          }
+        },
+        "tau_x2": {
+          "background": {
+            "count": 88,
+            "median": 10.83,
+            "p10": 5.78,
+            "p90": 43.57,
+            "share_at_or_above": {
+              "99": 0.0,
+              "95": 0.0,
+              "90": 0.0,
+              "75": 0.0,
+              "50": 0.011
+            }
+          },
+          "candidates": {
+            "earth-upper-mustang": 44.32,
+            "earth-ladakh": 51.09,
+            "earth-atacama": 7.7,
+            "earth-atacama-south": 8.09,
+            "earth-danakil": 5.2,
+            "earth-craters-of-the-moon": 7.2,
+            "earth-hanksville-mdrs": 8.78,
+            "earth-meteor-crater": 5.7
+          }
+        }
+      },
+      "candidates": {
+        "earth-upper-mustang": {
+          "index": 30.38,
+          "background_share_at_or_above": 0.057
+        },
+        "earth-ladakh": {
+          "index": 47.69,
+          "background_share_at_or_above": 0.011
+        },
+        "earth-atacama": {
+          "index": 0.03,
+          "background_share_at_or_above": 0.682
+        },
+        "earth-atacama-south": {
+          "index": 0.03,
+          "background_share_at_or_above": 0.636
+        },
+        "earth-danakil": {
+          "index": 0.01,
+          "background_share_at_or_above": 0.977
+        },
+        "earth-craters-of-the-moon": {
+          "index": 0.02,
+          "background_share_at_or_above": 0.75
+        },
+        "earth-hanksville-mdrs": {
+          "index": 0.05,
+          "background_share_at_or_above": 0.602
+        },
+        "earth-meteor-crater": {
+          "index": 0.01,
+          "background_share_at_or_above": 0.898
+        }
+      },
+      "leave_one_region_out": {
+        "Afar": {
+          "tau": {
+            "slope": 6.083,
+            "relative_elevation": 82.742
+          },
+          "held_out_windows": 9,
+          "held_out_background": {
+            "count": 9,
+            "median": 0.05,
+            "p10": 0.01,
+            "p90": 4.03,
+            "share_at_or_above": {
+              "99": 0.0,
+              "95": 0.0,
+              "90": 0.0,
+              "75": 0.0,
+              "50": 0.0
+            }
+          },
+          "candidate_order": [
+            "earth-ladakh",
+            "earth-upper-mustang",
+            "earth-hanksville-mdrs",
+            "earth-atacama-south",
+            "earth-atacama",
+            "earth-craters-of-the-moon",
+            "earth-meteor-crater",
+            "earth-danakil"
+          ]
+        },
+        "Central Andes": {
+          "tau": {
+            "slope": 6.297,
+            "relative_elevation": 77.51
+          },
+          "held_out_windows": 9,
+          "held_out_background": {
+            "count": 9,
+            "median": 0.15,
+            "p10": 0.04,
+            "p90": 2.34,
+            "share_at_or_above": {
+              "99": 0.0,
+              "95": 0.0,
+              "90": 0.0,
+              "75": 0.0,
+              "50": 0.0
+            }
+          },
+          "candidate_order": [
+            "earth-ladakh",
+            "earth-upper-mustang",
+            "earth-hanksville-mdrs",
+            "earth-atacama-south",
+            "earth-atacama",
+            "earth-craters-of-the-moon",
+            "earth-meteor-crater",
+            "earth-danakil"
+          ]
+        },
+        "Himalaya and Tibet": {
+          "tau": {
+            "slope": 3.679,
+            "relative_elevation": 42.669
+          },
+          "held_out_windows": 17,
+          "held_out_background": {
+            "count": 17,
+            "median": 5.03,
+            "p10": 0.0,
+            "p90": 37.72,
+            "share_at_or_above": {
+              "99": 0.0,
+              "95": 0.0,
+              "90": 0.0,
+              "75": 0.0,
+              "50": 0.0
+            }
+          },
+          "candidate_order": [
+            "earth-ladakh",
+            "earth-upper-mustang",
+            "earth-hanksville-mdrs",
+            "earth-atacama-south",
+            "earth-atacama",
+            "earth-craters-of-the-moon",
+            "earth-meteor-crater",
+            "earth-danakil"
+          ]
+        },
+        "Western USA": {
+          "tau": {
+            "slope": 9.422,
+            "relative_elevation": 146.698
+          },
+          "held_out_windows": 53,
+          "held_out_background": {
+            "count": 53,
+            "median": 3.63,
+            "p10": 1.81,
+            "p90": 27.68,
+            "share_at_or_above": {
+              "99": 0.0,
+              "95": 0.0,
+              "90": 0.0,
+              "75": 0.0,
+              "50": 0.0
+            }
+          },
+          "candidate_order": [
+            "earth-ladakh",
+            "earth-upper-mustang",
+            "earth-hanksville-mdrs",
+            "earth-atacama-south",
+            "earth-atacama",
+            "earth-craters-of-the-moon",
+            "earth-meteor-crater",
+            "earth-danakil"
+          ]
+        }
+      }
+    }
+  }
+}

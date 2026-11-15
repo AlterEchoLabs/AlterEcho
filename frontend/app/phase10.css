@@ -1,0 +1,88 @@
+/* Final pass: readable type scale, roomier layout, reference cards, list tools and synchronised comparison.
+   Overrides earlier sheets; same tokens. Body text is 16 px so the atlas reads at 100 % zoom on a laptop. */
+
+body { font-size: 16px; line-height: 1.6; }
+.small { font-size: 14px; }
+.step-label { font-size: 12.5px; }
+.masthead-nav a { font-size: 15px; }
+.segmented button, .profile-options button { font-size: 14.5px; padding: 8px 14px; }
+.layer-switch button { font-size: 13.5px; padding: 6px 12px; }
+.body-switch button { font-size: 13.5px; padding: 5px 12px; }
+.toggle { font-size: 14px; }
+.viewer-caption { font-size: 13.5px; }
+.result-place, .result-reason { font-size: 13.5px; }
+.result-name { font-size: 20px; }
+.result-score small { font-size: 12.5px; }
+.coverage-label { font-size: 12px; }
+.ordering-note, .base-rate { font-size: 14px; }
+.site-meta, .reference-facts, .profile-purpose { font-size: 15px; }
+.plate-legend dl, .kv { font-size: 14px; }
+.feature-table, .metric-table { font-size: 14px; }
+.simple-conclusion { font-size: 17px; }
+.simple-facts dd { font-size: 15px; }
+.simple-facts dt, .simple-head .kicker { font-size: 12px; }
+.full-evidence-body h3 { font-size: 13.5px; }
+.formula-list li { font-size: 14px; }
+.role-card dl { font-size: 14px; }
+
+/* layout: wider candidate column, larger maps, less dead space */
+@media (min-width: 960px) { .atlas-body { grid-template-columns: minmax(320px, 410px) minmax(0, 1fr); } }
+.overview-map { height: 300px; }
+.explorer-map { aspect-ratio: 16 / 9; max-height: min(74vh, 720px); min-height: 380px; }
+.atlas-site { padding-top: 18px; }
+.site-head { margin-bottom: 14px; }
+.result-panel { margin-bottom: 26px; }
+@media (min-width: 1500px) { .atlas-body { grid-template-columns: 420px minmax(0, 1fr); } }
+@media (max-width: 959px) { .atlas-body { grid-template-columns: minmax(0, 1fr); } .overview-map { height: 240px; } .explorer-map { aspect-ratio: 4 / 5; min-height: 320px; } }
+
+/* reference band */
+.rb2 { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 18px 40px; }
+@media (max-width: 1000px) { .rb2 { grid-template-columns: 1fr; } }
+.rb2 .body-switch { margin-bottom: 10px; }
+.ref-cards { display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 8px; scrollbar-width: thin; }
+.ref-card { flex: 0 0 auto; display: flex; gap: 10px; align-items: center; text-align: left; min-width: 196px; max-width: 240px; padding: 8px 10px 8px 8px;
+  background: var(--ink-1); border: 1px solid var(--line); border-radius: 4px; color: var(--text-2); cursor: pointer; transition: border-color .15s ease, background .15s ease, transform .15s ease; }
+.ref-card:hover { border-color: var(--earth-dim); transform: translateY(-1px); }
+.ref-card.is-active { border-color: var(--earth); background: var(--ink-2); color: var(--text); box-shadow: inset 3px 0 0 var(--earth); }
+.ref-card:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.ref-card img { width: 56px; height: 56px; object-fit: cover; border-radius: 3px; filter: grayscale(.2); flex: none; }
+.ref-card-text { display: flex; flex-direction: column; min-width: 0; }
+.ref-card-name { font-family: var(--serif); font-size: 15.5px; line-height: 1.2; color: inherit; }
+.ref-card-meta { font-size: 12.5px; color: var(--text-3); }
+.ref-card-badge { margin-top: 3px; font-size: 11px; letter-spacing: .04em; text-transform: uppercase; }
+.ref-card-badge.ok { color: var(--measured); }
+.ref-card-badge.warn { color: var(--warn); }
+.ref-detail { margin-top: 10px; }
+.ref-about { margin-top: 8px; }
+.ref-about summary { cursor: pointer; color: var(--earth); font-size: 14.5px; }
+.ref-about summary:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.ref-about-body { margin-top: 8px; padding: 10px 12px; border-left: 2px solid var(--line); font-size: 14.5px; color: var(--text-2); animation: slide-open .25s ease-out both; }
+.notice-warn { border-left: 3px solid var(--warn); padding: 6px 10px; background: rgba(226, 184, 102, .08); color: var(--text); font-size: 14.5px; margin: 8px 0 0; }
+.profile-tag { margin-left: 6px; font-size: 10.5px; letter-spacing: .05em; text-transform: uppercase; color: var(--warn); }
+
+/* list tools */
+.list-tools { display: grid; gap: 8px; margin: 12px 0 6px; }
+.list-tools .search-input { width: 100%; }
+.list-tools-row { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; font-size: 13.5px; color: var(--text-3); }
+.list-tools-row select { margin-left: 6px; background: var(--ink-1); color: var(--text); border: 1px solid var(--line); border-radius: 3px; padding: 4px 6px; font: inherit; font-size: 13.5px; }
+.search-input { background: var(--ink-1); color: var(--text); border: 1px solid var(--line); border-radius: 3px; padding: 8px 10px; font: inherit; font-size: 15px; }
+.search-input:focus-visible, .list-tools-row select:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+.bg-share { color: var(--text-3); font-size: 11.5px; white-space: nowrap; }
+
+/* synchronised comparison */
+.synced-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; touch-action: none; cursor: grab; outline: none; }
+.synced-pair:active { cursor: grabbing; }
+.synced-pair:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+.synced-pane { margin: 0; }
+.synced-clip { position: relative; aspect-ratio: 1 / 1; overflow: hidden; background: #000; border: 1px solid var(--line-soft); }
+.synced-clip img { width: 100%; height: 100%; object-fit: cover; transform-origin: 50% 50%; transition: transform .12s ease-out; user-select: none; }
+.synced-pane figcaption { font-size: 13.5px; color: var(--text-2); margin-top: 6px; }
+.synced-scale { position: absolute; left: 10px; bottom: 10px; display: flex; flex-direction: column; gap: 2px; font-size: 11.5px; color: #fff; text-shadow: 0 1px 2px #000; }
+.synced-scale i { display: block; height: 4px; background: #fff; border: 1px solid #000; }
+@media (max-width: 640px) { .synced-pair { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .synced-clip img, .ref-card, .ref-about-body { transition: none; animation: none; } }
+.ref-cards { flex-wrap: wrap; overflow: visible; }
+.ref-card { flex: 1 1 200px; min-width: 0; max-width: none; }
+.reference, .profile { min-width: 0; }
+@media (max-width: 1000px) { .rb2 { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 520px) { .ref-card { flex-basis: 100%; } .ref-card img { width: 44px; height: 44px; } }

@@ -1,0 +1,13 @@
+{
+  "site_id": "earth-danakil",
+  "resolution_m": 30.0,
+  "pixels": 334,
+  "hillshade": {
+    "azimuth_deg": 315,
+    "altitude_deg": 45
+  },
+  "slope_ramp": "linear 0-35 degrees, fixed across sites",
+  "slope_p50_deg": 1.94,
+  "source_sha256": "a7f37842278d203a63300480201cb7b8db147ed5f05ae30caa164137decc88be",
+  "purpose": "visualisation only; numeric analysis uses terrain-v3/v4"
+}

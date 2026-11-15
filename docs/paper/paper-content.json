@@ -1,0 +1,348 @@
+[
+  {
+    "type": "h1",
+    "text": "Methods: Earth–Planetary Terrain Analogue Comparison"
+  },
+  {
+    "type": "p",
+    "text": "This section describes the method implemented in the TerraLuna application as analogue-method-v1.0 with the terrain measurement terrain-v5.0. Every number below is generated from the versioned configuration, calibration files and a live comparison of the running backend; a test fails if the text and the backend diverge."
+  },
+  {
+    "type": "h2",
+    "text": "Research question and scope"
+  },
+  {
+    "type": "p",
+    "text": "We ask a narrow question: at a specified 10 km Earth window and a specified 10 km planetary reference window, how closely do the distributions of two measured terrain properties agree on a common 60 m grid, and is that agreement larger than what the measurement itself can resolve? A result is conditional on the comparison definition"
+  },
+  {
+    "type": "eq",
+    "n": 1,
+    "latex": "\\mathcal{R} = \\mathcal{R}(E,\\,P,\\,T,\\,H,\\,V)",
+    "umath": "R=R(E,P,T,H,V)#(1)"
+  },
+  {
+    "type": "p",
+    "text": "where $E$ is the Earth area of interest (AOI), $P$ the planetary reference AOI, $T$ the task profile, $H$ the epoch (the present-day surface recorded by the elevation models, not the ancient environment that formed it) and $V$ the method version. Results with different definitions are never ranked together. The output is an experimental terrain evidence index, not a probability that a place is like Mars, not a measure of geology, atmosphere, water, habitability, access or mission safety, and not a NASA or USGS endorsement."
+  },
+  {
+    "type": "h2",
+    "text": "Areas of interest and sources"
+  },
+  {
+    "type": "p",
+    "text": "Earth windows are 10 km squares centred on registered points and processed from NASA SRTMGL1.003 (1 arc-second, about 30 m; elevations in metres above the EGM96 geoid; acquired February 2000). The Jezero reference (mars-jezero-aoi-v1, centred at 18.44° N, 77.45° E) uses the Mars 2020 Science Investigation CTX DEM mosaic (20 m posting; DOI 10.5066/P906QQT8). Four further Mars references (Gale crater floor, Elysium Planitia at the InSight site, Gusev crater plains and the Eberswalde delta) use USGS controlled CTX DTMs (20 m; CC0; DOI 10.5066/P9JKVWR3), read as windows from cloud-optimised GeoTIFFs and reprojected once onto a local equirectangular grid true to scale at the window latitude. Among products covering a window, the one with the lowest median stereo intersection error was used. A lunar south-pole window uses LRO LOLA LDEM_875S_20M. Windows were placed by documented rules before their terrain was measured; one Earth window (the original Atacama window) was excluded because it contains an industrial complex and was replaced by a window 8 km south."
+  },
+  {
+    "type": "h2",
+    "text": "Raster preparation and quality rules"
+  },
+  {
+    "type": "p",
+    "text": "Each DEM is resampled bilinearly from its native posting onto a north-up metric grid centred on the AOI: UTM for Earth, the native or local equirectangular grid for Mars and polar stereographic for the Moon. All three are true to scale over a 10 km window to better than 0.1 %. The primary analysis grid is 60 m (167 × 167 cells, at least twice the native posting); 120 and 240 m grids are used only as sensitivity scenarios. A 1200 m halo is processed around every window so neighbourhood statistics are complete at the edges, and only core cells are summarised. Source no-data become missing values and are never filled. On Earth, cells that are at least half built-up in ESA WorldCover v200 (2021) are set to missing before derivatives are computed. A feature is eligible only if at least 90% of core cells are valid on both windows."
+  },
+  {
+    "type": "p",
+    "text": "Four terrain constructs are measured on every valid cell: slope; local relief (maximum minus minimum elevation in a 17 × 17-cell, 1020 m neighbourhood); roughness (standard deviation of elevation in a 5 × 5-cell, 300 m neighbourhood); and relative elevation. Neighbourhood statistics require at least half the window to be valid. Slope uses central differences on the metric grid,"
+  },
+  {
+    "type": "eq",
+    "n": 2,
+    "latex": "\\theta = \\arctan\\sqrt{\\left(\\frac{\\partial z}{\\partial x}\\right)^{2} + \\left(\\frac{\\partial z}{\\partial y}\\right)^{2}}",
+    "umath": "θ=arctan√((∂z/∂x)^2+(∂z/∂y)^2 )#(2)"
+  },
+  {
+    "type": "p",
+    "text": "with $z$ the elevation in metres and $x$, $y$ ground distances in metres, giving $\\theta$ in degrees. Relative elevation removes the incomparable vertical datums of Earth, Mars and the Moon:"
+  },
+  {
+    "type": "eq",
+    "n": 3,
+    "latex": "z_{\\mathrm{rel}} = z - \\operatorname{median}(z)",
+    "umath": "z_rel=z-median(z)#(3)"
+  },
+  {
+    "type": "h2",
+    "text": "Distances between distributions"
+  },
+  {
+    "type": "p",
+    "text": "For a scalar feature $k$ measured in the same units on both bodies, the difference is"
+  },
+  {
+    "type": "eq",
+    "n": 4,
+    "latex": "d_{k} = \\left| x_{E,k} - x_{P,k} \\right|",
+    "umath": "d_k=|x_(E,k)-x_(P,k) |#(4)"
+  },
+  {
+    "type": "p",
+    "text": "No scalar feature is scored in the current version; all scored terrain features are distributions. For a distribution feature, $F_{E,k}$ and $F_{P,k}$ are the empirical cumulative distribution functions of the valid core cells (equal-area cells, so every cell has the same weight), and the distance is the one-dimensional Wasserstein-1 distance"
+  },
+  {
+    "type": "eq",
+    "n": 5,
+    "latex": "d_{k} = W_{1}\\!\\left(F_{E,k}, F_{P,k}\\right) = \\int_{0}^{1} \\left| F_{E,k}^{-1}(u) - F_{P,k}^{-1}(u) \\right| \\mathrm{d}u",
+    "umath": "d_k=W_1 (F_(E,k),F_(P,k) )=∫_0^1▒|F_(E,k)^(-1) (u)-F_(P,k)^(-1) (u) | du#(5)"
+  },
+  {
+    "type": "p",
+    "text": "in degrees for slope and metres for relative elevation. The implementation evaluates Equation 5 with the midpoint rule on 500 quantiles,"
+  },
+  {
+    "type": "eq",
+    "n": 6,
+    "latex": "\\hat{d}_{k} = \\frac{1}{N}\\sum_{i=1}^{N} \\left| Q_{E,k}(u_{i}) - Q_{P,k}(u_{i}) \\right|, \\qquad u_{i} = \\frac{i - \\tfrac{1}{2}}{N}, \\quad N = 500",
+    "umath": "d̂_k=1/N ∑_(i=1)^N▒|Q_(E,k) (u_i )-Q_(P,k) (u_i ) | ,  u_i=(i-1/2)/N,  N=500#(6)"
+  },
+  {
+    "type": "p",
+    "text": "where $Q$ is the inverted-CDF empirical quantile function. For the worked example below, the quantile approximation differs from the exact all-cell W1 by 0.0005 ° (0.06 %) for slope; 0.0093 m (0.06 %) for relative elevation. W1 compares distributions only: two windows with the same slope histogram but different arrangements of ridges, channels or craters have zero distance."
+  },
+  {
+    "type": "h2",
+    "text": "Feature similarity and tolerances"
+  },
+  {
+    "type": "p",
+    "text": "Each distance is converted to a bounded feature similarity"
+  },
+  {
+    "type": "eq",
+    "n": 7,
+    "latex": "s_{k} = \\exp\\!\\left[-\\ln 2\\,\\left(\\frac{d_{k}}{\\tau_{k}}\\right)^{2}\\right]",
+    "umath": "s_k=exp[-ln⁡2 (d_k/τ_k )^2 ]#(7)"
+  },
+  {
+    "type": "p",
+    "text": "so that $s_k = 1$ at $d_k = 0$, $s_k = 0.5$ at $d_k = \\tau_k$ and $s_k = 0.0625$ at $d_k = 2\\tau_k$ (these values are unit-tested). The tolerance $\\tau_k$ has the units of $d_k$. It is the median pairwise distance among unselected Earth land windows,"
+  },
+  {
+    "type": "eq",
+    "n": 8,
+    "latex": "\\tau_{k} = \\operatorname*{median}_{i<j} W_{1}\\!\\left(F_{i,k}, F_{j,k}\\right)",
+    "umath": "τ_k=median┬(i<j) W_1 (F_(i,k),F_(j,k) )#(8)"
+  },
+  {
+    "type": "p",
+    "text": "computed over all 3828 pairs of 88 windows on a regular grid inside the downloaded SRTM tiles, excluding any window within 10 km of a candidate centre. This gives $\\tau_{\\mathrm{slope}}$ = 5.8058° and $\\tau_{\\mathrm{rel}}$ = 77.1038 m at 60 m. The interpretation is a task-relevant contrast: a candidate that differs from the reference as much as a typical pair of real Earth landscapes differ from each other receives 0.5. The tolerance is a project definition, not an empirically validated threshold. It depends on the background sample: leaving one source tile out gives 4.52–6.34° and 55.1–88.6 m, and leaving one region out gives 3.68–9.42° and 42.7–146.7 m. The candidate windows were known before this rule was fixed, so it is not a blind test."
+  },
+  {
+    "type": "h2",
+    "text": "Feature selection and family score"
+  },
+  {
+    "type": "p",
+    "text": "Features whose window medians correlate at Spearman |ρ| ≥ 0.95 across the background windows are treated as one construct. Slope correlates with roughness (ρ = 0.998) and with local relief (ρ = 0.985), whereas relative elevation does not (ρ = -0.244 with slope). Slope and relative elevation are therefore the scored features; local relief and roughness are reported as diagnostics with zero weight. Within the terrain family $g$,"
+  },
+  {
+    "type": "eq",
+    "n": 9,
+    "latex": "S_{g} = \\sum_{k} a_{k|g}\\, s_{k}, \\qquad \\sum_{k} a_{k|g} = 1",
+    "umath": "S_g=∑_k▒〖a_(k|g) s_k 〗,  ∑_k▒a_(k|g) =1#(9)"
+  },
+  {
+    "type": "p",
+    "text": "with $a_{\\mathrm{slope}|g} = a_{\\mathrm{rel}|g} = 0.5$. A family is eligible ($I_g = 1$) only if every scored feature is eligible; a family is never scored from an incomplete feature set."
+  },
+  {
+    "type": "h2",
+    "text": "Resolution floor and eligibility"
+  },
+  {
+    "type": "p",
+    "text": "The resolution floor is the distance produced by the measurement itself, not by a terrain difference:"
+  },
+  {
+    "type": "eq",
+    "n": 10,
+    "latex": "\\delta_{k} = \\sqrt{\\delta_{\\mathrm{place},k}^{2} + \\delta_{\\mathrm{dem},k}^{2}}",
+    "umath": "δ_k=√(δ_(place,k)^2+δ_(dem,k)^2 )#(10)"
+  },
+  {
+    "type": "p",
+    "text": "where $\\delta_{\\mathrm{place},k}$ is the largest W1 between the reference window and the same window moved 2 km north, south, east and west, and $\\delta_{\\mathrm{dem},k}$ is the largest W1 between SRTMGL1 and NASADEM or Copernicus GLO-30 for the same Earth window (15 measured pairs). For Jezero, $\\delta_{\\mathrm{slope}}$ = 1.1708° and $\\delta_{\\mathrm{rel}}$ = 22.1523 m. A scored feature is used only if $\\tau_k \\ge 3\\,\\delta_k$; otherwise its distance is reported without a similarity. The floor never changes $s_k$. It decides eligibility and interpretation: when every scored distance is at or below its floor, the candidate is reported as not resolved from the reference by these tests. The tests are a 2 km reference move and a change of Earth DEM product; they do not cover every source of error, so the wording is limited to them. The lunar window fails the condition (moving it 2 km changes relative elevation by about 195 m against a 77 m tolerance), so lunar comparisons show distances without an index."
+  },
+  {
+    "type": "h2",
+    "text": "Observed index, evidence coverage and ranking"
+  },
+  {
+    "type": "p",
+    "text": "Each task profile assigns planned weights $w_g$ ($\\sum_g w_g = 1$) to evidence families. With $I_g$ the eligibility indicator,"
+  },
+  {
+    "type": "eq",
+    "n": 11,
+    "latex": "A_{\\mathrm{obs}} = 100 \\times \\frac{\\sum_{g} w_{g} I_{g} S_{g}}{\\sum_{g} w_{g} I_{g}}",
+    "umath": "A_obs=100×(∑_g▒〖w_g I_g S_g 〗)/(∑_g▒〖w_g I_g 〗)#(11)"
+  },
+  {
+    "type": "eq",
+    "n": 12,
+    "latex": "C = \\sum_{g} w_{g} I_{g}",
+    "umath": "C=∑_g▒〖w_g I_g 〗#(12)"
+  },
+  {
+    "type": "p",
+    "text": "$A_{\\mathrm{obs}}$ is undefined, never zero, when no family qualifies. $C$ is the share of the planned profile weight that is measured and comparable; it is not statistical confidence and not DEM pixel coverage. Only terrain is currently measured, so $C$ = 1 for the terrain-analogy profile and 0.30, 0.80 and 0.35 for the balanced-science, rover-mobility and Mars-base field-testing profiles. A profile is ranked only if it is declared rankable, every task-critical family is eligible for every candidate and all candidates share one eligibility key (reference AOI, method, weights, scored features, tolerances, grid, DEM product and mask). Today only terrain analogy is ranked; the other profiles are reported as partial evidence or not assessed. Ties are formed from scenario ranges: each candidate's index is recomputed with the Earth window moved 2 km in four directions, the reference moved 2 km in four directions, each alternative DEM, the 120 and 240 m grids, all tolerances × 0.75 and × 1.25, and feature weights 0.25/0.75; candidates whose ranges overlap, chained in order of nominal index, share a competition rank. These ranges are scenario sensitivities, not confidence intervals."
+  },
+  {
+    "type": "table",
+    "caption": "Table 1. Planned family weights and task-critical families by profile.",
+    "header": [
+      "Profile",
+      "Planned weights $w_g$",
+      "Task-critical",
+      "Ranked"
+    ],
+    "rows": [
+      [
+        "Terrain analogy",
+        "terrain 1.00",
+        "terrain",
+        "yes"
+      ],
+      [
+        "Balanced science",
+        "terrain 0.30, geology 0.25, temperature 0.10, water ice 0.15, surface processes 0.10, subsurface habitability 0.10",
+        "terrain, geology",
+        "no"
+      ],
+      [
+        "Rover mobility",
+        "terrain 0.80, surface processes 0.20",
+        "terrain, field test suitability",
+        "no"
+      ],
+      [
+        "Biosignature fieldwork",
+        "geology 0.35, water ice 0.25, subsurface habitability 0.20, temperature 0.10, terrain 0.10",
+        "geology, water ice, subsurface habitability",
+        "no"
+      ],
+      [
+        "Mars-base field testing",
+        "terrain 0.35, temperature 0.35, water ice 0.15, subsurface habitability 0.15",
+        "terrain, temperature, field test suitability",
+        "no"
+      ]
+    ]
+  },
+  {
+    "type": "h2",
+    "text": "Worked example: Atacama Desert (south window) compared with Jezero"
+  },
+  {
+    "type": "p",
+    "text": "Earth window earth-atacama-south-aoi-v1 (centre 24.2722° S, 69.9005° W; SRTMGL1.003 tile S25W070, extracted file SHA-256 31ff152bdf6000f3…; UTM zone 19S (EPSG:32719); ESA WorldCover v200 2021: cells ≥ 50 % built-up excluded, 0.00 % of cells excluded) is compared with mars-jezero-aoi-v1 (CTX DEM SHA-256 ba7f706ea1b5d63a…) under the terrain-analogy profile, analogue-method-v1.0."
+  },
+  {
+    "type": "table",
+    "caption": "Table 2. Worked example at 60 m. d, τ and δ in the feature units; s and contributions from full-precision values.",
+    "header": [
+      "Feature",
+      "Earth window",
+      "Jezero window",
+      "$d$",
+      "$\\tau$",
+      "$d/\\tau$",
+      "$s$",
+      "$a$",
+      "Points",
+      "$\\delta$"
+    ],
+    "rows": [
+      [
+        "Slope distribution",
+        "2.69° median, 6.22° p90",
+        "1.83° median, 5.24° p90",
+        "0.8225",
+        "5.8058",
+        "0.14167",
+        "0.986185",
+        "0.50",
+        "49.3093",
+        "1.1708"
+      ],
+      [
+        "Relative elevation distribution",
+        "-80.2 to 44.9 m (p10–p90)",
+        "-58.9 to 105.9 m (p10–p90)",
+        "15.6373",
+        "77.1038",
+        "0.20281",
+        "0.971893",
+        "0.50",
+        "48.5946",
+        "22.1523"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "With the full-precision values, $S_g$ = 0.5 × 0.986185 + 0.5 × 0.971893 = 0.979039 and $A_{\\mathrm{obs}}$ = 97.9039, reported by the API as 97.90; the service and an independent recomputation with the reference arithmetic agree exactly (difference below 10⁻⁹ index points). Recombining the four-decimal similarities shown in the interface (0.9862 and 0.9719) gives 97.905, which differs in the last decimal only because of display rounding. Evidence coverage is $C$ = 1.00 (terrain only). Both scored distances are below their floors, so the window is not resolved from Jezero by these tests. Across 17 scenarios the index ranges 93.12–98.65; the window shares rank 1 with 4 other windows. Local relief (11.96 m) and roughness (1.02 m) are reported as diagnostics only."
+  },
+  {
+    "type": "h2",
+    "text": "Discrimination checks"
+  },
+  {
+    "type": "p",
+    "text": "Against Jezero, the 88 background windows have a median index of 87.4; 49% score 90 or more and 1% score 99 or more. Slope alone and relative elevation alone give 47% and 49% at 90 or more. The previous Phase 5 tolerances would give 55%, half the current tolerances 19% and double 58%. Against the other Mars references, 42–49 % of background windows score 90 or more. Synthetic controls scored 2.1 (a 15° tilted plane), 38.2 (150 m ridges every 2 km), 21.2 (rough 1,500 m fractal relief) and 100.0 (an identical copy of Jezero); a gentle 300 m fractal surface scored 88.4 because its distributions resemble Jezero's even though its spatial arrangement does not. The background windows come from tiles first downloaded for candidate sites: arid and mountainous regions are over-represented, and windows inside one region are spatially correlated. 4 regions, not 88 independent samples. The order of the five highest-scoring candidates is unchanged when the tolerance is recomputed with each region left out."
+  },
+  {
+    "type": "h2",
+    "text": "Limitations and validation status"
+  },
+  {
+    "type": "list",
+    "items": [
+      "The equations, the reference values of Equation 7, the W1 implementation, eligibility gates and determinism are verified by automated tests against an independent reference implementation. The scientific claim that the index identifies useful analogues has not been validated against expert-labelled analogues, expert-chosen negative controls or field outcomes.",
+      "Tolerances, weights and the redundancy threshold are project definitions. They are not fitted to labelled data and they depend on the background sample.",
+      "At a 60 m grid the index separates low-relief from rugged terrain but does not order low-relief windows; about half of unselected Earth windows score 90 or more against each Mars reference.",
+      "Distributions ignore spatial arrangement; no morphology descriptor is scored.",
+      "Only terrain is measured. Geology, temperature (which fails a comparability audit), water and ice, surface processes, habitability, field access and mission safety are not assessed.",
+      "SRTM (2000), CTX stereo (2006 onward) and LOLA record present-day surfaces. CTX stereo noise inflates slopes on very smooth plains, and planetary DEM vertical references differ from Earth's (relative elevation removes the offset but not tilts).",
+      "Existing NASA and USGS work supports measuring terrain and using Earth analogues for specific questions; it does not endorse this index, its weights or its tolerances."
+    ]
+  },
+  {
+    "type": "h2",
+    "text": "Software and versions"
+  },
+  {
+    "type": "p",
+    "text": "Python 3.13.4, NumPy 2.3.4, Rasterio 1.4.3 with GDAL 3.9.3, FastAPI 0.162.7. Method configuration backend/app/data/analogue.v1.json (SHA-256 of LF text fa0cebded15dd10b…); calibration backend/data/processed/evaluation/analogue-v1-calibration.json (1e0463f39fca804a…). Scoring functions: backend/app/services/analogue_math.py (similarity, w1_quantile_functions, family_score, observed_index); backend/app/services/analogue_v1_service.py (terrain_features, reference_floor, compare); backend/app/services/terrain_quantiles.py (measure, quantile_function)."
+  },
+  {
+    "type": "h1",
+    "text": "Results: measured terrain resemblance, Atacama south and Jezero"
+  },
+  {
+    "type": "p",
+    "text": "On the two scored terrain features at a 60 m grid, the Atacama south window differs from the Jezero window by 0.82° in slope distribution and 15.6 m in relative-elevation distribution, giving an experimental terrain evidence index of 97.9 (scenario range 93.1–98.7) with 100 % terrain-profile coverage. Both differences are within the resolution floor of these tests, and the window shares rank 1 with 4 other low-relief windows whose order the data cannot resolve. The score is not distinctive: 17% of 88 unselected Earth windows score at least as high, and 49% score 90 or more. The result shows that the two windows share low-relief terrain at this scale; it does not show that Atacama is the best overall Mars analogue, and it says nothing about geology, habitability or the safety of a base or landing site."
+  },
+  {
+    "type": "h2",
+    "text": "References"
+  },
+  {
+    "type": "list",
+    "items": [
+      "NASA JPL (2013). NASA Shuttle Radar Topography Mission Global 1 arc second, V003. NASA EOSDIS Land Processes DAAC. doi:10.5067/MEaSUREs/SRTM/SRTMGL1.003.",
+      "USGS Astrogeology Science Center (2021). Mars 2020 Science Investigation CTX DEM Mosaic. doi:10.5066/P906QQT8.",
+      "USGS Astrogeology Science Center. Mars Reconnaissance Orbiter Context Camera controlled digital terrain models (STAC collection mro_ctx_controlled_usgs_dtms). doi:10.5066/P9JKVWR3.",
+      "Smith, D. E. et al. LRO LOLA Gridded Data Records, LDEM_875S_20M. NASA Planetary Data System, LRO-L-LOLA-3-RDR-V1.",
+      "ESA WorldCover project (2022). ESA WorldCover 10 m 2021 v200. CC-BY-4.0.",
+      "Copernicus DEM GLO-30 (DLR e.V. and Airbus, provided under COPERNICUS by the European Union and ESA) and NASADEM_HGT.001, via Microsoft Planetary Computer.",
+      "Grotzinger, J. P. et al. (2014). A habitable fluvio-lacustrine environment at Yellowknife Bay, Gale Crater, Mars. Science 343, 1242777. doi:10.1126/science.1242777.",
+      "Golombek, M. et al. (2020). Geology of the InSight landing site on Mars. Nature Communications 11, 1014. doi:10.1038/s41467-020-14679-1.",
+      "Golombek, M. P. et al. (2006). Geology of the Gusev cratered plains from the Spirit rover transverse. JGR Planets 111. doi:10.1029/2005JE002503.",
+      "Malin, M. C. & Edgett, K. S. (2003). Evidence for persistent flow and aqueous sedimentation on early Mars. Science 302, 1931–1934. doi:10.1126/science.1090544.",
+      "Stepinski, T. F. & Coradetti, S. (2004). Comparing morphologies of drainage basins on Mars and Earth using integral-geometry and neural maps. Geophysical Research Letters 31. doi:10.1029/2004GL020359.",
+      "OECD/JRC (2008). Handbook on Constructing Composite Indicators: Methodology and User Guide. OECD Publishing.",
+      "Watson, K. & Blaisdell, G. (2000). Salient characteristics for terrestrial analog engineering test sites. NASA NTRS 20000105009."
+    ]
+  }
+]

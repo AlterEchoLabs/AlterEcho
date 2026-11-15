@@ -1,0 +1,30 @@
+{
+  "methodology_version": "terrain-v4.0",
+  "status": "provisional_pending_expert_review",
+  "inputs": "terrain-v3.0 artifacts: identical halo processing, fixed bins and 60/120/240 m scales. Only the distance-to-index conversion and the weights differ from v3.",
+  "formula": {
+    "family_scale": "C(f,s) = 100 * exp(-0.5 * (W1(f,s) / tau_f)^2)",
+    "family": "C(f) = sum_s w_s * C(f,s)",
+    "terrain_index": "C_terrain = sum_f w_f * C(f)",
+    "distance": "W1 = sum over bins of |CDF_earth - CDF_planet| * bin width, on normalised fixed-bin histograms, in the feature's units",
+    "notice": "C is a similarity index from 0 to 100. It is not a probability, a confidence level or a percentage of identity."
+  },
+  "families": {
+    "slope": {"distribution": "slope_deg", "units": "degrees", "tau": 8.0, "weight": 0.25,
+      "definition": "Slope from metric x/y gradients (numpy.gradient on the metric grid); invalid cells propagate through the stencil."},
+    "local_relief": {"distribution": "local_relief_m", "units": "metres", "tau": 200.0, "weight": 0.25,
+      "definition": "Maximum minus minimum elevation in a 1,000 m square neighbourhood."},
+    "roughness": {"distribution": "roughness_m", "units": "metres", "tau": 30.0, "weight": 0.25,
+      "definition": "Standard deviation of elevation in a 300 m square neighbourhood."},
+    "relative_elevation": {"distribution": "elevation_relative_m", "units": "metres", "tau": 150.0, "weight": 0.25,
+      "definition": "Relief-preserving relative elevation z - median(z) over the core AOI. Absolute datums are never compared. A shape-normalised variant (divided by spread) is not used because it would discard relief."}
+  },
+  "scale_weights": {"60": 0.5, "120": 0.3, "240": 0.2},
+  "scale_support": {"note": "SRTMGL1 posts at ~30 m and the Jezero CTX DEM at 20 m, so 60 m is the finest scale analysed (at least 2x the native posting).", "minimum_native_factor": 2.0},
+  "tau_provenance": "Each tau equals the terrain-v3.0 distance scale for that feature, carried over unchanged. Those values were set in Phase 5 after the three original Earth sites were seen. They were frozen on 2026-11-14 before the Phase 7 held-out sites (Dallol, Craters of the Moon, Hanksville, Meteor Crater) were processed, and were not tuned to favour any site.",
+  "weight_provenance": "Equal family weights (0.25). This is a neutral provisional choice so that no family dominates; v3 used 0.15/0.30/0.20/0.35.",
+  "redundancy_policy": "One distribution per family. Percentile summaries (p50, p90) are shown for interpretation only and never scored, so overlapping statistics are not double-counted. Correlation between family scores is reported by the calibration run.",
+  "frozen_before_sites": ["earth-danakil", "earth-craters-of-the-moon", "earth-hanksville-mdrs", "earth-meteor-crater"],
+  "sensitivity": {"weight_perturbation_fraction": 0.2, "tau_perturbation_fraction": 0.2,
+    "scale_weight_alternatives": {"equal": {"60": 0.3333, "120": 0.3333, "240": 0.3334}, "fine_only": {"60": 1.0, "120": 0.0, "240": 0.0}, "coarse_only": {"60": 0.0, "120": 0.0, "240": 1.0}}}
+}
