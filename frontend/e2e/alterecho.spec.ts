@@ -342,6 +342,7 @@ const JOB_ID = "0123456789abcdef0123456789abcdef";
 const SQUARE = { type: "Polygon", coordinates: [[[-116.82, 36.18], [-116.71, 36.18], [-116.71, 36.27], [-116.82, 36.27], [-116.82, 36.18]]] };
 const PREFLIGHT = {
   center: { lat: 36.2297, lon: -116.7669 }, geometry: SQUARE, width_m: 10000, supported: true, reason: null,
+  processing: { available: true, reason: null },
   dem: { product: "SRTMGL1 v003", native_resolution: "1 arc-second (~30 m)", analysis_scales_m: [60, 120, 240], tiles: ["N36W117"], tiles_cached: [], credentials_available: true, requires_credentials: false },
   imagery: { product: "Sentinel-2 L2A", authentication: "anonymous SAS", note: "mocked for the test" }, references: ["mars-jezero", "moon-south-pole-shackleton"],
   queue: { pending: 0, max: 4 }, limits: { per_client_per_hour: 3, global_per_day: 40 },
@@ -409,6 +410,15 @@ test("9 · explore: missing credentials, unsupported areas and provider failures
   await page.goto("/explore");
   await page.getByLabel("Documented analog places").selectOption({ label: "Haughton Crater, Devon Island (outside SRTM)" });
   await expect(page.getByTestId("preflight")).toContainText(/outside|coverage/i);
+  await expect(page.getByTestId("submit-screening")).toBeDisabled();
+
+  // A serverless deployment must explain its native-worker limitation instead of looking unreachable.
+  await page.unrouteAll({ behavior: "ignoreErrors" });
+  await page.route(`${API}/api/explore/preflight`, (route) => route.fulfill({
+    json: { ...PREFLIGHT, processing: { available: false, reason: "Custom-area processing requires Rasterio/GDAL and a persistent worker." } },
+  }));
+  await chooseDeathValley(page);
+  await expect(page.getByTestId("preflight")).toContainText("requires Rasterio/GDAL and a persistent worker");
   await expect(page.getByTestId("submit-screening")).toBeDisabled();
 });
 

@@ -37,6 +37,7 @@ export interface LayerMeta { site_id: string; resolution_m: number; pixels: numb
 
 export interface Preflight {
   center: { lat: number; lon: number }; geometry: AoiFeature["geometry"]; width_m: number; supported: boolean; reason: string | null;
+  processing: { available: boolean; reason: string | null };
   dem: { product: string; native_resolution: string; analysis_scales_m: number[]; tiles: string[]; tiles_cached: string[]; credentials_available: boolean; requires_credentials: boolean };
   imagery: { product: string; authentication: string; note: string }; references: string[]; queue: { pending: number; max: number };
   limits: { per_client_per_hour: number; global_per_day: number }; status_label: string;

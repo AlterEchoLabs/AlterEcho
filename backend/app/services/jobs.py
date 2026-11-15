@@ -38,6 +38,11 @@ PER_CLIENT_PER_HOUR = 3
 GLOBAL_PER_DAY = 40
 TERMINAL = {"ready", "failed", "unsupported", "requires_credentials"}
 
+VERCEL_UNAVAILABLE_REASON = (
+    "Custom-area processing is unavailable on the Vercel serverless backend. "
+    "It requires Rasterio/GDAL, persistent writable storage, and a worker that survives beyond one HTTP request."
+)
+
 _lock = threading.Lock()
 _executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="aoi-job")
 _client_hits: dict[str, deque] = {}
@@ -109,6 +114,13 @@ def square(lat: float, lon: float) -> dict:
     return {"type": "Polygon", "coordinates": [[[w, s], [e, s], [e, n], [w, n], [w, s]]]}
 
 
+def processing_capability() -> dict:
+    """Describe whether this runtime can execute persistent native processing jobs."""
+    if os.getenv("VERCEL"):
+        return {"available": False, "reason": VERCEL_UNAVAILABLE_REASON}
+    return {"available": True, "reason": None}
+
+
 def preflight(lat: float, lon: float) -> dict:
     from app.services.srtm_service import tiles_for_geojson_geometry
     if not (isfinite(lat) and isfinite(lon)) or not (-90 < lat < 90 and -180 <= lon <= 180):
@@ -121,6 +133,7 @@ def preflight(lat: float, lon: float) -> dict:
     return {
         "center": {"lat": lat, "lon": lon}, "geometry": geometry, "width_m": WIDTH_M, "supported": supported and len(tiles) <= MAX_TILES,
         "reason": None if supported else "Outside SRTMGL1 coverage (56° S to 60° N); ArcticDEM/REMA integrations are not available for screening.",
+        "processing": processing_capability(),
         "dem": {"product": "SRTMGL1.003", "native_resolution": "1 arc-second (~30 m)", "analysis_scales_m": [60, 120, 240], "tiles": tiles, "tiles_cached": cached,
                 "credentials_available": credentials, "requires_credentials": bool(set(tiles) - set(cached)) and not credentials},
         "imagery": {"product": "Sentinel-2 L2A via Microsoft Planetary Computer", "authentication": "none (public)", "note": "Scene chosen only if it covers ≥ 99 % of the AOI with ≤ 5 % AOI cloud."},
@@ -148,6 +161,8 @@ def _rate_limit(client: str) -> None:
 def submit(lat: float, lon: float, label: str | None, client: str) -> dict:
     global _pending
     pre = preflight(lat, lon)
+    if not pre["processing"]["available"]:
+        raise JobRejected(pre["processing"]["reason"], 503)
     label = re.sub(r"[^\w\s,.()'-]", "", (label or "").strip())[:60] or f"{lat:.3f}, {lon:.3f}"
     job = {"job_id": uuid4().hex, "label": label, "center": pre["center"], "geometry": pre["geometry"], "created_at": _now(), "updated_at": _now(),
            "state": "queued", "log": [], "preflight": pre, "result": None, "screening": True}

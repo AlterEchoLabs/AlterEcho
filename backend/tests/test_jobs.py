@@ -43,6 +43,23 @@ def test_preflight_rejects_areas_outside_srtm_and_bad_coordinates(sandbox):
     assert client.post("/api/explore/preflight", content='{"lat": NaN, "lon": 0}', headers={"Content-Type": "application/json"}).status_code == 422
 
 
+def test_vercel_runtime_reports_processing_unavailable_without_writing(sandbox, monkeypatch):
+    monkeypatch.setenv("VERCEL", "1")
+    preflight = client.post("/api/explore/preflight", json={"lat": 36.23, "lon": -116.77})
+    assert preflight.status_code == 200
+    assert preflight.json()["processing"]["available"] is False
+
+    response = client.post(
+        "/api/explore/jobs",
+        json={"lat": 36.23, "lon": -116.77},
+        headers={"Origin": "http://localhost:3000"},
+    )
+    assert response.status_code == 503
+    assert response.headers["access-control-allow-origin"] == "http://localhost:3000"
+    assert "Rasterio/GDAL" in response.json()["error"]["message"]
+    assert not (sandbox / "jobs").exists()
+
+
 def test_unsupported_and_missing_credentials_states_fetch_nothing(sandbox, monkeypatch):
     monkeypatch.delenv("EARTHDATA_TOKEN", raising=False)
     monkeypatch.delenv("EARTHDATA_USERNAME", raising=False)

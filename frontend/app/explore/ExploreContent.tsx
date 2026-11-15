@@ -130,12 +130,13 @@ export default function ExploreContent() {
                 <dt>Imagery</dt><dd>{pre.data.imagery.product} ({pre.data.imagery.authentication}). {pre.data.imagery.note}</dd>
                 <dt>Compared with</dt><dd>{pre.data.references.map((r) => sites.find((s) => s.id === r)?.name ?? r).join(", ")}</dd>
                 <dt>Analysis</dt><dd>{pre.data.dem.analysis_scales_m.join(" / ")} m, terrain-v4.0</dd>
+                <dt>Processing</dt><dd>{pre.data.processing.available ? "Available on this backend" : pre.data.processing.reason}</dd>
                 <dt>Limits</dt><dd>{pre.data.limits.per_client_per_hour} per hour per client · queue {pre.data.queue.pending}/{pre.data.queue.max}</dd>
               </dl>
             )}
             <label className="toggle" style={{ marginTop: 8 }}><span>Label</span><input className="search-input" style={{ width: 240, margin: 0 }} maxLength={60} value={label} onChange={(e) => setLabel(e.target.value)} aria-label="Optional label for this screening" /></label>
             <div className="export-row" style={{ marginTop: 12 }}>
-              <button type="button" className="button-link" onClick={submit} disabled={submitting || jobRunning || !pre?.data?.supported} data-testid="submit-screening">{submitting ? "Submitting…" : jobRunning ? "Measuring… (one job at a time)" : "Measure this window"}</button>
+              <button type="button" className="button-link" onClick={submit} disabled={submitting || jobRunning || !pre?.data?.supported || !pre?.data?.processing.available} data-testid="submit-screening">{submitting ? "Submitting…" : jobRunning ? "Measuring… (one job at a time)" : "Measure this window"}</button>
               {submitError && <span className="error-inline" role="alert">{submitError}</span>}
             </div>
           </div>
