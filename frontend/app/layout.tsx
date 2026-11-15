@@ -7,6 +7,8 @@ import "./phase9.css";
 import "./phase10.css";
 import "katex/dist/katex.min.css";
 import "./release.css";
+import "./polish.css";
+import Link from "next/link";
 import { BRAND } from "../config/brand";
 import Masthead from "./components/Masthead";
 
@@ -29,7 +31,19 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body data-application-id={BRAND.applicationId} data-build-identifier={BRAND.buildIdentifier}>
         <a className="skip-link" href="#main">Skip to content</a>
         <Masthead />
-        <main id="main">{children}</main>
+        <main id="main" tabIndex={-1}>{children}</main>
+        <footer className="site-footer" data-testid="site-footer">
+          <div className="footer-inner">
+            <p className="footer-brand"><strong>{BRAND.shortName}</strong> · Earth terrain compared with Mars and the Moon, from real elevation data.</p>
+            <div className="footer-team">
+              <h2 className="footer-heading">Team members</h2>
+              <ul className="team-list" data-testid="team-members">
+                {BRAND.teamMembers.map((name) => <li key={name}>{name}</li>)}
+              </ul>
+            </div>
+            <p className="footer-note">Every score is calculated from stored measurements. <Link href="/method">How it works</Link> · <Link href="/sources">Data &amp; sources</Link></p>
+          </div>
+        </footer>
       </body>
     </html>
   );

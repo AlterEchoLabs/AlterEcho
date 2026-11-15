@@ -107,11 +107,3 @@
 .chart-grid > .chart:only-child { max-width: 640px; }
 /* Full SHA-256 strings in the report wrap instead of widening the page. */
 .report .mono, .report li.small { overflow-wrap: anywhere; }
-/* Phones: the wordmark and the four links no longer fit one row, so the nav moves to a second row. */
-@media (max-width: 560px) {
-  :root { --masthead-h: 88px; }
-  .masthead { flex-wrap: wrap; align-content: center; row-gap: 2px; padding-top: 6px; padding-bottom: 6px; }
-  .masthead nav { width: 100%; overflow-x: auto; scrollbar-width: none; }
-  .masthead-nav { gap: 2px; }
-  .masthead-nav a { white-space: nowrap; padding: 6px 8px; }
-}

@@ -2,6 +2,7 @@ import { expect, test } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { writeFileSync } from "node:fs";
 import path from "node:path";
+import { openMenuIfCollapsed } from "./helpers";
 
 const routes = ["/", "/method", "/sources", "/explore", "/report?site=earth-atacama-south&reference=mars-jezero&profile=terrain_analogy"];
 
@@ -12,6 +13,7 @@ test("release themes, accessibility, screenshots and navigation", async ({ page 
   page.on("pageerror", (error) => failures.push(error.message));
   for (const theme of ["dark", "light"]) {
     await page.goto("/");
+    await openMenuIfCollapsed(page);
     await page.getByLabel("Color theme").selectOption(theme);
     for (const [index, route] of routes.entries()) {
       await page.goto(route);
@@ -26,6 +28,7 @@ test("release themes, accessibility, screenshots and navigation", async ({ page 
       await page.screenshot({ path: info.outputPath(`${theme}-${index}.png`), fullPage: false });
     }
   }
+  await openMenuIfCollapsed(page);
   await page.getByLabel("Color theme").selectOption("system");
   await page.emulateMedia({ colorScheme: "dark" });
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");

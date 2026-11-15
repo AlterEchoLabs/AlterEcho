@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Fragment, useEffect, useId, useRef, useState } from "react";
 import { apiV3, safeExternalUrl, type Site } from "../../../lib/api";
-import { ROLE_TEXT, STATE_TEXT, STATUS_TEXT, type CandidateV3, type CompareMode, type CompareV3, type ContextV3, type DataRole, type DistributionPair, type FeatureRecord, type ResultDetail, type ViewMode } from "../../../lib/analogue";
+import { ROLE_TEXT, STATE_TEXT, STATUS_TEXT, type CandidateV3, type CompareMode, type CompareV3, type ContextV3, type DataRole, type DistributionPair, type FeatureRecord, type ResultDetail } from "../../../lib/analogue";
 import { coords, num, pct } from "../../../lib/format";
 import { useKeyed } from "../../../lib/hooks";
 import FormulaList from "../FormulaList";
@@ -283,6 +283,21 @@ export function FullEvidence({ detail, onBack }: { detail: ResultDetail; onBack?
   );
 }
 
+/** One plain sentence on why a site matched (or did not), from the measured distances as shares of the tolerance τ. */
+function shortWhy(result: CandidateV3): string | null {
+  const terrain = result.families.find((f) => f.family === "terrain");
+  const slope = terrain?.features.find((f) => f.feature === "slope" && f.role === "scored")?.d_over_tau;
+  const rel = terrain?.features.find((f) => f.feature === "relative_elevation" && f.role === "scored")?.d_over_tau;
+  if (slope == null || rel == null) return null;
+  const share = (x: number) => (x < 1 ? `${Math.round(100 * x)}%` : `${x.toFixed(1)}×`);
+  const typical = "the typical difference between two ordinary Earth landscapes";
+  if (slope < 1 && rel < 1) {
+    return `Slope and relief differ by only ${share(slope)} and ${share(rel)} of ${typical}${result.resolution === "unresolved_from_reference" ? ", smaller than the measurement can resolve at a 60 m grid" : ""}.`;
+  }
+  if (slope >= 1 && rel >= 1) return `Slope differs by ${share(slope)} and relief by ${share(rel)} ${typical}.`;
+  return `Slope differs by ${share(slope)} and relief by ${share(rel)} of ${typical}.`;
+}
+
 function TerrainCard({ site, comparison, result, detailed, actions }: {
   site: Site; comparison: CompareV3; result: CandidateV3; detailed: boolean; actions: React.ReactNode;
 }) {
@@ -309,10 +324,10 @@ function TerrainCard({ site, comparison, result, detailed, actions }: {
     );
   }
   const scored = st && result.observed_index != null && s.show_index;
+  const why = scored ? shortWhy(result) : null;
   return (
     <article className={`result-card class-${result.terrain_class ?? "none"}`} data-testid="simple-result">
       <header className="card-head">
-        <p className="kicker">{site.name} <span className="muted">compared with</span> {ref}</p>
         {s.verdict ? <h3 className="verdict" data-testid="verdict">{s.verdict}</h3> : <h3 className="verdict">{comparison.reference_body === "moon" ? "Measured distances, no index" : "Terrain compared"}</h3>}
       </header>
 
@@ -321,7 +336,8 @@ function TerrainCard({ site, comparison, result, detailed, actions }: {
           <div className="score-main">
             <p className="score-label">Terrain similarity index</p>
             <p className="score-value mono"><b>{result.observed_index!.toFixed(0)}</b><span>/100</span></p>
-            <p className="score-what">Present-day terrain shape at a 60 m analysis grid{detailed && range ? ` · scenario range ${range[0].toFixed(0)}–${range[1].toFixed(0)}` : ""}</p>
+            <p className="score-what">Present-day terrain shape at a 60&nbsp;m analysis grid</p>
+            {detailed && range && <p className="score-range mono" data-testid="score-range">range {range[0].toFixed(0)}–{range[1].toFixed(0)} across {result.sensitivity?.scenarios.length ?? 0} checks</p>}
           </div>
           <div className="score-context" data-testid="standing">
             <p className="score-label">Compared with ordinary land</p>
@@ -332,26 +348,34 @@ function TerrainCard({ site, comparison, result, detailed, actions }: {
         </div>
       )}
 
-      {scored && comparison.background_scores && comparison.background_scores.length > 0 && (
-        <OrdinaryHistogram scores={comparison.background_scores} value={result.observed_index!} siteName={site.name} referenceName={ref} />
-      )}
+      {!scored && <p className="simple-conclusion" data-testid="simple-conclusion">{s.conclusion}</p>}
+      <dl className="card-facts">
+        {why && <div><dt>{result.terrain_class === "different" ? "Why it differs" : "Why it matched"}</dt><dd data-testid="why-short">{why}</dd></div>}
+        <div><dt>Main limitation</dt><dd data-testid="main-limitation">{s.limitation}</dd></div>
+      </dl>
 
-      <p className="simple-conclusion" data-testid="simple-conclusion">{s.conclusion}</p>
-
-      {terrain && terrain.features.length > 0 && (
-        <details className="why-match" open={detailed} data-testid="why-match">
-          <summary>Why this match?</summary>
-          <MeasureRows features={terrain.features} siteName={site.name} referenceName={ref} detailed={detailed} />
-          {s.background_text && <p className="small" data-testid="background-text">{s.background_text}</p>}
-          <p className="small muted">{s.limitation} {s.validation_status}</p>
-        </details>
+      {detailed && scored && (
+        <div className="card-detail" data-testid="card-detail">
+          <p className="simple-conclusion" data-testid="simple-conclusion">{s.conclusion}</p>
+          <p className="small muted" data-testid="coverage-text">{s.coverage_text} {s.validation_status}</p>
+          {comparison.background_scores && comparison.background_scores.length > 0 && (
+            <OrdinaryHistogram scores={comparison.background_scores} value={result.observed_index!} siteName={site.name} referenceName={ref} />
+          )}
+          {terrain && terrain.features.length > 0 && (
+            <div className="why-match" data-testid="why-match">
+              <h4 className="detail-title">Measured distributions</h4>
+              <MeasureRows features={terrain.features} siteName={site.name} referenceName={ref} detailed={detailed} />
+              {s.background_text && <p className="small" data-testid="background-text">{s.background_text}</p>}
+            </div>
+          )}
+        </div>
       )}
       {actions}
     </article>
   );
 }
 
-function TemperatureCard({ site, context }: { site: Site; context: ContextV3 }) {
+function TemperatureCard({ site, context, detailed }: { site: Site; context: ContextV3; detailed: boolean }) {
   const row = context.temperature.sites.find((t) => t.site_id === site.id);
   const ref = context.temperature.reference;
   return (
@@ -364,12 +388,12 @@ function TemperatureCard({ site, context }: { site: Site; context: ContextV3 }) 
         reference={ref ? { name: context.reference_name, rec: ref } : null} />
       <p className="simple-conclusion" data-testid="simple-conclusion">{context.temperature.note}{ref && row?.record ? ` ${context.reference_name} is about ${(row.record.day_c! - ref.day_c!).toFixed(0)}°C colder by day and ${(row.record.night_c! - ref.night_c!).toFixed(0)}°C colder at night than this window, but the two numbers are not measured the same way.` : ""}</p>
       {row?.audit && (
-        <details className="why-match">
+        <details className="why-match" open={detailed}>
           <summary>Why temperature is not scored</summary>
           <ul className="audit">{row.audit.checks.map((c) => <li key={c.check} className={c.passed ? "pass" : c.required ? "fail" : "note"}><span className="audit-mark" aria-hidden="true">{c.passed ? "✓" : c.required ? "✕" : "–"}</span><span><strong>{c.check}</strong> — {c.passed ? "passed" : c.required ? "failed" : "not met"}. {c.detail}</span></li>)}</ul>
         </details>
       )}
-      {row?.record && <p className="small muted">Earth: {row.record.product_id} ({row.record.instrument}, {row.record.platform}), {row.record.period?.slice(0, 10)} to {row.record.period?.slice(21, 31)}, {row.record.paired_samples} paired 8-day composites.{ref ? ` Reference: ${ref.instrument}, ${ref.platform}.` : ""}</p>}
+      {row?.record && <p className="small muted">Earth: {row.record.product_id} ({row.record.instrument}, {row.record.platform}){detailed ? `, ${row.record.period?.slice(0, 10)} to ${row.record.period?.slice(21, 31)}, ${row.record.paired_samples} paired 8-day composites` : ""}.{ref ? ` Reference: ${ref.instrument}, ${ref.platform}.` : ""}</p>}
     </article>
   );
 }
@@ -379,72 +403,74 @@ function FieldworkCard({ site, context }: { site: Site; context: ContextV3 }) {
   return (
     <article className="result-card" data-testid="simple-result">
       <header className="card-head">
-        <p className="kicker">Field-test record · not scored</p>
+        <p className="kicker">Field-test record · documented research, not scored</p>
         <h3 className="verdict">{f ? f.analog_status_text : "No record"}</h3>
       </header>
       <p className="simple-conclusion" data-testid="simple-conclusion">{f?.summary ?? "This window has no recorded analog study."}</p>
       {f && f.sources.length > 0 && (
         <ul className="source-list">{f.sources.map((c) => { const href = safeExternalUrl(c.url); return <li key={c.id}>{href ? <a href={href} target="_blank" rel="noreferrer noopener">{c.title}</a> : c.title}</li>; })}</ul>
       )}
-      <p className="small muted">Being a well-known analog site does not mean the terrain matches a given Mars window, and the reverse. Use “Terrain shape” for the measured comparison.</p>
+      <p className="small muted">This record does not change the terrain result. Being a well-known analog site does not mean the terrain matches a given Mars window, and the reverse. Use “Terrain shape” for the measured comparison.</p>
     </article>
   );
 }
 
-export default function ResultPanel({ site, reference, comparison, context, mode, result, view, onView }: {
-  site: Site; reference: Site | null; comparison: CompareV3 | null; context: ContextV3 | null; mode: CompareMode; result: CandidateV3 | null; view: ViewMode; onView: (view: ViewMode) => void;
+/** The selected site's answer. Simple: verdict, one index with its context, why, and the main limitation. Detailed adds ranges, distributions and exports. */
+export default function ResultPanel({ site, comparison, context, mode, result, onDetailed }: {
+  site: Site; comparison: CompareV3 | null; context: ContextV3 | null; mode: CompareMode; result: CandidateV3 | null; onDetailed: () => void;
 }) {
   const [why, setWhy] = useState(false);
   const [detail] = useDetailMode();
   const detailed = detail === "detailed";
-  const fullId = useId();
   const profileId = "terrain_analogy" as const;
-  const referenceId = comparison?.reference_site_id ?? reference?.id ?? "mars-jezero";
-  const showFull = mode === "terrain" && (view === "full" || detailed) && result && result.state !== "not_measured" && result.state !== "excluded";
-  const detailData = useKeyed(showFull ? `${site.id}|${profileId}|${referenceId}` : null, () => apiV3.result(site.id, profileId, referenceId));
-  const fullRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => { if (view === "full" && detailData.data) fullRef.current?.focus({ preventScroll: true }); }, [view, detailData.data]);
+  const referenceId = comparison?.reference_site_id ?? "mars-jezero";
 
   if (mode !== "terrain") {
-    if (!context) return <div className="viewer-placeholder" data-testid="simple-result">Loading measured context…</div>;
-    return <section className="result-panel" aria-label={`Result for ${site.name}`}>{mode === "temperature" ? <TemperatureCard site={site} context={context} /> : <FieldworkCard site={site} context={context} />}</section>;
+    if (!context) return <div className="viewer-placeholder card-placeholder" data-testid="simple-result">Loading measured context…</div>;
+    return <section className="result-panel" aria-label={`Result for ${site.name}`}>{mode === "temperature" ? <TemperatureCard site={site} context={context} detailed={detailed} /> : <FieldworkCard site={site} context={context} />}</section>;
   }
-  if (!comparison) return <div className="viewer-placeholder" data-testid="simple-result">Calculating comparison…</div>;
-  if (!result) return <div className="viewer-placeholder" data-testid="simple-result">No result for this site.</div>;
+  if (!comparison) return <div className="viewer-placeholder card-placeholder" data-testid="simple-result">Calculating comparison…</div>;
+  if (!result) return <div className="viewer-placeholder card-placeholder" data-testid="simple-result">No result for this site.</div>;
   const reportHref = `/report?site=${encodeURIComponent(site.id)}&profile=${profileId}&reference=${encodeURIComponent(referenceId)}`;
   const jsonName = `alterecho-${site.id}-${referenceId}.json`;
   const canDetail = result.state !== "not_measured" && result.state !== "excluded";
   const actions = canDetail ? (
     <div className="simple-actions">
-      {!detailed && (
-        <button type="button" className="primary-button" aria-expanded={view === "full"} aria-controls={fullId} onClick={() => onView(view === "full" ? "simple" : "full")} data-testid="toggle-full">
-          {view === "full" ? "Hide the calculation" : "Show the full calculation"}
-        </button>
-      )}
+      {!detailed && <button type="button" className="primary-button" onClick={onDetailed} data-testid="toggle-full">Show the full calculation</button>}
       <button type="button" className="text-button" onClick={() => setWhy(true)} data-testid="why-data">Why this data?</button>
-      <Link className="text-button" href={reportHref} prefetch={false}>Printable report</Link>
-      <button type="button" className="text-button" data-testid="download-json"
-        onClick={() => apiV3.result(site.id, profileId, referenceId).then((d) => downloadJson(d, jsonName)).catch(() => undefined)}>Download JSON</button>
+      {detailed && <Link className="text-button" href={reportHref} prefetch={false}>Printable report</Link>}
+      {detailed && (
+        <button type="button" className="text-button" data-testid="download-json"
+          onClick={() => apiV3.result(site.id, profileId, referenceId).then((d) => downloadJson(d, jsonName)).catch(() => undefined)}>Download JSON</button>
+      )}
     </div>
   ) : null;
 
   return (
     <section className="result-panel" aria-label={`Result for ${site.name}`}>
       <TerrainCard site={site} comparison={comparison} result={result} detailed={detailed} actions={actions} />
-      <div id={fullId} className={`full-evidence ${showFull ? "is-open" : ""}`} data-testid="full-evidence" hidden={!showFull} ref={fullRef} tabIndex={-1} aria-label="Full calculation">
-        {showFull && (
-          <>
-            <div className="full-head">
-              <h3>The full calculation</h3>
-              {!detailed && <button type="button" className="text-button" onClick={() => onView("simple")}>Hide</button>}
-            </div>
-            {detailData.loading && <div className="viewer-placeholder">Loading measurements…</div>}
-            {detailData.error && <p role="alert">The calculation could not be loaded: {detailData.error}</p>}
-            {detailData.data && <FullEvidence detail={detailData.data} />}
-          </>
-        )}
-      </div>
       <WhyThisData open={why} onClose={() => setWhy(false)} roleIds={result.data_roles} profileId={profileId} siteName={site.name} />
+    </section>
+  );
+}
+
+/** Detailed mode only: every formula, table, range, mask, checksum and source behind the selected result. */
+export function FullCalculation({ site, comparison, result, onHide }: { site: Site; comparison: CompareV3; result: CandidateV3; onHide: () => void }) {
+  const titleId = useId();
+  const profileId = "terrain_analogy" as const;
+  const referenceId = comparison.reference_site_id;
+  const show = result.state !== "not_measured" && result.state !== "excluded";
+  const detailData = useKeyed(show ? `${site.id}|${profileId}|${referenceId}` : null, () => apiV3.result(site.id, profileId, referenceId));
+  if (!show) return null;
+  return (
+    <section className="full-evidence is-open" data-testid="full-evidence" aria-labelledby={titleId}>
+      <div className="full-head">
+        <h3 id={titleId}>The full calculation</h3>
+        <button type="button" className="text-button" onClick={onHide} data-testid="hide-full">Hide the calculation</button>
+      </div>
+      {detailData.loading && <div className="viewer-placeholder">Loading measurements…</div>}
+      {detailData.error && <p role="alert">The calculation could not be loaded: {detailData.error}</p>}
+      {detailData.data && <FullEvidence detail={detailData.data} />}
     </section>
   );
 }

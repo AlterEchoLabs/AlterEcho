@@ -6,6 +6,8 @@ Current local production review: [release handoff](docs/RELEASE_HANDOFF.md), [sy
 
 Team AlterEcho · NASA Space Apps Challenge 2026 · *Identify Earth locations that analog the permanent Moon base locations and Mars*
 
+Team members: Sarbagya Acharya, Bikash Pandey, Saurav Shah, Neharika Acharya.
+
 Choose a reference site on Mars or the Moon, find comparable Earth terrain, and see what each mission question can and cannot conclude. Every result separates three things: **measured analogy** (a similarity index from comparable measurements), **field-test suitability** (a documented record, never scored) and **evidence quality** (statuses, coverage and sensitivity). There is no synthetic confidence number.
 
 AlterEcho is a research-shortlisting tool. It is not a landing-site selector, a safety assessment or a NASA endorsement.
@@ -51,6 +53,7 @@ index = 100 · Σ w_g I_g S_g / Σ w_g I_g,   coverage = Σ w_g I_g    no qualif
 - **Terrain class instead of ranks.** A site is in the *same terrain class* when both scored distances are below their tolerances, a *different* class when both are above. Sites whose scenario ranges overlap (placement, reference placement, DEM, grid, τ, weights) are listed together without rank numbers.
 - **Compare by.** The atlas offers three views: *Terrain shape* (scored), *Temperature* (Aqua MODIS and Mars 2020 MEDA records, shown side by side, not scored because they fail the comparability audit) and *Field tests* (published analog research per site, not scored). The partial task profiles remain in the API and are described on the Method page as future work.
 - **Explore uses the same method.** Screened areas are scored with analogue-method-v1.0 against every reference, with the same standing.
+- **Atlas layout.** Three steps: choose the planetary reference, choose what to compare by, read the best Earth matches. *Simple* (default) shows the three closest sites, one index with how many ordinary windows it beats, why it matched and the main limitation, beside the cached Sentinel-2 crop of the exact 10 km window. *Detailed* adds the full list, scenario ranges, distributions, every formula and table, provenance, checksums and exports. The still image is served by the API, so it renders even when third-party map tiles fail; the interactive globe below it is an enhancement. Reference, site and comparison live in the URL (`?reference=…&site=…&compare=…`, `view=full` for Detailed), so links, reloads and back/forward agree.
 
 | Terrain shape vs Jezero | Index | Ordinary windows beaten (of 88) | Scenario range | Class |
 |---|---|---|---|---|

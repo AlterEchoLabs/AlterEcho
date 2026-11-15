@@ -40,6 +40,10 @@ export default function SiteExplorer({ site }: { site: Site }) {
   const [zoom, setZoom] = useState(1.4);
   const [busy, setBusy] = useState(true);
   const [failed, setFailed] = useState(false);
+  const tileErrors = useRef(0);
+  // Study-window overlays (served by the AlterEcho API): loaded or failed, per layer.
+  const [overlay, setOverlay] = useState<Record<string, "ready" | "failed">>({});
+  const tilesLoaded = useRef(0);
   const reduced = useReducedMotion();
   const win = useKeyed(site.aoi_id ? site.id : null, apiV3.explorer);
   const data: ExplorerWindow | null = win.data;
@@ -52,7 +56,9 @@ export default function SiteExplorer({ site }: { site: Site }) {
       style: {
         version: 8, projection: { type: "globe" },
         sources: { bm: { type: "raster", tiles: [BLUE_MARBLE], tileSize: 256, maxzoom: 8, attribution: "NASA Blue Marble (2004 composite) via GIBS" } },
-        layers: [{ id: "space", type: "background", paint: { "background-color": "#0b0f14" } }, { id: "bm", type: "raster", source: "bm" }],
+        layers: [{ id: "space", type: "background", paint: { "background-color": "#0b0f14" } },
+          // The ~500 m global mosaic is dimmed past zoom 7 so it reads as coarse context, not blurry local detail.
+          { id: "bm", type: "raster", source: "bm", paint: { "raster-opacity": ["interpolate", ["linear"], ["zoom"], 7, 1, 10, 0.32] } }],
       },
       center: [site.longitude, site.latitude], zoom: 1.4, minZoom: 0.6, maxZoom: 14, attributionControl: { compact: true },
       transformRequest: (url) => {
@@ -66,7 +72,25 @@ export default function SiteExplorer({ site }: { site: Site }) {
     map.on("zoom", () => setZoom(map.getZoom()));
     map.on("dataloading", () => setBusy(true));
     map.on("idle", () => setBusy(false));
-    map.on("error", () => setFailed(true));
+    // Only third-party tile failures are reported here; the study-window overlay is served by the AlterEcho API.
+    // Background tiles failing (three errors, or any error before a single tile has loaded) hide the background layer,
+    // so the attribution only names what is shown; the study-window overlay comes from the AlterEcho API and stays.
+    map.on("sourcedata", (event) => {
+      if (event.sourceId === "bm" && (event as { tile?: unknown }).tile) tilesLoaded.current += 1;
+      const sid = event.sourceId;
+      if (sid?.startsWith("ov-") && event.isSourceLoaded) setOverlay((o) => (o[sid] === "ready" ? o : { ...o, [sid]: "ready" }));
+    });
+    map.on("error", (event) => {
+      const id = (event as { sourceId?: string }).sourceId;
+      if (id?.startsWith("ov-")) {
+        setOverlay((o) => ({ ...o, [id]: "failed" }));
+        if (id === "ov-satellite") setLayer((l) => (l === "satellite" ? "hillshade" : l));
+        return;
+      }
+      if (id && id !== "bm" && id !== "recent") return;
+      tileErrors.current += 1;
+      if (tileErrors.current >= 3 || tilesLoaded.current === 0) setFailed(true);
+    });
     map.once("style.load", () => setReady(true));
     return () => { map.remove(); mapRef.current = null; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -132,8 +156,19 @@ export default function SiteExplorer({ site }: { site: Site }) {
     for (const id of ["satellite", "hillshade", "slope"] as LayerId[]) {
       if (map.getLayer(`ov-${id}`)) map.setLayoutProperty(`ov-${id}`, "visibility", id === layer ? "visible" : "none");
     }
-    if (map.getLayer("recent")) map.setLayoutProperty("recent", "visibility", recent ? "visible" : "none");
-  }, [layer, recent, ready, data]);
+    if (map.getLayer("recent")) map.setLayoutProperty("recent", "visibility", recent && !failed ? "visible" : "none");
+    if (failed && map.getLayer("bm")) map.setLayoutProperty("bm", "visibility", "none");
+  }, [layer, recent, ready, data, failed]);
+
+  const retry = useCallback(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    tileErrors.current = 0;
+    tilesLoaded.current = 0;
+    setFailed(false);
+    if (map.getLayer("bm")) map.setLayoutProperty("bm", "visibility", "visible");
+    for (const id of ["bm", "recent"]) if (map.getSource(id)) map.refreshTiles(id);
+  }, []);
 
   const res = data ? groundResolution(zoom, data.center[1]) : null;
   const active = layer === "satellite" ? data?.imagery : layer === "hillshade" ? data?.hillshade : data?.slope;
@@ -161,15 +196,23 @@ export default function SiteExplorer({ site }: { site: Site }) {
       <div className="explorer-stage">
         <div ref={container} className="explorer-map" role="region" aria-label={`Interactive globe and map of the ${site.name} study window. Use arrow keys to pan and plus or minus to zoom.`} tabIndex={0} />
         {(busy || win.loading) && <div className="explorer-loading" aria-live="polite"><span className="spinner" aria-hidden="true" /> Loading imagery…</div>}
-        {win.error && <div className="explorer-overlay-note" role="alert">Study-window imagery is unavailable ({win.error}). The globe still works.</div>}
-        {failed && <div className="explorer-overlay-note">Some map tiles failed to load; the window overlay and results are unaffected.</div>}
+        {data && active && !overlay[`ov-${layer}`] && <div className="map-wait" aria-live="polite" data-testid="overlay-wait">Loading the {layer === "satellite" ? "10 m satellite image" : layer} of the study window…</div>}
+        {overlay["ov-satellite"] === "failed" && <div className="map-chip map-chip-low" role="status" data-testid="overlay-failed">The 10 m image could not be drawn on the map; showing the hillshade. The image above is the same window.</div>}
+        {win.error && <div className="map-chip map-chip-error" role="alert">Study-window imagery is unavailable ({win.error}). The globe still works.</div>}
+        {failed && (
+          <div className="map-chip" role="status" data-testid="tile-fallback">
+            <span>Background map offline · study-window image shown</span>
+            <button type="button" className="map-chip-button" onClick={retry} data-testid="tile-retry">Retry</button>
+          </div>
+        )}
       </div>
       <p className="viewer-caption" data-testid="explorer-caption">
         <span>Zoom {zoom.toFixed(1)} · {detailText}</span>
-        {layer === "satellite" && data?.imagery && <span>Sentinel-2 L2A {date(data.imagery.acquired)} · {data.imagery.product_id}</span>}
+        {layer === "satellite" && data?.imagery && <span>Sentinel-2 L2A {date(data.imagery.acquired)} · {data.imagery.product_id} · {data.imagery.attribution}</span>}
         {layer !== "satellite" && data?.hillshade && <span>{data.hillshade.source} · {layer === "hillshade" ? data.hillshade.light : data.slope?.ramp}</span>}
         {recent && data?.recent && <span>VIIRS {date(data.recent.observed)} (latest available, not live)</span>}
         <span>Gold line: exact 10 km analysis boundary · north up</span>
+        {zoom < 10 && !failed && <span>Outside the window: NASA Blue Marble 2004 global mosaic (orientation only)</span>}
       </p>
     </div>
   );
