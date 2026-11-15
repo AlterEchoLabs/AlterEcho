@@ -112,7 +112,7 @@ def report(site_id: SiteIdPath, profile_id: str = Query(default="terrain_analogy
         return load_manifest(s.source_id).model_dump() if s.source_id else None
 
     return {
-        "report_type": "terraluna-comparison-record", "generated_at": datetime.now(timezone.utc).isoformat(),
+        "report_type": "alterecho-comparison-record", "generated_at": datetime.now(timezone.utc).isoformat(),
         "model_version": comparison.model_version, "terrain_method": comparison.terrain_method, "review_status": comparison.review_status,
         "profile": comparison.profile.model_dump(), "profile_state": comparison.profile_state, "profile_state_reason": comparison.profile_state_reason,
         "reference": {"site": ref.model_dump(mode="json"), "aoi": aoi(ref), "source_manifest": manifest(ref), "measurements": artifact_record(ref),

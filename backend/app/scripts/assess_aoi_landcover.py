@@ -99,7 +99,7 @@ def assess(site_id: str, client: httpx.Client) -> dict:
 
 def main() -> None:
     earth = [s.id for s in SITES if s.body.value == "earth" and s.data_status.value == "real_processed"]
-    with httpx.Client(timeout=120, follow_redirects=False, headers={"User-Agent": "TerraLuna-analysis/1.0"}) as client:
+    with httpx.Client(timeout=120, follow_redirects=False, headers={"User-Agent": "AlterEcho-analysis/1.0"}) as client:
         for site_id in earth:
             r = assess(site_id, client)
             print(f"{site_id:28s} built-up {r['built_up_fraction_core']:.4%}  {r['class_fractions_core']}")

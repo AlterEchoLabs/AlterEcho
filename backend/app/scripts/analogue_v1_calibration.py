@@ -140,7 +140,7 @@ def run(skip_remote: bool = False) -> dict:
     # Earth sites --------------------------------------------------------------------------------
     dem_w1: dict[str, dict] = {}
     remote_status: dict[str, str] = {}
-    client = httpx.Client(timeout=120, follow_redirects=False, headers={"User-Agent": "TerraLuna-analysis/1.0"})
+    client = httpx.Client(timeout=120, follow_redirects=False, headers={"User-Agent": "AlterEcho-analysis/1.0"})
     for site in earth:
         aoi = load_aoi(site.aoi_id)
         src = _source_path(site)

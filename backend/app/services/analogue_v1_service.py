@@ -22,10 +22,11 @@ from app.models.analogue_v1 import (
 from app.services.analogue_math import competition_ranks, family_score, observed_index, similarity, w1_quantile_functions
 from app.services.catalog_service import SITES, get_site
 from app.services.evidence_v2_service import CONTEXT, _citations, load_thermal, thermal_audit
-from app.services.geospatial_service import GEO_DATA, load_aoi, load_manifest
+from app.services.geospatial_service import GEO_DATA, load_aoi, load_manifest, canonical_text_sha256
 
 APP_DATA = Path(__file__).resolve().parents[1] / "data"
 CONFIG: dict[str, Any] = json.loads((APP_DATA / "analogue.v1.json").read_text(encoding="utf-8"))
+CONFIG_FILE_SHA256 = canonical_text_sha256(APP_DATA / "analogue.v1.json")
 ROLES: dict[str, Any] = json.loads((APP_DATA / "data_roles.json").read_text(encoding="utf-8"))
 REGISTRY: list[dict] = json.loads((APP_DATA / "datasets.json").read_text(encoding="utf-8"))
 V5_DIR = GEO_DATA / "processed" / "terrain-v5"
@@ -59,7 +60,9 @@ class AnalogueError(ValueError):
 # ------------------------------------------------------------------ cached inputs
 
 def _signature() -> tuple:
-    paths = [*V5_DIR.glob("*.terrain-v5.json"), CALIBRATION_PATH, DISCRIMINATION_PATH, *(GEO_DATA / "processed" / "evidence").glob("*.json")]
+    if canonical_text_sha256(APP_DATA / "analogue.v1.json") != CONFIG_FILE_SHA256:
+        raise AnalogueError("Method configuration changed on disk; restart the service before calculating or exporting results")
+    paths = [*V5_DIR.glob("*.terrain-v5.json"), *V5_DIR.glob("*.sha256"), *(GEO_DATA / "manifests").glob("*.json"), *(GEO_DATA / "aoi").glob("*.geojson"), CALIBRATION_PATH, DISCRIMINATION_PATH, POPULATION_PATH, *(GEO_DATA / "processed" / "evidence").glob("*.json")]
     return tuple(sorted((p.name, p.stat().st_mtime_ns) for p in paths if p.exists()))
 
 
@@ -77,7 +80,14 @@ def calibration() -> dict:
 @lru_cache(maxsize=32)
 def _artifact(site_id: str, _sig: tuple) -> dict | None:
     path = V5_DIR / f"{site_id}.terrain-v5.json"
-    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
+    if not path.exists():
+        return None
+    from app.services.provenance_service import validate_scoring_artifact
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    errors = validate_scoring_artifact(path, payload)
+    if errors:
+        raise AnalogueError("Terrain provenance failed validation: " + "; ".join(errors))
+    return payload
 
 
 def artifact(site_id: str) -> dict | None:
@@ -253,6 +263,8 @@ def _sensitivity_sets(art: dict) -> dict:
 def _eligibility_key(reference_id: str, prof: ProfileV3, included: list[str], dem: str) -> str:
     cal = calibration()
     data = {"reference_aoi": get_site(reference_id).aoi_id, "method": CONFIG["method_version"], "profile": prof.id, "weights": prof.weights,
+            "profile_configuration_sha256": sha256(json.dumps(CONFIG["profiles"], sort_keys=True).encode()).hexdigest(),
+            "epoch": "present-day surface morphology; archived observations; not contemporaneous climate",
             "included": included, "scored": cal["redundancy"]["scored"], "tau": {f: cal["tau"][f][PRIMARY] for f in cal["redundancy"]["scored"]},
             "scale": PRIMARY, "dem": dem, "mask": "worldcover-v200 built-up >= 50 %"}
     return sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()[:16]
@@ -420,6 +432,11 @@ def _compare_cached(reference_id: str, profile_id: str, candidate_ids: tuple[str
         if state == "not_assessed" and r.state == "partial":
             r.state = "not_assessed"
             r.observed_index = None
+        # A family measurement is still useful, but must not escape as an overall
+        # task score through JSON exports when a task-critical gate fails.
+        if not all(r.critical_gates.values()):
+            r.observed_index = None
+            r.sensitivity = None
         r.simple = _simple(r, prof, ref_site.name, body, state, groups if state == "ranked" else [], terrain_cache.get(r.site_id, ([], None, False))[0],
                            len(background) if background else 0)
 
@@ -700,11 +717,12 @@ def result_detail(reference_id: str, profile_id: str, site_id: str) -> ResultDet
         reg = lookup.get(role.get("registry_id") or "")
         sources.append({"role": role_id, "label": role["label"], "product": role["product"], "url": role.get("source_url") or (reg or {}).get("official_landing_page")})
     comparison = comp.model_dump(mode="json", exclude={"results"})
+    from app.services.provenance_service import calculation_inputs
     return ResultDetail(
         comparison=comparison, candidate=cand, distributions=dists, earth_window=_window(get_site(site_id), art), reference_window=_window(get_site(reference_id), ref_art),
         sources=sources,
         calibration={k: cal[k] for k in ("rules", "resolution_floor", "redundancy", "synthetic_negatives", "base_rate", "notice")},
-        reproducibility={"method_config": "backend/app/data/analogue.v1.json", "calibration_file": "backend/data/processed/evaluation/analogue-v1-calibration.json",
+        reproducibility={"calculation_inputs": calculation_inputs([reference_id, site_id]), "method_config": "backend/app/data/analogue.v1.json", "calibration_file": "backend/data/processed/evaluation/analogue-v1-calibration.json",
                          "terrain_artifacts": [f"backend/data/processed/terrain-v5/{reference_id}.terrain-v5.json", f"backend/data/processed/terrain-v5/{site_id}.terrain-v5.json"],
                          "recompute": "cd backend && python -m app.scripts.analogue_v1_calibration", "generated_at": comp.generated_at.isoformat()})
 

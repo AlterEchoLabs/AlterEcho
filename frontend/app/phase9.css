@@ -48,7 +48,11 @@
 .kv.params dt { color: var(--earth); }
 .formula-list { list-style: none; margin: 0 0 12px; padding: 0; display: grid; gap: 6px; }
 .formula-list li { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 10px; font-size: 12.5px; align-items: baseline; }
-.formula-list code { font-family: var(--mono); color: var(--text); background: var(--ink-1); padding: 3px 6px; border-radius: 2px; overflow-wrap: anywhere; }
+.formula-block { min-width: 0; color: var(--text); background: var(--ink-1); padding: 8px 10px; border-radius: 2px; overflow-x: auto; }
+.formula-display { display: block; min-width: max-content; font: 1.15em var(--serif); letter-spacing: .01em; }
+.formula-source { margin-top: 6px; color: var(--text-3); font-size: 11px; }
+.formula-source summary { cursor: pointer; }
+.formula-source code { font-family: var(--mono); color: var(--text-2); overflow-wrap: anywhere; }
 .calc-table th .muted { display: block; font-size: 11px; }
 .feature-table tr.is-diagnostic td, .feature-table tr.is-diagnostic th { color: var(--text-3); }
 .feature-table tfoot th, .feature-table tfoot td { border-top: 1px solid var(--line); padding-top: 8px; color: var(--text); }
@@ -89,11 +93,11 @@
 .explorer-actions { display: flex; gap: 14px; margin-left: auto; }
 .explorer-stage { position: relative; }
 .explorer-map { width: 100%; aspect-ratio: 16 / 10; max-height: min(70vh, 640px); min-height: 320px; background: #0b0f14; border: 1px solid var(--line-soft); }
-.explorer-loading { position: absolute; top: 10px; left: 10px; display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-2); background: rgba(13, 17, 23, .82); padding: 4px 10px; border-radius: 3px; pointer-events: none; }
+.explorer-loading { position: absolute; top: 10px; left: 10px; display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-2); background: var(--ink-1); padding: 4px 10px; border-radius: 3px; pointer-events: none; }
 .spinner { width: 12px; height: 12px; border: 2px solid var(--line); border-top-color: var(--earth); border-radius: 50%; animation: spin .8s linear infinite; }
-.explorer-overlay-note { position: absolute; bottom: 34px; left: 10px; right: 10px; font-size: 12px; color: var(--warn); background: rgba(13, 17, 23, .88); padding: 6px 10px; border-radius: 3px; }
+.explorer-overlay-note { position: absolute; bottom: 34px; left: 10px; right: 10px; font-size: 12px; color: var(--warn); background: var(--ink-1); padding: 6px 10px; border-radius: 3px; }
 .explore-pair { align-items: start; }
-.explorer .maplibregl-ctrl-scale { background: rgba(13, 17, 23, .7); color: var(--text-2); border-color: var(--text-2); }
+.explorer .maplibregl-ctrl-scale { background: var(--ink-1); color: var(--text-2); border-color: var(--text-2); }
 @media (max-width: 640px) { .explorer-actions { margin-left: 0; } .explorer-map { aspect-ratio: 4 / 5; min-height: 300px; } }
 
 @media (prefers-reduced-motion: reduce) {

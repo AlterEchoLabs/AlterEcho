@@ -101,9 +101,14 @@ def collect(exact_check: bool = True) -> dict:
     import numpy as _np
     import rasterio as _rio
     import fastapi as _fa
+    software = {"python": sys.version.split()[0], "numpy": _np.__version__, "rasterio": _rio.__version__, "gdal": _rio.__gdal_version__, "fastapi": _fa.__version__}
+    if not exact_check and committed.exists():
+        # Checking a published paper on another supported Python does not rewrite
+        # the recorded execution environment. A real raster rebuild records it anew.
+        software = json.loads(committed.read_text(encoding="utf-8"))["software"]
     data = {
         "method_version": cfg["method_version"], "terrain_method": cfg["terrain_method"], "status": cfg["status"],
-        "software": {"python": sys.version.split()[0], "numpy": _np.__version__, "rasterio": _rio.__version__, "gdal": _rio.__gdal_version__, "fastapi": _fa.__version__},
+        "software": software,
         "files": {"method_config": {"path": "backend/app/data/analogue.v1.json", "sha256_lf": canonical_text_sha256(BACKEND_ROOT / "app" / "data" / "analogue.v1.json")},
                   "calibration": {"path": "backend/data/processed/evaluation/analogue-v1-calibration.json", "sha256_lf": canonical_text_sha256(av.CALIBRATION_PATH)},
                   "discrimination": {"path": "backend/data/processed/evaluation/analogue-v1-discrimination.json", "sha256_lf": canonical_text_sha256(av.DISCRIMINATION_PATH)},
@@ -163,14 +168,103 @@ def blocks(d: dict) -> list[dict]:
     fl = d["floor_jezero"]
     pct = lambda x: f"{100 * x:.0f}%"
     B: list[dict] = []
+    B.append({"type": "h1", "text": "AlterEcho: An Auditable Earth–Planetary Terrain Analogue System"})
+    B.append({"type": "p", "text": "Overall project paper · Team AlterEcho · NASA Space Apps Challenge 2026 · 15 November 2026"})
+    B.append({"type": "p", "text": "AlterEcho is a research-shortlisting application that compares registered 10 km Earth windows with specific Mars or lunar reference windows. It combines traceable elevation data, deterministic terrain measurements, explicit quality gates and a bounded similarity index. The system is designed to make every number inspectable: the interface, API, exported JSON and this paper use the same versioned calculation inputs."})
+    B.append({"type": "h2", "text": "Abstract"})
+    B.append({"type": "p", "text": "Earth analogues are useful only when the question, scale, measurement and uncertainty are explicit. AlterEcho implements one narrow, reproducible question: whether the distributions of slope and relative elevation in a 10 km Earth window resemble those in a 10 km planetary reference at a 60 m grid. It measures four terrain descriptors, scores only two nonredundant distributions, calibrates tolerances from unselected Earth terrain, and reports a scenario range and background share beside the index. A candidate is not ranked when critical evidence is missing or when the tested resolution cannot separate it from the reference. The current atlas contains seven measured Earth candidates, five Mars references and one lunar distance-only reference. In the worked Atacama-south/Jezero comparison, the index is 97.90, but 17% of the 88 background windows score at least as high and both feature differences are within the tested resolution floor. The result therefore supports a limited low-relief terrain analogy, not a claim about geology, habitability, resources, landing safety or mission suitability."})
+    B.append({"type": "h2", "text": "Project summary in one page"})
+    B.append({"type": "table", "caption": "Table 1. What the running system contains and what its output means.",
+              "header": ["Item", "Current implementation"],
+              "rows": [
+                  ["Purpose", "Shortlist Earth terrain windows for transparent research and field-method discussion."],
+                  ["Primary measured evidence", "Slope and relative-elevation distributions from checksum-verified DEMs."],
+                  ["Current method", f"{d['method_version']} with {d['terrain_method']}; 60 m primary grid, 120/240 m sensitivity."],
+                  ["Index", "A bounded experimental terrain evidence index from 0–100; not a probability or confidence."],
+                  ["Ranking", "Terrain analogy only; overlapping scenario ranges form tie groups."],
+                  ["Not scored", "Imagery, temperature, geology, minerals, water/ice, soil, hazards and field suitability."],
+                  ["Primary output", "Candidate result, evidence coverage, resolution status, sensitivity range, background share and provenance hashes."],
+                  ["Reproducibility", "Versioned JSON artifacts, manifests, checksums, API responses and automated regression tests."],
+              ]})
+    B.append({"type": "h2", "text": "How to read this paper"})
+    B.append({"type": "p", "text": "Sections 1–4 explain the product, data and software path. Sections 5–8 define the terrain measurements, formulas, tolerances, eligibility and ranking. Sections 9–11 show a worked result, discrimination checks and limitations. A source link means the official landing page or API used to identify a product; a local checksum means the exact byte file used by the current release. Planned or contextual products are listed for traceability but are never silently treated as scored evidence."})
+    B.append({"type": "h2", "text": "System architecture and user workflow"})
+    B.append({"type": "p", "text": "The browser is a Next.js application. It requests catalog, methodology, comparison, imagery, terrain-preview, provenance and report data from a FastAPI service. Python owns raster preparation and all scientific arithmetic; the frontend formats responses and never recomputes the index. Committed small artifacts make the atlas browseable without a provider call. Separate acquisition scripts are used only when a raw product must be restored or a new study window is deliberately registered."})
+    B.append({"type": "diagram", "text": "architecture", "nodes": ["Browser atlas", "FastAPI API", "Versioned comparison service", "Checksummed processed artifacts", "Official data providers"]})
+    B.append({"type": "p", "text": "A typical user selects a planetary body and reference, chooses a task profile, selects an Earth candidate, reads the simple result, opens full evidence, compares the two windows at a common scale, and exports the JSON record. The Explore page can screen a new Earth coordinate, but Explore output is a screening record and is not added to the ranked atlas. The Report page is a printable view of the same stored comparison."})
+    B.append({"type": "h2", "text": "Implemented API surface"})
+    B.append({"type": "table", "caption": "Table 2. Main local API routes used by the application.",
+              "header": ["Route", "Purpose", "Used by"],
+              "rows": [
+                  ["/api/health, /api/config", "Service health, build identifier and bounded configuration.", "Startup and diagnostics"],
+                  ["/api/planets, /api/sites/{site_id}", "Planet, reference and candidate catalog records.", "Atlas and Sources"],
+                  ["/api/methodology", "Method, profiles, formulas, tolerances and limitations.", "Method page"],
+                  ["/api/v3/compare", "Current analogue-method-v1.0 comparison and ranked results.", "Atlas"],
+                  ["/api/v3/result/{site}/{profile}/{reference}", "Full evidence, calculations and provenance hashes.", "Result and Report"],
+                  ["/api/v3/source-registry", "Roles, official sources, local checksums and data status.", "Sources"],
+                  ["/api/sites/{site_id}/imagery and /terrain/*", "Display imagery, hillshade, slope and heightmap artifacts.", "Site viewer"],
+                  ["/api/explore/*", "Bounded coordinate screening job and status/result record.", "Explore"],
+              ]})
+    B.append({"type": "p", "text": "The generated OpenAPI description is stored at docs/api-reference.json. When the backend is running locally, interactive documentation is available at /docs outside production mode. All route identifiers and file IDs are constrained slugs; request bodies, job IDs, queue depth and provider access are bounded."})
+    B.append({"type": "h2", "text": "Data products, providers and roles"})
+    B.append({"type": "p", "text": "The system distinguishes scored inputs from diagnostics, quality masks, display context and planned evidence. This distinction prevents a visually convincing image or an unavailable measurement from becoming a hidden score. The source registry and acquisition guide contain complete product-level rows and checksums; the links below are the official discovery points used by the release."})
+    B.append({"type": "table", "caption": "Table 3. Essential datasets and official discovery links.",
+              "header": ["Product", "Role in AlterEcho", "Official link"],
+              "rows": [
+                  ["NASA SRTMGL1.003", "Scored Earth DEM; 1 arc-second, about 30 m.", "https://search.earthdata.nasa.gov/search?q=SRTMGL1"],
+                  ["USGS Mars 2020 CTX DEM mosaic", "Scored Jezero reference DEM.", "https://astrogeology.usgs.gov/search/map/mars_2020_science_investigation_ctx_dem_mosaic"],
+                  ["USGS controlled CTX DTMs", "Scored Gale, InSight, Gusev and Eberswalde references.", "https://stac.astrogeology.usgs.gov/docs/data/mars/ctxdtms/"],
+                  ["NASA PDS LRO LOLA", "Lunar diagnostic reference; distances only after floor failure.", "https://pds-geosciences.wustl.edu/missions/lro/lola.htm"],
+                  ["ESA WorldCover v200", "Built-up quality mask; not an analogue feature.", "https://esa-worldcover.org/"],
+                  ["NASADEM and Copernicus GLO-30", "Resolution-floor and sensitivity checks.", "https://planetarycomputer.microsoft.com/dataset/cop-dem-glo-30"],
+                  ["Sentinel-2 L2A and CTX imagery", "Display context only; never scored.", "https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a"],
+                  ["NASA GIBS/Worldview and OpenFreeMap", "Orientation and interactive map context.", "https://worldview.earthdata.nasa.gov/"],
+                  ["MODIS MYD11A2 and Mars MEDA", "Temperature context; comparability audit fails scoring use.", "https://planetarycomputer.microsoft.com/dataset/modis-11A2-061"],
+              ]})
+    B.append({"type": "p", "text": "The local release records 14 terrain inputs and 13 imagery records. Verified terrain bytes include eight Earth SRTM inputs, five Mars DEM inputs and one lunar derivative. The original Atacama window remains catalogued but excluded because it contains an industrial complex; Atacama south is the registered replacement. Raw files are ignored by Git, while manifests, derived artifacts and LF-normalized metadata hashes are retained."})
+    B.append({"type": "h2", "text": "Acquisition, processing and provenance"})
+    B.append({"type": "p", "text": "The reproducible path is: discover an official product; record its product, licence, AOI, asset and quality metadata; acquire only into ignored raw storage; verify size, host, checksum and raster metadata; process a 10 km core with a 1200 m halo; apply the documented quality mask; compute terrain features and quantiles; write a versioned artifact and manifest; and validate the artifact before serving it. A changed archive cannot overwrite a recorded raw checksum. Unsafe archive paths and replacement of differing raw bytes are rejected."})
+    B.append({"type": "p", "text": "Each result carries an identity made from the Earth window, planetary reference, task, epoch, method version and profile configuration. It also exposes hashes for the method configuration, calibration, background population and selected calculation inputs. These controls answer “which bytes and rules made this number?” They do not claim that the source measurements or scientific interpretation have been independently validated."})
+    B.append({"type": "h2", "text": "What is measured and what is deliberately excluded"})
+    B.append({"type": "table", "caption": "Table 4. Evidence roles in the current release.",
+              "header": ["Evidence family", "Current status", "Effect on rank"],
+              "rows": [
+                  ["Terrain morphology", "Slope and relative elevation scored; relief and roughness diagnostic.", "Only family currently eligible for ranking."],
+                  ["Imagery", "Sentinel-2 and CTX crops, hillshade and slope previews.", "Display context; zero score weight."],
+                  ["Temperature", "MODIS area composites and MEDA rover observations.", "Diagnostic only; incompatible spatial/temporal support."],
+                  ["Geology/mineralogy", "EMIT, CRISM and related products listed for future work.", "Unavailable; task-critical profiles remain partial."],
+                  ["Water/ice/subsurface", "Not processed as comparable measurements.", "No balanced-science, biosignature or base index."],
+                  ["Field suitability", "Literature and site records only.", "Never converted into a numerical suitability score."],
+              ]})
+    B.append({"type": "h2", "text": "Release verification and reproducibility"})
+    B.append({"type": "p", "text": "A release is considered internally reproducible when the catalog integrity audit, source-manifest audit, independent result recomputation, paper-number test and frontend build all pass. Backend tests cover the pure arithmetic, quantile approximation, eligibility gates, provenance and security boundaries. The frontend contract tests confirm that the displayed candidate, tie label, evidence panel and downloaded JSON correspond to the API response. These are engineering and numerical-consistency checks, not a substitute for external scientific validation."})
+    B.append({"type": "table", "caption": "Table 5. Minimal local reproduction sequence.",
+              "header": ["Stage", "Command or artifact", "Purpose"],
+              "rows": [
+                  ["Audit", "audit_sources --write; validate_catalog_integrity", "Verify registered products, metadata and checksums."],
+                  ["Recompute", "reproduce_release", "Recalculate stored terrain distributions without replacing them."],
+                  ["Paper", "build_methods_paper; build_methods_paper --check", "Regenerate this paper and detect drift from the live method."],
+                  ["Tests", "pytest tests/test_paper_numbers.py tests/test_provenance.py -q", "Check numbers, gates, identity and provenance."],
+                  ["Frontend", "npm run lint; npm run typecheck; npm run build", "Check typed API use and production rendering."],
+              ]})
+    B.append({"type": "h2", "text": "Interpretation rules for users"})
+    B.append({"type": "list", "items": [
+        "Read the reference AOI, method version, grid and evidence coverage before comparing two indices. Results from different keys are not a competition.",
+        "Treat a high index as similarity of the measured distributions at the stated scale. Inspect the background share and scenario range before calling a candidate distinctive.",
+        "Treat a tie as an honest unresolved ordering, not a frontend error. A label such as “1 (tie)” means the candidate belongs to a range-overlap group.",
+        "Treat “not resolved” as a measurement statement: the observed distance is no larger than the tested placement and DEM-product floor. It is not proof that the surfaces are identical.",
+        "Do not interpret evidence coverage as confidence. A profile can have a high terrain score while remaining incomplete for geology, temperature, water, habitability or field testing.",
+    ]})
+    B.append({"type": "h2", "text": "Validation roadmap"})
+    B.append({"type": "p", "text": "The next scientific step is not to tune the index until the ranking looks persuasive. It is to pre-register expert-labelled positive analogues, deliberately selected negative controls and held-out regions, then evaluate calibration, discrimination and stability without changing the tolerances after seeing the labels. Additional families should be admitted only when Earth and planetary observations have comparable support, resolution, epoch and uncertainty. Morphology descriptors that preserve spatial arrangement, explicit vertical-datum checks, surface-process evidence and field-observation protocols are promising extensions. Until those tests are complete, AlterEcho should be used as an auditable terrain-screening aid and a way to expose assumptions—not as a site-certification system."})
     B.append({"type": "h1", "text": "Methods: Earth–Planetary Terrain Analogue Comparison"})
-    B.append({"type": "p", "text": f"This section describes the method implemented in the TerraLuna application as {d['method_version']} with the terrain measurement {d['terrain_method']}. "
+    B.append({"type": "p", "text": f"This section describes the method implemented in the AlterEcho application as {d['method_version']} with the terrain measurement {d['terrain_method']}. "
               "Every number below is generated from the versioned configuration, calibration files and a live comparison of the running backend; a test fails if the text and the backend diverge."})
     B.append({"type": "h2", "text": "Research question and scope"})
     B.append({"type": "p", "text": "We ask a narrow question: at a specified 10 km Earth window and a specified 10 km planetary reference window, how closely do the distributions of two measured terrain properties agree on a common 60 m grid, and is that agreement larger than what the measurement itself can resolve? "
               "A result is conditional on the comparison definition"})
-    B.append(eq(1, r"\mathcal{R} = \mathcal{R}(E,\,P,\,T,\,H,\,V)", "R=R(E,P,T,H,V)#(1)"))
-    B.append({"type": "p", "text": "where $E$ is the Earth area of interest (AOI), $P$ the planetary reference AOI, $T$ the task profile, $H$ the epoch (the present-day surface recorded by the elevation models, not the ancient environment that formed it) and $V$ the method version. "
+    B.append(eq(1, r"\mathcal{Q} = (E,\,P,\,T,\,H,\,V,\,R)", "Q=(E,P,T,H,V,R)#(1)"))
+    B.append({"type": "p", "text": "where $E$ is the Earth area of interest (AOI), $P$ the planetary reference AOI, $T$ the task profile, $H$ the epoch (the present-day surface recorded by the elevation models, not the ancient environment that formed it) $V$ the method version and $R$ the profile configuration (identified by its content digest). "
               "Results with different definitions are never ranked together. The output is an experimental terrain evidence index, not a probability that a place is like Mars, not a measure of geology, atmosphere, water, habitability, access or mission safety, and not a NASA or USGS endorsement."})
     B.append({"type": "h2", "text": "Areas of interest and sources"})
     B.append({"type": "p", "text": "Earth windows are 10 km squares centred on registered points and processed from NASA SRTMGL1.003 (1 arc-second, about 30 m; elevations in metres above the EGM96 geoid; acquired February 2000). "
@@ -234,15 +328,15 @@ def blocks(d: dict) -> list[dict]:
     B.append({"type": "p", "text": "$A_{\\mathrm{obs}}$ is undefined, never zero, when no family qualifies. $C$ is the share of the planned profile weight that is measured and comparable; it is not statistical confidence and not DEM pixel coverage. "
               "Only terrain is currently measured, so $C$ = 1 for the terrain-analogy profile and 0.30, 0.80 and 0.35 for the balanced-science, rover-mobility and Mars-base field-testing profiles. "
               "A profile is ranked only if it is declared rankable, every task-critical family is eligible for every candidate and all candidates share one eligibility key (reference AOI, method, weights, scored features, tolerances, grid, DEM product and mask). "
-              "Today only terrain analogy is ranked; the other profiles are reported as partial evidence or not assessed. "
+              "Today only terrain analogy is ranked; the other profiles are reported as partial evidence or not assessed. If any task-critical gate fails, the overall API/export index is null; family measurements remain visible. "
               "Ties are formed from scenario ranges: each candidate's index is recomputed with the Earth window moved 2 km in four directions, the reference moved 2 km in four directions, each alternative DEM, the 120 and 240 m grids, all tolerances × 0.75 and × 1.25, and feature weights 0.25/0.75; candidates whose ranges overlap, chained in order of nominal index, share a competition rank. These ranges are scenario sensitivities, not confidence intervals."})
-    B.append({"type": "table", "caption": "Table 1. Planned family weights and task-critical families by profile.",
+    B.append({"type": "table", "caption": "Table 6. Planned family weights and task-critical families by profile.",
               "header": ["Profile", "Planned weights $w_g$", "Task-critical", "Ranked"],
               "rows": [[p["label"], ", ".join(f"{k.replace('_', ' ')} {v:.2f}" for k, v in p["weights"].items()), ", ".join(x.replace("_", " ") for x in p["task_critical"]), "yes" if p["rankable"] else "no"] for p in d["profiles"].values()]})
     B.append({"type": "h2", "text": "Worked example: Atacama Desert (south window) compared with Jezero"})
     B.append({"type": "p", "text": f"Earth window {ex['earth']['aoi_id']} (centre {abs(ex['earth']['center'][0]):.4f}° S, {abs(ex['earth']['center'][1]):.4f}° W; SRTMGL1.003 tile {ex['earth']['tile']}, extracted file SHA-256 {ex['earth']['dem_sha256'][:16]}…; {ex['earth']['grid_crs']}; {ex['earth']['mask']}, {100 * ex['earth']['excluded_fraction_60m']:.2f} % of cells excluded) "
               f"is compared with {ex['reference']['aoi_id']} (CTX DEM SHA-256 {ex['reference']['dem_sha256'][:16]}…) under the terrain-analogy profile, {d['method_version']}."})
-    B.append({"type": "table", "caption": "Table 2. Worked example at 60 m. d, τ and δ in the feature units; s and contributions from full-precision values.",
+    B.append({"type": "table", "caption": "Table 7. Worked example at 60 m. d, τ and δ in the feature units; s and contributions from full-precision values.",
               "header": ["Feature", "Earth window", "Jezero window", "$d$", r"$\tau$", r"$d/\tau$", "$s$", "$a$", "Points", r"$\delta$"],
               "rows": [[v["label"], v["earth_summary"], v["reference_summary"], f"{v['d']:.4f}", f"{v['tau']:.4f}", f"{v['d_over_tau']:.5f}", f"{v['s']:.6f}", f"{v['weight']:.2f}", f"{v['contribution']:.4f}", f"{v['delta']:.4f}"]
                        for v in (sl, re_)]})
@@ -300,6 +394,13 @@ def _md_inline(text: str) -> str:
     return text
 
 
+def _md_cell(value: object) -> str:
+    text = str(value)
+    if text.startswith("https://"):
+        return f"[official source]({text})"
+    return text
+
+
 def render_markdown(d: dict, B: list[dict]) -> str:
     out = [f"<!-- Generated by backend/app/scripts/build_methods_paper.py from {d['method_version']} ({d['terrain_method']}). Do not edit by hand. -->", ""]
     for b in B:
@@ -309,11 +410,13 @@ def render_markdown(d: dict, B: list[dict]) -> str:
             out += [f"## {b['text']}", ""]
         elif b["type"] == "p":
             out += [_md_inline(b["text"]), ""]
+        elif b["type"] == "diagram":
+            out += [f"**{b['text'].replace('-', ' ').title()}:** " + " → ".join(b["nodes"]), ""]
         elif b["type"] == "eq":
             out += ["$$", f"{b['latex']} \\tag{{{b['n']}}}", "$$", ""]
         elif b["type"] == "table":
             out += [f"*{b['caption']}*", "", "| " + " | ".join(b["header"]) + " |", "|" + "---|" * len(b["header"])]
-            out += ["| " + " | ".join(str(c) for c in row) + " |" for row in b["rows"]]
+            out += ["| " + " | ".join(_md_cell(c) for c in row) + " |" for row in b["rows"]]
             out += [""]
         elif b["type"] == "list":
             out += [f"- {item}" for item in b["items"]] + [""]
@@ -336,12 +439,20 @@ def _tex_text(text: str) -> str:
     return "".join(out)
 
 
+def _tex_cell(value: object) -> str:
+    text = str(value)
+    if text.startswith("https://"):
+        return r"\href{" + text + r"}{\texttt{official source}}"
+    return _tex_text(text)
+
+
 def render_latex(d: dict, B: list[dict]) -> str:
     out = [r"% Generated by backend/app/scripts/build_methods_paper.py from " + d["method_version"] + " (" + d["terrain_method"] + "). Do not edit by hand.",
-           r"\documentclass[11pt,a4paper]{article}", r"\usepackage{amsmath}", r"\usepackage{fontspec}", r"\usepackage{unicode-math}",
-           r"\setmainfont{Calibri}", r"\setmathfont{Cambria Math}", r"\usepackage[margin=2cm]{geometry}", r"\usepackage{booktabs,tabularx,array}",
+           r"\documentclass[11pt,a4paper]{article}", r"\usepackage{amsmath}", r"\usepackage{iftex}",
+           r"\ifPDFTeX\usepackage[utf8]{inputenc}\usepackage[T1]{fontenc}\usepackage{lmodern}\else\usepackage{fontspec}\usepackage{unicode-math}",
+           r"\setmainfont{Calibri}\setmathfont{Cambria Math}\fi", r"\usepackage[margin=2cm]{geometry}", r"\usepackage{booktabs,tabularx,array}",
            r"\usepackage[hidelinks]{hyperref}", r"\usepackage{fancyhdr}", r"\pagestyle{fancy}\fancyhf{}\renewcommand{\headrulewidth}{0pt}",
-           r"\cfoot{\footnotesize TerraLuna \textperiodcentered{} " + d["method_version"] + r" \textperiodcentered{} page \thepage}",
+           r"\cfoot{\footnotesize AlterEcho \textperiodcentered{} " + d["method_version"] + r" \textperiodcentered{} page \thepage}",
            r"\sloppy\setlength{\parskip}{0.55em}\setlength{\parindent}{0pt}\renewcommand{\arraystretch}{1.25}", r"\begin{document}"]
     for b in B:
         if b["type"] == "h1":
@@ -350,6 +461,9 @@ def render_latex(d: dict, B: list[dict]) -> str:
             out.append(r"\subsection*{" + _tex_text(b["text"]) + "}")
         elif b["type"] == "p":
             out.append(_tex_text(b["text"]) + "\n")
+        elif b["type"] == "diagram":
+            nodes = r" $\longrightarrow$ ".join(_tex_text(node) for node in b["nodes"])
+            out.append(r"\begin{center}\fbox{\parbox{0.94\linewidth}{\centering " + nodes + r"}}\end{center}" + "\n")
         elif b["type"] == "eq":
             out.append(r"\begin{equation*}" + b["latex"] + r" \tag{" + str(b["n"]) + r"}\end{equation*}")
         elif b["type"] == "table":
@@ -360,7 +474,7 @@ def render_latex(d: dict, B: list[dict]) -> str:
             out.append(r"\begin{tabularx}{\linewidth}{" + spec + r"}\toprule")
             out.append(" & ".join(r"\textbf{" + _tex_text(h) + "}" for h in b["header"]) + r" \\ \midrule")
             for row in b["rows"]:
-                out.append(" & ".join(_tex_text(str(c)) for c in row) + r" \\")
+                out.append(" & ".join(_tex_cell(c) for c in row) + r" \\")
             out.append(r"\bottomrule\end{tabularx}\end{" + size + "}" + "\n")
         elif b["type"] == "list":
             out.append(r"\begin{itemize}")

@@ -85,36 +85,42 @@ export default function SiteExplorer({ site }: { site: Site }) {
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !ready || !data) return;
-    map.setMaxZoom(maxZoom);
-    const ring = [...data.aoi_corners, data.aoi_corners[0]];
-    const overlays: [string, { url: string; corners: [number, number][] } | null][] = [["satellite", data.imagery], ["hillshade", data.hillshade], ["slope", data.slope]];
-    for (const [id, item] of overlays) {
-      if (!item) continue;
-      const url = resolveApiUrl(item.url);
-      if (!url) continue;
-      const src = map.getSource(`ov-${id}`) as ImageSource | undefined;
-      const coordinates = item.corners as [[number, number], [number, number], [number, number], [number, number]];
-      if (src) src.updateImage({ url, coordinates });
-      else {
-        map.addSource(`ov-${id}`, { type: "image", url, coordinates });
-        map.addLayer({ id: `ov-${id}`, type: "raster", source: `ov-${id}`, paint: { "raster-opacity": 1, "raster-fade-duration": reduced ? 0 : 300, "raster-resampling": "linear" } });
+    const syncOverlays = () => {
+      if (!map.isStyleLoaded()) return;
+      map.setMaxZoom(maxZoom);
+      const ring = [...data.aoi_corners, data.aoi_corners[0]];
+      const overlays: [string, { url: string; corners: [number, number][] } | null][] = [["satellite", data.imagery], ["hillshade", data.hillshade], ["slope", data.slope]];
+      for (const [id, item] of overlays) {
+        if (!item) continue;
+        const url = resolveApiUrl(item.url);
+        if (!url) continue;
+        const src = map.getSource(`ov-${id}`) as ImageSource | undefined;
+        const coordinates = item.corners as [[number, number], [number, number], [number, number], [number, number]];
+        if (src) src.updateImage({ url, coordinates });
+        else {
+          map.addSource(`ov-${id}`, { type: "image", url, coordinates });
+          map.addLayer({ id: `ov-${id}`, type: "raster", source: `ov-${id}`, paint: { "raster-opacity": 1, "raster-fade-duration": reduced ? 0 : 300, "raster-resampling": "linear" } });
+        }
       }
-    }
-    if (data.recent && !map.getSource("recent")) {
-      map.addSource("recent", { type: "raster", tiles: [data.recent.tile_url], tileSize: 256, maxzoom: 9, attribution: `${data.recent.attribution} (${date(data.recent.observed)})` });
-      map.addLayer({ id: "recent", type: "raster", source: "recent", layout: { visibility: "none" } }, map.getLayer("ov-satellite") ? "ov-satellite" : undefined);
-    }
-    const aoi = { type: "Feature" as const, geometry: { type: "Polygon" as const, coordinates: [ring] }, properties: {} };
-    const existing = map.getSource("aoi") as GeoJSONSource | undefined;
-    if (existing) existing.setData(aoi);
-    else {
-      map.addSource("aoi", { type: "geojson", data: aoi });
-      map.addLayer({ id: "aoi-halo", type: "line", source: "aoi", paint: { "line-color": "#0b0f14", "line-width": 5, "line-opacity": 0.55 } });
-      map.addLayer({ id: "aoi-line", type: "line", source: "aoi", paint: { "line-color": "#f3d58f", "line-width": 2 } });
-    }
-    map.jumpTo({ center: data.center, zoom: 1.4 });
-    const timer = window.setTimeout(() => fit(true), reduced ? 0 : 350);
-    return () => window.clearTimeout(timer);
+      if (data.recent && !map.getSource("recent")) {
+        map.addSource("recent", { type: "raster", tiles: [data.recent.tile_url], tileSize: 256, maxzoom: 9, attribution: `${data.recent.attribution} (${date(data.recent.observed)})` });
+        map.addLayer({ id: "recent", type: "raster", source: "recent", layout: { visibility: "none" } }, map.getLayer("ov-satellite") ? "ov-satellite" : undefined);
+      }
+      const aoi = { type: "Feature" as const, geometry: { type: "Polygon" as const, coordinates: [ring] }, properties: {} };
+      const existing = map.getSource("aoi") as GeoJSONSource | undefined;
+      if (existing) existing.setData(aoi);
+      else {
+        map.addSource("aoi", { type: "geojson", data: aoi });
+        map.addLayer({ id: "aoi-halo", type: "line", source: "aoi", paint: { "line-color": "#0b0f14", "line-width": 5, "line-opacity": 0.55 } });
+        map.addLayer({ id: "aoi-line", type: "line", source: "aoi", paint: { "line-color": "#f3d58f", "line-width": 2 } });
+      }
+      map.jumpTo({ center: data.center, zoom: 1.4 });
+      const timer = window.setTimeout(() => fit(true), reduced ? 0 : 350);
+      return () => window.clearTimeout(timer);
+    };
+    if (map.isStyleLoaded()) return syncOverlays();
+    map.once("idle", syncOverlays);
+    return () => map.off("idle", syncOverlays);
   }, [ready, data, maxZoom, reduced, fit]);
 
   useEffect(() => {

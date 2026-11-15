@@ -53,6 +53,37 @@ def test_oversized_body_is_rejected_before_parsing():
     assert response.status_code == 413
 
 
+def test_streamed_body_without_length_is_bounded():
+    def chunks():
+        yield b" " * 20000
+        yield b" " * 20000
+    response = client.post("/api/discover", content=chunks(), headers={"Content-Type": "application/json"})
+    assert response.status_code == 413
+
+
+def test_archive_rejects_traversal_before_writing_and_preserves_raw(tmp_path):
+    import zipfile
+    from app.scripts.acquire_dataset import AcquisitionError, extract_dem
+    raw = tmp_path / "raw"
+    raw.mkdir()
+    archive = tmp_path / "archive.zip"
+    with zipfile.ZipFile(archive, "w") as z:
+        z.writestr("../escape.hgt", b"test")
+    with pytest.raises(AcquisitionError):
+        extract_dem(archive, raw)
+    assert not (tmp_path / "escape.hgt").exists()
+    with zipfile.ZipFile(archive, "w") as z:
+        z.writestr("tile.hgt", b"first")
+    source = extract_dem(archive, raw)
+    assert extract_dem(archive, raw) == source
+    with zipfile.ZipFile(archive, "w") as z:
+        z.writestr("tile.hgt", b"changed")
+    with pytest.raises(AcquisitionError):
+        extract_dem(archive, raw)
+    assert source.read_bytes() == b"first"
+    assert not list(raw.glob("*.part"))
+
+
 def test_security_headers_present():
     response = client.get("/api/health")
     assert response.headers["x-content-type-options"] == "nosniff"

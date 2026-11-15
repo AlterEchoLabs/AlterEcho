@@ -3,7 +3,7 @@
   "terrain_method": "terrain-v5.0",
   "status": "experimental_research_method",
   "software": {
-    "python": "3.13.4",
+    "python": "3.12.14",
     "numpy": "2.3.4",
     "rasterio": "1.4.3",
     "gdal": "3.9.3",
@@ -12,7 +12,7 @@
   "files": {
     "method_config": {
       "path": "backend/app/data/analogue.v1.json",
-      "sha256_lf": "fa0cebded15dd10b7afd8432fe13030debe6fc051c31920a54deddfad2040cd9"
+      "sha256_lf": "4d4a2c257499ed6faefea47fc81f0b1cbaa366b49dd152d41087bd4a1a272053"
     },
     "calibration": {
       "path": "backend/data/processed/evaluation/analogue-v1-calibration.json",

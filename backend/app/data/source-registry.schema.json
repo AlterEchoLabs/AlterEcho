@@ -1,0 +1,457 @@
+{
+  "$defs": {
+    "SourceRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "dataset_id": {
+          "title": "Dataset Id",
+          "type": "string"
+        },
+        "provider": {
+          "title": "Provider",
+          "type": "string"
+        },
+        "mission_instrument": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Mission Instrument"
+        },
+        "product_collection": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Product Collection"
+        },
+        "collection_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Collection Version"
+        },
+        "official_landing_page": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Official Landing Page"
+        },
+        "doi_or_pds_identifier": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Doi Or Pds Identifier"
+        },
+        "discovery_endpoint": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Discovery Endpoint"
+        },
+        "body": {
+          "title": "Body",
+          "type": "string"
+        },
+        "measured_variable": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Measured Variable"
+        },
+        "native_resolution": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Native Resolution"
+        },
+        "analysis_resolution": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Analysis Resolution"
+        },
+        "spatial_support": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Spatial Support"
+        },
+        "crs": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Crs"
+        },
+        "vertical_datum": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Vertical Datum"
+        },
+        "units": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Units"
+        },
+        "observation_interval": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Observation Interval"
+        },
+        "processing_level": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Processing Level"
+        },
+        "retrieval_date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Retrieval Date"
+        },
+        "license": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "License"
+        },
+        "authentication": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Authentication"
+        },
+        "raw_filename": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Raw Filename"
+        },
+        "byte_size": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Byte Size"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Sha256"
+        },
+        "processing_software": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Processing Software"
+        },
+        "role": {
+          "enum": [
+            "scored",
+            "diagnostic",
+            "quality-mask",
+            "display-only",
+            "context-only"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "known_limitations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Known Limitations",
+          "type": "array"
+        },
+        "status": {
+          "enum": [
+            "verified",
+            "processing",
+            "blocked",
+            "planned",
+            "rejected"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "status_reason": {
+          "title": "Status Reason",
+          "type": "string"
+        },
+        "artifact": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Artifact"
+        },
+        "quality": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quality"
+        },
+        "files": {
+          "default": [],
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Files",
+          "type": "array"
+        }
+      },
+      "required": [
+        "dataset_id",
+        "provider",
+        "mission_instrument",
+        "product_collection",
+        "collection_version",
+        "official_landing_page",
+        "doi_or_pds_identifier",
+        "discovery_endpoint",
+        "body",
+        "measured_variable",
+        "native_resolution",
+        "analysis_resolution",
+        "spatial_support",
+        "crs",
+        "vertical_datum",
+        "units",
+        "observation_interval",
+        "processing_level",
+        "retrieval_date",
+        "license",
+        "authentication",
+        "raw_filename",
+        "byte_size",
+        "sha256",
+        "processing_software",
+        "role",
+        "known_limitations",
+        "status",
+        "status_reason"
+      ],
+      "title": "SourceRecord",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "source-registry-v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "audited_at": {
+      "title": "Audited At",
+      "type": "string"
+    },
+    "verification_scope": {
+      "title": "Verification Scope",
+      "type": "string"
+    },
+    "records": {
+      "items": {
+        "$ref": "#/$defs/SourceRecord"
+      },
+      "title": "Records",
+      "type": "array"
+    },
+    "sites": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Sites",
+      "type": "array"
+    },
+    "imagery": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Imagery",
+      "type": "array"
+    },
+    "unknown_metadata_policy": {
+      "title": "Unknown Metadata Policy",
+      "type": "string"
+    },
+    "new_products_acquired": {
+      "items": {
+        "type": "string"
+      },
+      "title": "New Products Acquired",
+      "type": "array"
+    },
+    "blocked_acquisitions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Blocked Acquisitions",
+      "type": "array"
+    },
+    "scientific_limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Scientific Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "audited_at",
+    "verification_scope",
+    "records",
+    "sites",
+    "imagery",
+    "unknown_metadata_policy",
+    "new_products_acquired",
+    "blocked_acquisitions",
+    "scientific_limitations"
+  ],
+  "title": "SourceRegistry",
+  "type": "object"
+}

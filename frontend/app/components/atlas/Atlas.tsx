@@ -95,7 +95,7 @@ export default function Atlas() {
       <ReferenceBand references={references} referenceId={referenceId} onReference={setReference} profiles={profiles} profileId={profileId} onProfile={(id) => setProfile(id as ProfileIdV3)} />
       {catalogError && (
         <div className="notice notice-error atlas-notice" role="alert">
-          <p>The TerraLuna API is not reachable ({catalogError}). Start the backend on port 8000 and try again.</p>
+          <p>The AlterEcho API is not reachable ({catalogError}). Start the backend on port 8000 and try again.</p>
           <button type="button" className="text-button" onClick={() => setAttempt((n) => n + 1)}>Try again</button>
         </div>
       )}

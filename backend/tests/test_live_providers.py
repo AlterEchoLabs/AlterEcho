@@ -1,10 +1,10 @@
 """Opt-in live checks against the real data providers.
 
-Ordinary test runs never touch the network: this whole module is skipped unless TERRALUNA_LIVE=1.
+Ordinary test runs never touch the network: this whole module is skipped unless ALTERECHO_LIVE=1.
 Every check is a read-only metadata request (STAC item JSON, a WMTS capabilities document, a CMR
 collection search, one HTTP HEAD). No raster is downloaded and no credential is sent.
 
-    TERRALUNA_LIVE=1 .venv-geo/Scripts/python.exe -m pytest -q tests/test_live_providers.py
+    ALTERECHO_LIVE=1 .venv-geo/Scripts/python.exe -m pytest -q tests/test_live_providers.py
 """
 
 import json
@@ -18,13 +18,13 @@ import pytest
 
 from app.services.imagery_service import parse_gibs_capabilities
 
-pytestmark = pytest.mark.skipif(os.environ.get("TERRALUNA_LIVE") != "1", reason="live provider checks are opt-in: set TERRALUNA_LIVE=1")
+pytestmark = pytest.mark.skipif(os.environ.get("ALTERECHO_LIVE") != "1", reason="live provider checks are opt-in: set ALTERECHO_LIVE=1")
 
 BACKEND = Path(__file__).resolve().parents[1]
 SELECTIONS = sorted((BACKEND / "data" / "imagery").glob("earth-*.sentinel-selection.json"))
 PROVIDERS = json.loads((BACKEND / "app" / "data" / "imagery.providers.json").read_text(encoding="utf-8"))
 LOLA = json.loads((BACKEND / "data" / "manifests" / "moon-south-pole-shackleton-lola-ldem.json").read_text(encoding="utf-8"))
-HEADERS = {"User-Agent": "TerraLuna-live-check/1.0"}
+HEADERS = {"User-Agent": "AlterEcho-live-check/1.0"}
 
 
 @pytest.fixture(scope="module")

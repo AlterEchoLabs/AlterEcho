@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type PointerEvent, type WheelEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
 import { resolveApiUrl, type Site } from "../../../lib/api";
 import type { ReferenceV3 } from "../../../lib/analogue";
 
@@ -31,8 +31,17 @@ export default function SyncedCompare({ site, reference, earthImage }: { site: S
     const lim = (1 - 1 / z) / 2;
     return { z, x: Math.max(-lim, Math.min(lim, x)), y: Math.max(-lim, Math.min(lim, y)) };
   }, []);
-  const zoomBy = (factor: number) => setView((v) => clamp(Math.max(1, Math.min(MAX_ZOOM, v.z * factor)), v.x, v.y));
-  const onWheel = (e: WheelEvent) => { e.preventDefault(); zoomBy(e.deltaY < 0 ? 1.25 : 0.8); };
+  const zoomBy = useCallback((factor: number) => setView((v) => clamp(Math.max(1, Math.min(MAX_ZOOM, v.z * factor)), v.x, v.y)), [clamp]);
+  useEffect(() => {
+    const el = frame.current;
+    if (!el) return;
+    const onWheel = (event: globalThis.WheelEvent) => {
+      event.preventDefault();
+      zoomBy(event.deltaY < 0 ? 1.25 : 0.8);
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, [zoomBy]);
   const onDown = (e: PointerEvent) => { drag.current = { x: e.clientX, y: e.clientY }; (e.target as Element).setPointerCapture?.(e.pointerId); };
   const onMove = (e: PointerEvent) => {
     if (!drag.current) return;
@@ -71,8 +80,8 @@ export default function SyncedCompare({ site, reference, earthImage }: { site: S
           <button type="button" className="text-button" onClick={() => setView({ z: 1, x: 0, y: 0 })}>Reset</button>
         </div>
       </div>
-      <div className="synced-pair" ref={frame} tabIndex={0} role="group" aria-label={`Synchronised views of ${site.name} and ${reference.name}; scroll or press plus and minus to zoom, drag or use arrow keys to pan`}
-        onWheel={onWheel} onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerLeave={onUp} onKeyDown={onKey}>
+      <div className="synced-pair" ref={frame} tabIndex={0} role="group" aria-label={`Synchronised views of ${site.name} and ${reference.name}; use the mouse wheel or plus and minus to zoom, drag or use arrow keys to pan`}
+        onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerLeave={onUp} onKeyDown={onKey}>
         {panes.map(([name, src, label]) => (
           <figure key={name} className="synced-pane">
             <div className="synced-clip">

@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* TerraLuna — editorial atlas styling. Hairline rules, a serif display face and monospaced figures.
+/* AlterEcho — editorial atlas styling. Hairline rules, a serif display face and monospaced figures.
    Earth reads as sand, Mars as rust. No glows, no gradients, one page scroll. */
 
 :root {
@@ -31,6 +31,15 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 html { background: var(--ink-0); color-scheme: dark; -webkit-text-size-adjust: 100%; }
+html[data-theme="light"] {
+  color-scheme: light;
+  --ink-0: #f6f4ef; --ink-1: #eeece5; --ink-2: #e3e1d9;
+  --line: #b7b7ae; --line-soft: #d2d1c8;
+  --text: #202b32; --text-2: #46515a; --text-3: #59636a;
+  --earth: #755316; --earth-dim: #846326; --mars: #a33f21; --mars-dim: #92442d;
+  --measured: #31613c; --context: #455d7c; --missing: #59636a;
+  --warn: #795719; --error: #a33026; --focus: #1a6196;
+}
 body { margin: 0; min-height: 100vh; background: var(--ink-0); color: var(--text); font: 15px/1.55 var(--sans); font-feature-settings: "tnum" 0; overflow-x: hidden; }
 img { max-width: 100%; display: block; }
 a { color: var(--earth); text-decoration-thickness: 1px; text-underline-offset: 3px; }
@@ -54,7 +63,7 @@ p { margin: 0 0 .6em; }
 .masthead {
   position: sticky; top: 0; z-index: 40; height: var(--masthead-h);
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  padding: 0 var(--gutter); background: rgba(13, 17, 23, .94); border-bottom: 1px solid var(--line-soft);
+  padding: 0 var(--gutter); background: var(--ink-0); border-bottom: 1px solid var(--line-soft);
   backdrop-filter: saturate(120%) blur(6px);
 }
 .wordmark { display: flex; align-items: baseline; gap: 10px; color: var(--text); text-decoration: none; min-width: 0; }
@@ -62,6 +71,13 @@ p { margin: 0 0 .6em; }
 .wordmark-name { font-family: var(--serif); font-size: 21px; letter-spacing: .01em; }
 .wordmark-team { font-size: 12px; color: var(--text-3); white-space: nowrap; }
 .masthead-nav { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+.theme-select select { background: var(--ink-1); color: var(--text); border: 1px solid var(--line); border-radius: 3px; padding: 8px; font: inherit; min-height: 40px; }
+@media (max-width: 760px) {
+  .masthead { height: auto; min-height: var(--masthead-h); flex-wrap: wrap; gap: 6px; padding-block: 8px; }
+  .masthead nav { order: 3; width: 100%; }
+  .masthead-nav { justify-content: space-between; }
+  .wordmark-team { display: none; }
+}
 .masthead-nav a { display: block; padding: 6px 10px; color: var(--text-2); text-decoration: none; font-size: 14px; border-radius: 3px; }
 .masthead-nav a:hover { color: var(--text); background: var(--ink-2); }
 .masthead-nav a[aria-current="page"] { color: var(--text); box-shadow: inset 0 -2px 0 var(--earth); border-radius: 0; }
@@ -330,6 +346,8 @@ button:disabled { cursor: not-allowed; opacity: .45; }
 /* MapLibre controls on the dark theme */
 .maplibregl-ctrl-group { background: var(--ink-1) !important; border: 1px solid var(--line) !important; }
 .maplibregl-ctrl-group button .maplibregl-ctrl-icon { filter: invert(1); }
-.maplibregl-ctrl-attrib { background: rgba(13, 17, 23, .8) !important; color: var(--text-3) !important; }
+.maplibregl-ctrl-attrib { background: var(--ink-1) !important; color: var(--text-3) !important; }
 .maplibregl-ctrl-attrib a { color: var(--text-2) !important; }
-.maplibregl-ctrl-scale { background: rgba(13, 17, 23, .7); color: var(--text); border-color: var(--text-2); }
+.maplibregl-ctrl-scale { background: var(--ink-1); color: var(--text); border-color: var(--text-2); }
+
+html[data-theme="light"] .maplibregl-ctrl-group button .maplibregl-ctrl-icon { filter: none; }

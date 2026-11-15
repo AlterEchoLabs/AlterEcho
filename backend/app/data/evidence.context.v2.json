@@ -1,6 +1,6 @@
 {
   "version": "evidence-context-v2",
-  "notice": "Pair-level statuses for dimensions TerraLuna does not score. Region-level research is never presented as a measurement of the exact AOI.",
+  "notice": "Pair-level statuses for dimensions AlterEcho does not score. Region-level research is never presented as a measurement of the exact AOI.",
   "pair_status": {
     "geology": {
       "default": {"status": "source_available_unprocessed", "earth": "EMIT L2B mineral identification (EMITL2BMIN.001, NASA Earthdata login) or regional geological maps could support this, but nothing has been processed for this AOI and EMIT coverage of the exact window is unverified. A true-colour image is not mineral evidence.",
@@ -23,7 +23,7 @@
     "_fields": ["test_goal_fit", "terrain_detail", "access_and_permits", "logistics", "safety", "environmental_constraints"],
     "_default": {
       "test_goal_fit": {"value": "unknown", "note": "No field-test goal has been matched to this AOI."},
-      "terrain_detail": {"value": "SRTMGL1 ~30 m posting", "note": "Adequate for regional landform screening. Wheel-scale (≤1 m) terrain for traversability is not available in TerraLuna."},
+      "terrain_detail": {"value": "SRTMGL1 ~30 m posting", "note": "Adequate for regional landform screening. Wheel-scale (≤1 m) terrain for traversability is not available in AlterEcho."},
       "access_and_permits": {"value": "unknown", "note": "Not checked."},
       "logistics": {"value": "unknown", "note": "Not checked."},
       "safety": {"value": "unknown", "note": "Not checked."},
@@ -38,7 +38,7 @@
     "earth-atacama": {"text": "Region-level: Mars-like soil studies near Yungay and NASA life-detection instrument tests in the hyperarid core. This AOI lies about 15 km from Yungay, but those studies did not measure this exact window. The window also contains built infrastructure.", "aoi_specific": false, "source_ids": ["atacama-study", "nasa-atacama"]},
     "earth-ladakh": {"text": "Region-level: a 2016 multidisciplinary expedition and ISRO's 2025 analog mission at Tso Kar. This AOI (34.20° N, 77.60° E) is not the Tso Kar site.", "aoi_specific": false, "source_ids": ["ladakh-research", "isro-ladakh"]},
     "earth-upper-mustang": {"text": "No peer-reviewed analog study of this window was found. A commercial analog-station proposal has been described publicly; that is not scientific validation.", "aoi_specific": false, "source_ids": ["handoff-candidate-atlas"]},
-    "earth-danakil": {"text": "Window-level: the AOI is centred on the Dallol dome characterised as a planetary field analog for hydrothermal and evaporite processes (Cavalazzi et al. 2019). Those processes are not measured by TerraLuna.", "aoi_specific": true, "source_ids": ["dallol-study"]},
+    "earth-danakil": {"text": "Window-level: the AOI is centred on the Dallol dome characterised as a planetary field analog for hydrothermal and evaporite processes (Cavalazzi et al. 2019). Those processes are not measured by AlterEcho.", "aoi_specific": true, "source_ids": ["dallol-study"]},
     "earth-craters-of-the-moon": {"text": "Region-level: NASA BASALT campaigns used Craters of the Moon lava flows as Mars basalt analogs (Lim et al. 2019). This window is not claimed to match their sample sites.", "aoi_specific": false, "source_ids": ["basalt-lim-2019"]},
     "earth-hanksville-mdrs": {"text": "Window-level: the AOI is centred on the Mars Desert Research Station, an operational analog station. Its operational use does not establish physical similarity.", "aoi_specific": true, "source_ids": ["mdrs-station"]},
     "earth-meteor-crater": {"text": "Window-level: Barringer (Meteor) Crater is a well-studied simple impact crater (Kring 2007). It occupies a small part of the 10 km window.", "aoi_specific": true, "source_ids": ["kring-2007-barringer"]}

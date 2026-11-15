@@ -1,0 +1,25 @@
+{
+  "scope": "200 percent CSS zoom in Chromium; physical browser UI zoom and assistive-technology testing remain manual checks",
+  "results": [
+    {
+      "route": "/",
+      "horizontal_overflow": false,
+      "heading_visible": true
+    },
+    {
+      "route": "/method",
+      "horizontal_overflow": false,
+      "heading_visible": true
+    },
+    {
+      "route": "/sources",
+      "horizontal_overflow": false,
+      "heading_visible": true
+    },
+    {
+      "route": "/explore",
+      "horizontal_overflow": false,
+      "heading_visible": true
+    }
+  ]
+}

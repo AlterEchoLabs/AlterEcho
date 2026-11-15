@@ -1,6 +1,6 @@
 # Phase 7/8 audit and method record
 
-Branch `feature/terraluna-phase-6`, checkpoint tag `phase6-checkpoint` (commit 77d8bdd) taken before any scientific calculation changed. Every number below was reproduced from the stored artifacts on 2026-11-14. None was typed in by hand.
+Branch `feature/alterecho-phase-6`, checkpoint tag `phase6-checkpoint` (commit 77d8bdd) taken before any scientific calculation changed. Every number below was reproduced from the stored artifacts on 2026-11-14. None was typed in by hand.
 
 ## 1. Baseline inventory (before Phase 7 → after)
 
@@ -122,8 +122,8 @@ Decision: **measured · context only** for every Earth site. Day and night media
 ## 9. Tests
 
 - Backend: `pytest -q` gives 198 passed. New: `test_terrain_v4.py` (Gaussian reference values, invalid inputs, unit mismatch, W1, weights, hand-computed index, v3 preservation), `test_evidence_v2.py` (statuses, partial index formula, profile states, eligibility, tie ranks, lunar reference, thermal audit, worked example, report reproducibility, imagery metadata, CTX registration), and `test_jobs.py` (bounds, NaN, credentials, every state transition on a synthetic tile, void-window quality failure, rate limit, queue cap, restart recovery, ID validation). External services are mocked. No ordinary test makes a network call.
-- Live (opt-in): `TERRALUNA_LIVE=1 pytest tests/test_live_providers.py` runs 10 read-only checks. Each stored Sentinel-2 product ID and acquisition time must match its Planetary Computer STAC record. The GIBS VIIRS layer must still be listed, with a latest date no earlier than the stored one. SRTMGL1.003 must be published in CMR under LPCLOUD. The LOLA LDEM_875S_20M file size must match the manifest (HTTP HEAD). No raster is downloaded and no credential is sent. All 10 passed on 2026-11-14.
-- Browser: `frontend/e2e/terraluna.spec.ts` runs against a production build on 1327×660, 1680×1000 and 390 px. Explore job states are mocked with `page.route`, and the v2 contract fixture is the stored real API response.
+- Live (opt-in): `ALTERECHO_LIVE=1 pytest tests/test_live_providers.py` runs 10 read-only checks. Each stored Sentinel-2 product ID and acquisition time must match its Planetary Computer STAC record. The GIBS VIIRS layer must still be listed, with a latest date no earlier than the stored one. SRTMGL1.003 must be published in CMR under LPCLOUD. The LOLA LDEM_875S_20M file size must match the manifest (HTTP HEAD). No raster is downloaded and no credential is sent. All 10 passed on 2026-11-14.
+- Browser: `frontend/e2e/alterecho.spec.ts` runs against a production build on 1327×660, 1680×1000 and 390 px. Explore job states are mocked with `page.route`, and the v2 contract fixture is the stored real API response.
 
 ## 10. Remaining limitations
 

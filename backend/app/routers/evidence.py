@@ -12,7 +12,7 @@ def evidence_model():
     config = evidence_service.CONFIG
     return {"model_version": config["model_version"], "review_status": config["review_status"], "notice": config["notice"],
             "dimensions": config["dimensions"], "thermal_comparison": config["thermal_comparison"], "default_profile": config["default_profile"],
-            "status_definitions": {"measured": "Observed quantity processed by TerraLuna for both bodies under a documented method.",
+            "status_definitions": {"measured": "Observed quantity processed by AlterEcho for both bodies under a documented method.",
                                    "proxy": "Indirect indicator of the quantity; never presented as the quantity itself.",
                                    "context_only": "Published or coarse evidence shown for interpretation; never scored.",
                                    "missing": "No evidence processed. Not a zero and not absence.",

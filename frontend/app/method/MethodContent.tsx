@@ -5,6 +5,7 @@ import { apiV3 } from "../../lib/api";
 import type { ProfileV3, ResultDetail, ToleranceRecord } from "../../lib/analogue";
 import { pct } from "../../lib/format";
 import { useKeyed } from "../../lib/hooks";
+import FormulaList from "../components/FormulaList";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type Json = Record<string, any>;
@@ -26,7 +27,7 @@ export default function MethodContent() {
     <article className="page page-wide">
       <h1>How every number is made</h1>
       <p className="intro">
-        TerraLuna separates three things that are often blurred together: a <strong>measured analogy</strong> (how alike two windows are on comparable
+        AlterEcho separates three things that are often blurred together: a <strong>measured analogy</strong> (how alike two windows are on comparable
         measurements), <strong>field-test suitability</strong> (whether a place is useful for a task, recorded as evidence and never scored), and
         <strong> evidence quality</strong> (coverage, resolution limits and sensitivity, shown as facts rather than a confidence number).
       </p>
@@ -43,7 +44,7 @@ export default function MethodContent() {
       </dl>
 
       <h2>The formulas</h2>
-      <ul className="formula-list">{m && Object.entries(m.formulas as Record<string, string>).map(([k, v]) => <li key={k}><span className="muted">{k.replaceAll("_", " ")}</span><code>{v}</code></li>)}</ul>
+      {m && <FormulaList formulas={m.formulas as Record<string, string>} />}
       <dl className="kv params">{m && Object.entries(m.parameters as Record<string, string>).map(([k, v]) => <Fragment key={k}><dt className="mono">{k}</dt><dd>{v}</dd></Fragment>)}</dl>
       <p className="muted small">{m?.notice}</p>
 
@@ -54,7 +55,7 @@ export default function MethodContent() {
         if it is at least {cal.rules?.noise_factor ?? 3}× the resolution floor δ, which combines moving the reference window 2 km and changing the DEM product.
         Neither value is fitted to expert labels, and the candidate windows were already known, so this is not a blind test.
       </p>
-      <div className="table-scroll">
+      <div className="table-scroll" tabIndex={0} role="region" aria-label="Scrollable data table">
         <table className="feature-table" data-testid="method-tolerances">
           <thead><tr><th scope="col">Feature</th><th scope="col">Role</th><th scope="col"><span className="g">τ</span> 60 / 120 / 240 m</th><th scope="col">Leave one tile out</th><th scope="col"><span className="g">δ</span> placement</th><th scope="col"><span className="g">δ</span> DEM</th><th scope="col"><span className="g">τ ≥ 3δ</span></th></tr></thead>
           <tbody>{tol.map((t) => (
@@ -73,7 +74,7 @@ export default function MethodContent() {
 
       <h2>Reference windows</h2>
       <p>Each reference is a 10 km window placed by a documented rule before its terrain was measured. Its own resolution floor comes from moving that window 2 km in four directions; a reference whose features change by more than a third of the tolerance under that move is shown with distances only.</p>
-      <div className="table-scroll">
+      <div className="table-scroll" tabIndex={0} role="region" aria-label="Scrollable data table">
         <table className="feature-table" data-testid="method-references">
           <thead><tr><th scope="col">Reference</th><th scope="col">Elevation product</th><th scope="col">Median slope (60 m)</th><th scope="col"><span className="g">δ</span> slope · relative elevation</th><th scope="col">Scored</th></tr></thead>
           <tbody>{(m?.references ?? []).map((r: Json) => (
@@ -90,7 +91,7 @@ export default function MethodContent() {
 
       <h2>Is the index informative? Discrimination analysis</h2>
       <p>Each reference is compared with the same {m?.discrimination_population?.windows ?? "…"} unselected Earth windows. If many of them score highly, a high value for a candidate says little. The table shows how often that happens.</p>
-      <div className="table-scroll">
+      <div className="table-scroll" tabIndex={0} role="region" aria-label="Scrollable data table">
         <table className="feature-table" data-testid="method-discrimination">
           <thead><tr><th scope="col">Reference</th><th scope="col">Background median</th><th scope="col">Share ≥ 90</th><th scope="col">Share ≥ 99</th><th scope="col">Slope alone ≥ 90</th><th scope="col">Relative elevation alone ≥ 90</th></tr></thead>
           <tbody>{Object.entries((m?.discrimination ?? {}) as Record<string, Json>).filter(([, v]) => v.background?.count).map(([rid, v]) => (
@@ -120,7 +121,7 @@ export default function MethodContent() {
 
       <h2>Why the old scores clustered near 99.9</h2>
       <p>{dec.finding}</p>
-      <div className="table-scroll">
+      <div className="table-scroll" tabIndex={0} role="region" aria-label="Scrollable data table">
         <table className="feature-table" data-testid="decomposition">
           <caption className="sr-only">Index after each change, Jezero reference</caption>
           <thead><tr><th scope="col">Site</th>{(dec.steps ?? []).map((s: string, i: number) => <th key={s} scope="col">{i + 1}. {s}</th>)}</tr></thead>

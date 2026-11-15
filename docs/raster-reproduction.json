@@ -1,0 +1,184 @@
+[
+  {
+    "site_id": "earth-atacama-south",
+    "maximum_quantile_difference": {
+      "slope": 0.0,
+      "relative_elevation": 0.0
+    },
+    "coverage": {
+      "slope": 1.0,
+      "local_relief": 1.0,
+      "roughness": 1.0,
+      "relative_elevation": 1.0
+    }
+  },
+  {
+    "site_id": "earth-atacama",
+    "maximum_quantile_difference": {
+      "slope": 0.0,
+      "relative_elevation": 0.0
+    },
+    "coverage": {
+      "slope": 1.0,
+      "local_relief": 1.0,
+      "roughness": 1.0,
+      "relative_elevation": 1.0
+    }
+  },
+  {
+    "site_id": "earth-craters-of-the-moon",
+    "maximum_quantile_difference": {
+      "slope": 0.0,
+      "relative_elevation": 0.0
+    },
+    "coverage": {
+      "slope": 0.99957,
+      "local_relief": 0.999857,
+      "roughness": 0.999857,
+      "relative_elevation": 0.999857
+    }
+  },
+  {
+    "site_id": "earth-danakil",
+    "maximum_quantile_difference": {
+      "slope": 0.0,
+      "relative_elevation": 0.0
+    },
+    "coverage": {
+      "slope": 1.0,
+      "local_relief": 1.0,
+      "roughness": 1.0,
+      "relative_elevation": 1.0
+    }
+  },
+  {
+    "site_id": "earth-hanksville-mdrs",
+    "maximum_quantile_difference": {
+      "slope": 0.0,
+      "relative_elevation": 0.0
+    },
+    "coverage": {
+      "slope": 1.0,
+      "local_relief": 1.0,
+      "roughness": 1.0,
+      "relative_elevation": 1.0
+    }
+  },
+  {
+    "site_id": "earth-ladakh",
+    "maximum_quantile_difference": {
+      "slope": 0.0,
+      "relative_elevation": 0.0
+    },
+    "coverage": {
+      "slope": 0.974363,
+      "local_relief": 0.989888,
+      "roughness": 0.989028,
+      "relative_elevation": 0.989888
+    }
+  },
+  {
+    "site_id": "earth-meteor-crater",
+    "maximum_quantile_difference": {
+      "slope": 0.0,
+      "relative_elevation": 0.0
+    },
+    "coverage": {
+      "slope": 0.999498,
+      "local_relief": 0.999857,
+      "roughness": 0.999857,
+      "relative_elevation": 0.999857
+    }
+  },
+  {
+    "site_id": "earth-upper-mustang",
+    "maximum_quantile_difference": {
+      "slope": 0.0,
+      "relative_elevation": 0.0
+    },
+    "coverage": {
+      "slope": 0.999821,
+      "local_relief": 0.999964,
+      "roughness": 0.999964,
+      "relative_elevation": 0.999964
+    }
+  },
+  {
+    "site_id": "mars-eberswalde-delta",
+    "maximum_quantile_difference": {
+      "slope": 0.0,
+      "relative_elevation": 0.0
+    },
+    "coverage": {
+      "slope": 0.999068,
+      "local_relief": 0.999785,
+      "roughness": 0.999785,
+      "relative_elevation": 0.999785
+    }
+  },
+  {
+    "site_id": "mars-gale-aeolis-palus",
+    "maximum_quantile_difference": {
+      "slope": 0.0,
+      "relative_elevation": 0.0
+    },
+    "coverage": {
+      "slope": 0.997884,
+      "local_relief": 0.999319,
+      "roughness": 0.999319,
+      "relative_elevation": 0.999319
+    }
+  },
+  {
+    "site_id": "mars-gusev-plains",
+    "maximum_quantile_difference": {
+      "slope": 0.0,
+      "relative_elevation": 0.0
+    },
+    "coverage": {
+      "slope": 1.0,
+      "local_relief": 1.0,
+      "roughness": 1.0,
+      "relative_elevation": 1.0
+    }
+  },
+  {
+    "site_id": "mars-insight-elysium",
+    "maximum_quantile_difference": {
+      "slope": 0.0,
+      "relative_elevation": 0.0
+    },
+    "coverage": {
+      "slope": 0.998566,
+      "local_relief": 0.999713,
+      "roughness": 0.999713,
+      "relative_elevation": 0.999713
+    }
+  },
+  {
+    "site_id": "mars-jezero",
+    "maximum_quantile_difference": {
+      "slope": 0.0,
+      "relative_elevation": 0.0
+    },
+    "coverage": {
+      "slope": 1.0,
+      "local_relief": 1.0,
+      "roughness": 1.0,
+      "relative_elevation": 1.0
+    }
+  },
+  {
+    "site_id": "moon-south-pole-shackleton",
+    "maximum_quantile_difference": {
+      "slope": 0.0,
+      "relative_elevation": 0.0
+    },
+    "coverage": {
+      "slope": 1.0,
+      "local_relief": 1.0,
+      "roughness": 1.0,
+      "relative_elevation": 1.0
+    }
+  }
+]

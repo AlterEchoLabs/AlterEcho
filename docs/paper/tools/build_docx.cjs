@@ -85,7 +85,7 @@ for (const b of blocks) {
 }
 
 const doc = new Document({
-  creator: "TerraLuna (Team AlterEcho)", title: "Methods: Earth–Planetary Terrain Analogue Comparison",
+  creator: "AlterEcho (Team AlterEcho)", title: "Methods: Earth–Planetary Terrain Analogue Comparison",
   description: `Generated from ${data.method_version} / ${data.terrain_method}`,
   styles: {
     default: { document: { run: { font: BODY, size: 22 } } },
@@ -97,7 +97,7 @@ const doc = new Document({
   numbering: { config: [{ reference: "bullets", levels: [{ level: 0, format: LevelFormat.BULLET, text: "•", alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 540, hanging: 270 } } } }] }] },
   sections: [{
     properties: { page: { size: { width: PAGE_W, height: 16838 }, margin: { top: MARGIN, bottom: MARGIN, left: MARGIN, right: MARGIN } } },
-    footers: { default: new Footer({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: `TerraLuna · ${data.method_version} · page `, size: 16, color: "777777" }), new TextRun({ children: [PageNumber.CURRENT], size: 16, color: "777777" })] })] }) },
+    footers: { default: new Footer({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: `AlterEcho · ${data.method_version} · page `, size: 16, color: "777777" }), new TextRun({ children: [PageNumber.CURRENT], size: 16, color: "777777" })] })] }) },
     children,
   }],
 });

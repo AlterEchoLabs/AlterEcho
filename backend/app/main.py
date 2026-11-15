@@ -1,3 +1,4 @@
+import asyncio
 from fastapi import FastAPI, Request
 from fastapi.exceptions import HTTPException, RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
@@ -36,6 +37,42 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
         return response
 
 
+class BoundedBodyMiddleware:
+    """Count streamed bytes as well as Content-Length; bound slow request bodies."""
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] != "http":
+            return await self.app(scope, receive, send)
+        body = bytearray()
+        try:
+            async with asyncio.timeout(15):
+                while True:
+                    message = await receive()
+                    if message["type"] == "http.disconnect":
+                        return
+                    body.extend(message.get("body", b""))
+                    if len(body) > MAX_BODY_BYTES:
+                        response = JSONResponse(status_code=413, content={"error": {"code": "payload_too_large", "message": "Request body exceeds limit"}})
+                        return await response(scope, receive, send)
+                    if not message.get("more_body", False):
+                        break
+        except TimeoutError:
+            response = JSONResponse(status_code=408, content={"error": {"code": "request_timeout", "message": "Request body timed out"}})
+            return await response(scope, receive, send)
+        delivered = False
+
+        async def bounded_receive():
+            nonlocal delivered
+            if not delivered:
+                delivered = True
+                return {"type": "http.request", "body": bytes(body), "more_body": False}
+            return await receive()
+        await self.app(scope, bounded_receive, send)
+
+
+app.add_middleware(BoundedBodyMiddleware)
 app.add_middleware(SecurityHeadersMiddleware)
 app.add_middleware(CORSMiddleware, allow_origins=list(settings.cors_origins), allow_credentials=False, allow_methods=["GET", "POST"], allow_headers=["Content-Type"])
 app.include_router(health.router, prefix="/api", tags=["system"])

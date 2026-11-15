@@ -5,7 +5,9 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Any, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, computed_field
+
+ScientificStatus = Literal["real_processed", "real_context_only", "planned", "not_assessed", "unavailable", "failed_quality_gate"]
 
 FamilyId = Literal["terrain", "geology", "temperature", "water_ice", "surface_processes", "subsurface_habitability", "field_test_suitability"]
 ProfileIdV3 = Literal["terrain_analogy", "balanced_science", "rover_mobility", "biosignature_fieldwork", "mars_base_field_testing"]
@@ -52,6 +54,21 @@ class FamilyRecord(BaseModel):
     task_critical: bool
     features: list[FeatureRecord] = []
     context: dict[str, Any] | None = None
+
+    @computed_field
+    @property
+    def scientific_status(self) -> ScientificStatus:
+        if self.eligible:
+            return "real_processed"
+        if self.status == "measured_context_only":
+            return "real_context_only"
+        if self.status in {"incompatible", "excluded"}:
+            return "failed_quality_gate"
+        if self.status == "source_available_unprocessed":
+            return "planned"
+        if self.status in {"missing_earth", "missing_planetary"}:
+            return "unavailable"
+        return "not_assessed"
 
 
 class Scenario(BaseModel):
@@ -100,6 +117,19 @@ class CandidateV3(BaseModel):
     literature_context: dict[str, Any] | None = None
     data_roles: list[str]
     background_share: float | None = Field(None, description="Share of unselected Earth windows whose terrain index is at least this candidate's")
+
+    @computed_field
+    @property
+    def scientific_status(self) -> ScientificStatus:
+        if self.state == "excluded":
+            return "failed_quality_gate"
+        if self.observed_index is not None:
+            return "real_processed"
+        if self.state == "not_measured":
+            return "unavailable"
+        if any(f.eligible or f.status == "measured_context_only" for f in self.families):
+            return "real_context_only"
+        return "not_assessed"
 
 
 class ToleranceRecord(BaseModel):

@@ -1,6 +1,6 @@
 {
   "version": "evidence-context-v1",
-  "notice": "Statuses for dimensions that are not measured by TerraLuna. Context statements cite sources and never contribute to a score.",
+  "notice": "Statuses for dimensions that are not measured by AlterEcho. Context statements cite sources and never contribute to a score.",
   "dimensions": {
     "geology": {
       "mars-jezero": {"status": "context_only", "reason": "Jezero's geological units are mapped in USGS SIM 3464 (1:75,000). Those units have not been converted into a descriptor that can be compared with an Earth product.", "source_ids": ["usgs-sim-3464"]},
@@ -15,7 +15,7 @@
     },
     "subsurface_habitability": {
       "mars-jezero": {"status": "context_only", "reason": "SHARAD radar and GRS footprints are kilometres to hundreds of kilometres across, coarser than the 10 km AOI. They are regional context only.", "source_ids": ["sharad-pds"]},
-      "_earth_default": {"status": "not_comparable", "reason": "No comparable subsurface product exists for this AOI. TerraLuna makes no life-detection or habitability claim."}
+      "_earth_default": {"status": "not_comparable", "reason": "No comparable subsurface product exists for this AOI. AlterEcho makes no life-detection or habitability claim."}
     }
   },
   "operational": {

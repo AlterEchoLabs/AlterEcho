@@ -1,6 +1,6 @@
 # Phase 9 audit: scientific scoring, explainable results and the planetary explorer
 
-Branch `feature/terraluna-phase-6`, starting commit `3e31b1b` (Phase 7/8 documentation). Inputs: the AlterEcho project handbook (31 pp.), the research handoff, and the analogue-method handoff (`analogue-method-v1.0` proposal). The screenshots mentioned in the request were not attached, so their findings are taken from the request text: scores of about 99.5–99.9 for several Earth sites, Balanced science shown on 30 % of planned evidence, built infrastructure in the Atacama window, and an Earth globe that cannot zoom into the study area.
+Branch `feature/alterecho-phase-6`, starting commit `3e31b1b` (Phase 7/8 documentation). Inputs: the AlterEcho project handbook (31 pp.), the research handoff, and the analogue-method handoff (`analogue-method-v1.0` proposal). The screenshots mentioned in the request were not attached, so their findings are taken from the request text: scores of about 99.5–99.9 for several Earth sites, Balanced science shown on 30 % of planned evidence, built infrastructure in the Atacama window, and an Earth globe that cannot zoom into the study area.
 
 ## 1. What Phases 7–8 actually implemented
 

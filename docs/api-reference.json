@@ -1,0 +1,7241 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "AlterEcho AI API",
+    "description": "Transparent Earth terrain analog comparisons using processed elevation data.",
+    "version": "0.5.0"
+  },
+  "paths": {
+    "/api/health": {
+      "get": {
+        "tags": [
+          "system"
+        ],
+        "summary": "Health",
+        "operationId": "health_api_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/config": {
+      "get": {
+        "tags": [
+          "system"
+        ],
+        "summary": "Config",
+        "operationId": "config_api_config_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/planets": {
+      "get": {
+        "tags": [
+          "catalog"
+        ],
+        "summary": "Planets",
+        "operationId": "planets_api_planets_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sites": {
+      "get": {
+        "tags": [
+          "catalog"
+        ],
+        "summary": "Sites",
+        "operationId": "sites_api_sites_get",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Body"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Body"
+            }
+          },
+          {
+            "name": "data_status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/DataStatus"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Data Status"
+            }
+          },
+          {
+            "name": "analog_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 80
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Analog Type"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sites/{site_id}": {
+      "get": {
+        "tags": [
+          "catalog"
+        ],
+        "summary": "Site",
+        "operationId": "site_api_sites__site_id__get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+              "description": "Catalog site identifier",
+              "title": "Site Id"
+            },
+            "description": "Catalog site identifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/methodology": {
+      "get": {
+        "tags": [
+          "catalog"
+        ],
+        "summary": "Methodology",
+        "operationId": "methodology_api_methodology_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/discover": {
+      "post": {
+        "tags": [
+          "comparison"
+        ],
+        "summary": "Discover",
+        "operationId": "discover_api_discover_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiscoverRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiscoverResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/evidence/model": {
+      "get": {
+        "tags": [
+          "evidence v1 (historical)"
+        ],
+        "summary": "Evidence Model",
+        "operationId": "evidence_model_api_evidence_model_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/evidence/profiles": {
+      "get": {
+        "tags": [
+          "evidence v1 (historical)"
+        ],
+        "summary": "Evidence Profiles",
+        "operationId": "evidence_profiles_api_evidence_profiles_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ProfileSummary"
+                  },
+                  "type": "array",
+                  "title": "Response Evidence Profiles Api Evidence Profiles Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sites/{site_id}/evidence": {
+      "get": {
+        "tags": [
+          "evidence v1 (historical)"
+        ],
+        "summary": "Site Evidence",
+        "operationId": "site_evidence_api_sites__site_id__evidence_get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+              "description": "Catalog site identifier",
+              "title": "Site Id"
+            },
+            "description": "Catalog site identifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SiteEvidence"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/evidence/compare": {
+      "post": {
+        "tags": [
+          "evidence v1 (historical)"
+        ],
+        "summary": "Evidence Compare",
+        "operationId": "evidence_compare_api_evidence_compare_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvidenceCompareRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvidenceCompareResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/model": {
+      "get": {
+        "tags": [
+          "analog evidence v2 (historical)"
+        ],
+        "summary": "Model",
+        "operationId": "model_api_v2_model_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/profiles": {
+      "get": {
+        "tags": [
+          "analog evidence v2 (historical)"
+        ],
+        "summary": "List Profiles",
+        "operationId": "list_profiles_api_v2_profiles_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ProfileV2"
+                  },
+                  "type": "array",
+                  "title": "Response List Profiles Api V2 Profiles Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/compare": {
+      "post": {
+        "tags": [
+          "analog evidence v2 (historical)"
+        ],
+        "summary": "Compare",
+        "operationId": "compare_api_v2_compare_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompareRequestV2"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompareResponseV2"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/evaluation": {
+      "get": {
+        "tags": [
+          "analog evidence v2 (historical)"
+        ],
+        "summary": "Evaluation",
+        "operationId": "evaluation_api_v2_evaluation_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/thermal-audit/{site_id}": {
+      "get": {
+        "tags": [
+          "analog evidence v2 (historical)"
+        ],
+        "summary": "Thermal Audit",
+        "operationId": "thermal_audit_api_v2_thermal_audit__site_id__get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+              "description": "Catalog site identifier",
+              "title": "Site Id"
+            },
+            "description": "Catalog site identifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThermalAudit"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/method/worked-example": {
+      "get": {
+        "tags": [
+          "analog evidence v2 (historical)"
+        ],
+        "summary": "Worked Example",
+        "operationId": "worked_example_api_v2_method_worked_example_get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+              "default": "earth-ladakh",
+              "title": "Site Id"
+            }
+          },
+          {
+            "name": "family",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 32,
+              "default": "slope",
+              "title": "Family"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/reports/{site_id}": {
+      "get": {
+        "tags": [
+          "analog evidence v2 (historical)"
+        ],
+        "summary": "Report",
+        "operationId": "report_api_v2_reports__site_id__get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+              "description": "Catalog site identifier",
+              "title": "Site Id"
+            },
+            "description": "Catalog site identifier"
+          },
+          {
+            "name": "profile_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 40,
+              "default": "terrain_analogy",
+              "title": "Profile Id"
+            }
+          },
+          {
+            "name": "reference_site_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+              "default": "mars-jezero",
+              "title": "Reference Site Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v3/source-registry": {
+      "get": {
+        "tags": [
+          "analogue method v1.0"
+        ],
+        "summary": "Source Registry",
+        "operationId": "source_registry_api_v3_source_registry_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SourceRegistry"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v3/method": {
+      "get": {
+        "tags": [
+          "analogue method v1.0"
+        ],
+        "summary": "Method",
+        "operationId": "method_api_v3_method_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v3/references": {
+      "get": {
+        "tags": [
+          "analogue method v1.0"
+        ],
+        "summary": "References",
+        "operationId": "references_api_v3_references_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v3/profiles": {
+      "get": {
+        "tags": [
+          "analogue method v1.0"
+        ],
+        "summary": "Profiles",
+        "operationId": "profiles_api_v3_profiles_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ProfileV3"
+                  },
+                  "type": "array",
+                  "title": "Response Profiles Api V3 Profiles Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v3/compare": {
+      "get": {
+        "tags": [
+          "analogue method v1.0"
+        ],
+        "summary": "Compare",
+        "operationId": "compare_api_v3_compare_get",
+        "parameters": [
+          {
+            "name": "reference",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+              "default": "mars-jezero",
+              "title": "Reference"
+            }
+          },
+          {
+            "name": "profile",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "terrain_analogy",
+                "balanced_science",
+                "rover_mobility",
+                "biosignature_fieldwork",
+                "mars_base_field_testing"
+              ],
+              "type": "string",
+              "default": "terrain_analogy",
+              "title": "Profile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompareV3"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v3/result": {
+      "get": {
+        "tags": [
+          "analogue method v1.0"
+        ],
+        "summary": "Result",
+        "operationId": "result_api_v3_result_get",
+        "parameters": [
+          {
+            "name": "site",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+              "title": "Site"
+            }
+          },
+          {
+            "name": "reference",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+              "default": "mars-jezero",
+              "title": "Reference"
+            }
+          },
+          {
+            "name": "profile",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "terrain_analogy",
+                "balanced_science",
+                "rover_mobility",
+                "biosignature_fieldwork",
+                "mars_base_field_testing"
+              ],
+              "type": "string",
+              "default": "terrain_analogy",
+              "title": "Profile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultDetail"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v3/data-roles": {
+      "get": {
+        "tags": [
+          "analogue method v1.0"
+        ],
+        "summary": "Data Roles",
+        "operationId": "data_roles_api_v3_data_roles_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/DataRole"
+                  },
+                  "type": "array",
+                  "title": "Response Data Roles Api V3 Data Roles Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v3/sites/{site_id}/explorer": {
+      "get": {
+        "tags": [
+          "analogue method v1.0"
+        ],
+        "summary": "Explorer",
+        "operationId": "explorer_api_v3_sites__site_id__explorer_get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+              "description": "Catalog site identifier",
+              "title": "Site Id"
+            },
+            "description": "Catalog site identifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExplorerWindow"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sites/{site_id}/aoi": {
+      "get": {
+        "tags": [
+          "geospatial provenance"
+        ],
+        "summary": "Site Aoi",
+        "operationId": "site_aoi_api_sites__site_id__aoi_get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+              "description": "Catalog site identifier",
+              "title": "Site Id"
+            },
+            "description": "Catalog site identifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sites/{site_id}/terrain": {
+      "get": {
+        "tags": [
+          "geospatial provenance"
+        ],
+        "summary": "Site Terrain",
+        "operationId": "site_terrain_api_sites__site_id__terrain_get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+              "description": "Catalog site identifier",
+              "title": "Site Id"
+            },
+            "description": "Catalog site identifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TerrainFeatureSummary"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sources": {
+      "get": {
+        "tags": [
+          "geospatial provenance"
+        ],
+        "summary": "Sources",
+        "operationId": "sources_api_sources_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/SourceManifest"
+                  },
+                  "type": "array",
+                  "title": "Response Sources Api Sources Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sources/{source_id}": {
+      "get": {
+        "tags": [
+          "geospatial provenance"
+        ],
+        "summary": "Source",
+        "operationId": "source_api_sources__source_id__get",
+        "parameters": [
+          {
+            "name": "source_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+              "description": "Source manifest identifier",
+              "title": "Source Id"
+            },
+            "description": "Source manifest identifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SourceManifest"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/processing-runs/{run_id}": {
+      "get": {
+        "tags": [
+          "geospatial provenance"
+        ],
+        "summary": "Processing Run",
+        "operationId": "processing_run_api_processing_runs__run_id__get",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "^[a-z0-9][a-z0-9-]{0,40}-\\d{8}T\\d{6}Z-[0-9a-f]{8}$",
+              "description": "Processing-run identifier",
+              "title": "Run Id"
+            },
+            "description": "Processing-run identifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcessingRun"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/datasets": {
+      "get": {
+        "tags": [
+          "geospatial provenance"
+        ],
+        "summary": "Datasets",
+        "operationId": "datasets_api_datasets_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/DatasetRecord"
+                  },
+                  "type": "array",
+                  "title": "Response Datasets Api Datasets Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sites/{site_id}/imagery": {
+      "get": {
+        "tags": [
+          "geospatial provenance"
+        ],
+        "summary": "Site Imagery",
+        "operationId": "site_imagery_api_sites__site_id__imagery_get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+              "description": "Catalog site identifier",
+              "title": "Site Id"
+            },
+            "description": "Catalog site identifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ImageryRecord"
+                  },
+                  "title": "Response Site Imagery Api Sites  Site Id  Imagery Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sites/{site_id}/imagery/latest": {
+      "get": {
+        "tags": [
+          "geospatial provenance"
+        ],
+        "summary": "Latest Site Imagery",
+        "operationId": "latest_site_imagery_api_sites__site_id__imagery_latest_get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+              "description": "Catalog site identifier",
+              "title": "Site Id"
+            },
+            "description": "Catalog site identifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageryRecord"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sites/{site_id}/imagery/{imagery_id}": {
+      "get": {
+        "tags": [
+          "geospatial provenance"
+        ],
+        "summary": "Site Imagery Record",
+        "operationId": "site_imagery_record_api_sites__site_id__imagery__imagery_id__get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+              "description": "Catalog site identifier",
+              "title": "Site Id"
+            },
+            "description": "Catalog site identifier"
+          },
+          {
+            "name": "imagery_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 96,
+              "pattern": "^[a-z0-9][a-z0-9-]{0,95}$",
+              "description": "Imagery record identifier",
+              "title": "Imagery Id"
+            },
+            "description": "Imagery record identifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageryRecord"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sites/{site_id}/terrain/heightmap": {
+      "get": {
+        "tags": [
+          "geospatial provenance"
+        ],
+        "summary": "Terrain Heightmap",
+        "description": "Relative-height grid (decimetres from the AOI median) for the 3D terrain view. Visualisation only.",
+        "operationId": "terrain_heightmap_api_sites__site_id__terrain_heightmap_get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+              "description": "Catalog site identifier",
+              "title": "Site Id"
+            },
+            "description": "Catalog site identifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sites/{site_id}/terrain/layers": {
+      "get": {
+        "tags": [
+          "geospatial provenance"
+        ],
+        "summary": "Terrain Layers Meta",
+        "operationId": "terrain_layers_meta_api_sites__site_id__terrain_layers_get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+              "description": "Catalog site identifier",
+              "title": "Site Id"
+            },
+            "description": "Catalog site identifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sites/{site_id}/terrain/quality": {
+      "get": {
+        "tags": [
+          "geospatial provenance"
+        ],
+        "summary": "Terrain Quality",
+        "operationId": "terrain_quality_api_sites__site_id__terrain_quality_get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+              "description": "Catalog site identifier",
+              "title": "Site Id"
+            },
+            "description": "Catalog site identifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sites/{site_id}/terrain/distributions": {
+      "get": {
+        "tags": [
+          "geospatial provenance"
+        ],
+        "summary": "Terrain Distributions",
+        "operationId": "terrain_distributions_api_sites__site_id__terrain_distributions_get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+              "description": "Catalog site identifier",
+              "title": "Site Id"
+            },
+            "description": "Catalog site identifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sites/{site_id}/terrain/sensitivity": {
+      "get": {
+        "tags": [
+          "geospatial provenance"
+        ],
+        "summary": "Terrain Sensitivity",
+        "operationId": "terrain_sensitivity_api_sites__site_id__terrain_sensitivity_get",
+        "parameters": [
+          {
+            "name": "site_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+              "description": "Catalog site identifier",
+              "title": "Site Id"
+            },
+            "description": "Catalog site identifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/explore/preflight": {
+      "post": {
+        "tags": [
+          "user AOI screening"
+        ],
+        "summary": "Preflight",
+        "operationId": "preflight_api_explore_preflight_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AreaRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/explore/jobs": {
+      "get": {
+        "tags": [
+          "user AOI screening"
+        ],
+        "summary": "Recent",
+        "operationId": "recent_api_explore_jobs_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "user AOI screening"
+        ],
+        "summary": "Submit",
+        "operationId": "submit_api_explore_jobs_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AreaRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/explore/jobs/{job_id}": {
+      "get": {
+        "tags": [
+          "user AOI screening"
+        ],
+        "summary": "Status",
+        "operationId": "status_api_explore_jobs__job_id__get",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Root",
+        "operationId": "root__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AreaRequest": {
+        "properties": {
+          "lat": {
+            "type": "number",
+            "maximum": 90.0,
+            "minimum": -90.0,
+            "title": "Lat"
+          },
+          "lon": {
+            "type": "number",
+            "maximum": 180.0,
+            "minimum": -180.0,
+            "title": "Lon"
+          },
+          "label": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 60
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Label"
+          }
+        },
+        "type": "object",
+        "required": [
+          "lat",
+          "lon"
+        ],
+        "title": "AreaRequest"
+      },
+      "AuditCheck": {
+        "properties": {
+          "check": {
+            "type": "string",
+            "title": "Check"
+          },
+          "required": {
+            "type": "boolean",
+            "title": "Required"
+          },
+          "passed": {
+            "type": "boolean",
+            "title": "Passed"
+          },
+          "detail": {
+            "type": "string",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "required": [
+          "check",
+          "required",
+          "passed",
+          "detail"
+        ],
+        "title": "AuditCheck"
+      },
+      "Body": {
+        "type": "string",
+        "enum": [
+          "earth",
+          "mars",
+          "moon"
+        ],
+        "title": "Body"
+      },
+      "CandidateEvidenceResult": {
+        "properties": {
+          "site_id": {
+            "type": "string",
+            "title": "Site Id"
+          },
+          "site_name": {
+            "type": "string",
+            "title": "Site Name"
+          },
+          "rank": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rank"
+          },
+          "ranking_status": {
+            "type": "string",
+            "enum": [
+              "ranked",
+              "insufficient_evidence"
+            ],
+            "title": "Ranking Status"
+          },
+          "index": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Index",
+            "description": "Analog evidence index out of 100 on the common basis. Not a probability or percentage of identity."
+          },
+          "backed_weight_fraction": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Backed Weight Fraction",
+            "description": "Share of the profile weight backed by comparable measured evidence"
+          },
+          "scoring_basis": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "terrain",
+                "temperature",
+                "geology",
+                "water_ice",
+                "surface_processes",
+                "subsurface_habitability"
+              ]
+            },
+            "type": "array",
+            "title": "Scoring Basis"
+          },
+          "evidence_quality": {
+            "type": "string",
+            "enum": [
+              "moderate",
+              "limited",
+              "none"
+            ],
+            "title": "Evidence Quality"
+          },
+          "dimensions": {
+            "items": {
+              "$ref": "#/components/schemas/DimensionScore"
+            },
+            "type": "array",
+            "title": "Dimensions"
+          },
+          "factors": {
+            "items": {
+              "$ref": "#/components/schemas/Factor"
+            },
+            "type": "array",
+            "title": "Factors"
+          },
+          "terrain_baseline": {
+            "$ref": "#/components/schemas/TerrainBaseline"
+          },
+          "sensitivity": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SensitivityResult"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "explanation": {
+            "type": "string",
+            "title": "Explanation"
+          },
+          "not_assessed": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Not Assessed"
+          }
+        },
+        "type": "object",
+        "required": [
+          "site_id",
+          "site_name",
+          "rank",
+          "ranking_status",
+          "index",
+          "backed_weight_fraction",
+          "scoring_basis",
+          "evidence_quality",
+          "dimensions",
+          "factors",
+          "terrain_baseline",
+          "sensitivity",
+          "explanation",
+          "not_assessed"
+        ],
+        "title": "CandidateEvidenceResult"
+      },
+      "CandidateResult": {
+        "properties": {
+          "site_id": {
+            "type": "string",
+            "title": "Site Id"
+          },
+          "site_name": {
+            "type": "string",
+            "title": "Site Name"
+          },
+          "rank": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rank"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "ranked",
+              "experimental_partial",
+              "not_assessed",
+              "not_rankable"
+            ],
+            "title": "State"
+          },
+          "partial_index": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Partial Index",
+            "description": "Partial index on the included dimensions only"
+          },
+          "evidence_coverage": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Evidence Coverage",
+            "description": "Sum of the profile weights of the included dimensions"
+          },
+          "included_dimensions": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "terrain",
+                "geology",
+                "temperature",
+                "water_ice",
+                "surface_processes",
+                "subsurface_habitability",
+                "field_test_suitability"
+              ]
+            },
+            "type": "array",
+            "title": "Included Dimensions"
+          },
+          "missing_task_critical": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "terrain",
+                "geology",
+                "temperature",
+                "water_ice",
+                "surface_processes",
+                "subsurface_habitability",
+                "field_test_suitability"
+              ]
+            },
+            "type": "array",
+            "title": "Missing Task Critical"
+          },
+          "dimensions": {
+            "items": {
+              "$ref": "#/components/schemas/DimensionRecord"
+            },
+            "type": "array",
+            "title": "Dimensions"
+          },
+          "closest": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Closest"
+          },
+          "furthest": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Furthest"
+          },
+          "historical_terrain_v3_index": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Historical Terrain V3 Index"
+          },
+          "sensitivity": {
+            "$ref": "#/components/schemas/Sensitivity"
+          },
+          "eligibility": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Eligibility"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "field_test": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Field Test"
+          },
+          "research_context": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Research Context"
+          },
+          "explanation": {
+            "type": "string",
+            "title": "Explanation"
+          },
+          "permitted_conclusion": {
+            "type": "string",
+            "title": "Permitted Conclusion"
+          },
+          "unassessed": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Unassessed"
+          }
+        },
+        "type": "object",
+        "required": [
+          "site_id",
+          "site_name",
+          "rank",
+          "state",
+          "evidence_coverage",
+          "included_dimensions",
+          "missing_task_critical",
+          "dimensions",
+          "closest",
+          "furthest",
+          "historical_terrain_v3_index",
+          "sensitivity",
+          "eligibility",
+          "field_test",
+          "research_context",
+          "explanation",
+          "permitted_conclusion",
+          "unassessed"
+        ],
+        "title": "CandidateResult"
+      },
+      "CandidateV3": {
+        "properties": {
+          "site_id": {
+            "type": "string",
+            "title": "Site Id"
+          },
+          "site_name": {
+            "type": "string",
+            "title": "Site Name"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "ranked",
+              "partial",
+              "not_assessed",
+              "excluded",
+              "not_measured"
+            ],
+            "title": "State"
+          },
+          "rank": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rank"
+          },
+          "observed_index": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Observed Index"
+          },
+          "evidence_coverage": {
+            "type": "number",
+            "title": "Evidence Coverage"
+          },
+          "resolution": {
+            "type": "string",
+            "enum": [
+              "unresolved_from_reference",
+              "resolved",
+              "not_applicable"
+            ],
+            "title": "Resolution"
+          },
+          "critical_gates": {
+            "additionalProperties": {
+              "type": "boolean"
+            },
+            "type": "object",
+            "title": "Critical Gates"
+          },
+          "families": {
+            "items": {
+              "$ref": "#/components/schemas/FamilyRecord"
+            },
+            "type": "array",
+            "title": "Families"
+          },
+          "sensitivity": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SensitivityV3"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "eligibility_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Eligibility Key"
+          },
+          "simple": {
+            "$ref": "#/components/schemas/SimpleResult"
+          },
+          "exclusion": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Exclusion"
+          },
+          "literature_context": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Literature Context"
+          },
+          "data_roles": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Data Roles"
+          },
+          "background_share": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Background Share",
+            "description": "Share of unselected Earth windows whose terrain index is at least this candidate's"
+          },
+          "scientific_status": {
+            "type": "string",
+            "enum": [
+              "real_processed",
+              "real_context_only",
+              "planned",
+              "not_assessed",
+              "unavailable",
+              "failed_quality_gate"
+            ],
+            "title": "Scientific Status",
+            "readOnly": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "site_id",
+          "site_name",
+          "state",
+          "evidence_coverage",
+          "resolution",
+          "critical_gates",
+          "families",
+          "simple",
+          "data_roles",
+          "scientific_status"
+        ],
+        "title": "CandidateV3"
+      },
+      "Citation": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "url"
+        ],
+        "title": "Citation"
+      },
+      "CompareRequestV2": {
+        "properties": {
+          "reference_site_id": {
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+            "title": "Reference Site Id",
+            "default": "mars-jezero"
+          },
+          "candidate_site_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array",
+                "maxItems": 30
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Candidate Site Ids"
+          },
+          "profile_id": {
+            "type": "string",
+            "enum": [
+              "terrain_analogy",
+              "balanced_science",
+              "rover_mobility",
+              "biosignature_fieldwork",
+              "mars_base_field_testing"
+            ],
+            "title": "Profile Id",
+            "default": "terrain_analogy"
+          }
+        },
+        "type": "object",
+        "title": "CompareRequestV2"
+      },
+      "CompareResponseV2": {
+        "properties": {
+          "model_version": {
+            "type": "string",
+            "title": "Model Version"
+          },
+          "terrain_method": {
+            "type": "string",
+            "title": "Terrain Method"
+          },
+          "review_status": {
+            "type": "string",
+            "title": "Review Status"
+          },
+          "reference_site_id": {
+            "type": "string",
+            "title": "Reference Site Id"
+          },
+          "reference_aoi_id": {
+            "type": "string",
+            "title": "Reference Aoi Id"
+          },
+          "reference_body": {
+            "type": "string",
+            "enum": [
+              "mars",
+              "moon"
+            ],
+            "title": "Reference Body"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/ProfileV2"
+          },
+          "profile_state": {
+            "type": "string",
+            "enum": [
+              "ranked",
+              "experimental_partial",
+              "not_assessed"
+            ],
+            "title": "Profile State"
+          },
+          "profile_state_reason": {
+            "type": "string",
+            "title": "Profile State Reason"
+          },
+          "included_dimensions": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "terrain",
+                "geology",
+                "temperature",
+                "water_ice",
+                "surface_processes",
+                "subsurface_habitability",
+                "field_test_suitability"
+              ]
+            },
+            "type": "array",
+            "title": "Included Dimensions"
+          },
+          "evidence_coverage": {
+            "type": "number",
+            "title": "Evidence Coverage"
+          },
+          "ordering_note": {
+            "type": "string",
+            "title": "Ordering Note"
+          },
+          "tie_groups": {
+            "items": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "type": "array",
+            "title": "Tie Groups"
+          },
+          "ranking_sensitive": {
+            "type": "boolean",
+            "title": "Ranking Sensitive"
+          },
+          "results": {
+            "items": {
+              "$ref": "#/components/schemas/CandidateResult"
+            },
+            "type": "array",
+            "title": "Results"
+          },
+          "physical_limits": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Physical Limits"
+          },
+          "evaluation": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Evaluation"
+          },
+          "generated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Generated At"
+          },
+          "mode": {
+            "type": "string",
+            "const": "prepared_artifacts",
+            "title": "Mode",
+            "default": "prepared_artifacts"
+          },
+          "notice": {
+            "type": "string",
+            "title": "Notice"
+          }
+        },
+        "type": "object",
+        "required": [
+          "model_version",
+          "terrain_method",
+          "review_status",
+          "reference_site_id",
+          "reference_aoi_id",
+          "reference_body",
+          "profile",
+          "profile_state",
+          "profile_state_reason",
+          "included_dimensions",
+          "evidence_coverage",
+          "ordering_note",
+          "tie_groups",
+          "ranking_sensitive",
+          "results",
+          "physical_limits",
+          "evaluation",
+          "generated_at",
+          "notice"
+        ],
+        "title": "CompareResponseV2"
+      },
+      "CompareV3": {
+        "properties": {
+          "method_version": {
+            "type": "string",
+            "title": "Method Version"
+          },
+          "terrain_method": {
+            "type": "string",
+            "title": "Terrain Method"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "review_status": {
+            "type": "string",
+            "title": "Review Status"
+          },
+          "comparison_definition": {
+            "type": "string",
+            "title": "Comparison Definition"
+          },
+          "reference_site_id": {
+            "type": "string",
+            "title": "Reference Site Id"
+          },
+          "reference_name": {
+            "type": "string",
+            "title": "Reference Name"
+          },
+          "reference_aoi_id": {
+            "type": "string",
+            "title": "Reference Aoi Id"
+          },
+          "reference_body": {
+            "type": "string",
+            "enum": [
+              "mars",
+              "moon"
+            ],
+            "title": "Reference Body"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/ProfileV3"
+          },
+          "profile_state": {
+            "type": "string",
+            "enum": [
+              "ranked",
+              "partial",
+              "not_assessed"
+            ],
+            "title": "Profile State"
+          },
+          "profile_state_reason": {
+            "type": "string",
+            "title": "Profile State Reason"
+          },
+          "headline": {
+            "type": "string",
+            "title": "Headline"
+          },
+          "evidence_coverage": {
+            "type": "number",
+            "title": "Evidence Coverage"
+          },
+          "primary_scale_m": {
+            "type": "integer",
+            "title": "Primary Scale M"
+          },
+          "tolerances": {
+            "items": {
+              "$ref": "#/components/schemas/ToleranceRecord"
+            },
+            "type": "array",
+            "title": "Tolerances"
+          },
+          "base_rate": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Base Rate"
+          },
+          "tie_groups": {
+            "items": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "type": "array",
+            "title": "Tie Groups"
+          },
+          "ordering_note": {
+            "type": "string",
+            "title": "Ordering Note"
+          },
+          "results": {
+            "items": {
+              "$ref": "#/components/schemas/CandidateV3"
+            },
+            "type": "array",
+            "title": "Results"
+          },
+          "physical_limits": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Physical Limits"
+          },
+          "formulas": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Formulas"
+          },
+          "parameters": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Parameters"
+          },
+          "validation_status": {
+            "type": "string",
+            "title": "Validation Status"
+          },
+          "notice": {
+            "type": "string",
+            "title": "Notice"
+          },
+          "generated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Generated At"
+          },
+          "discrimination": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discrimination"
+          },
+          "resolution_floor": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resolution Floor"
+          }
+        },
+        "type": "object",
+        "required": [
+          "method_version",
+          "terrain_method",
+          "status",
+          "review_status",
+          "comparison_definition",
+          "reference_site_id",
+          "reference_name",
+          "reference_aoi_id",
+          "reference_body",
+          "profile",
+          "profile_state",
+          "profile_state_reason",
+          "headline",
+          "evidence_coverage",
+          "primary_scale_m",
+          "tolerances",
+          "base_rate",
+          "tie_groups",
+          "ordering_note",
+          "results",
+          "physical_limits",
+          "formulas",
+          "parameters",
+          "validation_status",
+          "notice",
+          "generated_at"
+        ],
+        "title": "CompareV3"
+      },
+      "ComparisonResult": {
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "title": "Request Id"
+          },
+          "reference_site": {
+            "$ref": "#/components/schemas/Site"
+          },
+          "candidate_site": {
+            "$ref": "#/components/schemas/Site"
+          },
+          "overall_similarity": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Overall Similarity"
+          },
+          "display_percentage": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Display Percentage"
+          },
+          "rankability": {
+            "type": "string",
+            "title": "Rankability"
+          },
+          "metric_similarities": {
+            "items": {
+              "$ref": "#/components/schemas/MetricComparison"
+            },
+            "type": "array",
+            "title": "Metric Similarities"
+          },
+          "available_metrics": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Available Metrics"
+          },
+          "missing_metrics": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Missing Metrics"
+          },
+          "explanation": {
+            "type": "string",
+            "title": "Explanation"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Limitations"
+          },
+          "provenance": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Provenance"
+          },
+          "data_status": {
+            "$ref": "#/components/schemas/DataStatus"
+          },
+          "methodology_version": {
+            "type": "string",
+            "title": "Methodology Version"
+          },
+          "generated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Generated At"
+          },
+          "compatibility": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Compatibility"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "quality": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Quality"
+          },
+          "ranking_scope": {
+            "type": "string",
+            "title": "Ranking Scope",
+            "default": "preview_only"
+          },
+          "reference_data_status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DataStatus"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "candidate_data_status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DataStatus"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "comparison_classification": {
+            "type": "string",
+            "title": "Comparison Classification",
+            "default": "preview"
+          },
+          "processing_run_ids": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Processing Run Ids"
+          }
+        },
+        "type": "object",
+        "required": [
+          "request_id",
+          "reference_site",
+          "candidate_site",
+          "overall_similarity",
+          "display_percentage",
+          "rankability",
+          "metric_similarities",
+          "available_metrics",
+          "missing_metrics",
+          "explanation",
+          "limitations",
+          "provenance",
+          "data_status",
+          "methodology_version",
+          "generated_at"
+        ],
+        "title": "ComparisonResult"
+      },
+      "Compatibility": {
+        "properties": {
+          "compatible": {
+            "type": "boolean",
+            "title": "Compatible"
+          },
+          "aoi_scale_match": {
+            "type": "boolean",
+            "title": "Aoi Scale Match"
+          },
+          "resolution_match": {
+            "type": "boolean",
+            "title": "Resolution Match"
+          },
+          "methodology_match": {
+            "type": "boolean",
+            "title": "Methodology Match"
+          },
+          "reference_resolution_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference Resolution M"
+          },
+          "candidate_resolution_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Candidate Resolution M"
+          },
+          "warnings": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Warnings"
+          }
+        },
+        "type": "object",
+        "required": [
+          "compatible",
+          "aoi_scale_match",
+          "resolution_match",
+          "methodology_match",
+          "reference_resolution_m",
+          "candidate_resolution_m"
+        ],
+        "title": "Compatibility"
+      },
+      "DataRole": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "scored_input",
+              "uncertainty_input",
+              "quality_input",
+              "display_context",
+              "context_measurement",
+              "literature_context"
+            ],
+            "title": "Role"
+          },
+          "body": {
+            "type": "string",
+            "title": "Body"
+          },
+          "product": {
+            "type": "string",
+            "title": "Product"
+          },
+          "registry_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Registry Id"
+          },
+          "measures": {
+            "type": "string",
+            "title": "Measures"
+          },
+          "why": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Why"
+          },
+          "native_resolution": {
+            "type": "string",
+            "title": "Native Resolution"
+          },
+          "analysis_resolution": {
+            "type": "string",
+            "title": "Analysis Resolution"
+          },
+          "dates": {
+            "type": "string",
+            "title": "Dates"
+          },
+          "footprint": {
+            "type": "string",
+            "title": "Footprint"
+          },
+          "used_in": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Used In"
+          },
+          "cannot_establish": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Cannot Establish"
+          },
+          "source_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Url"
+          },
+          "doi": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Doi"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "role",
+          "body",
+          "product",
+          "registry_id",
+          "measures",
+          "why",
+          "native_resolution",
+          "analysis_resolution",
+          "dates",
+          "footprint",
+          "used_in",
+          "cannot_establish",
+          "source_url"
+        ],
+        "title": "DataRole"
+      },
+      "DataStatus": {
+        "type": "string",
+        "enum": [
+          "real_processed",
+          "planned",
+          "demo_fixture",
+          "metadata_only",
+          "unavailable"
+        ],
+        "title": "DataStatus"
+      },
+      "DatasetRecord": {
+        "properties": {
+          "dataset_id": {
+            "type": "string",
+            "title": "Dataset Id"
+          },
+          "provider": {
+            "type": "string",
+            "title": "Provider"
+          },
+          "product_name": {
+            "type": "string",
+            "title": "Product Name"
+          },
+          "product_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Product Id"
+          },
+          "collection": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Collection"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "celestial_body": {
+            "type": "string",
+            "title": "Celestial Body"
+          },
+          "scientific_dimension": {
+            "type": "string",
+            "title": "Scientific Dimension"
+          },
+          "spatial_resolution": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Spatial Resolution"
+          },
+          "temporal_coverage": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Temporal Coverage"
+          },
+          "spatial_coverage": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Spatial Coverage"
+          },
+          "authentication_requirement": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Authentication Requirement"
+          },
+          "license_or_usage_notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "License Or Usage Notes"
+          },
+          "doi": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Doi"
+          },
+          "official_landing_page": {
+            "type": "string",
+            "title": "Official Landing Page"
+          },
+          "api_endpoint": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Api Endpoint"
+          },
+          "local_status": {
+            "type": "string",
+            "title": "Local Status"
+          },
+          "intended_project_use": {
+            "type": "string",
+            "title": "Intended Project Use"
+          },
+          "known_limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Known Limitations"
+          },
+          "checksum": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Checksum"
+          },
+          "last_checked_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Checked Date"
+          },
+          "integration_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Integration Type"
+          },
+          "aois_covered": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Aois Covered"
+          },
+          "acquisition_period": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Acquisition Period"
+          }
+        },
+        "type": "object",
+        "required": [
+          "dataset_id",
+          "provider",
+          "product_name",
+          "product_id",
+          "collection",
+          "version",
+          "celestial_body",
+          "scientific_dimension",
+          "spatial_resolution",
+          "temporal_coverage",
+          "spatial_coverage",
+          "authentication_requirement",
+          "license_or_usage_notes",
+          "doi",
+          "official_landing_page",
+          "api_endpoint",
+          "local_status",
+          "intended_project_use",
+          "known_limitations"
+        ],
+        "title": "DatasetRecord"
+      },
+      "DimensionEvidence": {
+        "properties": {
+          "dimension": {
+            "type": "string",
+            "enum": [
+              "terrain",
+              "temperature",
+              "geology",
+              "water_ice",
+              "surface_processes",
+              "subsurface_habitability"
+            ],
+            "title": "Dimension"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "measured",
+              "proxy",
+              "context_only",
+              "missing",
+              "not_comparable"
+            ],
+            "title": "Status"
+          },
+          "quality": {
+            "type": "string",
+            "enum": [
+              "moderate",
+              "limited",
+              "none"
+            ],
+            "title": "Quality"
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason"
+          },
+          "metrics": {
+            "items": {
+              "$ref": "#/components/schemas/MetricEvidence"
+            },
+            "type": "array",
+            "title": "Metrics"
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/SourceCitation"
+            },
+            "type": "array",
+            "title": "Sources"
+          }
+        },
+        "type": "object",
+        "required": [
+          "dimension",
+          "label",
+          "status",
+          "quality",
+          "reason"
+        ],
+        "title": "DimensionEvidence"
+      },
+      "DimensionRecord": {
+        "properties": {
+          "dimension": {
+            "type": "string",
+            "enum": [
+              "terrain",
+              "geology",
+              "temperature",
+              "water_ice",
+              "surface_processes",
+              "subsurface_habitability",
+              "field_test_suitability"
+            ],
+            "title": "Dimension"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "scorable": {
+            "type": "boolean",
+            "title": "Scorable"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "measured_comparable",
+              "measured_context_only",
+              "source_available_unprocessed",
+              "missing_earth",
+              "missing_planetary",
+              "incompatible",
+              "review_pending"
+            ],
+            "title": "Status"
+          },
+          "profile_weight": {
+            "type": "number",
+            "title": "Profile Weight"
+          },
+          "included": {
+            "type": "boolean",
+            "title": "Included"
+          },
+          "index": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Index"
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason"
+          },
+          "earth_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Earth Note"
+          },
+          "planetary_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Planetary Note"
+          },
+          "families": {
+            "items": {
+              "$ref": "#/components/schemas/FamilyScore"
+            },
+            "type": "array",
+            "title": "Families"
+          },
+          "thermal_audit": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ThermalAudit"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sources": {
+            "items": {
+              "$ref": "#/components/schemas/Citation"
+            },
+            "type": "array",
+            "title": "Sources"
+          }
+        },
+        "type": "object",
+        "required": [
+          "dimension",
+          "label",
+          "scorable",
+          "status",
+          "profile_weight",
+          "included",
+          "reason"
+        ],
+        "title": "DimensionRecord"
+      },
+      "DimensionScore": {
+        "properties": {
+          "dimension": {
+            "type": "string",
+            "enum": [
+              "terrain",
+              "temperature",
+              "geology",
+              "water_ice",
+              "surface_processes",
+              "subsurface_habitability"
+            ],
+            "title": "Dimension"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "profile_weight": {
+            "type": "number",
+            "title": "Profile Weight"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "measured",
+              "proxy",
+              "context_only",
+              "missing",
+              "not_comparable"
+            ],
+            "title": "Status"
+          },
+          "quality": {
+            "type": "string",
+            "enum": [
+              "moderate",
+              "limited",
+              "none"
+            ],
+            "title": "Quality"
+          },
+          "similarity": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Similarity"
+          },
+          "used_in_score": {
+            "type": "boolean",
+            "title": "Used In Score"
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason"
+          },
+          "features": {
+            "items": {
+              "$ref": "#/components/schemas/FeatureComparison"
+            },
+            "type": "array",
+            "title": "Features"
+          }
+        },
+        "type": "object",
+        "required": [
+          "dimension",
+          "label",
+          "profile_weight",
+          "status",
+          "quality",
+          "used_in_score",
+          "reason"
+        ],
+        "title": "DimensionScore"
+      },
+      "DiscoverRequest": {
+        "properties": {
+          "reference_site_id": {
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+            "title": "Reference Site Id",
+            "default": "mars-jezero"
+          },
+          "candidate_site_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Candidate Site Ids"
+          },
+          "weights": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "number"
+                },
+                "type": "object",
+                "maxProperties": 12
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Weights"
+          },
+          "methodology_version": {
+            "type": "string",
+            "enum": [
+              "terrain-v3.0",
+              "terrain-v2.0"
+            ],
+            "title": "Methodology Version",
+            "default": "terrain-v3.0"
+          }
+        },
+        "type": "object",
+        "required": [
+          "candidate_site_ids"
+        ],
+        "title": "DiscoverRequest"
+      },
+      "DiscoverResponse": {
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "title": "Request Id"
+          },
+          "reference_site_id": {
+            "type": "string",
+            "title": "Reference Site Id"
+          },
+          "results": {
+            "items": {
+              "$ref": "#/components/schemas/ComparisonResult"
+            },
+            "type": "array",
+            "title": "Results"
+          },
+          "methodology_version": {
+            "type": "string",
+            "title": "Methodology Version"
+          },
+          "data_mode": {
+            "type": "string",
+            "title": "Data Mode"
+          },
+          "generated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Generated At"
+          },
+          "ranking_scope": {
+            "type": "string",
+            "title": "Ranking Scope",
+            "default": "preview_only"
+          },
+          "real_results": {
+            "items": {
+              "$ref": "#/components/schemas/ComparisonResult"
+            },
+            "type": "array",
+            "title": "Real Results"
+          },
+          "preview_results": {
+            "items": {
+              "$ref": "#/components/schemas/ComparisonResult"
+            },
+            "type": "array",
+            "title": "Preview Results"
+          },
+          "unrankable_results": {
+            "items": {
+              "$ref": "#/components/schemas/ComparisonResult"
+            },
+            "type": "array",
+            "title": "Unrankable Results"
+          }
+        },
+        "type": "object",
+        "required": [
+          "request_id",
+          "reference_site_id",
+          "results",
+          "methodology_version",
+          "data_mode",
+          "generated_at"
+        ],
+        "title": "DiscoverResponse"
+      },
+      "DistributionPair": {
+        "properties": {
+          "feature": {
+            "type": "string",
+            "title": "Feature"
+          },
+          "units": {
+            "type": "string",
+            "title": "Units"
+          },
+          "u": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "U"
+          },
+          "earth": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Earth"
+          },
+          "planet": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Planet"
+          }
+        },
+        "type": "object",
+        "required": [
+          "feature",
+          "units",
+          "u",
+          "earth",
+          "planet"
+        ],
+        "title": "DistributionPair"
+      },
+      "Eligibility": {
+        "properties": {
+          "reference_aoi_id": {
+            "type": "string",
+            "title": "Reference Aoi Id"
+          },
+          "method_version": {
+            "type": "string",
+            "title": "Method Version"
+          },
+          "included_dimensions": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "terrain",
+                "geology",
+                "temperature",
+                "water_ice",
+                "surface_processes",
+                "subsurface_habitability",
+                "field_test_suitability"
+              ]
+            },
+            "type": "array",
+            "title": "Included Dimensions"
+          },
+          "feature_definitions_sha256": {
+            "type": "string",
+            "title": "Feature Definitions Sha256"
+          },
+          "resolution_policy": {
+            "type": "string",
+            "title": "Resolution Policy"
+          },
+          "weights_sha256": {
+            "type": "string",
+            "title": "Weights Sha256"
+          },
+          "dem_product": {
+            "type": "string",
+            "title": "Dem Product"
+          },
+          "key": {
+            "type": "string",
+            "title": "Key"
+          }
+        },
+        "type": "object",
+        "required": [
+          "reference_aoi_id",
+          "method_version",
+          "included_dimensions",
+          "feature_definitions_sha256",
+          "resolution_policy",
+          "weights_sha256",
+          "dem_product",
+          "key"
+        ],
+        "title": "Eligibility"
+      },
+      "EvidenceCompareRequest": {
+        "properties": {
+          "reference_site_id": {
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]{0,63}$",
+            "title": "Reference Site Id",
+            "default": "mars-jezero"
+          },
+          "candidate_site_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Candidate Site Ids"
+          },
+          "profile_id": {
+            "type": "string",
+            "enum": [
+              "balanced_science",
+              "rover_mobility",
+              "biosignature_fieldwork",
+              "mars_base_field_testing"
+            ],
+            "title": "Profile Id",
+            "default": "balanced_science"
+          }
+        },
+        "type": "object",
+        "required": [
+          "candidate_site_ids"
+        ],
+        "title": "EvidenceCompareRequest"
+      },
+      "EvidenceCompareResponse": {
+        "properties": {
+          "model_version": {
+            "type": "string",
+            "title": "Model Version"
+          },
+          "review_status": {
+            "type": "string",
+            "title": "Review Status"
+          },
+          "reference_site_id": {
+            "type": "string",
+            "title": "Reference Site Id"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/ProfileSummary"
+          },
+          "common_basis": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "terrain",
+                "temperature",
+                "geology",
+                "water_ice",
+                "surface_processes",
+                "subsurface_habitability"
+              ]
+            },
+            "type": "array",
+            "title": "Common Basis"
+          },
+          "common_basis_weight_fraction": {
+            "type": "number",
+            "title": "Common Basis Weight Fraction"
+          },
+          "ranking_status": {
+            "type": "string",
+            "enum": [
+              "ranked",
+              "insufficient_evidence"
+            ],
+            "title": "Ranking Status"
+          },
+          "ordering_note": {
+            "type": "string",
+            "title": "Ordering Note"
+          },
+          "results": {
+            "items": {
+              "$ref": "#/components/schemas/CandidateEvidenceResult"
+            },
+            "type": "array",
+            "title": "Results"
+          },
+          "generated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Generated At"
+          },
+          "mode": {
+            "type": "string",
+            "const": "prepared_artifacts",
+            "title": "Mode",
+            "default": "prepared_artifacts"
+          },
+          "notice": {
+            "type": "string",
+            "title": "Notice"
+          }
+        },
+        "type": "object",
+        "required": [
+          "model_version",
+          "review_status",
+          "reference_site_id",
+          "profile",
+          "common_basis",
+          "common_basis_weight_fraction",
+          "ranking_status",
+          "ordering_note",
+          "results",
+          "generated_at",
+          "notice"
+        ],
+        "title": "EvidenceCompareResponse"
+      },
+      "ExplorerWindow": {
+        "properties": {
+          "site_id": {
+            "type": "string",
+            "title": "Site Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "center": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Center"
+          },
+          "aoi_corners": {
+            "items": {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            "type": "array",
+            "title": "Aoi Corners",
+            "description": "Exact analysis-grid corners [lon, lat]: top-left, top-right, bottom-right, bottom-left"
+          },
+          "imagery": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Imagery"
+          },
+          "hillshade": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hillshade"
+          },
+          "slope": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Slope"
+          },
+          "recent": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recent"
+          },
+          "max_native_zoom": {
+            "type": "number",
+            "title": "Max Native Zoom"
+          },
+          "notes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Notes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "site_id",
+          "name",
+          "center",
+          "aoi_corners",
+          "imagery",
+          "hillshade",
+          "slope",
+          "recent",
+          "max_native_zoom",
+          "notes"
+        ],
+        "title": "ExplorerWindow"
+      },
+      "Factor": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "helped",
+              "hurt",
+              "gap"
+            ],
+            "title": "Kind"
+          },
+          "dimension": {
+            "type": "string",
+            "enum": [
+              "terrain",
+              "temperature",
+              "geology",
+              "water_ice",
+              "surface_processes",
+              "subsurface_habitability"
+            ],
+            "title": "Dimension"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "short_label": {
+            "type": "string",
+            "title": "Short Label",
+            "description": "Few-word name of the feature or dimension, for compact lists"
+          },
+          "weight_share": {
+            "type": "number",
+            "title": "Weight Share"
+          }
+        },
+        "type": "object",
+        "required": [
+          "kind",
+          "dimension",
+          "text",
+          "short_label",
+          "weight_share"
+        ],
+        "title": "Factor"
+      },
+      "FamilyRecord": {
+        "properties": {
+          "family": {
+            "type": "string",
+            "enum": [
+              "terrain",
+              "geology",
+              "temperature",
+              "water_ice",
+              "surface_processes",
+              "subsurface_habitability",
+              "field_test_suitability"
+            ],
+            "title": "Family"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "weight": {
+            "type": "number",
+            "title": "Weight",
+            "description": "w_g: planned profile weight"
+          },
+          "eligible": {
+            "type": "boolean",
+            "title": "Eligible",
+            "description": "I_g"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "measured_comparable",
+              "measured_context_only",
+              "source_available_unprocessed",
+              "missing_earth",
+              "missing_planetary",
+              "incompatible",
+              "review_pending",
+              "excluded"
+            ],
+            "title": "Status"
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason"
+          },
+          "score": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Score",
+            "description": "S_g in [0, 1]"
+          },
+          "task_critical": {
+            "type": "boolean",
+            "title": "Task Critical"
+          },
+          "features": {
+            "items": {
+              "$ref": "#/components/schemas/FeatureRecord"
+            },
+            "type": "array",
+            "title": "Features",
+            "default": []
+          },
+          "context": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Context"
+          },
+          "scientific_status": {
+            "type": "string",
+            "enum": [
+              "real_processed",
+              "real_context_only",
+              "planned",
+              "not_assessed",
+              "unavailable",
+              "failed_quality_gate"
+            ],
+            "title": "Scientific Status",
+            "readOnly": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "family",
+          "label",
+          "weight",
+          "eligible",
+          "status",
+          "reason",
+          "task_critical",
+          "scientific_status"
+        ],
+        "title": "FamilyRecord"
+      },
+      "FamilyScore": {
+        "properties": {
+          "family": {
+            "type": "string",
+            "title": "Family"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "units": {
+            "type": "string",
+            "title": "Units"
+          },
+          "tau": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "Tau"
+          },
+          "weight": {
+            "type": "number",
+            "title": "Weight"
+          },
+          "w1_by_scale": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "W1 By Scale"
+          },
+          "index_by_scale": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Index By Scale"
+          },
+          "index": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Index"
+          },
+          "reference_stat": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference Stat"
+          },
+          "candidate_stat": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Candidate Stat"
+          },
+          "stat_label": {
+            "type": "string",
+            "title": "Stat Label"
+          }
+        },
+        "type": "object",
+        "required": [
+          "family",
+          "label",
+          "units",
+          "tau",
+          "weight",
+          "w1_by_scale",
+          "index_by_scale",
+          "index",
+          "reference_stat",
+          "candidate_stat",
+          "stat_label"
+        ],
+        "title": "FamilyScore"
+      },
+      "FeatureComparison": {
+        "properties": {
+          "dimension": {
+            "type": "string",
+            "enum": [
+              "terrain",
+              "temperature",
+              "geology",
+              "water_ice",
+              "surface_processes",
+              "subsurface_habitability"
+            ],
+            "title": "Dimension"
+          },
+          "feature": {
+            "type": "string",
+            "title": "Feature"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "reference_value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference Value"
+          },
+          "candidate_value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Candidate Value"
+          },
+          "difference": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Difference"
+          },
+          "units": {
+            "type": "string",
+            "title": "Units"
+          },
+          "similarity": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Similarity"
+          },
+          "weight_in_dimension": {
+            "type": "number",
+            "title": "Weight In Dimension"
+          }
+        },
+        "type": "object",
+        "required": [
+          "dimension",
+          "feature",
+          "label",
+          "reference_value",
+          "candidate_value",
+          "difference",
+          "units",
+          "similarity",
+          "weight_in_dimension"
+        ],
+        "title": "FeatureComparison"
+      },
+      "FeatureRecord": {
+        "properties": {
+          "feature": {
+            "type": "string",
+            "title": "Feature"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "units": {
+            "type": "string",
+            "title": "Units"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "scored",
+              "diagnostic"
+            ],
+            "title": "Role"
+          },
+          "redundant_with": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Redundant With"
+          },
+          "measures": {
+            "type": "string",
+            "title": "Measures"
+          },
+          "eligible": {
+            "type": "boolean",
+            "title": "Eligible"
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason"
+          },
+          "distance": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Distance",
+            "description": "d_k: W1 in the feature's units"
+          },
+          "tau": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tau"
+          },
+          "delta": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Delta",
+            "description": "resolution floor in the feature's units"
+          },
+          "d_over_tau": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "D Over Tau"
+          },
+          "similarity": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Similarity",
+            "description": "s_k in [0, 1]"
+          },
+          "weight": {
+            "type": "number",
+            "title": "Weight",
+            "description": "a_k|g inside the family",
+            "default": 0.0
+          },
+          "contribution": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Contribution",
+            "description": "index points contributed: 100 * share * a_k * s_k"
+          },
+          "resolvable": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resolvable",
+            "description": "True when d_k exceeds the resolution floor"
+          },
+          "earth": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WindowStats"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "planet": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WindowStats"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "feature",
+          "label",
+          "units",
+          "role",
+          "measures",
+          "eligible",
+          "reason"
+        ],
+        "title": "FeatureRecord"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ImageryRecord": {
+        "properties": {
+          "imagery_id": {
+            "type": "string",
+            "title": "Imagery Id"
+          },
+          "site_id": {
+            "type": "string",
+            "title": "Site Id"
+          },
+          "body": {
+            "$ref": "#/components/schemas/Body"
+          },
+          "mode": {
+            "type": "string",
+            "title": "Mode"
+          },
+          "provider": {
+            "type": "string",
+            "title": "Provider"
+          },
+          "collection": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Collection"
+          },
+          "product_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Product Id"
+          },
+          "acquisition_datetime": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Acquisition Datetime"
+          },
+          "publication_datetime": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publication Datetime"
+          },
+          "resolution_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resolution M"
+          },
+          "cloud_cover_pct": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cloud Cover Pct"
+          },
+          "processing_level": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Processing Level"
+          },
+          "bbox": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Bbox"
+          },
+          "aoi_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Aoi Id"
+          },
+          "preview_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preview Url"
+          },
+          "tile_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tile Url"
+          },
+          "attribution": {
+            "type": "string",
+            "title": "Attribution"
+          },
+          "official_source_url": {
+            "type": "string",
+            "title": "Official Source Url"
+          },
+          "cache_status": {
+            "type": "string",
+            "title": "Cache Status"
+          },
+          "cache_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cache Date"
+          },
+          "data_status": {
+            "type": "string",
+            "title": "Data Status"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Limitations"
+          },
+          "display_resolution_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Display Resolution M"
+          },
+          "aoi_coverage_fraction": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Aoi Coverage Fraction"
+          },
+          "source_checksum": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Checksum"
+          },
+          "preview_checksum": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preview Checksum"
+          },
+          "source_crs": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Crs"
+          },
+          "native_resolution": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Native Resolution"
+          },
+          "source_download_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Download Url"
+          },
+          "aoi_valid_pixel_fraction": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Aoi Valid Pixel Fraction"
+          },
+          "aoi_cloud_fraction": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Aoi Cloud Fraction"
+          },
+          "aoi_snow_fraction": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Aoi Snow Fraction"
+          },
+          "aoi_statistics_method": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Aoi Statistics Method"
+          },
+          "aoi_coverage_meaning": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Aoi Coverage Meaning"
+          },
+          "registration": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Registration"
+          }
+        },
+        "type": "object",
+        "required": [
+          "imagery_id",
+          "site_id",
+          "body",
+          "mode",
+          "provider",
+          "collection",
+          "product_id",
+          "acquisition_datetime",
+          "resolution_m",
+          "processing_level",
+          "bbox",
+          "aoi_id",
+          "preview_url",
+          "attribution",
+          "official_source_url",
+          "cache_status",
+          "data_status"
+        ],
+        "title": "ImageryRecord"
+      },
+      "MetricComparison": {
+        "properties": {
+          "metric": {
+            "type": "string",
+            "title": "Metric"
+          },
+          "reference_value": {
+            "type": "number",
+            "title": "Reference Value"
+          },
+          "candidate_value": {
+            "type": "number",
+            "title": "Candidate Value"
+          },
+          "tolerance": {
+            "type": "number",
+            "title": "Tolerance"
+          },
+          "normalized_weight": {
+            "type": "number",
+            "title": "Normalized Weight"
+          },
+          "similarity": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Similarity"
+          }
+        },
+        "type": "object",
+        "required": [
+          "metric",
+          "reference_value",
+          "candidate_value",
+          "tolerance",
+          "normalized_weight",
+          "similarity"
+        ],
+        "title": "MetricComparison"
+      },
+      "MetricEvidence": {
+        "properties": {
+          "metric_id": {
+            "type": "string",
+            "title": "Metric Id"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          },
+          "units": {
+            "type": "string",
+            "title": "Units"
+          },
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          },
+          "source_url": {
+            "type": "string",
+            "title": "Source Url"
+          },
+          "native_resolution": {
+            "type": "string",
+            "title": "Native Resolution"
+          },
+          "analysis_resolution": {
+            "type": "string",
+            "title": "Analysis Resolution"
+          },
+          "observation_period": {
+            "type": "string",
+            "title": "Observation Period"
+          },
+          "aoi_overlap": {
+            "type": "string",
+            "title": "Aoi Overlap"
+          },
+          "valid_coverage": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Valid Coverage"
+          },
+          "processing_version": {
+            "type": "string",
+            "title": "Processing Version"
+          },
+          "quality_flags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Quality Flags"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Limitations"
+          }
+        },
+        "type": "object",
+        "required": [
+          "metric_id",
+          "label",
+          "value",
+          "units",
+          "product_id",
+          "source_url",
+          "native_resolution",
+          "analysis_resolution",
+          "observation_period",
+          "aoi_overlap",
+          "processing_version"
+        ],
+        "title": "MetricEvidence",
+        "description": "One measured quantity, with everything needed to judge whether it is comparable."
+      },
+      "ProcessingRun": {
+        "properties": {
+          "processing_run_id": {
+            "type": "string",
+            "title": "Processing Run Id"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp"
+          },
+          "site_id": {
+            "type": "string",
+            "title": "Site Id"
+          },
+          "source_id": {
+            "type": "string",
+            "title": "Source Id"
+          },
+          "source_checksum": {
+            "type": "string",
+            "title": "Source Checksum"
+          },
+          "aoi_version": {
+            "type": "string",
+            "title": "Aoi Version"
+          },
+          "methodology_version": {
+            "type": "string",
+            "title": "Methodology Version"
+          },
+          "software_version": {
+            "type": "string",
+            "title": "Software Version"
+          },
+          "native_resolution": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Native Resolution"
+          },
+          "target_resolution": {
+            "type": "number",
+            "title": "Target Resolution"
+          },
+          "source_crs": {
+            "type": "string",
+            "title": "Source Crs"
+          },
+          "processing_crs": {
+            "type": "string",
+            "title": "Processing Crs"
+          },
+          "resampling_method": {
+            "type": "string",
+            "title": "Resampling Method"
+          },
+          "nodata_handling": {
+            "type": "string",
+            "title": "Nodata Handling"
+          },
+          "requested_analysis_window_m": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Requested Analysis Window M"
+          },
+          "actual_analysis_window_m": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Actual Analysis Window M"
+          },
+          "grid_dimensions": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "title": "Grid Dimensions"
+          },
+          "metric_configuration": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Metric Configuration"
+          },
+          "output_summary": {
+            "type": "string",
+            "title": "Output Summary"
+          },
+          "output_checksum": {
+            "type": "string",
+            "title": "Output Checksum"
+          },
+          "quality_passed": {
+            "type": "boolean",
+            "title": "Quality Passed"
+          },
+          "warnings": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Warnings"
+          }
+        },
+        "type": "object",
+        "required": [
+          "processing_run_id",
+          "timestamp",
+          "site_id",
+          "source_id",
+          "source_checksum",
+          "aoi_version",
+          "methodology_version",
+          "software_version",
+          "native_resolution",
+          "target_resolution",
+          "source_crs",
+          "processing_crs",
+          "resampling_method",
+          "nodata_handling",
+          "requested_analysis_window_m",
+          "actual_analysis_window_m",
+          "grid_dimensions",
+          "metric_configuration",
+          "output_summary",
+          "output_checksum",
+          "quality_passed",
+          "warnings"
+        ],
+        "title": "ProcessingRun"
+      },
+      "ProcessingStatus": {
+        "type": "string",
+        "enum": [
+          "not_processed",
+          "processed",
+          "integrity_checked"
+        ],
+        "title": "ProcessingStatus"
+      },
+      "ProfileSummary": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "balanced_science",
+              "rover_mobility",
+              "biosignature_fieldwork",
+              "mars_base_field_testing"
+            ],
+            "title": "Id"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "purpose": {
+            "type": "string",
+            "title": "Purpose"
+          },
+          "weights": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Weights"
+          },
+          "required_dimensions": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "terrain",
+                "temperature",
+                "geology",
+                "water_ice",
+                "surface_processes",
+                "subsurface_habitability"
+              ]
+            },
+            "type": "array",
+            "title": "Required Dimensions"
+          },
+          "min_backed_weight_fraction": {
+            "type": "number",
+            "title": "Min Backed Weight Fraction"
+          },
+          "review_status": {
+            "type": "string",
+            "title": "Review Status"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "purpose",
+          "weights",
+          "required_dimensions",
+          "min_backed_weight_fraction",
+          "review_status"
+        ],
+        "title": "ProfileSummary"
+      },
+      "ProfileV2": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "terrain_analogy",
+              "balanced_science",
+              "rover_mobility",
+              "biosignature_fieldwork",
+              "mars_base_field_testing"
+            ],
+            "title": "Id"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "question": {
+            "type": "string",
+            "title": "Question"
+          },
+          "required_measurements": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Required Measurements"
+          },
+          "weights": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Weights"
+          },
+          "task_critical": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "terrain",
+                "geology",
+                "temperature",
+                "water_ice",
+                "surface_processes",
+                "subsurface_habitability",
+                "field_test_suitability"
+              ]
+            },
+            "type": "array",
+            "title": "Task Critical"
+          },
+          "allowed_missing": {
+            "items": {
+              "type": "string",
+              "enum": [
+                "terrain",
+                "geology",
+                "temperature",
+                "water_ice",
+                "surface_processes",
+                "subsurface_habitability",
+                "field_test_suitability"
+              ]
+            },
+            "type": "array",
+            "title": "Allowed Missing"
+          },
+          "ranking_conditions": {
+            "type": "string",
+            "title": "Ranking Conditions"
+          },
+          "permitted_conclusion": {
+            "type": "string",
+            "title": "Permitted Conclusion"
+          },
+          "unassessed": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Unassessed"
+          },
+          "review_status": {
+            "type": "string",
+            "title": "Review Status"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "question",
+          "required_measurements",
+          "weights",
+          "task_critical",
+          "allowed_missing",
+          "ranking_conditions",
+          "permitted_conclusion",
+          "unassessed",
+          "review_status"
+        ],
+        "title": "ProfileV2"
+      },
+      "ProfileV3": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "terrain_analogy",
+              "balanced_science",
+              "rover_mobility",
+              "biosignature_fieldwork",
+              "mars_base_field_testing"
+            ],
+            "title": "Id"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "question": {
+            "type": "string",
+            "title": "Question"
+          },
+          "rankable": {
+            "type": "boolean",
+            "title": "Rankable"
+          },
+          "weights": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Weights"
+          },
+          "task_critical": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Task Critical"
+          },
+          "permitted_conclusion": {
+            "type": "string",
+            "title": "Permitted Conclusion"
+          },
+          "scope_line": {
+            "type": "string",
+            "title": "Scope Line"
+          },
+          "not_assessed": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Not Assessed"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "question",
+          "rankable",
+          "weights",
+          "task_critical",
+          "permitted_conclusion",
+          "scope_line",
+          "not_assessed"
+        ],
+        "title": "ProfileV3"
+      },
+      "ResultDetail": {
+        "properties": {
+          "comparison": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Comparison"
+          },
+          "candidate": {
+            "$ref": "#/components/schemas/CandidateV3"
+          },
+          "distributions": {
+            "items": {
+              "$ref": "#/components/schemas/DistributionPair"
+            },
+            "type": "array",
+            "title": "Distributions"
+          },
+          "earth_window": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Earth Window"
+          },
+          "reference_window": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Reference Window"
+          },
+          "sources": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Sources"
+          },
+          "calibration": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Calibration"
+          },
+          "reproducibility": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Reproducibility"
+          }
+        },
+        "type": "object",
+        "required": [
+          "comparison",
+          "candidate",
+          "distributions",
+          "earth_window",
+          "reference_window",
+          "sources",
+          "calibration",
+          "reproducibility"
+        ],
+        "title": "ResultDetail"
+      },
+      "Scenario": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "nominal",
+              "placement",
+              "reference_placement",
+              "dem",
+              "scale",
+              "tolerance",
+              "weights"
+            ],
+            "title": "Kind"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "index": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Index"
+          },
+          "rank": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rank"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "label",
+          "index"
+        ],
+        "title": "Scenario"
+      },
+      "ScientificValidationStatus": {
+        "type": "string",
+        "enum": [
+          "not_reviewed",
+          "methodology_review_pending",
+          "research_reviewed"
+        ],
+        "title": "ScientificValidationStatus"
+      },
+      "Sensitivity": {
+        "properties": {
+          "method_index_range": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Method Index Range"
+          },
+          "method_rank_range": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Method Rank Range"
+          },
+          "placement_index_range": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Placement Index Range"
+          },
+          "dem_index": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Dem Index"
+          },
+          "halo_effect_index": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Halo Effect Index"
+          },
+          "tie_group": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tie Group"
+          },
+          "notice": {
+            "type": "string",
+            "title": "Notice",
+            "default": "Deterministic configuration, placement and DEM checks. Not a statistical confidence interval."
+          }
+        },
+        "type": "object",
+        "title": "Sensitivity"
+      },
+      "SensitivityResult": {
+        "properties": {
+          "tested_configurations": {
+            "type": "integer",
+            "title": "Tested Configurations"
+          },
+          "index_range": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Index Range"
+          },
+          "rank_range": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rank Range"
+          },
+          "notice": {
+            "type": "string",
+            "title": "Notice"
+          }
+        },
+        "type": "object",
+        "required": [
+          "tested_configurations",
+          "index_range",
+          "rank_range",
+          "notice"
+        ],
+        "title": "SensitivityResult"
+      },
+      "SensitivityV3": {
+        "properties": {
+          "scenarios": {
+            "items": {
+              "$ref": "#/components/schemas/Scenario"
+            },
+            "type": "array",
+            "title": "Scenarios"
+          },
+          "index_range": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Index Range"
+          },
+          "rank_range": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rank Range"
+          },
+          "tie_group": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tie Group"
+          },
+          "notice": {
+            "type": "string",
+            "title": "Notice"
+          }
+        },
+        "type": "object",
+        "required": [
+          "scenarios",
+          "notice"
+        ],
+        "title": "SensitivityV3"
+      },
+      "SimpleResult": {
+        "properties": {
+          "conclusion": {
+            "type": "string",
+            "title": "Conclusion"
+          },
+          "measured": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Measured"
+          },
+          "coverage_text": {
+            "type": "string",
+            "title": "Coverage Text"
+          },
+          "validation_status": {
+            "type": "string",
+            "title": "Validation Status"
+          },
+          "strength": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Strength"
+          },
+          "mismatch": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mismatch"
+          },
+          "limitation": {
+            "type": "string",
+            "title": "Limitation"
+          },
+          "show_index": {
+            "type": "boolean",
+            "title": "Show Index"
+          },
+          "index_label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Index Label"
+          },
+          "background_text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Background Text"
+          }
+        },
+        "type": "object",
+        "required": [
+          "conclusion",
+          "measured",
+          "coverage_text",
+          "validation_status",
+          "strength",
+          "mismatch",
+          "limitation",
+          "show_index",
+          "index_label"
+        ],
+        "title": "SimpleResult"
+      },
+      "Site": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "body": {
+            "$ref": "#/components/schemas/Body"
+          },
+          "country_or_region": {
+            "type": "string",
+            "title": "Country Or Region"
+          },
+          "latitude": {
+            "type": "number",
+            "maximum": 90.0,
+            "minimum": -90.0,
+            "title": "Latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "maximum": 180.0,
+            "minimum": -180.0,
+            "title": "Longitude"
+          },
+          "short_description": {
+            "type": "string",
+            "title": "Short Description"
+          },
+          "analog_type": {
+            "type": "string",
+            "title": "Analog Type"
+          },
+          "relevant_characteristics": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Relevant Characteristics"
+          },
+          "known_limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Known Limitations"
+          },
+          "source_references": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Source References"
+          },
+          "data_status": {
+            "$ref": "#/components/schemas/DataStatus"
+          },
+          "available_metrics": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Available Metrics"
+          },
+          "thumbnail_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Thumbnail Url"
+          },
+          "map_display": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Map Display"
+          },
+          "processing_status": {
+            "$ref": "#/components/schemas/ProcessingStatus",
+            "default": "not_processed"
+          },
+          "scientific_validation_status": {
+            "$ref": "#/components/schemas/ScientificValidationStatus",
+            "default": "not_reviewed"
+          },
+          "aoi_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Aoi Id"
+          },
+          "source_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "body",
+          "country_or_region",
+          "latitude",
+          "longitude",
+          "short_description",
+          "analog_type",
+          "relevant_characteristics",
+          "known_limitations",
+          "source_references",
+          "data_status",
+          "available_metrics",
+          "map_display"
+        ],
+        "title": "Site"
+      },
+      "SiteEvidence": {
+        "properties": {
+          "site_id": {
+            "type": "string",
+            "title": "Site Id"
+          },
+          "site_name": {
+            "type": "string",
+            "title": "Site Name"
+          },
+          "body": {
+            "type": "string",
+            "enum": [
+              "earth",
+              "mars",
+              "moon"
+            ],
+            "title": "Body"
+          },
+          "dimensions": {
+            "items": {
+              "$ref": "#/components/schemas/DimensionEvidence"
+            },
+            "type": "array",
+            "title": "Dimensions"
+          },
+          "operational": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Operational"
+          }
+        },
+        "type": "object",
+        "required": [
+          "site_id",
+          "site_name",
+          "body",
+          "dimensions"
+        ],
+        "title": "SiteEvidence"
+      },
+      "SourceCitation": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "url"
+        ],
+        "title": "SourceCitation"
+      },
+      "SourceManifest": {
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "title": "Source Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "planetary_body": {
+            "type": "string",
+            "title": "Planetary Body"
+          },
+          "provider": {
+            "type": "string",
+            "title": "Provider"
+          },
+          "mission": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mission"
+          },
+          "instrument": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Instrument"
+          },
+          "product_name": {
+            "type": "string",
+            "title": "Product Name"
+          },
+          "product_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Product Version"
+          },
+          "source_page_url": {
+            "type": "string",
+            "title": "Source Page Url"
+          },
+          "download_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Download Url"
+          },
+          "doi": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Doi"
+          },
+          "access_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Access Date"
+          },
+          "license_or_use_constraints": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "License Or Use Constraints"
+          },
+          "native_resolution": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Native Resolution"
+          },
+          "native_crs": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Native Crs"
+          },
+          "native_bounds": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Native Bounds"
+          },
+          "native_nodata": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Native Nodata"
+          },
+          "file_size": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "File Size"
+          },
+          "filename": {
+            "type": "string",
+            "title": "Filename"
+          },
+          "sha256_checksum": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sha256 Checksum"
+          },
+          "citation_text": {
+            "type": "string",
+            "title": "Citation Text"
+          },
+          "processing_status": {
+            "type": "string",
+            "title": "Processing Status"
+          },
+          "notes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notes"
+          },
+          "extracted_filename": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extracted Filename"
+          },
+          "extracted_sha256_checksum": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extracted Sha256 Checksum"
+          },
+          "aoi_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Aoi Id"
+          },
+          "tiles": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Tiles"
+          },
+          "mosaic_filename": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mosaic Filename"
+          },
+          "mosaic_sha256_checksum": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mosaic Sha256 Checksum"
+          }
+        },
+        "type": "object",
+        "required": [
+          "source_id",
+          "title",
+          "planetary_body",
+          "provider",
+          "mission",
+          "instrument",
+          "product_name",
+          "product_version",
+          "source_page_url",
+          "download_url",
+          "doi",
+          "access_date",
+          "license_or_use_constraints",
+          "native_resolution",
+          "native_crs",
+          "native_bounds",
+          "native_nodata",
+          "file_size",
+          "filename",
+          "sha256_checksum",
+          "citation_text",
+          "processing_status",
+          "notes"
+        ],
+        "title": "SourceManifest"
+      },
+      "SourceRecord": {
+        "properties": {
+          "dataset_id": {
+            "type": "string",
+            "title": "Dataset Id"
+          },
+          "provider": {
+            "type": "string",
+            "title": "Provider"
+          },
+          "mission_instrument": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mission Instrument"
+          },
+          "product_collection": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Product Collection"
+          },
+          "collection_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Collection Version"
+          },
+          "official_landing_page": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Official Landing Page"
+          },
+          "doi_or_pds_identifier": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Doi Or Pds Identifier"
+          },
+          "discovery_endpoint": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discovery Endpoint"
+          },
+          "body": {
+            "type": "string",
+            "title": "Body"
+          },
+          "measured_variable": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Measured Variable"
+          },
+          "native_resolution": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Native Resolution"
+          },
+          "analysis_resolution": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Analysis Resolution"
+          },
+          "spatial_support": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Spatial Support"
+          },
+          "crs": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Crs"
+          },
+          "vertical_datum": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vertical Datum"
+          },
+          "units": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Units"
+          },
+          "observation_interval": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Observation Interval"
+          },
+          "processing_level": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Processing Level"
+          },
+          "retrieval_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Retrieval Date"
+          },
+          "license": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "License"
+          },
+          "authentication": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Authentication"
+          },
+          "raw_filename": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Raw Filename"
+          },
+          "byte_size": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Byte Size"
+          },
+          "sha256": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sha256"
+          },
+          "processing_software": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Processing Software"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "scored",
+              "diagnostic",
+              "quality-mask",
+              "display-only",
+              "context-only"
+            ],
+            "title": "Role"
+          },
+          "known_limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Known Limitations"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "verified",
+              "processing",
+              "blocked",
+              "planned",
+              "rejected"
+            ],
+            "title": "Status"
+          },
+          "status_reason": {
+            "type": "string",
+            "title": "Status Reason"
+          },
+          "artifact": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Artifact"
+          },
+          "quality": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Quality"
+          },
+          "files": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Files",
+            "default": []
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "dataset_id",
+          "provider",
+          "mission_instrument",
+          "product_collection",
+          "collection_version",
+          "official_landing_page",
+          "doi_or_pds_identifier",
+          "discovery_endpoint",
+          "body",
+          "measured_variable",
+          "native_resolution",
+          "analysis_resolution",
+          "spatial_support",
+          "crs",
+          "vertical_datum",
+          "units",
+          "observation_interval",
+          "processing_level",
+          "retrieval_date",
+          "license",
+          "authentication",
+          "raw_filename",
+          "byte_size",
+          "sha256",
+          "processing_software",
+          "role",
+          "known_limitations",
+          "status",
+          "status_reason"
+        ],
+        "title": "SourceRecord"
+      },
+      "SourceRegistry": {
+        "properties": {
+          "schema_version": {
+            "type": "string",
+            "const": "source-registry-v1",
+            "title": "Schema Version"
+          },
+          "audited_at": {
+            "type": "string",
+            "title": "Audited At"
+          },
+          "verification_scope": {
+            "type": "string",
+            "title": "Verification Scope"
+          },
+          "records": {
+            "items": {
+              "$ref": "#/components/schemas/SourceRecord"
+            },
+            "type": "array",
+            "title": "Records"
+          },
+          "sites": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Sites"
+          },
+          "imagery": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Imagery"
+          },
+          "unknown_metadata_policy": {
+            "type": "string",
+            "title": "Unknown Metadata Policy"
+          },
+          "new_products_acquired": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "New Products Acquired"
+          },
+          "blocked_acquisitions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Blocked Acquisitions"
+          },
+          "scientific_limitations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Scientific Limitations"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "schema_version",
+          "audited_at",
+          "verification_scope",
+          "records",
+          "sites",
+          "imagery",
+          "unknown_metadata_policy",
+          "new_products_acquired",
+          "blocked_acquisitions",
+          "scientific_limitations"
+        ],
+        "title": "SourceRegistry"
+      },
+      "TerrainBaseline": {
+        "properties": {
+          "method": {
+            "type": "string",
+            "title": "Method"
+          },
+          "index": {
+            "type": "number",
+            "title": "Index"
+          },
+          "rank": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rank"
+          }
+        },
+        "type": "object",
+        "required": [
+          "method",
+          "index",
+          "rank"
+        ],
+        "title": "TerrainBaseline"
+      },
+      "TerrainFeatureSummary": {
+        "properties": {
+          "site_id": {
+            "type": "string",
+            "title": "Site Id"
+          },
+          "slope_p50_deg": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Slope P50 Deg"
+          },
+          "slope_p90_deg": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Slope P90 Deg"
+          },
+          "local_relief_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Local Relief M"
+          },
+          "roughness_index": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Roughness Index"
+          },
+          "elevation_min_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Elevation Min M"
+          },
+          "elevation_max_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Elevation Max M"
+          },
+          "elevation_mean_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Elevation Mean M"
+          },
+          "elevation_std_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Elevation Std M"
+          },
+          "elevation_p10_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Elevation P10 M"
+          },
+          "elevation_p50_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Elevation P50 M"
+          },
+          "elevation_p90_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Elevation P90 M"
+          },
+          "slope_mean_deg": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Slope Mean Deg"
+          },
+          "slope_max_deg": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Slope Max Deg"
+          },
+          "local_relief_mean_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Local Relief Mean M"
+          },
+          "local_relief_p50_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Local Relief P50 M"
+          },
+          "local_relief_p90_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Local Relief P90 M"
+          },
+          "roughness_mean": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Roughness Mean"
+          },
+          "roughness_p90": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Roughness P90"
+          },
+          "valid_coverage_fraction": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Valid Coverage Fraction"
+          },
+          "resolution_m": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resolution M"
+          },
+          "projection": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Projection"
+          },
+          "calculation_metadata": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Calculation Metadata"
+          },
+          "data_source": {
+            "type": "string",
+            "title": "Data Source"
+          },
+          "data_status": {
+            "$ref": "#/components/schemas/DataStatus"
+          },
+          "aoi_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Aoi Id"
+          },
+          "processing_run_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Processing Run Id"
+          },
+          "analysis_width_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Analysis Width M"
+          },
+          "analysis_height_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Analysis Height M"
+          },
+          "provenance": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Provenance"
+          },
+          "quality": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Quality"
+          }
+        },
+        "type": "object",
+        "required": [
+          "site_id",
+          "valid_coverage_fraction",
+          "calculation_metadata",
+          "data_source",
+          "data_status"
+        ],
+        "title": "TerrainFeatureSummary"
+      },
+      "ThermalAudit": {
+        "properties": {
+          "decision": {
+            "type": "string",
+            "enum": [
+              "measured_comparable",
+              "measured_context_only",
+              "missing"
+            ],
+            "title": "Decision"
+          },
+          "checks": {
+            "items": {
+              "$ref": "#/components/schemas/AuditCheck"
+            },
+            "type": "array",
+            "title": "Checks"
+          },
+          "summary": {
+            "type": "string",
+            "title": "Summary"
+          },
+          "context_values": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Context Values"
+          }
+        },
+        "type": "object",
+        "required": [
+          "decision",
+          "checks",
+          "summary"
+        ],
+        "title": "ThermalAudit"
+      },
+      "ToleranceRecord": {
+        "properties": {
+          "feature": {
+            "type": "string",
+            "title": "Feature"
+          },
+          "units": {
+            "type": "string",
+            "title": "Units"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "scored",
+              "diagnostic"
+            ],
+            "title": "Role"
+          },
+          "tau": {
+            "type": "number",
+            "title": "Tau"
+          },
+          "tau_by_scale": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object",
+            "title": "Tau By Scale"
+          },
+          "leave_one_tile_out": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Leave One Tile Out"
+          },
+          "delta": {
+            "type": "number",
+            "title": "Delta"
+          },
+          "delta_placement": {
+            "type": "number",
+            "title": "Delta Placement"
+          },
+          "delta_dem": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Delta Dem"
+          },
+          "noise_condition_passed": {
+            "type": "boolean",
+            "title": "Noise Condition Passed"
+          },
+          "redundant_with": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Redundant With"
+          }
+        },
+        "type": "object",
+        "required": [
+          "feature",
+          "units",
+          "role",
+          "tau",
+          "tau_by_scale",
+          "leave_one_tile_out",
+          "delta",
+          "delta_placement",
+          "delta_dem",
+          "noise_condition_passed"
+        ],
+        "title": "ToleranceRecord"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "WindowStats": {
+        "properties": {
+          "median": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Median"
+          },
+          "p90": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "P90"
+          },
+          "coverage": {
+            "type": "number",
+            "title": "Coverage"
+          },
+          "valid_cells": {
+            "type": "integer",
+            "title": "Valid Cells"
+          }
+        },
+        "type": "object",
+        "required": [
+          "median",
+          "p90",
+          "coverage",
+          "valid_cells"
+        ],
+        "title": "WindowStats"
+      }
+    }
+  }
+}

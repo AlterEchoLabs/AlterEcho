@@ -111,7 +111,7 @@ def square(lat: float, lon: float) -> dict:
 
 def preflight(lat: float, lon: float) -> dict:
     from app.services.srtm_service import tiles_for_geojson_geometry
-    if not (isfinite(lat) and isfinite(lon)) or not (-180 <= lon <= 180):
+    if not (isfinite(lat) and isfinite(lon)) or not (-90 < lat < 90 and -180 <= lon <= 180):
         raise JobRejected("Latitude and longitude must be finite degrees")
     geometry = square(lat, lon)
     supported = LAT_RANGE[0] <= lat <= LAT_RANGE[1]
@@ -120,7 +120,7 @@ def preflight(lat: float, lon: float) -> dict:
     credentials = bool(os.getenv("EARTHDATA_TOKEN") or (os.getenv("EARTHDATA_USERNAME") and os.getenv("EARTHDATA_PASSWORD")))
     return {
         "center": {"lat": lat, "lon": lon}, "geometry": geometry, "width_m": WIDTH_M, "supported": supported and len(tiles) <= MAX_TILES,
-        "reason": None if supported else "SRTMGL1 covers 56° S to 60° N only; ArcticDEM/REMA integrations are not available for screening.",
+        "reason": None if supported else "Outside SRTMGL1 coverage (56° S to 60° N); ArcticDEM/REMA integrations are not available for screening.",
         "dem": {"product": "SRTMGL1.003", "native_resolution": "1 arc-second (~30 m)", "analysis_scales_m": [60, 120, 240], "tiles": tiles, "tiles_cached": cached,
                 "credentials_available": credentials, "requires_credentials": bool(set(tiles) - set(cached)) and not credentials},
         "imagery": {"product": "Sentinel-2 L2A via Microsoft Planetary Computer", "authentication": "none (public)", "note": "Scene chosen only if it covers ≥ 99 % of the AOI with ≤ 5 % AOI cloud."},

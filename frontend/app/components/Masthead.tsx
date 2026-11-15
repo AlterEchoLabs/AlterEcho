@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BRAND } from "../../config/brand";
+import ThemeSelect from "./ThemeSelect";
 
 const LINKS = [
   { href: "/", label: "Atlas" },
@@ -32,6 +33,7 @@ export default function Masthead() {
           ))}
         </ul>
       </nav>
+      <ThemeSelect />
     </header>
   );
 }

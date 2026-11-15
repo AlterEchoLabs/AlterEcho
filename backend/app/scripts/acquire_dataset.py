@@ -3,6 +3,9 @@ import base64
 from datetime import date
 import os
 from pathlib import Path
+from pathlib import PurePosixPath
+import tempfile
+import shutil
 from urllib.parse import urljoin, urlsplit
 import zipfile
 
@@ -84,8 +87,27 @@ def extract_dem(archive_path: Path, raw_dir: Path) -> Path:
         candidates = [info for info in archive.infolist() if info.filename.lower().endswith((".hgt", ".tif", ".tiff"))]
         if len(candidates) != 1: raise AcquisitionError(f"Expected one DEM inside archive, found {len(candidates)}")
         if candidates[0].file_size > MAX_EXTRACTED_BYTES: raise AcquisitionError("Archived DEM exceeds the extraction size cap")
-        extracted = Path(archive.extract(candidates[0], raw_dir)).resolve()
+        member = candidates[0]
+        name = PurePosixPath(member.filename.replace("\\", "/"))
+        if name.is_absolute() or ".." in name.parts or ":" in member.filename or (member.external_attr >> 16) & 0o170000 == 0o120000:
+            raise AcquisitionError("Unsafe archive member")
+        extracted = (raw_dir / str(name)).resolve()
         if raw_dir.resolve() not in extracted.parents: raise AcquisitionError("Archive member escapes the raw data directory")
+        extracted.parent.mkdir(parents=True, exist_ok=True)
+        temporary = None
+        try:
+            with tempfile.NamedTemporaryFile(dir=extracted.parent, suffix=".part", delete=False) as output:
+                temporary = Path(output.name)
+                with archive.open(member) as source:
+                    shutil.copyfileobj(source, output, length=1024 * 1024)
+            if extracted.exists():
+                if sha256_file(extracted) != sha256_file(temporary):
+                    raise AcquisitionError("Existing raw DEM differs; preserve and register a new source version")
+            else:
+                temporary.replace(extracted)
+        finally:
+            if temporary is not None and temporary.exists():
+                temporary.unlink()
         return extracted
 
 
@@ -118,7 +140,10 @@ def main() -> None:
         if not tile.get("download_url"): raise AcquisitionError("Manifest tile has no download URL")
         archive_path = raw_dir / tile["filename"]
         if not archive_path.exists() or args.force: download(tile["download_url"], archive_path, headers)
-        archive_checksum = sha256_file(archive_path); tile["sha256_checksum"] = archive_checksum
+        archive_checksum = sha256_file(archive_path)
+        if tile.get("sha256_checksum") and tile["sha256_checksum"] != archive_checksum:
+            raise AcquisitionError("Archive differs from registered checksum; do not overwrite its provenance")
+        tile["sha256_checksum"] = archive_checksum
         tile["file_size"] = archive_path.stat().st_size; total_size += archive_path.stat().st_size
         extracted = extract_dem(archive_path, raw_dir); tile["extracted_filename"] = extracted.name
         tile["extracted_sha256_checksum"] = sha256_file(extracted); inspected_paths.append(extracted)

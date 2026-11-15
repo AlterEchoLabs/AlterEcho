@@ -44,9 +44,9 @@ test.describe("atlas", () => {
     await expect(page.getByRole("heading", { level: 1, name: "Jezero Crater" })).toBeVisible();
     await expect(page.getByTestId("profile-state")).toHaveText("Ranked on terrain");
     for (const id of ["earth-craters-of-the-moon", "earth-atacama-south", "earth-hanksville-mdrs", "earth-meteor-crater", "earth-danakil"]) {
-      await expect(page.getByTestId(`result-${id}`).locator(".result-rank")).toHaveText("1=");
+      await expect(page.getByTestId(`result-${id}`).locator(".result-rank")).toHaveText("1 (tie)");
     }
-    for (const id of ["earth-upper-mustang", "earth-ladakh"]) await expect(page.getByTestId(`result-${id}`).locator(".result-rank")).toHaveText("6=");
+    for (const id of ["earth-upper-mustang", "earth-ladakh"]) await expect(page.getByTestId(`result-${id}`).locator(".result-rank")).toHaveText("6 (tie)");
     await expect(page.getByTestId("tie-label").first()).toContainText("Tie group · 5 sites · order not resolved by the data");
     await expect(page.getByTestId("result-earth-craters-of-the-moon")).toContainText("Not resolved from the reference by the floor tests");
     await expect(page.getByTestId("result-earth-craters-of-the-moon")).toContainText(/top \d+% of background/);
@@ -117,7 +117,7 @@ test.describe("atlas", () => {
 
     const download = page.waitForEvent("download");
     await page.getByTestId("download-json").click();
-    expect((await download).suggestedFilename()).toBe("terraluna-earth-hanksville-mdrs-terrain_analogy-mars-jezero.json");
+    expect((await download).suggestedFilename()).toBe("alterecho-earth-hanksville-mdrs-terrain_analogy-mars-jezero.json");
 
     await page.reload();
     await expect(page.getByTestId("calc-table")).toBeVisible();
@@ -227,6 +227,13 @@ test.describe("atlas", () => {
     await expect.poll(() => compare.getByRole("img", { name: /CTX orthoimage/ }).evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth)).toBe(1000);
     await compare.getByRole("button", { name: "Zoom both views in" }).click();
     await expect(page.getByTestId("synced-caption")).toContainText("zoom 1.25×");
+    await compare.scrollIntoViewIfNeeded();
+    const scrollBeforeWheel = await page.evaluate(() => window.scrollY);
+    const compareBox = await compare.boundingBox();
+    if (!compareBox) throw new Error("comparison view has no layout box");
+    await page.mouse.move(compareBox.x + compareBox.width / 2, compareBox.y + compareBox.height / 2);
+    await page.mouse.wheel(0, 600);
+    expect(await page.evaluate(() => window.scrollY)).toBe(scrollBeforeWheel);
     await compare.getByRole("radio", { name: "Hillshade" }).click();
     await expect(compare.getByRole("img", { name: /hillshade of the 10 km Gale Crater floor/ })).toBeVisible();
 

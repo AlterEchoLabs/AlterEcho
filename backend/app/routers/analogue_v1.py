@@ -9,9 +9,20 @@ from app.models.ids import SITE_ID_PATTERN, SiteIdPath
 from app.services import analogue_v1_service as av1
 from app.services.analogue_audit import decomposition
 from app.services.catalog_service import get_site
+from app.services.geospatial_service import GEO_DATA
+from app.models.provenance import SourceRegistry
+import json
 
 router = APIRouter(prefix="/v3")
 SiteQuery = Annotated[str, Query(pattern=SITE_ID_PATTERN, max_length=64)]
+
+
+@router.get("/source-registry", response_model=SourceRegistry)
+def source_registry():
+    path = GEO_DATA / "manifests/acquisition-v1/source-registry.json"
+    if not path.exists():
+        raise HTTPException(status_code=503, detail={"code": "registry_unavailable", "message": "Source audit has not been generated"})
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def _not_found():

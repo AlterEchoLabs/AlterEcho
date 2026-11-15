@@ -1,0 +1,2823 @@
+{
+  "schema_version": "source-registry-v1",
+  "audited_at": "2026-11-15T07:22:50.418792+00:00",
+  "verification_scope": "Local byte checksums, recorded official provenance, AOI identity, dates and measurement metadata; not external or expert validation.",
+  "records": [
+    {
+      "dataset_id": "earth-srtmgl1-v003",
+      "provider": "NASA LP DAAC / USGS EROS (via NASA Earthdata)",
+      "mission_instrument": "NASA SRTMGL1.003 (Shuttle Radar Topography Mission, 1 arc-second)",
+      "product_collection": "SRTMGL1.003",
+      "collection_version": "003",
+      "official_landing_page": "https://search.earthdata.nasa.gov/search?q=SRTMGL1",
+      "doi_or_pds_identifier": "10.5067/MEaSUREs/SRTM/SRTMGL1.003",
+      "discovery_endpoint": "https://data.lpdaac.earthdatacloud.nasa.gov/",
+      "body": "earth",
+      "measured_variable": "Ground elevation in metres (EGM96 geoid) from C-band radar interferometry flown in February 2000.",
+      "native_resolution": "1 arc-second (~30 m)",
+      "analysis_resolution": "60 m primary grid; 120 and 240 m as sensitivity checks; 1.2 km halo",
+      "spatial_support": [
+        "earth-atacama",
+        "earth-upper-mustang",
+        "earth-ladakh",
+        "earth-danakil",
+        "earth-craters-of-the-moon",
+        "earth-hanksville-mdrs",
+        "earth-meteor-crater",
+        "earth-atacama-south"
+      ],
+      "crs": null,
+      "vertical_datum": null,
+      "units": null,
+      "observation_interval": "2000-02-11 to 2000-02-22",
+      "processing_level": "downloadable asset -> processed measurement",
+      "retrieval_date": null,
+      "license": "Public domain; cite NASA JPL and the DOI.",
+      "authentication": "NASA Earthdata login",
+      "raw_filename": null,
+      "byte_size": null,
+      "sha256": null,
+      "processing_software": null,
+      "role": "scored",
+      "known_limitations": [
+        "Radar surface model; vegetation and voids possible",
+        "No coverage beyond 60° N / 56° S"
+      ],
+      "status": "planned",
+      "status_reason": "Collection metadata; exact artifacts are separately audited below, not all collection products are verified."
+    },
+    {
+      "dataset_id": "earth-nasadem-hgt-v001",
+      "provider": "NASA LP DAAC (via Microsoft Planetary Computer)",
+      "mission_instrument": "NASADEM_HGT.001 and Copernicus DEM GLO-30 via Microsoft Planetary Computer",
+      "product_collection": "NASADEM_HGT.001",
+      "collection_version": "001",
+      "official_landing_page": "https://planetarycomputer.microsoft.com/dataset/nasadem",
+      "doi_or_pds_identifier": "10.5067/MEaSUREs/NASADEM/NASADEM_HGT.001",
+      "discovery_endpoint": "https://planetarycomputer.microsoft.com/api/stac/v1",
+      "body": "earth",
+      "measured_variable": "The same windows from two other DEM products (NASADEM: reprocessed SRTM; GLO-30: TanDEM-X 2011-2015).",
+      "native_resolution": "1 arc-second (~30 m)",
+      "analysis_resolution": "60 m",
+      "spatial_support": [
+        "all eight Earth windows"
+      ],
+      "crs": null,
+      "vertical_datum": null,
+      "units": null,
+      "observation_interval": "SRTM 2000 reprocessed",
+      "processing_level": "windowed COG read -> sensitivity measurement",
+      "retrieval_date": null,
+      "license": "Public domain.",
+      "authentication": "None (Planetary Computer signs asset URLs at acquisition)",
+      "raw_filename": null,
+      "byte_size": null,
+      "sha256": null,
+      "processing_software": null,
+      "role": "diagnostic",
+      "known_limitations": [
+        "Not independent of SRTM"
+      ],
+      "status": "planned",
+      "status_reason": "Collection metadata; exact artifacts are separately audited below, not all collection products are verified."
+    },
+    {
+      "dataset_id": "earth-copernicus-dem-glo30",
+      "provider": "ESA / Airbus (Copernicus), via Microsoft Planetary Computer",
+      "mission_instrument": null,
+      "product_collection": "cop-dem-glo-30",
+      "collection_version": null,
+      "official_landing_page": "https://planetarycomputer.microsoft.com/dataset/cop-dem-glo-30",
+      "doi_or_pds_identifier": null,
+      "discovery_endpoint": "https://planetarycomputer.microsoft.com/api/stac/v1",
+      "body": "earth",
+      "measured_variable": null,
+      "native_resolution": "~30 m",
+      "analysis_resolution": null,
+      "spatial_support": [
+        "seven of eight Earth windows (Meteor Crater: provider rate limit in the Phase 9 run)"
+      ],
+      "crs": null,
+      "vertical_datum": null,
+      "units": null,
+      "observation_interval": "TanDEM-X 2011–2015",
+      "processing_level": "windowed COG read -> sensitivity measurement",
+      "retrieval_date": null,
+      "license": "Free with attribution: © DLR e.V. 2010–2014 and © Airbus Defence and Space GmbH 2014–2018, provided under COPERNICUS by the EU and ESA.",
+      "authentication": "None (Planetary Computer signs asset URLs at acquisition)",
+      "raw_filename": null,
+      "byte_size": null,
+      "sha256": null,
+      "processing_software": null,
+      "role": "context-only",
+      "known_limitations": [
+        "Digital surface model (includes buildings/vegetation)",
+        "Meteor Crater read was rate-limited (429) and is reported as not measured"
+      ],
+      "status": "planned",
+      "status_reason": "Collection metadata; exact artifacts are separately audited below, not all collection products are verified."
+    },
+    {
+      "dataset_id": "earth-sentinel-2-l2a-pc",
+      "provider": "Copernicus / ESA, via Microsoft Planetary Computer",
+      "mission_instrument": "Copernicus Sentinel-2 Level-2A true colour (B04/B03/B02) via Microsoft Planetary Computer",
+      "product_collection": "sentinel-2-l2a (per-scene STAC items)",
+      "collection_version": null,
+      "official_landing_page": "https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a",
+      "doi_or_pds_identifier": null,
+      "discovery_endpoint": "https://planetarycomputer.microsoft.com/api/stac/v1",
+      "body": "earth",
+      "measured_variable": "Surface reflectance in visible bands on one date.",
+      "native_resolution": "10 m (B02/B03/B04), 20 m SCL",
+      "analysis_resolution": "displayed at 10 m on the analysis grid; not analysed",
+      "spatial_support": [
+        "all eight Earth windows"
+      ],
+      "crs": null,
+      "vertical_datum": null,
+      "units": null,
+      "observation_interval": "2015–present",
+      "processing_level": "downloadable asset -> display crop",
+      "retrieval_date": null,
+      "license": "Contains modified Copernicus Sentinel data; attribution required.",
+      "authentication": "None (asset URLs signed at acquisition only)",
+      "raw_filename": null,
+      "byte_size": null,
+      "sha256": null,
+      "processing_software": null,
+      "role": "display-only",
+      "known_limitations": [
+        "Never scored",
+        "Scene-wide cloud differs from AOI cloud"
+      ],
+      "status": "planned",
+      "status_reason": "Collection metadata; exact artifacts are separately audited below, not all collection products are verified."
+    },
+    {
+      "dataset_id": "earth-sentinel-2-l2a-cdse",
+      "provider": "Copernicus Data Space Ecosystem",
+      "mission_instrument": null,
+      "product_collection": "sentinel-2-l2a",
+      "collection_version": null,
+      "official_landing_page": "https://dataspace.copernicus.eu/",
+      "doi_or_pds_identifier": null,
+      "discovery_endpoint": "https://stac.dataspace.copernicus.eu/v1/",
+      "body": "earth",
+      "measured_variable": null,
+      "native_resolution": "10 m",
+      "analysis_resolution": null,
+      "spatial_support": [
+        "earth-atacama",
+        "earth-upper-mustang",
+        "earth-ladakh"
+      ],
+      "crs": null,
+      "vertical_datum": null,
+      "units": null,
+      "observation_interval": "2015–present",
+      "processing_level": "discovery API",
+      "retrieval_date": null,
+      "license": "Copernicus terms.",
+      "authentication": "Discovery public; asset download needs CDSE OAuth",
+      "raw_filename": null,
+      "byte_size": null,
+      "sha256": null,
+      "processing_software": null,
+      "role": "context-only",
+      "known_limitations": [
+        "Protected asset download not used"
+      ],
+      "status": "planned",
+      "status_reason": "Collection metadata; exact artifacts are separately audited below, not all collection products are verified."
+    },
+    {
+      "dataset_id": "earth-gibs-viirs",
+      "provider": "NASA GIBS / Worldview",
+      "mission_instrument": "NASA GIBS VIIRS NOAA-20 Corrected Reflectance (true colour)",
+      "product_collection": "VIIRS_NOAA20_CorrectedReflectance_TrueColor",
+      "collection_version": null,
+      "official_landing_page": "https://worldview.earthdata.nasa.gov/",
+      "doi_or_pds_identifier": null,
+      "discovery_endpoint": "https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/",
+      "body": "earth",
+      "measured_variable": "Daily visible reflectance at about 375 m.",
+      "native_resolution": "~375 m",
+      "analysis_resolution": "not analysed",
+      "spatial_support": [
+        "all Earth windows"
+      ],
+      "crs": null,
+      "vertical_datum": null,
+      "units": null,
+      "observation_interval": "daily; date from WMTS capabilities",
+      "processing_level": "visualization tile",
+      "retrieval_date": null,
+      "license": "NASA GIBS attribution.",
+      "authentication": "None",
+      "raw_filename": null,
+      "byte_size": null,
+      "sha256": null,
+      "processing_software": null,
+      "role": "display-only",
+      "known_limitations": [
+        "Not live",
+        "May be cloudy"
+      ],
+      "status": "planned",
+      "status_reason": "Collection metadata; exact artifacts are separately audited below, not all collection products are verified."
+    },
+    {
+      "dataset_id": "earth-modis-myd11a2",
+      "provider": "NASA LP DAAC, via Microsoft Planetary Computer",
+      "mission_instrument": "MODIS/Aqua MYD11A2.061 land surface temperature, 8-day, 1 km",
+      "product_collection": "MYD11A2.061",
+      "collection_version": "061",
+      "official_landing_page": "https://planetarycomputer.microsoft.com/dataset/modis-11A2-061",
+      "doi_or_pds_identifier": "10.5067/MODIS/MYD11A2.061",
+      "discovery_endpoint": "https://planetarycomputer.microsoft.com/api/stac/v1",
+      "body": "earth",
+      "measured_variable": "Clear-sky skin temperature in kelvin, day (~13:30) and night (~01:30) passes, 2024.",
+      "native_resolution": "~1 km",
+      "analysis_resolution": "mean over the 10 km window",
+      "spatial_support": [
+        "all eight Earth windows"
+      ],
+      "crs": null,
+      "vertical_datum": null,
+      "units": null,
+      "observation_interval": "calendar 2024 used",
+      "processing_level": "windowed COG read -> context measurement",
+      "retrieval_date": null,
+      "license": "Public domain.",
+      "authentication": "None via Planetary Computer",
+      "raw_filename": null,
+      "byte_size": null,
+      "sha256": null,
+      "processing_software": null,
+      "role": "diagnostic",
+      "known_limitations": [
+        "Clear-sky 8-day composites",
+        "AOI mean of ~1 km pixels"
+      ],
+      "status": "planned",
+      "status_reason": "Collection metadata; exact artifacts are separately audited below, not all collection products are verified."
+    },
+    {
+      "dataset_id": "earth-esa-worldcover-v200",
+      "provider": "ESA WorldCover consortium via Microsoft Planetary Computer",
+      "mission_instrument": "ESA WorldCover 10 m v200 (2021) via Microsoft Planetary Computer",
+      "product_collection": "ESA_WorldCover_10m_2021_v200",
+      "collection_version": "2.0.0",
+      "official_landing_page": "https://esa-worldcover.org/",
+      "doi_or_pds_identifier": null,
+      "discovery_endpoint": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/esa-worldcover",
+      "body": "earth",
+      "measured_variable": "Eleven land-cover classes at 10 m, from Sentinel-1 and Sentinel-2 (2021).",
+      "native_resolution": "10 m",
+      "analysis_resolution": "Aggregated to the 60 m grid; built-up area fraction >= 0.5 excludes a cell.",
+      "spatial_support": [
+        "all eight Earth windows"
+      ],
+      "crs": null,
+      "vertical_datum": null,
+      "units": null,
+      "observation_interval": "2021",
+      "processing_level": "windowed COG read per AOI (clip stored with SHA-256)",
+      "retrieval_date": null,
+      "license": "CC-BY-4.0. © ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium.",
+      "authentication": "None (Planetary Computer signs asset URLs at read time)",
+      "raw_filename": null,
+      "byte_size": null,
+      "sha256": null,
+      "processing_software": null,
+      "role": "quality-mask",
+      "known_limitations": [
+        "Mines, heaps and graded ground are usually classed as bare land, so industrial disturbance is under-detected (the original Atacama complex was missed).",
+        "2021 classification; construction dates are unknown.",
+        "Stated global accuracy is about 77 %; per-window class errors are not quantified."
+      ],
+      "status": "planned",
+      "status_reason": "Collection metadata; exact artifacts are separately audited below, not all collection products are verified."
+    },
+    {
+      "dataset_id": "earth-emit-l2b-min",
+      "provider": "NASA LP DAAC (Earthdata)",
+      "mission_instrument": null,
+      "product_collection": "EMITL2BMIN.001",
+      "collection_version": "001",
+      "official_landing_page": "https://search.earthdata.nasa.gov/search?q=EMITL2BMIN",
+      "doi_or_pds_identifier": "10.5067/EMIT/EMITL2BMIN.001",
+      "discovery_endpoint": null,
+      "body": "earth",
+      "measured_variable": null,
+      "native_resolution": "~60 m",
+      "analysis_resolution": null,
+      "spatial_support": [],
+      "crs": null,
+      "vertical_datum": null,
+      "units": null,
+      "observation_interval": "2022–present",
+      "processing_level": "not integrated",
+      "retrieval_date": null,
+      "license": "Public domain.",
+      "authentication": "NASA Earthdata login",
+      "raw_filename": null,
+      "byte_size": null,
+      "sha256": null,
+      "processing_software": null,
+      "role": "context-only",
+      "known_limitations": [
+        "AOI coverage unverified",
+        "Needs a comparable Mars descriptor (CRISM)"
+      ],
+      "status": "planned",
+      "status_reason": "Collection metadata; exact artifacts are separately audited below, not all collection products are verified."
+    },
+    {
+      "dataset_id": "earth-aw3d30",
+      "provider": "JAXA G-Portal / EORC",
+      "mission_instrument": null,
+      "product_collection": "AW3D30",
+      "collection_version": null,
+      "official_landing_page": "https://gportal.jaxa.jp/gpr/index/index",
+      "doi_or_pds_identifier": null,
+      "discovery_endpoint": null,
+      "body": "earth",
+      "measured_variable": null,
+      "native_resolution": "~30 m",
+      "analysis_resolution": null,
+      "spatial_support": [],
+      "crs": null,
+      "vertical_datum": null,
+      "units": null,
+      "observation_interval": "2006–2011",
+      "processing_level": "not integrated",
+      "retrieval_date": null,
+      "license": "JAXA terms; surface model with masks.",
+      "authentication": "JAXA account registration",
+      "raw_filename": null,
+      "byte_size": null,
+      "sha256": null,
+      "processing_software": null,
+      "role": "context-only",
+      "known_limitations": [
+        "Requires account; not processed"
+      ],
+      "status": "planned",
+      "status_reason": "Collection metadata; exact artifacts are separately audited below, not all collection products are verified."
+    },
+    {
+      "dataset_id": "earth-radarsat-1",
+      "provider": "Canadian Space Agency",
+      "mission_instrument": null,
+      "product_collection": "radarsat1",
+      "collection_version": null,
+      "official_landing_page": "https://donnees-data.asc-csa.gc.ca/en/dataset/radarsat1",
+      "doi_or_pds_identifier": null,
+      "discovery_endpoint": null,
+      "body": "earth",
+      "measured_variable": null,
+      "native_resolution": "product dependent",
+      "analysis_resolution": null,
+      "spatial_support": [],
+      "crs": null,
+      "vertical_datum": null,
+      "units": null,
+      "observation_interval": "1995–2013",
+      "processing_level": "not integrated",
+      "retrieval_date": null,
+      "license": "Open Government Licence – Canada.",
+      "authentication": "Open data portal",
+      "raw_filename": null,
+      "byte_size": null,
+      "sha256": null,
+      "processing_software": null,
+      "role": "context-only",
+      "known_limitations": [
+        "No Mars/Moon radar counterpart processed"
+      ],
+      "status": "planned",
+      "status_reason": "Collection metadata; exact artifacts are separately audited below, not all collection products are verified."
+    },
+    {
+      "dataset_id": "earth-rcm",
+      "provider": "Canadian Space Agency",
+      "mission_instrument": null,
+      "product_collection": "rcm",
+      "collection_version": null,
+      "official_landing_page": "https://donnees-data.asc-csa.gc.ca/en/dataset/rcm",
+      "doi_or_pds_identifier": null,
+      "discovery_endpoint": null,
+      "body": "earth",
+      "measured_variable": null,
+      "native_resolution": "product dependent",
+      "analysis_resolution": null,
+      "spatial_support": [],
+      "crs": null,
+      "vertical_datum": null,
+      "units": null,
+      "observation_interval": "2019–present",
+      "processing_level": "not integrated",
+      "retrieval_date": null,
+      "license": "Not assumed open.",
+      "authentication": "Access restrictions apply; check before use",
+      "raw_filename": null,
+      "byte_size": null,
+      "sha256": null,
+      "processing_software": null,
+      "role": "context-only",
+      "known_limitations": [
+        "Access not verified"
+      ],
+      "status": "planned",
+      "status_reason": "Collection metadata; exact artifacts are separately audited below, not all collection products are verified."
+    },
+    {
+      "dataset_id": "guide-csa-sar-tutorial",
+      "provider": "Canadian Space Agency (GitHub)",
+      "mission_instrument": null,
+      "product_collection": null,
+      "collection_version": null,
+      "official_landing_page": "https://github.com/asc-csa/Synthetic_Aperture_Radar_Tutorial",
+      "doi_or_pds_identifier": null,
+      "discovery_endpoint": null,
+      "body": "earth",
+      "measured_variable": null,
+      "native_resolution": null,
+      "analysis_resolution": null,
+      "spatial_support": [],
+      "crs": null,
+      "vertical_datum": null,
+      "units": null,
+      "observation_interval": null,
+      "processing_level": "guidance",
+      "retrieval_date": null,
+      "license": "Repository licence applies.",
+      "authentication": "None",
+      "raw_filename": null,
+      "byte_size": null,
+      "sha256": null,
+      "processing_software": null,
+      "role": "context-only",
+      "known_limitations": [
+        "Not a dataset"
+      ],
+      "status": "planned",
+      "status_reason": "Collection metadata; exact artifacts are separately audited below, not all collection products are verified."
+    },
+    {
+      "dataset_id": "catalog-esa-osc",
+      "provider": "ESA",
+      "mission_instrument": null,
+      "product_collection": null,
+      "collection_version": null,
+      "official_landing_page": "https://opensciencedata.esa.int/",
+      "doi_or_pds_identifier": null,
+      "discovery_endpoint": null,
+      "body": "earth",
+      "measured_variable": null,
+      "native_resolution": null,
+      "analysis_resolution": null,
+      "spatial_support": [],
+      "crs": null,
+      "vertical_datum": null,
+      "units": null,
+      "observation_interval": null,
+      "processing_level": "discovery",
+      "retrieval_date": null,
+      "license": "Per dataset.",
+      "authentication": "None",
+      "raw_filename": null,
+      "byte_size": null,
+      "sha256": null,
+      "processing_software": null,
+      "role": "context-only",
+      "known_limitations": [
+        "No dataset selected yet"
+      ],
+      "status": "planned",
+      "status_reason": "Collection metadata; exact artifacts are separately audited below, not all collection products are verified."
+    },
+    {
+      "dataset_id": "mars-jezero-ctx-dem",
+      "provider": "USGS Astrogeology / NASA PDS",
+      "mission_instrument": "Mars 2020 Science Investigation CTX DEM mosaic, 20 m (USGS, Calef 2021)",
+      "product_collection": "M20_JezeroCrater_CTXDEM_20m",
+      "collection_version": null,
+      "official_landing_page": "https://astrogeology.usgs.gov/search/map/mars_2020_science_investigation_ctx_dem_mosaic",
+      "doi_or_pds_identifier": "10.5066/P906QQT8",
+      "discovery_endpoint": null,
+      "body": "mars",
+      "measured_variable": "Mars surface elevation from Context Camera stereo, on an equirectangular grid true to scale at 18.4663 N.",
+      "native_resolution": "20 m posting",
+      "analysis_resolution": "60 m primary grid; 120 and 240 m sensitivity",
+      "spatial_support": [
+        "mars-jezero"
+      ],
+      "crs": null,
+      "vertical_datum": null,
+      "units": null,
+      "observation_interval": "Mosaic published 2021-10-14",
+      "processing_level": "downloadable asset -> processed measurement",
+      "retrieval_date": null,
+      "license": "USGS public domain; cite source.",
+      "authentication": "None",
+      "raw_filename": null,
+      "byte_size": null,
+      "sha256": null,
+      "processing_software": null,
+      "role": "scored",
+      "known_limitations": [
+        "Eqc projection with true scale at 18.4663° N (verified)"
+      ],
+      "status": "planned",
+      "status_reason": "Collection metadata; exact artifacts are separately audited below, not all collection products are verified."
+    },
+    {
+      "dataset_id": "mars-jezero-ctx-ortho",
+      "provider": "USGS Astrogeology / NASA PDS",
+      "mission_instrument": "Mars 2020 CTX orthomosaic, 6 m (USGS)",
+      "product_collection": "JEZ_ctx_B_soc_008_orthoMosaic_6m_Eqc_latTs0_lon0",
+      "collection_version": null,
+      "official_landing_page": "https://astrogeology.usgs.gov/search/map/mars_2020_science_investigation_ctx_dem_mosaic",
+      "doi_or_pds_identifier": null,
+      "discovery_endpoint": null,
+      "body": "mars",
+      "measured_variable": "Visible-light Mars surface image mosaic.",
+      "native_resolution": "6 m",
+      "analysis_resolution": "not analysed",
+      "spatial_support": [
+        "mars-jezero"
+      ],
+      "crs": null,
+      "vertical_datum": null,
+      "units": null,
+      "observation_interval": "Mosaic published 2020-07-24",
+      "processing_level": "downloadable asset -> display crop",
+      "retrieval_date": null,
+      "license": "USGS public domain.",
+      "authentication": "None",
+      "raw_filename": null,
+      "byte_size": null,
+      "sha256": null,
+      "processing_software": null,
+      "role": "display-only",
+      "known_limitations": [
+        "Equirectangular with true scale at the equator; east-west correction applied"
+      ],
+      "status": "planned",
+      "status_reason": "Collection metadata; exact artifacts are separately audited below, not all collection products are verified."
+    },
+    {
+      "dataset_id": "mars-ctx-dtm-controlled",
+      "provider": "USGS Astrogeology Science Center",
+      "mission_instrument": "USGS Astrogeology controlled CTX DTMs (STAC mro_ctx_controlled_usgs_dtms), 20 m, CC0-1.0, DOI 10.5066/P9JKVWR3",
+      "product_collection": "mro_ctx_controlled_usgs_dtms",
+      "collection_version": "STAC items 2023-2024",
+      "official_landing_page": "https://stac.astrogeology.usgs.gov/docs/data/mars/ctxdtms/",
+      "doi_or_pds_identifier": "10.5066/P9JKVWR3",
+      "discovery_endpoint": "https://stac.astrogeology.usgs.gov/api",
+      "body": "mars",
+      "measured_variable": "Mars surface elevation from Context Camera stereo pairs, controlled to MOLA; heights above the areoid where a geoid-adjusted asset exists.",
+      "native_resolution": "20 m posting",
+      "analysis_resolution": "60 m primary grid; 120 and 240 m sensitivity",
+      "spatial_support": [
+        "mars-gale-aeolis-palus",
+        "mars-insight-elysium",
+        "mars-gusev-plains",
+        "mars-eberswalde-delta"
+      ],
+      "crs": null,
+      "vertical_datum": null,
+      "units": null,
+      "observation_interval": "CTX images 2006 onward",
+      "processing_level": "windowed COG read per reference AOI (derived clip stored with SHA-256)",
+      "retrieval_date": null,
+      "license": "CC0-1.0; cite DOI 10.5066/P9JKVWR3",
+      "authentication": "None",
+      "raw_filename": null,
+      "byte_size": null,
+      "sha256": null,
+      "processing_software": null,
+      "role": "scored",
+      "known_limitations": [
+        "Stereo noise adds short-wavelength texture that inflates slopes on very smooth plains.",
+        "Each window uses one stereo-pair product; seams between products are avoided, not corrected.",
+        "Selection among covering products uses the lowest median stereo intersection error."
+      ],
+      "status": "planned",
+      "status_reason": "Collection metadata; exact artifacts are separately audited below, not all collection products are verified."
+    },
+    {
+      "dataset_id": "mars-meda-tirs",
+      "provider": "NASA PDS Atmospheres Node",
+      "mission_instrument": "Mars 2020 MEDA TIRS calibrated ground temperature (PDS Atmospheres Node)",
+      "product_collection": "mars2020_meda:data_calibrated_env",
+      "collection_version": null,
+      "official_landing_page": "https://pds-atmospheres.nmsu.edu/PDS/data/PDS4/Mars2020/mars2020_meda/",
+      "doi_or_pds_identifier": null,
+      "discovery_endpoint": null,
+      "body": "mars",
+      "measured_variable": "Ground skin temperature measured from the rover mast at a few square metres.",
+      "native_resolution": "point (a few m²)",
+      "analysis_resolution": "annual medians of sol windows",
+      "spatial_support": [
+        "mars-jezero"
+      ],
+      "crs": null,
+      "vertical_datum": null,
+      "units": null,
+      "observation_interval": "sols 38–654 sampled",
+      "processing_level": "downloadable asset -> context measurement",
+      "retrieval_date": null,
+      "license": "NASA PDS.",
+      "authentication": "None",
+      "raw_filename": null,
+      "byte_size": null,
+      "sha256": null,
+      "processing_software": null,
+      "role": "diagnostic",
+      "known_limitations": [
+        "Point sensor",
+        "Single-sol window medians"
+      ],
+      "status": "planned",
+      "status_reason": "Collection metadata; exact artifacts are separately audited below, not all collection products are verified."
+    },
+    {
+      "dataset_id": "mars-mola-dem",
+      "provider": "USGS Astrogeology / NASA PDS",
+      "mission_instrument": "MGS MOLA global DEM mosaic, 463 m (USGS)",
+      "product_collection": "Mars_MGS_MOLA_DEM_mosaic_global_463m",
+      "collection_version": null,
+      "official_landing_page": "https://planetarymaps.usgs.gov/mosaic/Mars_MGS_MOLA_DEM_mosaic_global_463m.tif",
+      "doi_or_pds_identifier": null,
+      "discovery_endpoint": null,
+      "body": "mars",
+      "measured_variable": "Laser altimetry elevation of Mars at 463 m.",
+      "native_resolution": "463 m",
+      "analysis_resolution": "480 m (check only)",
+      "spatial_support": [
+        "mars-jezero (30 km)"
+      ],
+      "crs": null,
+      "vertical_datum": null,
+      "units": null,
+      "observation_interval": "1997–2001",
+      "processing_level": "windowed range read -> check",
+      "retrieval_date": null,
+      "license": "Public domain.",
+      "authentication": "None",
+      "raw_filename": null,
+      "byte_size": null,
+      "sha256": null,
+      "processing_software": null,
+      "role": "diagnostic",
+      "known_limitations": [
+        "Cannot validate 60–240 m scales"
+      ],
+      "status": "planned",
+      "status_reason": "Collection metadata; exact artifacts are separately audited below, not all collection products are verified."
+    },
+    {
+      "dataset_id": "mars-crism-mtrdr",
+      "provider": "NASA PDS Geosciences",
+      "mission_instrument": null,
+      "product_collection": "MRO-M-CRISM-5-RDR-MPTARGETED-V1.0",
+      "collection_version": null,
+      "official_landing_page": "https://ode.rsl.wustl.edu/",
+      "doi_or_pds_identifier": null,
+      "discovery_endpoint": null,
+      "body": "mars",
+      "measured_variable": null,
+      "native_resolution": "~18 m",
+      "analysis_resolution": null,
+      "spatial_support": [],
+      "crs": null,
+      "vertical_datum": null,
+      "units": null,
+      "observation_interval": "2006–2017",
+      "processing_level": "not integrated",
+      "retrieval_date": null,
+      "license": "NASA PDS.",
+      "authentication": "None",
+      "raw_filename": null,
+      "byte_size": null,
+      "sha256": null,
+      "processing_software": null,
+      "role": "context-only",
+      "known_limitations": [
+        "Spectral interpretation workflow not built"
+      ],
+      "status": "planned",
+      "status_reason": "Collection metadata; exact artifacts are separately audited below, not all collection products are verified."
+    },
+    {
+      "dataset_id": "mars-sharad",
+      "provider": "NASA PDS Geosciences",
+      "mission_instrument": null,
+      "product_collection": "MRO-M-SHARAD",
+      "collection_version": null,
+      "official_landing_page": "https://pds-geosciences.wustl.edu/missions/mro/sharad.htm",
+      "doi_or_pds_identifier": null,
+      "discovery_endpoint": null,
+      "body": "mars",
+      "measured_variable": null,
+      "native_resolution": "km-scale footprints",
+      "analysis_resolution": null,
+      "spatial_support": [],
+      "crs": null,
+      "vertical_datum": null,
+      "units": null,
+      "observation_interval": "2006–present",
+      "processing_level": "not integrated",
+      "retrieval_date": null,
+      "license": "NASA PDS.",
+      "authentication": "None",
+      "raw_filename": null,
+      "byte_size": null,
+      "sha256": null,
+      "processing_software": null,
+      "role": "context-only",
+      "known_limitations": [
+        "Coarser than the 10 km AOI"
+      ],
+      "status": "planned",
+      "status_reason": "Collection metadata; exact artifacts are separately audited below, not all collection products are verified."
+    },
+    {
+      "dataset_id": "moon-lola-ldem-875s-20m",
+      "provider": "NASA PDS Geosciences Node / LRO LOLA",
+      "mission_instrument": "LRO LOLA LDEM_875S_20M (PDS Geosciences Node)",
+      "product_collection": "LDEM_875S_20M",
+      "collection_version": null,
+      "official_landing_page": "https://pds-geosciences.wustl.edu/missions/lro/lola.htm",
+      "doi_or_pds_identifier": null,
+      "discovery_endpoint": null,
+      "body": "moon",
+      "measured_variable": "Lunar surface elevation from laser altimetry, polar stereographic, true scale at the pole.",
+      "native_resolution": "20 m posting (polar stereographic)",
+      "analysis_resolution": "60 m primary grid",
+      "spatial_support": [
+        "moon-south-pole-shackleton"
+      ],
+      "crs": null,
+      "vertical_datum": null,
+      "units": null,
+      "observation_interval": "LRO mission to product date",
+      "processing_level": "downloadable asset -> processed measurement",
+      "retrieval_date": null,
+      "license": "NASA PDS; cite the LOLA team.",
+      "authentication": "None",
+      "raw_filename": null,
+      "byte_size": null,
+      "sha256": null,
+      "processing_software": null,
+      "role": "diagnostic",
+      "known_limitations": [
+        "26.6 % of core cells have no LOLA shot (interpolated)",
+        "Illumination not assessed"
+      ],
+      "status": "planned",
+      "status_reason": "Collection metadata; exact artifacts are separately audited below, not all collection products are verified."
+    },
+    {
+      "dataset_id": "moon-lroc-diviner-lend-minirf",
+      "provider": "NASA PDS (LRO)",
+      "mission_instrument": null,
+      "product_collection": null,
+      "collection_version": null,
+      "official_landing_page": "https://pds-geosciences.wustl.edu/missions/lro/",
+      "doi_or_pds_identifier": null,
+      "discovery_endpoint": null,
+      "body": "moon",
+      "measured_variable": null,
+      "native_resolution": "product dependent",
+      "analysis_resolution": null,
+      "spatial_support": [],
+      "crs": null,
+      "vertical_datum": null,
+      "units": null,
+      "observation_interval": "2009–present",
+      "processing_level": "not integrated",
+      "retrieval_date": null,
+      "license": "NASA PDS.",
+      "authentication": "None",
+      "raw_filename": null,
+      "byte_size": null,
+      "sha256": null,
+      "processing_software": null,
+      "role": "context-only",
+      "known_limitations": [
+        "Not processed"
+      ],
+      "status": "planned",
+      "status_reason": "Collection metadata; exact artifacts are separately audited below, not all collection products are verified."
+    },
+    {
+      "dataset_id": "globes-orientation",
+      "provider": "NASA GIBS (Blue Marble NG), USGS (Viking colour mosaic), NASA SVS (CGI Moon Kit)",
+      "mission_instrument": "NASA Blue Marble (GIBS), USGS Viking colour mosaic, NASA SVS LROC WAC",
+      "product_collection": null,
+      "collection_version": null,
+      "official_landing_page": "https://svs.gsfc.nasa.gov/4720/",
+      "doi_or_pds_identifier": null,
+      "discovery_endpoint": null,
+      "body": "earth, mars, moon",
+      "measured_variable": "Global colour mosaics for orientation.",
+      "native_resolution": "4k/2k textures",
+      "analysis_resolution": "not analysed",
+      "spatial_support": [],
+      "crs": null,
+      "vertical_datum": null,
+      "units": null,
+      "observation_interval": null,
+      "processing_level": "visualization",
+      "retrieval_date": null,
+      "license": "Public domain / NASA media guidelines; credited in the app.",
+      "authentication": "None",
+      "raw_filename": null,
+      "byte_size": null,
+      "sha256": null,
+      "processing_software": null,
+      "role": "display-only",
+      "known_limitations": [
+        "Not live, not a site observation"
+      ],
+      "status": "planned",
+      "status_reason": "Collection metadata; exact artifacts are separately audited below, not all collection products are verified."
+    },
+    {
+      "dataset_id": "earth-atacama-south-srtmgl1",
+      "provider": "NASA LP DAAC / USGS EROS",
+      "mission_instrument": "Shuttle Radar Topography Mission / SRTM C-band radar",
+      "product_collection": "SRTMGL1",
+      "collection_version": "003",
+      "official_landing_page": "https://search.earthdata.nasa.gov/search?q=SRTMGL1",
+      "doi_or_pds_identifier": "10.5067/MEaSUREs/SRTM/SRTMGL1.003",
+      "discovery_endpoint": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/S25W070.SRTMGL1.hgt/S25W070.SRTMGL1.hgt.zip",
+      "body": "earth",
+      "measured_variable": "surface elevation",
+      "native_resolution": [
+        0.0002777777777777778,
+        0.0002777777777777778
+      ],
+      "analysis_resolution": "60 m primary; 120/240 m sensitivity",
+      "spatial_support": "earth-atacama-south-aoi-v1",
+      "crs": "EPSG:4326",
+      "vertical_datum": null,
+      "units": "metres",
+      "observation_interval": null,
+      "processing_level": "local elevation input; may be reprojected crop or mosaic, not necessarily immutable archive file",
+      "retrieval_date": "2026-11-13",
+      "license": "NASA Earthdata authentication may be required; follow LP DAAC data-use and citation guidance.",
+      "authentication": "Earthdata for SRTM re-acquisition",
+      "raw_filename": "data/raw/S25W070.hgt",
+      "byte_size": 25934402,
+      "sha256": "31ff152bdf6000f313f122a8872d68aecb332ab688f3697933dec4c5abb0c11c",
+      "processing_software": {
+        "method": "terrain-v5.0",
+        "command": "python -m app.scripts.analogue_v1_calibration"
+      },
+      "role": "scored",
+      "known_limitations": [
+        "No field validation. Source vertical datum and exact observation interval require product-label review.",
+        "Native post spacing is not effective resolution."
+      ],
+      "status": "verified",
+      "status_reason": "Byte integrity and recorded provenance checked; not independent scientific validation.",
+      "artifact": {
+        "path": "data/processed/terrain-v5/earth-atacama-south.terrain-v5.json",
+        "sha256_lf": "d06654031341de94847378caf8ebce49881e608d8fc8bfa021222fbaf1ea28bf"
+      },
+      "quality": {
+        "feature_coverage": {
+          "slope": 1.0,
+          "local_relief": 1.0,
+          "roughness": 1.0,
+          "relative_elevation": 1.0
+        },
+        "mask": {
+          "product": "ESA WorldCover 10 m v200 (2021)",
+          "classes_excluded": [
+            "Built-up (50)"
+          ],
+          "rule": "Analysis cell excluded when at least half of its area is WorldCover built-up (class 50); no buffer",
+          "built_up_fraction_core": 0.0,
+          "excluded_fraction_60m": 0.0,
+          "record": "data/processed/landcover/earth-atacama-south.worldcover-v200.json",
+          "note": "Assessed after the first measurement; re-measuring with the mask reproduced every quantile exactly (no built-up cells)."
+        }
+      },
+      "files": [
+        {
+          "path": "data/raw/S25W070.hgt",
+          "byte_size": 25934402,
+          "sha256": "31ff152bdf6000f313f122a8872d68aecb332ab688f3697933dec4c5abb0c11c",
+          "expected_sha256": "31ff152bdf6000f313f122a8872d68aecb332ab688f3697933dec4c5abb0c11c",
+          "status": "verified",
+          "raster": {
+            "driver": "SRTMHGT",
+            "crs": "EPSG:4326",
+            "resolution": [
+              0.0002777777777777778,
+              0.0002777777777777778
+            ],
+            "bounds": [
+              -70.00013888888888,
+              -25.00013888888889,
+              -68.9998611111111,
+              -23.999861111111112
+            ],
+            "nodata": -32768.0,
+            "dimensions": [
+              3601,
+              3601
+            ],
+            "units": [
+              "m"
+            ]
+          }
+        },
+        {
+          "path": "data/raw/S25W070.SRTMGL1.hgt.zip",
+          "byte_size": 12504377,
+          "sha256": "5def5b1a8ccc9fc9db063f4ef754cf77828db647a15a00041d1a2ca5b90e5078",
+          "expected_sha256": "5def5b1a8ccc9fc9db063f4ef754cf77828db647a15a00041d1a2ca5b90e5078",
+          "status": "verified"
+        },
+        {
+          "path": "data/raw/S25W070.hgt",
+          "byte_size": 25934402,
+          "sha256": "31ff152bdf6000f313f122a8872d68aecb332ab688f3697933dec4c5abb0c11c",
+          "expected_sha256": "31ff152bdf6000f313f122a8872d68aecb332ab688f3697933dec4c5abb0c11c",
+          "status": "verified",
+          "raster": {
+            "driver": "SRTMHGT",
+            "crs": "EPSG:4326",
+            "resolution": [
+              0.0002777777777777778,
+              0.0002777777777777778
+            ],
+            "bounds": [
+              -70.00013888888888,
+              -25.00013888888889,
+              -68.9998611111111,
+              -23.999861111111112
+            ],
+            "nodata": -32768.0,
+            "dimensions": [
+              3601,
+              3601
+            ],
+            "units": [
+              "m"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "dataset_id": "earth-atacama-srtmgl1",
+      "provider": "NASA LP DAAC / USGS EROS",
+      "mission_instrument": "Shuttle Radar Topography Mission / SRTM C-band radar",
+      "product_collection": "SRTMGL1",
+      "collection_version": "003",
+      "official_landing_page": "https://search.earthdata.nasa.gov/search?q=SRTMGL1",
+      "doi_or_pds_identifier": "10.5067/MEaSUREs/SRTM/SRTMGL1.003",
+      "discovery_endpoint": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/S25W070.SRTMGL1.hgt/S25W070.SRTMGL1.hgt.zip",
+      "body": "earth",
+      "measured_variable": "surface elevation",
+      "native_resolution": [
+        0.0002777777777777778,
+        0.0002777777777777778
+      ],
+      "analysis_resolution": "60 m primary; 120/240 m sensitivity",
+      "spatial_support": "earth-atacama-aoi-v1",
+      "crs": "EPSG:4326",
+      "vertical_datum": null,
+      "units": "metres",
+      "observation_interval": null,
+      "processing_level": "local elevation input; may be reprojected crop or mosaic, not necessarily immutable archive file",
+      "retrieval_date": "2026-11-13",
+      "license": "NASA Earthdata authentication may be required; follow LP DAAC data-use and citation guidance.",
+      "authentication": "Earthdata for SRTM re-acquisition",
+      "raw_filename": "data/raw/S25W070.hgt",
+      "byte_size": 25934402,
+      "sha256": "31ff152bdf6000f313f122a8872d68aecb332ab688f3697933dec4c5abb0c11c",
+      "processing_software": {
+        "method": "terrain-v5.0",
+        "command": "python -m app.scripts.analogue_v1_calibration"
+      },
+      "role": "diagnostic",
+      "known_limitations": [
+        "No field validation. Source vertical datum and exact observation interval require product-label review.",
+        "Native post spacing is not effective resolution."
+      ],
+      "status": "verified",
+      "status_reason": "Byte integrity and recorded provenance checked; not independent scientific validation.",
+      "artifact": {
+        "path": "data/processed/terrain-v5/earth-atacama.terrain-v5.json",
+        "sha256_lf": "04157b4cd92f4d78258b075281810c49a767add24f63acd4748883e727b07e9e"
+      },
+      "quality": {
+        "feature_coverage": {
+          "slope": 1.0,
+          "local_relief": 1.0,
+          "roughness": 1.0,
+          "relative_elevation": 1.0
+        },
+        "mask": {
+          "product": "ESA WorldCover 10 m v200 (2021)",
+          "classes_excluded": [
+            "Built-up (50)"
+          ],
+          "rule": "Analysis cell excluded when at least half of its area is WorldCover built-up (class 50); no buffer",
+          "built_up_fraction_core": 1.4e-05,
+          "excluded_fraction_60m": 0.0,
+          "record": "data/processed/landcover/earth-atacama.worldcover-v200.json"
+        }
+      },
+      "files": [
+        {
+          "path": "data/raw/S25W070.hgt",
+          "byte_size": 25934402,
+          "sha256": "31ff152bdf6000f313f122a8872d68aecb332ab688f3697933dec4c5abb0c11c",
+          "expected_sha256": "31ff152bdf6000f313f122a8872d68aecb332ab688f3697933dec4c5abb0c11c",
+          "status": "verified",
+          "raster": {
+            "driver": "SRTMHGT",
+            "crs": "EPSG:4326",
+            "resolution": [
+              0.0002777777777777778,
+              0.0002777777777777778
+            ],
+            "bounds": [
+              -70.00013888888888,
+              -25.00013888888889,
+              -68.9998611111111,
+              -23.999861111111112
+            ],
+            "nodata": -32768.0,
+            "dimensions": [
+              3601,
+              3601
+            ],
+            "units": [
+              "m"
+            ]
+          }
+        },
+        {
+          "path": "data/raw/S25W070.SRTMGL1.hgt.zip",
+          "byte_size": 12504377,
+          "sha256": "5def5b1a8ccc9fc9db063f4ef754cf77828db647a15a00041d1a2ca5b90e5078",
+          "expected_sha256": "5def5b1a8ccc9fc9db063f4ef754cf77828db647a15a00041d1a2ca5b90e5078",
+          "status": "verified"
+        },
+        {
+          "path": "data/raw/S25W070.hgt",
+          "byte_size": 25934402,
+          "sha256": "31ff152bdf6000f313f122a8872d68aecb332ab688f3697933dec4c5abb0c11c",
+          "expected_sha256": "31ff152bdf6000f313f122a8872d68aecb332ab688f3697933dec4c5abb0c11c",
+          "status": "verified",
+          "raster": {
+            "driver": "SRTMHGT",
+            "crs": "EPSG:4326",
+            "resolution": [
+              0.0002777777777777778,
+              0.0002777777777777778
+            ],
+            "bounds": [
+              -70.00013888888888,
+              -25.00013888888889,
+              -68.9998611111111,
+              -23.999861111111112
+            ],
+            "nodata": -32768.0,
+            "dimensions": [
+              3601,
+              3601
+            ],
+            "units": [
+              "m"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "dataset_id": "earth-craters-of-the-moon-srtmgl1",
+      "provider": "NASA LP DAAC / USGS EROS",
+      "mission_instrument": "Shuttle Radar Topography Mission / SRTM C-band radar",
+      "product_collection": "SRTMGL1",
+      "collection_version": "003",
+      "official_landing_page": "https://search.earthdata.nasa.gov/search?q=SRTMGL1",
+      "doi_or_pds_identifier": "10.5067/MEaSUREs/SRTM/SRTMGL1.003",
+      "discovery_endpoint": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/N43W114.SRTMGL1.hgt/N43W114.SRTMGL1.hgt.zip",
+      "body": "earth",
+      "measured_variable": "surface elevation",
+      "native_resolution": [
+        0.0002777777777777778,
+        0.0002777777777777778
+      ],
+      "analysis_resolution": "60 m primary; 120/240 m sensitivity",
+      "spatial_support": "earth-craters-of-the-moon-aoi-v1",
+      "crs": "EPSG:4326",
+      "vertical_datum": null,
+      "units": "metres",
+      "observation_interval": null,
+      "processing_level": "local elevation input; may be reprojected crop or mosaic, not necessarily immutable archive file",
+      "retrieval_date": "2026-11-14",
+      "license": "NASA Earthdata authentication may be required; follow LP DAAC data-use and citation guidance.",
+      "authentication": "Earthdata for SRTM re-acquisition",
+      "raw_filename": "data/raw/N43W114.hgt",
+      "byte_size": 25934402,
+      "sha256": "65076c24d022dd70c3b755c63de3665e350f8905dc473cedc2ea929ad8102c0b",
+      "processing_software": {
+        "method": "terrain-v5.0",
+        "command": "python -m app.scripts.analogue_v1_calibration"
+      },
+      "role": "scored",
+      "known_limitations": [
+        "No field validation. Source vertical datum and exact observation interval require product-label review.",
+        "Native post spacing is not effective resolution."
+      ],
+      "status": "verified",
+      "status_reason": "Byte integrity and recorded provenance checked; not independent scientific validation.",
+      "artifact": {
+        "path": "data/processed/terrain-v5/earth-craters-of-the-moon.terrain-v5.json",
+        "sha256_lf": "6fb80f3382fe8188057311bd8a6c939513fe4e5c96dcee6d4e505a5ffd1aa84e"
+      },
+      "quality": {
+        "feature_coverage": {
+          "slope": 0.99957,
+          "local_relief": 0.999857,
+          "roughness": 0.999857,
+          "relative_elevation": 0.999857
+        },
+        "mask": {
+          "product": "ESA WorldCover 10 m v200 (2021)",
+          "classes_excluded": [
+            "Built-up (50)"
+          ],
+          "rule": "Analysis cell excluded when at least half of its area is WorldCover built-up (class 50); no buffer",
+          "built_up_fraction_core": 0.000892,
+          "excluded_fraction_60m": 0.000143,
+          "record": "data/processed/landcover/earth-craters-of-the-moon.worldcover-v200.json"
+        }
+      },
+      "files": [
+        {
+          "path": "data/raw/N43W114.hgt",
+          "byte_size": 25934402,
+          "sha256": "65076c24d022dd70c3b755c63de3665e350f8905dc473cedc2ea929ad8102c0b",
+          "expected_sha256": "65076c24d022dd70c3b755c63de3665e350f8905dc473cedc2ea929ad8102c0b",
+          "status": "verified",
+          "raster": {
+            "driver": "SRTMHGT",
+            "crs": "EPSG:4326",
+            "resolution": [
+              0.0002777777777777778,
+              0.0002777777777777778
+            ],
+            "bounds": [
+              -114.00013888888888,
+              42.999861111111116,
+              -112.9998611111111,
+              44.00013888888889
+            ],
+            "nodata": -32768.0,
+            "dimensions": [
+              3601,
+              3601
+            ],
+            "units": [
+              "m"
+            ]
+          }
+        },
+        {
+          "path": "data/raw/N43W114.SRTMGL1.hgt.zip",
+          "byte_size": 10696890,
+          "sha256": "7503728745b982564c79e63794df79ad1e53e0875671a4701999dd9c283a4d32",
+          "expected_sha256": "7503728745b982564c79e63794df79ad1e53e0875671a4701999dd9c283a4d32",
+          "status": "verified"
+        },
+        {
+          "path": "data/raw/N43W114.hgt",
+          "byte_size": 25934402,
+          "sha256": "65076c24d022dd70c3b755c63de3665e350f8905dc473cedc2ea929ad8102c0b",
+          "expected_sha256": "65076c24d022dd70c3b755c63de3665e350f8905dc473cedc2ea929ad8102c0b",
+          "status": "verified",
+          "raster": {
+            "driver": "SRTMHGT",
+            "crs": "EPSG:4326",
+            "resolution": [
+              0.0002777777777777778,
+              0.0002777777777777778
+            ],
+            "bounds": [
+              -114.00013888888888,
+              42.999861111111116,
+              -112.9998611111111,
+              44.00013888888889
+            ],
+            "nodata": -32768.0,
+            "dimensions": [
+              3601,
+              3601
+            ],
+            "units": [
+              "m"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "dataset_id": "earth-danakil-srtmgl1",
+      "provider": "NASA LP DAAC / USGS EROS",
+      "mission_instrument": "Shuttle Radar Topography Mission / SRTM C-band radar",
+      "product_collection": "SRTMGL1",
+      "collection_version": "003",
+      "official_landing_page": "https://search.earthdata.nasa.gov/search?q=SRTMGL1",
+      "doi_or_pds_identifier": "10.5067/MEaSUREs/SRTM/SRTMGL1.003",
+      "discovery_endpoint": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/N14E040.SRTMGL1.hgt/N14E040.SRTMGL1.hgt.zip",
+      "body": "earth",
+      "measured_variable": "surface elevation",
+      "native_resolution": [
+        0.0002777777777777778,
+        0.0002777777777777778
+      ],
+      "analysis_resolution": "60 m primary; 120/240 m sensitivity",
+      "spatial_support": "earth-danakil-aoi-v1",
+      "crs": "EPSG:4326",
+      "vertical_datum": null,
+      "units": "metres",
+      "observation_interval": null,
+      "processing_level": "local elevation input; may be reprojected crop or mosaic, not necessarily immutable archive file",
+      "retrieval_date": "2026-11-14",
+      "license": "NASA Earthdata authentication may be required; follow LP DAAC data-use and citation guidance.",
+      "authentication": "Earthdata for SRTM re-acquisition",
+      "raw_filename": "data/raw/N14E040.hgt",
+      "byte_size": 25934402,
+      "sha256": "a7f37842278d203a63300480201cb7b8db147ed5f05ae30caa164137decc88be",
+      "processing_software": {
+        "method": "terrain-v5.0",
+        "command": "python -m app.scripts.analogue_v1_calibration"
+      },
+      "role": "scored",
+      "known_limitations": [
+        "No field validation. Source vertical datum and exact observation interval require product-label review.",
+        "Native post spacing is not effective resolution."
+      ],
+      "status": "verified",
+      "status_reason": "Byte integrity and recorded provenance checked; not independent scientific validation.",
+      "artifact": {
+        "path": "data/processed/terrain-v5/earth-danakil.terrain-v5.json",
+        "sha256_lf": "3f4433b8c5e5ae6019c8822b8339cd288997f22e7295490e130dccda0482a2d6"
+      },
+      "quality": {
+        "feature_coverage": {
+          "slope": 1.0,
+          "local_relief": 1.0,
+          "roughness": 1.0,
+          "relative_elevation": 1.0
+        },
+        "mask": {
+          "product": "ESA WorldCover 10 m v200 (2021)",
+          "classes_excluded": [
+            "Built-up (50)"
+          ],
+          "rule": "Analysis cell excluded when at least half of its area is WorldCover built-up (class 50); no buffer",
+          "built_up_fraction_core": 0.0,
+          "excluded_fraction_60m": 0.0,
+          "record": "data/processed/landcover/earth-danakil.worldcover-v200.json"
+        }
+      },
+      "files": [
+        {
+          "path": "data/raw/N14E040.hgt",
+          "byte_size": 25934402,
+          "sha256": "a7f37842278d203a63300480201cb7b8db147ed5f05ae30caa164137decc88be",
+          "expected_sha256": "a7f37842278d203a63300480201cb7b8db147ed5f05ae30caa164137decc88be",
+          "status": "verified",
+          "raster": {
+            "driver": "SRTMHGT",
+            "crs": "EPSG:4326",
+            "resolution": [
+              0.0002777777777777778,
+              0.0002777777777777778
+            ],
+            "bounds": [
+              39.99986111111111,
+              13.999861111111112,
+              41.000138888888884,
+              15.00013888888889
+            ],
+            "nodata": -32768.0,
+            "dimensions": [
+              3601,
+              3601
+            ],
+            "units": [
+              "m"
+            ]
+          }
+        },
+        {
+          "path": "data/raw/N14E040.SRTMGL1.hgt.zip",
+          "byte_size": 10521694,
+          "sha256": "cb5bc947a76f371ee124573e78624f16a78dde1cf4dc4bc1ecc5cbb5023c6081",
+          "expected_sha256": "cb5bc947a76f371ee124573e78624f16a78dde1cf4dc4bc1ecc5cbb5023c6081",
+          "status": "verified"
+        },
+        {
+          "path": "data/raw/N14E040.hgt",
+          "byte_size": 25934402,
+          "sha256": "a7f37842278d203a63300480201cb7b8db147ed5f05ae30caa164137decc88be",
+          "expected_sha256": "a7f37842278d203a63300480201cb7b8db147ed5f05ae30caa164137decc88be",
+          "status": "verified",
+          "raster": {
+            "driver": "SRTMHGT",
+            "crs": "EPSG:4326",
+            "resolution": [
+              0.0002777777777777778,
+              0.0002777777777777778
+            ],
+            "bounds": [
+              39.99986111111111,
+              13.999861111111112,
+              41.000138888888884,
+              15.00013888888889
+            ],
+            "nodata": -32768.0,
+            "dimensions": [
+              3601,
+              3601
+            ],
+            "units": [
+              "m"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "dataset_id": "earth-hanksville-mdrs-srtmgl1",
+      "provider": "NASA LP DAAC / USGS EROS",
+      "mission_instrument": "Shuttle Radar Topography Mission / SRTM C-band radar",
+      "product_collection": "SRTMGL1",
+      "collection_version": "003",
+      "official_landing_page": "https://search.earthdata.nasa.gov/search?q=SRTMGL1",
+      "doi_or_pds_identifier": "10.5067/MEaSUREs/SRTM/SRTMGL1.003",
+      "discovery_endpoint": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/N38W111.SRTMGL1.hgt/N38W111.SRTMGL1.hgt.zip",
+      "body": "earth",
+      "measured_variable": "surface elevation",
+      "native_resolution": [
+        0.0002777777777777778,
+        0.0002777777777777778
+      ],
+      "analysis_resolution": "60 m primary; 120/240 m sensitivity",
+      "spatial_support": "earth-hanksville-mdrs-aoi-v1",
+      "crs": "EPSG:4326",
+      "vertical_datum": null,
+      "units": "metres",
+      "observation_interval": null,
+      "processing_level": "local elevation input; may be reprojected crop or mosaic, not necessarily immutable archive file",
+      "retrieval_date": "2026-11-14",
+      "license": "NASA Earthdata authentication may be required; follow LP DAAC data-use and citation guidance.",
+      "authentication": "Earthdata for SRTM re-acquisition",
+      "raw_filename": "data/raw/N38W111.hgt",
+      "byte_size": 25934402,
+      "sha256": "c71e33cbfedcecb6ab09a43cc37ea33c4acf6b261ea1aa0e6f2207bd7ec98bbc",
+      "processing_software": {
+        "method": "terrain-v5.0",
+        "command": "python -m app.scripts.analogue_v1_calibration"
+      },
+      "role": "scored",
+      "known_limitations": [
+        "No field validation. Source vertical datum and exact observation interval require product-label review.",
+        "Native post spacing is not effective resolution."
+      ],
+      "status": "verified",
+      "status_reason": "Byte integrity and recorded provenance checked; not independent scientific validation.",
+      "artifact": {
+        "path": "data/processed/terrain-v5/earth-hanksville-mdrs.terrain-v5.json",
+        "sha256_lf": "5d031c3a909e80a1f164274d5f19d23e84a6fdef82fd4a8c37eaa271d95a62f3"
+      },
+      "quality": {
+        "feature_coverage": {
+          "slope": 1.0,
+          "local_relief": 1.0,
+          "roughness": 1.0,
+          "relative_elevation": 1.0
+        },
+        "mask": {
+          "product": "ESA WorldCover 10 m v200 (2021)",
+          "classes_excluded": [
+            "Built-up (50)"
+          ],
+          "rule": "Analysis cell excluded when at least half of its area is WorldCover built-up (class 50); no buffer",
+          "built_up_fraction_core": 0.000674,
+          "excluded_fraction_60m": 0.0,
+          "record": "data/processed/landcover/earth-hanksville-mdrs.worldcover-v200.json"
+        }
+      },
+      "files": [
+        {
+          "path": "data/raw/N38W111.hgt",
+          "byte_size": 25934402,
+          "sha256": "c71e33cbfedcecb6ab09a43cc37ea33c4acf6b261ea1aa0e6f2207bd7ec98bbc",
+          "expected_sha256": "c71e33cbfedcecb6ab09a43cc37ea33c4acf6b261ea1aa0e6f2207bd7ec98bbc",
+          "status": "verified",
+          "raster": {
+            "driver": "SRTMHGT",
+            "crs": "EPSG:4326",
+            "resolution": [
+              0.0002777777777777778,
+              0.0002777777777777778
+            ],
+            "bounds": [
+              -111.00013888888888,
+              37.999861111111116,
+              -109.9998611111111,
+              39.00013888888889
+            ],
+            "nodata": -32768.0,
+            "dimensions": [
+              3601,
+              3601
+            ],
+            "units": [
+              "m"
+            ]
+          }
+        },
+        {
+          "path": "data/raw/N38W111.SRTMGL1.hgt.zip",
+          "byte_size": 11827705,
+          "sha256": "e16918d91ec7f641dec49e0348479e2b4bf3d9b3160ddc6d230c36c4fca18b7a",
+          "expected_sha256": "e16918d91ec7f641dec49e0348479e2b4bf3d9b3160ddc6d230c36c4fca18b7a",
+          "status": "verified"
+        },
+        {
+          "path": "data/raw/N38W111.hgt",
+          "byte_size": 25934402,
+          "sha256": "c71e33cbfedcecb6ab09a43cc37ea33c4acf6b261ea1aa0e6f2207bd7ec98bbc",
+          "expected_sha256": "c71e33cbfedcecb6ab09a43cc37ea33c4acf6b261ea1aa0e6f2207bd7ec98bbc",
+          "status": "verified",
+          "raster": {
+            "driver": "SRTMHGT",
+            "crs": "EPSG:4326",
+            "resolution": [
+              0.0002777777777777778,
+              0.0002777777777777778
+            ],
+            "bounds": [
+              -111.00013888888888,
+              37.999861111111116,
+              -109.9998611111111,
+              39.00013888888889
+            ],
+            "nodata": -32768.0,
+            "dimensions": [
+              3601,
+              3601
+            ],
+            "units": [
+              "m"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "dataset_id": "earth-ladakh-srtmgl1",
+      "provider": "NASA LP DAAC / USGS EROS",
+      "mission_instrument": "Shuttle Radar Topography Mission / SRTM C-band radar",
+      "product_collection": "SRTMGL1",
+      "collection_version": "003",
+      "official_landing_page": "https://search.earthdata.nasa.gov/search?q=SRTMGL1",
+      "doi_or_pds_identifier": "10.5067/MEaSUREs/SRTM/SRTMGL1.003",
+      "discovery_endpoint": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/N34E077.SRTMGL1.hgt/N34E077.SRTMGL1.hgt.zip",
+      "body": "earth",
+      "measured_variable": "surface elevation",
+      "native_resolution": [
+        0.0002777777777777778,
+        0.0002777777777777778
+      ],
+      "analysis_resolution": "60 m primary; 120/240 m sensitivity",
+      "spatial_support": "earth-ladakh-aoi-v1",
+      "crs": "EPSG:4326",
+      "vertical_datum": null,
+      "units": "metres",
+      "observation_interval": null,
+      "processing_level": "local elevation input; may be reprojected crop or mosaic, not necessarily immutable archive file",
+      "retrieval_date": "2026-11-13",
+      "license": "NASA Earthdata authentication required; retain NASA/LP DAAC citation.",
+      "authentication": "Earthdata for SRTM re-acquisition",
+      "raw_filename": "data/raw/N34E077.hgt",
+      "byte_size": 25934402,
+      "sha256": "01d169724e5cd2561fb216b301ad2ddcc6a8494fff61774f5ae2a60b5496942e",
+      "processing_software": {
+        "method": "terrain-v5.0",
+        "command": "python -m app.scripts.analogue_v1_calibration"
+      },
+      "role": "scored",
+      "known_limitations": [
+        "No field validation. Source vertical datum and exact observation interval require product-label review.",
+        "Native post spacing is not effective resolution."
+      ],
+      "status": "verified",
+      "status_reason": "Byte integrity and recorded provenance checked; not independent scientific validation.",
+      "artifact": {
+        "path": "data/processed/terrain-v5/earth-ladakh.terrain-v5.json",
+        "sha256_lf": "79cfebfac2423092568e297102fe67478e17ef3396fd9e9eeb69ff96f3cbca55"
+      },
+      "quality": {
+        "feature_coverage": {
+          "slope": 0.974363,
+          "local_relief": 0.989888,
+          "roughness": 0.989028,
+          "relative_elevation": 0.989888
+        },
+        "mask": {
+          "product": "ESA WorldCover 10 m v200 (2021)",
+          "classes_excluded": [
+            "Built-up (50)"
+          ],
+          "rule": "Analysis cell excluded when at least half of its area is WorldCover built-up (class 50); no buffer",
+          "built_up_fraction_core": 0.01622,
+          "excluded_fraction_60m": 0.010112,
+          "record": "data/processed/landcover/earth-ladakh.worldcover-v200.json"
+        }
+      },
+      "files": [
+        {
+          "path": "data/raw/N34E077.hgt",
+          "byte_size": 25934402,
+          "sha256": "01d169724e5cd2561fb216b301ad2ddcc6a8494fff61774f5ae2a60b5496942e",
+          "expected_sha256": "01d169724e5cd2561fb216b301ad2ddcc6a8494fff61774f5ae2a60b5496942e",
+          "status": "verified",
+          "raster": {
+            "driver": "SRTMHGT",
+            "crs": "EPSG:4326",
+            "resolution": [
+              0.0002777777777777778,
+              0.0002777777777777778
+            ],
+            "bounds": [
+              76.99986111111112,
+              33.999861111111116,
+              78.0001388888889,
+              35.00013888888889
+            ],
+            "nodata": -32768.0,
+            "dimensions": [
+              3601,
+              3601
+            ],
+            "units": [
+              "m"
+            ]
+          }
+        },
+        {
+          "path": "data/raw/N34E077.SRTMGL1.hgt.zip",
+          "byte_size": 18417837,
+          "sha256": "640f1615cc2c9822c8228604b5ab14454d2e795b8e08271a89624c23257a772e",
+          "expected_sha256": "640f1615cc2c9822c8228604b5ab14454d2e795b8e08271a89624c23257a772e",
+          "status": "verified"
+        },
+        {
+          "path": "data/raw/N34E077.hgt",
+          "byte_size": 25934402,
+          "sha256": "01d169724e5cd2561fb216b301ad2ddcc6a8494fff61774f5ae2a60b5496942e",
+          "expected_sha256": "01d169724e5cd2561fb216b301ad2ddcc6a8494fff61774f5ae2a60b5496942e",
+          "status": "verified",
+          "raster": {
+            "driver": "SRTMHGT",
+            "crs": "EPSG:4326",
+            "resolution": [
+              0.0002777777777777778,
+              0.0002777777777777778
+            ],
+            "bounds": [
+              76.99986111111112,
+              33.999861111111116,
+              78.0001388888889,
+              35.00013888888889
+            ],
+            "nodata": -32768.0,
+            "dimensions": [
+              3601,
+              3601
+            ],
+            "units": [
+              "m"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "dataset_id": "earth-meteor-crater-srtmgl1",
+      "provider": "NASA LP DAAC / USGS EROS",
+      "mission_instrument": "Shuttle Radar Topography Mission / SRTM C-band radar",
+      "product_collection": "SRTMGL1",
+      "collection_version": "003",
+      "official_landing_page": "https://search.earthdata.nasa.gov/search?q=SRTMGL1",
+      "doi_or_pds_identifier": "10.5067/MEaSUREs/SRTM/SRTMGL1.003",
+      "discovery_endpoint": null,
+      "body": "earth",
+      "measured_variable": "surface elevation",
+      "native_resolution": [
+        0.0002777777777777778,
+        0.0002777777777777778
+      ],
+      "analysis_resolution": "60 m primary; 120/240 m sensitivity",
+      "spatial_support": "earth-meteor-crater-aoi-v1",
+      "crs": "EPSG:4326",
+      "vertical_datum": null,
+      "units": "metres",
+      "observation_interval": null,
+      "processing_level": "local elevation input; may be reprojected crop or mosaic, not necessarily immutable archive file",
+      "retrieval_date": "2026-11-14",
+      "license": "NASA Earthdata authentication may be required; follow LP DAAC data-use and citation guidance.",
+      "authentication": "Earthdata for SRTM re-acquisition",
+      "raw_filename": "data/interim/earth-meteor-crater-srtmgl1.mosaic.tif",
+      "byte_size": 36938507,
+      "sha256": "a839e3a03eaec6443087f8729e42a1dffa28dfc352d5d1046b306b6af08197f5",
+      "processing_software": {
+        "method": "terrain-v5.0",
+        "command": "python -m app.scripts.analogue_v1_calibration"
+      },
+      "role": "scored",
+      "known_limitations": [
+        "No field validation. Source vertical datum and exact observation interval require product-label review.",
+        "Native post spacing is not effective resolution."
+      ],
+      "status": "verified",
+      "status_reason": "Byte integrity and recorded provenance checked; not independent scientific validation.",
+      "artifact": {
+        "path": "data/processed/terrain-v5/earth-meteor-crater.terrain-v5.json",
+        "sha256_lf": "ee28c1658703eab774e266ff96834c195b7765d0d94336bdf899eeeb6e085b01"
+      },
+      "quality": {
+        "feature_coverage": {
+          "slope": 0.999498,
+          "local_relief": 0.999857,
+          "roughness": 0.999857,
+          "relative_elevation": 0.999857
+        },
+        "mask": {
+          "product": "ESA WorldCover 10 m v200 (2021)",
+          "classes_excluded": [
+            "Built-up (50)"
+          ],
+          "rule": "Analysis cell excluded when at least half of its area is WorldCover built-up (class 50); no buffer",
+          "built_up_fraction_core": 0.000542,
+          "excluded_fraction_60m": 0.000143,
+          "record": "data/processed/landcover/earth-meteor-crater.worldcover-v200.json"
+        }
+      },
+      "files": [
+        {
+          "path": "data/interim/earth-meteor-crater-srtmgl1.mosaic.tif",
+          "byte_size": 36938507,
+          "sha256": "a839e3a03eaec6443087f8729e42a1dffa28dfc352d5d1046b306b6af08197f5",
+          "expected_sha256": "a839e3a03eaec6443087f8729e42a1dffa28dfc352d5d1046b306b6af08197f5",
+          "status": "verified",
+          "raster": {
+            "driver": "GTiff",
+            "crs": "EPSG:4326",
+            "resolution": [
+              0.0002777777777777778,
+              0.0002777777777777778
+            ],
+            "bounds": [
+              -112.00013888888888,
+              33.999861111111116,
+              -109.9998611111111,
+              36.00013888888889
+            ],
+            "nodata": -32768.0,
+            "dimensions": [
+              7201,
+              7201
+            ],
+            "units": [
+              null
+            ]
+          }
+        },
+        {
+          "path": "data/raw/N34W112.SRTMGL1.hgt.zip",
+          "byte_size": 13120197,
+          "sha256": "eda000d71dd85574ea394a48dbcb998fe4eb93521bbd2aed00d53cad421212a3",
+          "expected_sha256": "eda000d71dd85574ea394a48dbcb998fe4eb93521bbd2aed00d53cad421212a3",
+          "status": "verified"
+        },
+        {
+          "path": "data/raw/N34W112.hgt",
+          "byte_size": 25934402,
+          "sha256": "f3b0b87a9e2698a1373a54135d86b2288e363e20d9ec1fff6ca2569f3fc4c4ff",
+          "expected_sha256": "f3b0b87a9e2698a1373a54135d86b2288e363e20d9ec1fff6ca2569f3fc4c4ff",
+          "status": "verified",
+          "raster": {
+            "driver": "SRTMHGT",
+            "crs": "EPSG:4326",
+            "resolution": [
+              0.0002777777777777778,
+              0.0002777777777777778
+            ],
+            "bounds": [
+              -112.00013888888888,
+              33.999861111111116,
+              -110.9998611111111,
+              35.00013888888889
+            ],
+            "nodata": -32768.0,
+            "dimensions": [
+              3601,
+              3601
+            ],
+            "units": [
+              "m"
+            ]
+          }
+        },
+        {
+          "path": "data/raw/N34W111.SRTMGL1.hgt.zip",
+          "byte_size": 10378212,
+          "sha256": "b3f43841514bc5f1ec50e6ab8c4682c0d4bc8ac6915066c8d1ee797f814bcdb1",
+          "expected_sha256": "b3f43841514bc5f1ec50e6ab8c4682c0d4bc8ac6915066c8d1ee797f814bcdb1",
+          "status": "verified"
+        },
+        {
+          "path": "data/raw/N34W111.hgt",
+          "byte_size": 25934402,
+          "sha256": "0464701c48e9148020c6a81a64bb4b1f4e68bcb53107cba25d29d9d5f13b126f",
+          "expected_sha256": "0464701c48e9148020c6a81a64bb4b1f4e68bcb53107cba25d29d9d5f13b126f",
+          "status": "verified",
+          "raster": {
+            "driver": "SRTMHGT",
+            "crs": "EPSG:4326",
+            "resolution": [
+              0.0002777777777777778,
+              0.0002777777777777778
+            ],
+            "bounds": [
+              -111.00013888888888,
+              33.999861111111116,
+              -109.9998611111111,
+              35.00013888888889
+            ],
+            "nodata": -32768.0,
+            "dimensions": [
+              3601,
+              3601
+            ],
+            "units": [
+              "m"
+            ]
+          }
+        },
+        {
+          "path": "data/raw/N35W112.SRTMGL1.hgt.zip",
+          "byte_size": 10508513,
+          "sha256": "b7647a7d9901a83ad30c830d2b13d98738a38c322b9ca0c9111541b166ee8b74",
+          "expected_sha256": "b7647a7d9901a83ad30c830d2b13d98738a38c322b9ca0c9111541b166ee8b74",
+          "status": "verified"
+        },
+        {
+          "path": "data/raw/N35W112.hgt",
+          "byte_size": 25934402,
+          "sha256": "18e3befa1464e5580fca9371212e75ed621b4b6848ef8717dad391feb6156486",
+          "expected_sha256": "18e3befa1464e5580fca9371212e75ed621b4b6848ef8717dad391feb6156486",
+          "status": "verified",
+          "raster": {
+            "driver": "SRTMHGT",
+            "crs": "EPSG:4326",
+            "resolution": [
+              0.0002777777777777778,
+              0.0002777777777777778
+            ],
+            "bounds": [
+              -112.00013888888888,
+              34.999861111111116,
+              -110.9998611111111,
+              36.00013888888889
+            ],
+            "nodata": -32768.0,
+            "dimensions": [
+              3601,
+              3601
+            ],
+            "units": [
+              "m"
+            ]
+          }
+        },
+        {
+          "path": "data/raw/N35W111.SRTMGL1.hgt.zip",
+          "byte_size": 9487712,
+          "sha256": "74eb0fb48ceb2ab6f9c65433c92400def27cfebcec9cb9cd1c809c1d95eef29d",
+          "expected_sha256": "74eb0fb48ceb2ab6f9c65433c92400def27cfebcec9cb9cd1c809c1d95eef29d",
+          "status": "verified"
+        },
+        {
+          "path": "data/raw/N35W111.hgt",
+          "byte_size": 25934402,
+          "sha256": "63909ae519ccbd5e360a12b3a884af4c3e7d42670929361ce67778b39352eefa",
+          "expected_sha256": "63909ae519ccbd5e360a12b3a884af4c3e7d42670929361ce67778b39352eefa",
+          "status": "verified",
+          "raster": {
+            "driver": "SRTMHGT",
+            "crs": "EPSG:4326",
+            "resolution": [
+              0.0002777777777777778,
+              0.0002777777777777778
+            ],
+            "bounds": [
+              -111.00013888888888,
+              34.999861111111116,
+              -109.9998611111111,
+              36.00013888888889
+            ],
+            "nodata": -32768.0,
+            "dimensions": [
+              3601,
+              3601
+            ],
+            "units": [
+              "m"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "dataset_id": "earth-upper-mustang-srtmgl1",
+      "provider": "NASA LP DAAC / USGS EROS",
+      "mission_instrument": "Shuttle Radar Topography Mission / SRTM C-band radar",
+      "product_collection": "SRTMGL1",
+      "collection_version": "003",
+      "official_landing_page": "https://search.earthdata.nasa.gov/search?q=SRTMGL1",
+      "doi_or_pds_identifier": "10.5067/MEaSUREs/SRTM/SRTMGL1.003",
+      "discovery_endpoint": "https://data.lpdaac.earthdatacloud.nasa.gov/lp-prod-protected/SRTMGL1.003/N29E083.SRTMGL1.hgt/N29E083.SRTMGL1.hgt.zip",
+      "body": "earth",
+      "measured_variable": "surface elevation",
+      "native_resolution": [
+        0.0002777777777777778,
+        0.0002777777777777778
+      ],
+      "analysis_resolution": "60 m primary; 120/240 m sensitivity",
+      "spatial_support": "earth-upper-mustang-aoi-v1",
+      "crs": "EPSG:4326",
+      "vertical_datum": null,
+      "units": "metres",
+      "observation_interval": null,
+      "processing_level": "local elevation input; may be reprojected crop or mosaic, not necessarily immutable archive file",
+      "retrieval_date": "2026-11-13",
+      "license": "NASA Earthdata authentication required; retain NASA/LP DAAC citation.",
+      "authentication": "Earthdata for SRTM re-acquisition",
+      "raw_filename": "data/raw/N29E083.hgt",
+      "byte_size": 25934402,
+      "sha256": "7ab9f9c07f8a43f96fcd1e00dabb269a88221df1fed1445f58d49857ef08ca7b",
+      "processing_software": {
+        "method": "terrain-v5.0",
+        "command": "python -m app.scripts.analogue_v1_calibration"
+      },
+      "role": "scored",
+      "known_limitations": [
+        "No field validation. Source vertical datum and exact observation interval require product-label review.",
+        "Native post spacing is not effective resolution."
+      ],
+      "status": "verified",
+      "status_reason": "Byte integrity and recorded provenance checked; not independent scientific validation.",
+      "artifact": {
+        "path": "data/processed/terrain-v5/earth-upper-mustang.terrain-v5.json",
+        "sha256_lf": "215d4973d7addb9b477b470d0f42aed5b3512caea8a77c648a23f18e64264130"
+      },
+      "quality": {
+        "feature_coverage": {
+          "slope": 0.999821,
+          "local_relief": 0.999964,
+          "roughness": 0.999964,
+          "relative_elevation": 0.999964
+        },
+        "mask": {
+          "product": "ESA WorldCover 10 m v200 (2021)",
+          "classes_excluded": [
+            "Built-up (50)"
+          ],
+          "rule": "Analysis cell excluded when at least half of its area is WorldCover built-up (class 50); no buffer",
+          "built_up_fraction_core": 0.000207,
+          "excluded_fraction_60m": 3.6e-05,
+          "record": "data/processed/landcover/earth-upper-mustang.worldcover-v200.json"
+        }
+      },
+      "files": [
+        {
+          "path": "data/raw/N29E083.hgt",
+          "byte_size": 25934402,
+          "sha256": "7ab9f9c07f8a43f96fcd1e00dabb269a88221df1fed1445f58d49857ef08ca7b",
+          "expected_sha256": "7ab9f9c07f8a43f96fcd1e00dabb269a88221df1fed1445f58d49857ef08ca7b",
+          "status": "verified",
+          "raster": {
+            "driver": "SRTMHGT",
+            "crs": "EPSG:4326",
+            "resolution": [
+              0.0002777777777777778,
+              0.0002777777777777778
+            ],
+            "bounds": [
+              82.99986111111112,
+              28.99986111111111,
+              84.0001388888889,
+              30.000138888888888
+            ],
+            "nodata": -32768.0,
+            "dimensions": [
+              3601,
+              3601
+            ],
+            "units": [
+              "m"
+            ]
+          }
+        },
+        {
+          "path": "data/raw/N29E083.SRTMGL1.hgt.zip",
+          "byte_size": 15360548,
+          "sha256": "7cf7f97cf773c02196f6fd01223caa3083535556e4c96b6dfea28f84fa268c36",
+          "expected_sha256": "7cf7f97cf773c02196f6fd01223caa3083535556e4c96b6dfea28f84fa268c36",
+          "status": "verified"
+        },
+        {
+          "path": "data/raw/N29E083.hgt",
+          "byte_size": 25934402,
+          "sha256": "7ab9f9c07f8a43f96fcd1e00dabb269a88221df1fed1445f58d49857ef08ca7b",
+          "expected_sha256": "7ab9f9c07f8a43f96fcd1e00dabb269a88221df1fed1445f58d49857ef08ca7b",
+          "status": "verified",
+          "raster": {
+            "driver": "SRTMHGT",
+            "crs": "EPSG:4326",
+            "resolution": [
+              0.0002777777777777778,
+              0.0002777777777777778
+            ],
+            "bounds": [
+              82.99986111111112,
+              28.99986111111111,
+              84.0001388888889,
+              30.000138888888888
+            ],
+            "nodata": -32768.0,
+            "dimensions": [
+              3601,
+              3601
+            ],
+            "units": [
+              "m"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "dataset_id": "mars-eberswalde-delta-ctx-dtm",
+      "provider": "USGS Astrogeology Science Center",
+      "mission_instrument": "Mars Reconnaissance Orbiter / Context Camera (CTX)",
+      "product_collection": "MRO_CTX_controlled_USGS_DTM",
+      "collection_version": "B22_018056_1559_XN_24S033W__G01_018557_1555_XN_24S033W",
+      "official_landing_page": "https://stac.astrogeology.usgs.gov/api/collections/mro_ctx_controlled_usgs_dtms/items/B22_018056_1559_XN_24S033W__G01_018557_1555_XN_24S033W",
+      "doi_or_pds_identifier": "10.5066/P9JKVWR3",
+      "discovery_endpoint": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/mars/mro/ctx/controlled/usgs/B22_018056_1559_XN_24S033W__G01_018557_1555_XN_24S033W/B22_018056_1559_XN_24S033W__G01_018557_1555_XN_24S033W_dtm.tif",
+      "body": "mars",
+      "measured_variable": "surface elevation",
+      "native_resolution": [
+        20.209513626390784,
+        20.209513626390784
+      ],
+      "analysis_resolution": "60 m primary; 120/240 m sensitivity",
+      "spatial_support": "mars-eberswalde-delta-aoi-v1",
+      "crs": "PROJCS[\"unknown\",GEOGCS[\"unknown\",DATUM[\"unknown\",SPHEROID[\"unknown\",3396190,0]],PRIMEM[\"Reference meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",-23.85],PARAMETER[\"central_meridian\",-33.55],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "vertical_datum": null,
+      "units": "metres",
+      "observation_interval": null,
+      "processing_level": "local elevation input; may be reprojected crop or mosaic, not necessarily immutable archive file",
+      "retrieval_date": "2026-11-14",
+      "license": "CC0-1.0 (USGS Astrogeology). Cite the product DOI.",
+      "authentication": "public",
+      "raw_filename": "data/raw/mars/mars-eberswalde-delta-ctx-dtm-local.tif",
+      "byte_size": 1399901,
+      "sha256": "015a2b904561f184cd11f1a2f33c8003f8cb6992c6f5c987c0eea77062326c71",
+      "processing_software": {
+        "method": "terrain-v5.0",
+        "command": "python -m app.scripts.analogue_v1_references"
+      },
+      "role": "scored",
+      "known_limitations": [
+        "No field validation. Source vertical datum and exact observation interval require product-label review.",
+        "Native post spacing is not effective resolution."
+      ],
+      "status": "verified",
+      "status_reason": "Byte integrity and recorded provenance checked; not independent scientific validation.",
+      "artifact": {
+        "path": "data/processed/terrain-v5/mars-eberswalde-delta.terrain-v5.json",
+        "sha256_lf": "06c511dfe068a0b5ab4a1ca50dd8f5ea8d6ee4c69d354970d74bdb041e1f08d7"
+      },
+      "quality": {
+        "feature_coverage": {
+          "slope": 0.999068,
+          "local_relief": 0.999785,
+          "roughness": 0.999785,
+          "relative_elevation": 0.999785
+        },
+        "mask": null
+      },
+      "files": [
+        {
+          "path": "data/raw/mars/mars-eberswalde-delta-ctx-dtm-local.tif",
+          "byte_size": 1399901,
+          "sha256": "015a2b904561f184cd11f1a2f33c8003f8cb6992c6f5c987c0eea77062326c71",
+          "expected_sha256": "015a2b904561f184cd11f1a2f33c8003f8cb6992c6f5c987c0eea77062326c71",
+          "status": "verified",
+          "raster": {
+            "driver": "GTiff",
+            "crs": "PROJCS[\"unknown\",GEOGCS[\"unknown\",DATUM[\"unknown\",SPHEROID[\"unknown\",3396190,0]],PRIMEM[\"Reference meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",-23.85],PARAMETER[\"central_meridian\",-33.55],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+            "resolution": [
+              20.0,
+              20.0
+            ],
+            "bounds": [
+              -6800.0,
+              -1420501.5359308533,
+              6800.0,
+              -1406901.5359308533
+            ],
+            "nodata": -32767.0,
+            "dimensions": [
+              680,
+              680
+            ],
+            "units": [
+              null
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "dataset_id": "mars-gale-aeolis-palus-ctx-dtm",
+      "provider": "USGS Astrogeology Science Center",
+      "mission_instrument": "Mars Reconnaissance Orbiter / Context Camera (CTX)",
+      "product_collection": "MRO_CTX_controlled_USGS_DTM",
+      "collection_version": "T01_000815_1749_XN_05S222W__K19_060629_1752_XI_04S222W",
+      "official_landing_page": "https://stac.astrogeology.usgs.gov/api/collections/mro_ctx_controlled_usgs_dtms/items/T01_000815_1749_XN_05S222W__K19_060629_1752_XI_04S222W",
+      "doi_or_pds_identifier": "10.5066/P9JKVWR3",
+      "discovery_endpoint": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/mars/mro/ctx/controlled/usgs/T01_000815_1749_XN_05S222W__K19_060629_1752_XI_04S222W/T01_000815_1749_XN_05S222W__K19_060629_1752_XI_04S222W-DEM-geoid-adj.tif",
+      "body": "mars",
+      "measured_variable": "surface elevation",
+      "native_resolution": [
+        20.0,
+        20.0
+      ],
+      "analysis_resolution": "60 m primary; 120/240 m sensitivity",
+      "spatial_support": "mars-gale-aeolis-palus-aoi-v1",
+      "crs": "PROJCS[\"unknown\",GEOGCS[\"unknown\",DATUM[\"unknown\",SPHEROID[\"unknown\",3396190,0]],PRIMEM[\"Reference meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",-4.5625],PARAMETER[\"central_meridian\",137.4417],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "vertical_datum": null,
+      "units": "metres",
+      "observation_interval": null,
+      "processing_level": "local elevation input; may be reprojected crop or mosaic, not necessarily immutable archive file",
+      "retrieval_date": "2026-11-14",
+      "license": "CC0-1.0 (USGS Astrogeology). Cite the product DOI.",
+      "authentication": "public",
+      "raw_filename": "data/raw/mars/mars-gale-aeolis-palus-ctx-dtm-local.tif",
+      "byte_size": 1242734,
+      "sha256": "e258cc973b6e2b221b7b313ba24f333db19fe38453cf9265fa2c4ce8959b88df",
+      "processing_software": {
+        "method": "terrain-v5.0",
+        "command": "python -m app.scripts.analogue_v1_references"
+      },
+      "role": "scored",
+      "known_limitations": [
+        "No field validation. Source vertical datum and exact observation interval require product-label review.",
+        "Native post spacing is not effective resolution."
+      ],
+      "status": "verified",
+      "status_reason": "Byte integrity and recorded provenance checked; not independent scientific validation.",
+      "artifact": {
+        "path": "data/processed/terrain-v5/mars-gale-aeolis-palus.terrain-v5.json",
+        "sha256_lf": "f0d43b9212c53df2061e0b95af6353647c93d956b330d475d92023288a2920d2"
+      },
+      "quality": {
+        "feature_coverage": {
+          "slope": 0.997884,
+          "local_relief": 0.999319,
+          "roughness": 0.999319,
+          "relative_elevation": 0.999319
+        },
+        "mask": null
+      },
+      "files": [
+        {
+          "path": "data/raw/mars/mars-gale-aeolis-palus-ctx-dtm-local.tif",
+          "byte_size": 1242734,
+          "sha256": "e258cc973b6e2b221b7b313ba24f333db19fe38453cf9265fa2c4ce8959b88df",
+          "expected_sha256": "e258cc973b6e2b221b7b313ba24f333db19fe38453cf9265fa2c4ce8959b88df",
+          "status": "verified",
+          "raster": {
+            "driver": "GTiff",
+            "crs": "PROJCS[\"unknown\",GEOGCS[\"unknown\",DATUM[\"unknown\",SPHEROID[\"unknown\",3396190,0]],PRIMEM[\"Reference meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",-4.5625],PARAMETER[\"central_meridian\",137.4417],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+            "resolution": [
+              20.0,
+              20.0
+            ],
+            "bounds": [
+              -6800.0,
+              -277240.80745008466,
+              6800.0,
+              -263640.80745008466
+            ],
+            "nodata": -32767.0,
+            "dimensions": [
+              680,
+              680
+            ],
+            "units": [
+              null
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "dataset_id": "mars-gusev-plains-ctx-dtm",
+      "provider": "USGS Astrogeology Science Center",
+      "mission_instrument": "Mars Reconnaissance Orbiter / Context Camera (CTX)",
+      "product_collection": "MRO_CTX_controlled_USGS_DTM",
+      "collection_version": "P22_009530_1653_XI_14S184W__P06_003333_1652_XI_14S184W",
+      "official_landing_page": "https://stac.astrogeology.usgs.gov/api/collections/mro_ctx_controlled_usgs_dtms/items/P22_009530_1653_XI_14S184W__P06_003333_1652_XI_14S184W",
+      "doi_or_pds_identifier": "10.5066/P9JKVWR3",
+      "discovery_endpoint": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/mars/mro/ctx/controlled/usgs/P22_009530_1653_XI_14S184W__P06_003333_1652_XI_14S184W/P22_009530_1653_XI_14S184W__P06_003333_1652_XI_14S184W-DEM-geoid-adj.tif",
+      "body": "mars",
+      "measured_variable": "surface elevation",
+      "native_resolution": [
+        20.0,
+        20.0
+      ],
+      "analysis_resolution": "60 m primary; 120/240 m sensitivity",
+      "spatial_support": "mars-gusev-plains-aoi-v1",
+      "crs": "PROJCS[\"unknown\",GEOGCS[\"unknown\",DATUM[\"unknown\",SPHEROID[\"unknown\",3396190,0]],PRIMEM[\"Reference meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",-14.5684],PARAMETER[\"central_meridian\",175.4726],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "vertical_datum": null,
+      "units": "metres",
+      "observation_interval": null,
+      "processing_level": "local elevation input; may be reprojected crop or mosaic, not necessarily immutable archive file",
+      "retrieval_date": "2026-11-14",
+      "license": "CC0-1.0 (USGS Astrogeology). Cite the product DOI.",
+      "authentication": "public",
+      "raw_filename": "data/raw/mars/mars-gusev-plains-ctx-dtm-local.tif",
+      "byte_size": 1370122,
+      "sha256": "05c903c17573975c89d98fd1f0280ee80d0027d067461026611470ce4af35fd8",
+      "processing_software": {
+        "method": "terrain-v5.0",
+        "command": "python -m app.scripts.analogue_v1_references"
+      },
+      "role": "scored",
+      "known_limitations": [
+        "No field validation. Source vertical datum and exact observation interval require product-label review.",
+        "Native post spacing is not effective resolution."
+      ],
+      "status": "verified",
+      "status_reason": "Byte integrity and recorded provenance checked; not independent scientific validation.",
+      "artifact": {
+        "path": "data/processed/terrain-v5/mars-gusev-plains.terrain-v5.json",
+        "sha256_lf": "05eb2f26a23dbfd96e724b666f07755143c2d5ac962b5692bc30518eeee62f8b"
+      },
+      "quality": {
+        "feature_coverage": {
+          "slope": 1.0,
+          "local_relief": 1.0,
+          "roughness": 1.0,
+          "relative_elevation": 1.0
+        },
+        "mask": null
+      },
+      "files": [
+        {
+          "path": "data/raw/mars/mars-gusev-plains-ctx-dtm-local.tif",
+          "byte_size": 1370122,
+          "sha256": "05c903c17573975c89d98fd1f0280ee80d0027d067461026611470ce4af35fd8",
+          "expected_sha256": "05c903c17573975c89d98fd1f0280ee80d0027d067461026611470ce4af35fd8",
+          "status": "verified",
+          "raster": {
+            "driver": "GTiff",
+            "crs": "PROJCS[\"unknown\",GEOGCS[\"unknown\",DATUM[\"unknown\",SPHEROID[\"unknown\",3396190,0]],PRIMEM[\"Reference meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",-14.5684],PARAMETER[\"central_meridian\",175.4726],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+            "resolution": [
+              20.0,
+              20.0
+            ],
+            "bounds": [
+              -6800.0,
+              -870337.5033985344,
+              6800.0,
+              -856737.5033985344
+            ],
+            "nodata": -32767.0,
+            "dimensions": [
+              680,
+              680
+            ],
+            "units": [
+              null
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "dataset_id": "mars-insight-elysium-ctx-dtm",
+      "provider": "USGS Astrogeology Science Center",
+      "mission_instrument": "Mars Reconnaissance Orbiter / Context Camera (CTX)",
+      "product_collection": "MRO_CTX_controlled_USGS_DTM",
+      "collection_version": "N15_068239_1823_XN_02N224W__F18_042827_1842_XN_04N224W",
+      "official_landing_page": "https://stac.astrogeology.usgs.gov/api/collections/mro_ctx_controlled_usgs_dtms/items/N15_068239_1823_XN_02N224W__F18_042827_1842_XN_04N224W",
+      "doi_or_pds_identifier": "10.5066/P9JKVWR3",
+      "discovery_endpoint": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/mars/mro/ctx/controlled/usgs/N15_068239_1823_XN_02N224W__F18_042827_1842_XN_04N224W/N15_068239_1823_XN_02N224W__F18_042827_1842_XN_04N224W-DEM-geoid-adj.tif",
+      "body": "mars",
+      "measured_variable": "surface elevation",
+      "native_resolution": [
+        20.0,
+        20.0
+      ],
+      "analysis_resolution": "60 m primary; 120/240 m sensitivity",
+      "spatial_support": "mars-insight-elysium-aoi-v1",
+      "crs": "PROJCS[\"unknown\",GEOGCS[\"unknown\",DATUM[\"unknown\",SPHEROID[\"unknown\",3396190,0]],PRIMEM[\"Reference meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",4.5024],PARAMETER[\"central_meridian\",135.6234],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "vertical_datum": null,
+      "units": "metres",
+      "observation_interval": null,
+      "processing_level": "local elevation input; may be reprojected crop or mosaic, not necessarily immutable archive file",
+      "retrieval_date": "2026-11-14",
+      "license": "CC0-1.0 (USGS Astrogeology). Cite the product DOI.",
+      "authentication": "public",
+      "raw_filename": "data/raw/mars/mars-insight-elysium-ctx-dtm-local.tif",
+      "byte_size": 1327894,
+      "sha256": "4be42bd3ca7f7bdd7473017851186749dc1d5a86c95b7f5dcf1f7275c4c166bd",
+      "processing_software": {
+        "method": "terrain-v5.0",
+        "command": "python -m app.scripts.analogue_v1_references"
+      },
+      "role": "scored",
+      "known_limitations": [
+        "No field validation. Source vertical datum and exact observation interval require product-label review.",
+        "Native post spacing is not effective resolution."
+      ],
+      "status": "verified",
+      "status_reason": "Byte integrity and recorded provenance checked; not independent scientific validation.",
+      "artifact": {
+        "path": "data/processed/terrain-v5/mars-insight-elysium.terrain-v5.json",
+        "sha256_lf": "67150f248cfbc384ff8a313d42213cd60115321aa68a4697e89f039d534b9fcf"
+      },
+      "quality": {
+        "feature_coverage": {
+          "slope": 0.998566,
+          "local_relief": 0.999713,
+          "roughness": 0.999713,
+          "relative_elevation": 0.999713
+        },
+        "mask": null
+      },
+      "files": [
+        {
+          "path": "data/raw/mars/mars-insight-elysium-ctx-dtm-local.tif",
+          "byte_size": 1327894,
+          "sha256": "4be42bd3ca7f7bdd7473017851186749dc1d5a86c95b7f5dcf1f7275c4c166bd",
+          "expected_sha256": "4be42bd3ca7f7bdd7473017851186749dc1d5a86c95b7f5dcf1f7275c4c166bd",
+          "status": "verified",
+          "raster": {
+            "driver": "GTiff",
+            "crs": "PROJCS[\"unknown\",GEOGCS[\"unknown\",DATUM[\"unknown\",SPHEROID[\"unknown\",3396190,0]],PRIMEM[\"Reference meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",4.5024],PARAMETER[\"central_meridian\",135.6234],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+            "resolution": [
+              20.0,
+              20.0
+            ],
+            "bounds": [
+              -6800.0,
+              260078.3981289339,
+              6800.0,
+              273678.3981289339
+            ],
+            "nodata": -32767.0,
+            "dimensions": [
+              680,
+              680
+            ],
+            "units": [
+              null
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "dataset_id": "mars-jezero-ctx-dem",
+      "provider": "USGS Astrogeology Science Center / Planetary Data System",
+      "mission_instrument": "Mars 2020 / Mars Reconnaissance Orbiter Context Camera (CTX)",
+      "product_collection": "M20_JezeroCrater_CTXDEM_20m",
+      "collection_version": null,
+      "official_landing_page": "https://astrogeology.usgs.gov/search/map/mars_2020_science_investigation_ctx_dem_mosaic",
+      "doi_or_pds_identifier": "10.5066/P906QQT8",
+      "discovery_endpoint": "https://planetarymaps.usgs.gov/mosaic/mars2020_trn/CTX/ScienceInvestigationMaps_JPL/M20_JezeroCrater_CTXDEM_20m.tif",
+      "body": "mars",
+      "measured_variable": "surface elevation",
+      "native_resolution": [
+        20.0,
+        20.0
+      ],
+      "analysis_resolution": "60 m primary; 120/240 m sensitivity",
+      "spatial_support": "mars-jezero-aoi-v1",
+      "crs": "PROJCS[\"Jezero_Crater_Projection\",GEOGCS[\"GCS_Mars_2000_Sphere\",DATUM[\"Mars_2000_(Sphere)\",SPHEROID[\"Mars_2000_Sphere\",3396190,0]],PRIMEM[\"Reference_Meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",18.4663],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "vertical_datum": null,
+      "units": "metres",
+      "observation_interval": null,
+      "processing_level": "local elevation input; may be reprojected crop or mosaic, not necessarily immutable archive file",
+      "retrieval_date": "2026-11-13",
+      "license": "USGS public-domain data; retain source citation and verify PDS/USGS product documentation.",
+      "authentication": "public",
+      "raw_filename": "data/raw/M20_JezeroCrater_CTXDEM_20m.tif",
+      "byte_size": 90345300,
+      "sha256": "ba7f706ea1b5d63a562f28a7dcf7a7f3c79bce7f048e6974b57e8a33c30d1ba2",
+      "processing_software": {
+        "method": "terrain-v5.0",
+        "command": "python -m app.scripts.analogue_v1_calibration"
+      },
+      "role": "scored",
+      "known_limitations": [
+        "No field validation. Source vertical datum and exact observation interval require product-label review.",
+        "Native post spacing is not effective resolution."
+      ],
+      "status": "verified",
+      "status_reason": "Byte integrity and recorded provenance checked; not independent scientific validation.",
+      "artifact": {
+        "path": "data/processed/terrain-v5/mars-jezero.terrain-v5.json",
+        "sha256_lf": "c0ca48061705155445d1566c898391f6e1ce39425aceec88ba2c8ed5170bc4da"
+      },
+      "quality": {
+        "feature_coverage": {
+          "slope": 1.0,
+          "local_relief": 1.0,
+          "roughness": 1.0,
+          "relative_elevation": 1.0
+        },
+        "mask": null
+      },
+      "files": [
+        {
+          "path": "data/raw/M20_JezeroCrater_CTXDEM_20m.tif",
+          "byte_size": 90345300,
+          "sha256": "ba7f706ea1b5d63a562f28a7dcf7a7f3c79bce7f048e6974b57e8a33c30d1ba2",
+          "expected_sha256": "ba7f706ea1b5d63a562f28a7dcf7a7f3c79bce7f048e6974b57e8a33c30d1ba2",
+          "status": "verified",
+          "raster": {
+            "driver": "GTiff",
+            "crs": "PROJCS[\"Jezero_Crater_Projection\",GEOGCS[\"GCS_Mars_2000_Sphere\",DATUM[\"Mars_2000_(Sphere)\",SPHEROID[\"Mars_2000_Sphere\",3396190,0]],PRIMEM[\"Reference_Meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Equirectangular\"],PARAMETER[\"standard_parallel_1\",18.4663],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+            "resolution": [
+              20.0,
+              20.0
+            ],
+            "bounds": [
+              4328999.999999998,
+              1042080.0000000028,
+              4418119.999999998,
+              1143420.0000000028
+            ],
+            "nodata": -3.4028234663852886e+38,
+            "dimensions": [
+              4456,
+              5067
+            ],
+            "units": [
+              null
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "dataset_id": "moon-south-pole-shackleton-lola-ldem",
+      "provider": "NASA PDS Geosciences Node / LRO LOLA team",
+      "mission_instrument": "Lunar Reconnaissance Orbiter / Lunar Orbiter Laser Altimeter",
+      "product_collection": "LDEM_875S_20M",
+      "collection_version": "LRO-L-LOLA-3-RDR-V1",
+      "official_landing_page": "https://pds-geosciences.wustl.edu/missions/lro/lola.htm",
+      "doi_or_pds_identifier": null,
+      "discovery_endpoint": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/polar/img/ldem_875s_20m.img",
+      "body": "moon",
+      "measured_variable": "surface elevation",
+      "native_resolution": [
+        20.0,
+        20.0
+      ],
+      "analysis_resolution": "60 m primary; 120/240 m sensitivity",
+      "spatial_support": "moon-south-pole-shackleton-aoi-v1",
+      "crs": "PROJCS[\"POLAR_STEREOGRAPHIC MOON\",GEOGCS[\"GCS_MOON\",DATUM[\"D_MOON\",SPHEROID[\"MOON\",1737400,0]],PRIMEM[\"Reference_Meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Polar_Stereographic\"],PARAMETER[\"latitude_of_origin\",-90],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1],AXIS[\"Easting\",NORTH],AXIS[\"Northing\",NORTH]]",
+      "vertical_datum": null,
+      "units": "metres",
+      "observation_interval": null,
+      "processing_level": "local elevation input; may be reprojected crop or mosaic, not necessarily immutable archive file",
+      "retrieval_date": "2026-11-14",
+      "license": "NASA PDS data; cite the LOLA team and PDS Geosciences Node.",
+      "authentication": "public",
+      "raw_filename": "data/raw/lola/ldem_875s_20m_southpole_30km_m.tif",
+      "byte_size": 4146902,
+      "sha256": "60cdb4d19a3a955e70bd5920a569fac94a3e32d840736f34aac72803605d0032",
+      "processing_software": {
+        "method": "terrain-v5.0",
+        "command": "python -m app.scripts.analogue_v1_references"
+      },
+      "role": "diagnostic",
+      "known_limitations": [
+        "No field validation. Source vertical datum and exact observation interval require product-label review.",
+        "Native post spacing is not effective resolution."
+      ],
+      "status": "verified",
+      "status_reason": "Byte integrity and recorded provenance checked; not independent scientific validation.",
+      "artifact": {
+        "path": "data/processed/terrain-v5/moon-south-pole-shackleton.terrain-v5.json",
+        "sha256_lf": "8d14b987c84c959b87bc09919cfd72b85f70883e341d13e07a70e052f4188d5d"
+      },
+      "quality": {
+        "feature_coverage": {
+          "slope": 1.0,
+          "local_relief": 1.0,
+          "roughness": 1.0,
+          "relative_elevation": 1.0
+        },
+        "mask": null
+      },
+      "files": [
+        {
+          "path": "data/raw/lola/ldem_875s_20m_southpole_30km_m.tif",
+          "byte_size": 4146902,
+          "sha256": "60cdb4d19a3a955e70bd5920a569fac94a3e32d840736f34aac72803605d0032",
+          "expected_sha256": "60cdb4d19a3a955e70bd5920a569fac94a3e32d840736f34aac72803605d0032",
+          "status": "verified",
+          "raster": {
+            "driver": "GTiff",
+            "crs": "PROJCS[\"POLAR_STEREOGRAPHIC MOON\",GEOGCS[\"GCS_MOON\",DATUM[\"D_MOON\",SPHEROID[\"MOON\",1737400,0]],PRIMEM[\"Reference_Meridian\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Polar_Stereographic\"],PARAMETER[\"latitude_of_origin\",-90],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1],AXIS[\"Easting\",NORTH],AXIS[\"Northing\",NORTH]]",
+            "resolution": [
+              20.0,
+              20.0
+            ],
+            "bounds": [
+              -15000.0,
+              -15000.0,
+              15000.0,
+              15000.0
+            ],
+            "nodata": null,
+            "dimensions": [
+              1500,
+              1500
+            ],
+            "units": [
+              null
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "sites": [
+    {
+      "site_id": "earth-atacama-south",
+      "body": "earth",
+      "aoi_id": "earth-atacama-south-aoi-v1",
+      "center": [
+        -69.9005,
+        -24.2722
+      ],
+      "width_m": 10000.0,
+      "source_status": "verified",
+      "validation_errors": [],
+      "scoring_eligible": true,
+      "exclusion_reason": null
+    },
+    {
+      "site_id": "earth-atacama",
+      "body": "earth",
+      "aoi_id": "earth-atacama-aoi-v1",
+      "center": [
+        -69.9,
+        -24.2
+      ],
+      "width_m": 10000.0,
+      "source_status": "verified",
+      "validation_errors": [],
+      "scoring_eligible": false,
+      "exclusion_reason": {
+        "reason": "The window contains a large industrial complex (pads, buildings, graded ground) visible in Sentinel-2 L2A S2B_MSIL2A_20260927T144729_R139_T19KDP. WorldCover 2021 classes it as bare ground, so it cannot be masked. Replaced by earth-atacama-south, chosen by a rule fixed before its terrain was measured.",
+        "replacement": "earth-atacama-south"
+      }
+    },
+    {
+      "site_id": "earth-craters-of-the-moon",
+      "body": "earth",
+      "aoi_id": "earth-craters-of-the-moon-aoi-v1",
+      "center": [
+        -113.55,
+        43.42
+      ],
+      "width_m": 10000.0,
+      "source_status": "verified",
+      "validation_errors": [],
+      "scoring_eligible": true,
+      "exclusion_reason": null
+    },
+    {
+      "site_id": "earth-danakil",
+      "body": "earth",
+      "aoi_id": "earth-danakil-aoi-v1",
+      "center": [
+        40.2989,
+        14.2417
+      ],
+      "width_m": 10000.0,
+      "source_status": "verified",
+      "validation_errors": [],
+      "scoring_eligible": true,
+      "exclusion_reason": null
+    },
+    {
+      "site_id": "earth-hanksville-mdrs",
+      "body": "earth",
+      "aoi_id": "earth-hanksville-mdrs-aoi-v1",
+      "center": [
+        -110.7919,
+        38.4064
+      ],
+      "width_m": 10000.0,
+      "source_status": "verified",
+      "validation_errors": [],
+      "scoring_eligible": true,
+      "exclusion_reason": null
+    },
+    {
+      "site_id": "earth-ladakh",
+      "body": "earth",
+      "aoi_id": "earth-ladakh-aoi-v1",
+      "center": [
+        77.6,
+        34.2
+      ],
+      "width_m": 10000.0,
+      "source_status": "verified",
+      "validation_errors": [],
+      "scoring_eligible": true,
+      "exclusion_reason": null
+    },
+    {
+      "site_id": "earth-meteor-crater",
+      "body": "earth",
+      "aoi_id": "earth-meteor-crater-aoi-v1",
+      "center": [
+        -111.0225,
+        35.0272
+      ],
+      "width_m": 10000.0,
+      "source_status": "verified",
+      "validation_errors": [],
+      "scoring_eligible": true,
+      "exclusion_reason": null
+    },
+    {
+      "site_id": "earth-upper-mustang",
+      "body": "earth",
+      "aoi_id": "earth-upper-mustang-aoi-v1",
+      "center": [
+        83.9,
+        29.1
+      ],
+      "width_m": 10000.0,
+      "source_status": "verified",
+      "validation_errors": [],
+      "scoring_eligible": true,
+      "exclusion_reason": null
+    },
+    {
+      "site_id": "mars-eberswalde-delta",
+      "body": "mars",
+      "aoi_id": "mars-eberswalde-delta-aoi-v1",
+      "center": [
+        -33.55,
+        -23.85
+      ],
+      "width_m": 10000.0,
+      "source_status": "verified",
+      "validation_errors": [],
+      "scoring_eligible": true,
+      "exclusion_reason": null
+    },
+    {
+      "site_id": "mars-gale-aeolis-palus",
+      "body": "mars",
+      "aoi_id": "mars-gale-aeolis-palus-aoi-v1",
+      "center": [
+        137.4417,
+        -4.5625
+      ],
+      "width_m": 10000.0,
+      "source_status": "verified",
+      "validation_errors": [],
+      "scoring_eligible": true,
+      "exclusion_reason": null
+    },
+    {
+      "site_id": "mars-gusev-plains",
+      "body": "mars",
+      "aoi_id": "mars-gusev-plains-aoi-v1",
+      "center": [
+        175.4726,
+        -14.5684
+      ],
+      "width_m": 10000.0,
+      "source_status": "verified",
+      "validation_errors": [],
+      "scoring_eligible": true,
+      "exclusion_reason": null
+    },
+    {
+      "site_id": "mars-insight-elysium",
+      "body": "mars",
+      "aoi_id": "mars-insight-elysium-aoi-v1",
+      "center": [
+        135.6234,
+        4.5024
+      ],
+      "width_m": 10000.0,
+      "source_status": "verified",
+      "validation_errors": [],
+      "scoring_eligible": true,
+      "exclusion_reason": null
+    },
+    {
+      "site_id": "mars-jezero",
+      "body": "mars",
+      "aoi_id": "mars-jezero-aoi-v1",
+      "center": [
+        77.45,
+        18.44
+      ],
+      "width_m": 10000.0,
+      "source_status": "verified",
+      "validation_errors": [],
+      "scoring_eligible": true,
+      "exclusion_reason": null
+    },
+    {
+      "site_id": "moon-south-pole-shackleton",
+      "body": "moon",
+      "aoi_id": "moon-south-pole-shackleton-aoi-v1",
+      "center": [
+        0.0,
+        -90.0
+      ],
+      "width_m": 10000.0,
+      "source_status": "verified",
+      "validation_errors": [],
+      "scoring_eligible": false,
+      "exclusion_reason": "Reference fails tolerance/resolution-floor gate; distances only"
+    }
+  ],
+  "imagery": [
+    {
+      "metadata_path": "data/processed/imagery/earth-atacama-sentinel-reference.json",
+      "product_id": "S2B_MSIL2A_20260927T144729_R139_T19KDP_20260927T195914",
+      "site_id": "earth-atacama",
+      "role": "display-only",
+      "acquisition_datetime": "2026-09-27T14:47:29.024000Z",
+      "sha256": "52e60b74f7a9e64a5e93e97dfef94f8f8f20e5cfe766f51a6af455f6f6e130c8",
+      "validation_errors": []
+    },
+    {
+      "metadata_path": "data/processed/imagery/earth-atacama-south-sentinel-reference.json",
+      "product_id": "S2B_MSIL2A_20260927T144729_R139_T19KDP_20260927T195914",
+      "site_id": "earth-atacama-south",
+      "role": "display-only",
+      "acquisition_datetime": "2026-09-27T14:47:29.024000Z",
+      "sha256": "4bd488284c91aae21169947cc9ca4f712cae1789ad30f6c7091f986d2914f2b0",
+      "validation_errors": []
+    },
+    {
+      "metadata_path": "data/processed/imagery/earth-craters-of-the-moon-sentinel-reference.json",
+      "product_id": "S2B_MSIL2A_20261019T183359_R027_T11TQJ_20261019T221259",
+      "site_id": "earth-craters-of-the-moon",
+      "role": "display-only",
+      "acquisition_datetime": "2026-10-19T18:33:59.027000Z",
+      "sha256": "10547d33abbfe44941f3e98931df8c0e89de5108551684c9db1e6c648c90b478",
+      "validation_errors": []
+    },
+    {
+      "metadata_path": "data/processed/imagery/earth-danakil-sentinel-reference.json",
+      "product_id": "S2C_MSIL2A_20251203T074311_R092_T37PFR_20251203T113611",
+      "site_id": "earth-danakil",
+      "role": "display-only",
+      "acquisition_datetime": "2025-12-03T07:43:11.025000Z",
+      "sha256": "385b4f61c08f5c07285c85bf18f37fcad424b5a3737ca0e64c63ab62ab257338",
+      "validation_errors": []
+    },
+    {
+      "metadata_path": "data/processed/imagery/earth-hanksville-mdrs-sentinel-reference.json",
+      "product_id": "S2B_MSIL2A_20260903T180909_R084_T12SWH_20260903T220013",
+      "site_id": "earth-hanksville-mdrs",
+      "role": "display-only",
+      "acquisition_datetime": "2026-09-03T18:09:09.024000Z",
+      "sha256": "7522dd3db411aab72157a0571cc8b155b1ad1ef5e274579486a7f2e80ecec9de",
+      "validation_errors": []
+    },
+    {
+      "metadata_path": "data/processed/imagery/earth-ladakh-sentinel-reference.json",
+      "product_id": "S2A_MSIL2A_20251126T053251_R105_T43SGT_20251126T083814",
+      "site_id": "earth-ladakh",
+      "role": "display-only",
+      "acquisition_datetime": "2025-11-26T05:32:51.024000Z",
+      "sha256": "80125f1fd83e047a25ec856aa49494a8c61321a8eb902ae444467b623a80950f",
+      "validation_errors": []
+    },
+    {
+      "metadata_path": "data/processed/imagery/earth-meteor-crater-sentinel-reference.json",
+      "product_id": "S2B_MSIL2A_20261112T181609_R084_T12SVD_20261112T215033",
+      "site_id": "earth-meteor-crater",
+      "role": "display-only",
+      "acquisition_datetime": "2026-11-12T18:16:09.024000Z",
+      "sha256": "a840f9d1bae3fa82e6f7e48b3e27bde5e2fd4112e887ccbe057c1dd2d379e057",
+      "validation_errors": []
+    },
+    {
+      "metadata_path": "data/processed/imagery/earth-upper-mustang-sentinel-reference.json",
+      "product_id": "S2B_MSIL2A_20261026T045909_R119_T44RQT_20261026T103133",
+      "site_id": "earth-upper-mustang",
+      "role": "display-only",
+      "acquisition_datetime": "2026-10-26T04:59:09.024000Z",
+      "sha256": "54fbc2f26b5cc834b06942804e16ccddd4d005e2bfdab94d403a3e468aa1dd65",
+      "validation_errors": []
+    },
+    {
+      "metadata_path": "data/processed/imagery/mars-eberswalde-delta-ctx-reference.json",
+      "product_id": "B22_018056_1559_XN_24S033W__G01_018557_1555_XN_24S033W",
+      "site_id": "mars-eberswalde-delta",
+      "role": "display-only",
+      "acquisition_datetime": null,
+      "sha256": "21fc06b93f13a4521c6246d199c4cd0fcfe6f9f715ecbf7639d66c110f83abe9",
+      "validation_errors": []
+    },
+    {
+      "metadata_path": "data/processed/imagery/mars-gale-aeolis-palus-ctx-reference.json",
+      "product_id": "T01_000815_1749_XN_05S222W__K19_060629_1752_XI_04S222W",
+      "site_id": "mars-gale-aeolis-palus",
+      "role": "display-only",
+      "acquisition_datetime": null,
+      "sha256": "fa9ed35a2d87f146956cca719ab8059980c6661cc66213833e9c6fbe44084cce",
+      "validation_errors": []
+    },
+    {
+      "metadata_path": "data/processed/imagery/mars-gusev-plains-ctx-reference.json",
+      "product_id": "P22_009530_1653_XI_14S184W__P06_003333_1652_XI_14S184W",
+      "site_id": "mars-gusev-plains",
+      "role": "display-only",
+      "acquisition_datetime": null,
+      "sha256": "c0901b8175ebc2eeca7646130c6707f2e2a72938bdf98d1a61184784fb9ac99c",
+      "validation_errors": []
+    },
+    {
+      "metadata_path": "data/processed/imagery/mars-insight-elysium-ctx-reference.json",
+      "product_id": "N15_068239_1823_XN_02N224W__F18_042827_1842_XN_04N224W",
+      "site_id": "mars-insight-elysium",
+      "role": "display-only",
+      "acquisition_datetime": null,
+      "sha256": "12f58f34834c3a835e397284933bc1fae8831d2b637941137b6792e9ac608417",
+      "validation_errors": []
+    },
+    {
+      "metadata_path": "data/processed/imagery/mars-jezero-ctx-reference.json",
+      "product_id": "JEZ_ctx_B_soc_008_orthoMosaic_6m_Eqc_latTs0_lon0",
+      "site_id": "mars-jezero",
+      "role": "display-only",
+      "acquisition_datetime": null,
+      "sha256": "fc11e9d0faf0afde33c127443a5dac5736f786d5e1e6f9449e13316664945851",
+      "validation_errors": []
+    }
+  ],
+  "unknown_metadata_policy": "Null means not established; collection-level entries do not claim local acquisition.",
+  "new_products_acquired": [],
+  "blocked_acquisitions": [],
+  "scientific_limitations": [
+    "Only terrain may score. No expert-labelled predictive accuracy.",
+    "Archive labels, effective resolution and vertical datum need specialist review."
+  ]
+}

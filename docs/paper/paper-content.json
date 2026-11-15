@@ -1,11 +1,358 @@
 [
   {
     "type": "h1",
+    "text": "AlterEcho: An Auditable Earth–Planetary Terrain Analogue System"
+  },
+  {
+    "type": "p",
+    "text": "Overall project paper · Team AlterEcho · NASA Space Apps Challenge 2026 · 15 November 2026"
+  },
+  {
+    "type": "p",
+    "text": "AlterEcho is a research-shortlisting application that compares registered 10 km Earth windows with specific Mars or lunar reference windows. It combines traceable elevation data, deterministic terrain measurements, explicit quality gates and a bounded similarity index. The system is designed to make every number inspectable: the interface, API, exported JSON and this paper use the same versioned calculation inputs."
+  },
+  {
+    "type": "h2",
+    "text": "Abstract"
+  },
+  {
+    "type": "p",
+    "text": "Earth analogues are useful only when the question, scale, measurement and uncertainty are explicit. AlterEcho implements one narrow, reproducible question: whether the distributions of slope and relative elevation in a 10 km Earth window resemble those in a 10 km planetary reference at a 60 m grid. It measures four terrain descriptors, scores only two nonredundant distributions, calibrates tolerances from unselected Earth terrain, and reports a scenario range and background share beside the index. A candidate is not ranked when critical evidence is missing or when the tested resolution cannot separate it from the reference. The current atlas contains seven measured Earth candidates, five Mars references and one lunar distance-only reference. In the worked Atacama-south/Jezero comparison, the index is 97.90, but 17% of the 88 background windows score at least as high and both feature differences are within the tested resolution floor. The result therefore supports a limited low-relief terrain analogy, not a claim about geology, habitability, resources, landing safety or mission suitability."
+  },
+  {
+    "type": "h2",
+    "text": "Project summary in one page"
+  },
+  {
+    "type": "table",
+    "caption": "Table 1. What the running system contains and what its output means.",
+    "header": [
+      "Item",
+      "Current implementation"
+    ],
+    "rows": [
+      [
+        "Purpose",
+        "Shortlist Earth terrain windows for transparent research and field-method discussion."
+      ],
+      [
+        "Primary measured evidence",
+        "Slope and relative-elevation distributions from checksum-verified DEMs."
+      ],
+      [
+        "Current method",
+        "analogue-method-v1.0 with terrain-v5.0; 60 m primary grid, 120/240 m sensitivity."
+      ],
+      [
+        "Index",
+        "A bounded experimental terrain evidence index from 0–100; not a probability or confidence."
+      ],
+      [
+        "Ranking",
+        "Terrain analogy only; overlapping scenario ranges form tie groups."
+      ],
+      [
+        "Not scored",
+        "Imagery, temperature, geology, minerals, water/ice, soil, hazards and field suitability."
+      ],
+      [
+        "Primary output",
+        "Candidate result, evidence coverage, resolution status, sensitivity range, background share and provenance hashes."
+      ],
+      [
+        "Reproducibility",
+        "Versioned JSON artifacts, manifests, checksums, API responses and automated regression tests."
+      ]
+    ]
+  },
+  {
+    "type": "h2",
+    "text": "How to read this paper"
+  },
+  {
+    "type": "p",
+    "text": "Sections 1–4 explain the product, data and software path. Sections 5–8 define the terrain measurements, formulas, tolerances, eligibility and ranking. Sections 9–11 show a worked result, discrimination checks and limitations. A source link means the official landing page or API used to identify a product; a local checksum means the exact byte file used by the current release. Planned or contextual products are listed for traceability but are never silently treated as scored evidence."
+  },
+  {
+    "type": "h2",
+    "text": "System architecture and user workflow"
+  },
+  {
+    "type": "p",
+    "text": "The browser is a Next.js application. It requests catalog, methodology, comparison, imagery, terrain-preview, provenance and report data from a FastAPI service. Python owns raster preparation and all scientific arithmetic; the frontend formats responses and never recomputes the index. Committed small artifacts make the atlas browseable without a provider call. Separate acquisition scripts are used only when a raw product must be restored or a new study window is deliberately registered."
+  },
+  {
+    "type": "diagram",
+    "text": "architecture",
+    "nodes": [
+      "Browser atlas",
+      "FastAPI API",
+      "Versioned comparison service",
+      "Checksummed processed artifacts",
+      "Official data providers"
+    ]
+  },
+  {
+    "type": "p",
+    "text": "A typical user selects a planetary body and reference, chooses a task profile, selects an Earth candidate, reads the simple result, opens full evidence, compares the two windows at a common scale, and exports the JSON record. The Explore page can screen a new Earth coordinate, but Explore output is a screening record and is not added to the ranked atlas. The Report page is a printable view of the same stored comparison."
+  },
+  {
+    "type": "h2",
+    "text": "Implemented API surface"
+  },
+  {
+    "type": "table",
+    "caption": "Table 2. Main local API routes used by the application.",
+    "header": [
+      "Route",
+      "Purpose",
+      "Used by"
+    ],
+    "rows": [
+      [
+        "/api/health, /api/config",
+        "Service health, build identifier and bounded configuration.",
+        "Startup and diagnostics"
+      ],
+      [
+        "/api/planets, /api/sites/{site_id}",
+        "Planet, reference and candidate catalog records.",
+        "Atlas and Sources"
+      ],
+      [
+        "/api/methodology",
+        "Method, profiles, formulas, tolerances and limitations.",
+        "Method page"
+      ],
+      [
+        "/api/v3/compare",
+        "Current analogue-method-v1.0 comparison and ranked results.",
+        "Atlas"
+      ],
+      [
+        "/api/v3/result/{site}/{profile}/{reference}",
+        "Full evidence, calculations and provenance hashes.",
+        "Result and Report"
+      ],
+      [
+        "/api/v3/source-registry",
+        "Roles, official sources, local checksums and data status.",
+        "Sources"
+      ],
+      [
+        "/api/sites/{site_id}/imagery and /terrain/*",
+        "Display imagery, hillshade, slope and heightmap artifacts.",
+        "Site viewer"
+      ],
+      [
+        "/api/explore/*",
+        "Bounded coordinate screening job and status/result record.",
+        "Explore"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "The generated OpenAPI description is stored at docs/api-reference.json. When the backend is running locally, interactive documentation is available at /docs outside production mode. All route identifiers and file IDs are constrained slugs; request bodies, job IDs, queue depth and provider access are bounded."
+  },
+  {
+    "type": "h2",
+    "text": "Data products, providers and roles"
+  },
+  {
+    "type": "p",
+    "text": "The system distinguishes scored inputs from diagnostics, quality masks, display context and planned evidence. This distinction prevents a visually convincing image or an unavailable measurement from becoming a hidden score. The source registry and acquisition guide contain complete product-level rows and checksums; the links below are the official discovery points used by the release."
+  },
+  {
+    "type": "table",
+    "caption": "Table 3. Essential datasets and official discovery links.",
+    "header": [
+      "Product",
+      "Role in AlterEcho",
+      "Official link"
+    ],
+    "rows": [
+      [
+        "NASA SRTMGL1.003",
+        "Scored Earth DEM; 1 arc-second, about 30 m.",
+        "https://search.earthdata.nasa.gov/search?q=SRTMGL1"
+      ],
+      [
+        "USGS Mars 2020 CTX DEM mosaic",
+        "Scored Jezero reference DEM.",
+        "https://astrogeology.usgs.gov/search/map/mars_2020_science_investigation_ctx_dem_mosaic"
+      ],
+      [
+        "USGS controlled CTX DTMs",
+        "Scored Gale, InSight, Gusev and Eberswalde references.",
+        "https://stac.astrogeology.usgs.gov/docs/data/mars/ctxdtms/"
+      ],
+      [
+        "NASA PDS LRO LOLA",
+        "Lunar diagnostic reference; distances only after floor failure.",
+        "https://pds-geosciences.wustl.edu/missions/lro/lola.htm"
+      ],
+      [
+        "ESA WorldCover v200",
+        "Built-up quality mask; not an analogue feature.",
+        "https://esa-worldcover.org/"
+      ],
+      [
+        "NASADEM and Copernicus GLO-30",
+        "Resolution-floor and sensitivity checks.",
+        "https://planetarycomputer.microsoft.com/dataset/cop-dem-glo-30"
+      ],
+      [
+        "Sentinel-2 L2A and CTX imagery",
+        "Display context only; never scored.",
+        "https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a"
+      ],
+      [
+        "NASA GIBS/Worldview and OpenFreeMap",
+        "Orientation and interactive map context.",
+        "https://worldview.earthdata.nasa.gov/"
+      ],
+      [
+        "MODIS MYD11A2 and Mars MEDA",
+        "Temperature context; comparability audit fails scoring use.",
+        "https://planetarycomputer.microsoft.com/dataset/modis-11A2-061"
+      ]
+    ]
+  },
+  {
+    "type": "p",
+    "text": "The local release records 14 terrain inputs and 13 imagery records. Verified terrain bytes include eight Earth SRTM inputs, five Mars DEM inputs and one lunar derivative. The original Atacama window remains catalogued but excluded because it contains an industrial complex; Atacama south is the registered replacement. Raw files are ignored by Git, while manifests, derived artifacts and LF-normalized metadata hashes are retained."
+  },
+  {
+    "type": "h2",
+    "text": "Acquisition, processing and provenance"
+  },
+  {
+    "type": "p",
+    "text": "The reproducible path is: discover an official product; record its product, licence, AOI, asset and quality metadata; acquire only into ignored raw storage; verify size, host, checksum and raster metadata; process a 10 km core with a 1200 m halo; apply the documented quality mask; compute terrain features and quantiles; write a versioned artifact and manifest; and validate the artifact before serving it. A changed archive cannot overwrite a recorded raw checksum. Unsafe archive paths and replacement of differing raw bytes are rejected."
+  },
+  {
+    "type": "p",
+    "text": "Each result carries an identity made from the Earth window, planetary reference, task, epoch, method version and profile configuration. It also exposes hashes for the method configuration, calibration, background population and selected calculation inputs. These controls answer “which bytes and rules made this number?” They do not claim that the source measurements or scientific interpretation have been independently validated."
+  },
+  {
+    "type": "h2",
+    "text": "What is measured and what is deliberately excluded"
+  },
+  {
+    "type": "table",
+    "caption": "Table 4. Evidence roles in the current release.",
+    "header": [
+      "Evidence family",
+      "Current status",
+      "Effect on rank"
+    ],
+    "rows": [
+      [
+        "Terrain morphology",
+        "Slope and relative elevation scored; relief and roughness diagnostic.",
+        "Only family currently eligible for ranking."
+      ],
+      [
+        "Imagery",
+        "Sentinel-2 and CTX crops, hillshade and slope previews.",
+        "Display context; zero score weight."
+      ],
+      [
+        "Temperature",
+        "MODIS area composites and MEDA rover observations.",
+        "Diagnostic only; incompatible spatial/temporal support."
+      ],
+      [
+        "Geology/mineralogy",
+        "EMIT, CRISM and related products listed for future work.",
+        "Unavailable; task-critical profiles remain partial."
+      ],
+      [
+        "Water/ice/subsurface",
+        "Not processed as comparable measurements.",
+        "No balanced-science, biosignature or base index."
+      ],
+      [
+        "Field suitability",
+        "Literature and site records only.",
+        "Never converted into a numerical suitability score."
+      ]
+    ]
+  },
+  {
+    "type": "h2",
+    "text": "Release verification and reproducibility"
+  },
+  {
+    "type": "p",
+    "text": "A release is considered internally reproducible when the catalog integrity audit, source-manifest audit, independent result recomputation, paper-number test and frontend build all pass. Backend tests cover the pure arithmetic, quantile approximation, eligibility gates, provenance and security boundaries. The frontend contract tests confirm that the displayed candidate, tie label, evidence panel and downloaded JSON correspond to the API response. These are engineering and numerical-consistency checks, not a substitute for external scientific validation."
+  },
+  {
+    "type": "table",
+    "caption": "Table 5. Minimal local reproduction sequence.",
+    "header": [
+      "Stage",
+      "Command or artifact",
+      "Purpose"
+    ],
+    "rows": [
+      [
+        "Audit",
+        "audit_sources --write; validate_catalog_integrity",
+        "Verify registered products, metadata and checksums."
+      ],
+      [
+        "Recompute",
+        "reproduce_release",
+        "Recalculate stored terrain distributions without replacing them."
+      ],
+      [
+        "Paper",
+        "build_methods_paper; build_methods_paper --check",
+        "Regenerate this paper and detect drift from the live method."
+      ],
+      [
+        "Tests",
+        "pytest tests/test_paper_numbers.py tests/test_provenance.py -q",
+        "Check numbers, gates, identity and provenance."
+      ],
+      [
+        "Frontend",
+        "npm run lint; npm run typecheck; npm run build",
+        "Check typed API use and production rendering."
+      ]
+    ]
+  },
+  {
+    "type": "h2",
+    "text": "Interpretation rules for users"
+  },
+  {
+    "type": "list",
+    "items": [
+      "Read the reference AOI, method version, grid and evidence coverage before comparing two indices. Results from different keys are not a competition.",
+      "Treat a high index as similarity of the measured distributions at the stated scale. Inspect the background share and scenario range before calling a candidate distinctive.",
+      "Treat a tie as an honest unresolved ordering, not a frontend error. A label such as “1 (tie)” means the candidate belongs to a range-overlap group.",
+      "Treat “not resolved” as a measurement statement: the observed distance is no larger than the tested placement and DEM-product floor. It is not proof that the surfaces are identical.",
+      "Do not interpret evidence coverage as confidence. A profile can have a high terrain score while remaining incomplete for geology, temperature, water, habitability or field testing."
+    ]
+  },
+  {
+    "type": "h2",
+    "text": "Validation roadmap"
+  },
+  {
+    "type": "p",
+    "text": "The next scientific step is not to tune the index until the ranking looks persuasive. It is to pre-register expert-labelled positive analogues, deliberately selected negative controls and held-out regions, then evaluate calibration, discrimination and stability without changing the tolerances after seeing the labels. Additional families should be admitted only when Earth and planetary observations have comparable support, resolution, epoch and uncertainty. Morphology descriptors that preserve spatial arrangement, explicit vertical-datum checks, surface-process evidence and field-observation protocols are promising extensions. Until those tests are complete, AlterEcho should be used as an auditable terrain-screening aid and a way to expose assumptions—not as a site-certification system."
+  },
+  {
+    "type": "h1",
     "text": "Methods: Earth–Planetary Terrain Analogue Comparison"
   },
   {
     "type": "p",
-    "text": "This section describes the method implemented in the TerraLuna application as analogue-method-v1.0 with the terrain measurement terrain-v5.0. Every number below is generated from the versioned configuration, calibration files and a live comparison of the running backend; a test fails if the text and the backend diverge."
+    "text": "This section describes the method implemented in the AlterEcho application as analogue-method-v1.0 with the terrain measurement terrain-v5.0. Every number below is generated from the versioned configuration, calibration files and a live comparison of the running backend; a test fails if the text and the backend diverge."
   },
   {
     "type": "h2",
@@ -18,12 +365,12 @@
   {
     "type": "eq",
     "n": 1,
-    "latex": "\\mathcal{R} = \\mathcal{R}(E,\\,P,\\,T,\\,H,\\,V)",
-    "umath": "R=R(E,P,T,H,V)#(1)"
+    "latex": "\\mathcal{Q} = (E,\\,P,\\,T,\\,H,\\,V,\\,R)",
+    "umath": "Q=(E,P,T,H,V,R)#(1)"
   },
   {
     "type": "p",
-    "text": "where $E$ is the Earth area of interest (AOI), $P$ the planetary reference AOI, $T$ the task profile, $H$ the epoch (the present-day surface recorded by the elevation models, not the ancient environment that formed it) and $V$ the method version. Results with different definitions are never ranked together. The output is an experimental terrain evidence index, not a probability that a place is like Mars, not a measure of geology, atmosphere, water, habitability, access or mission safety, and not a NASA or USGS endorsement."
+    "text": "where $E$ is the Earth area of interest (AOI), $P$ the planetary reference AOI, $T$ the task profile, $H$ the epoch (the present-day surface recorded by the elevation models, not the ancient environment that formed it) $V$ the method version and $R$ the profile configuration (identified by its content digest). Results with different definitions are never ranked together. The output is an experimental terrain evidence index, not a probability that a place is like Mars, not a measure of geology, atmosphere, water, habitability, access or mission safety, and not a NASA or USGS endorsement."
   },
   {
     "type": "h2",
@@ -185,11 +532,11 @@
   },
   {
     "type": "p",
-    "text": "$A_{\\mathrm{obs}}$ is undefined, never zero, when no family qualifies. $C$ is the share of the planned profile weight that is measured and comparable; it is not statistical confidence and not DEM pixel coverage. Only terrain is currently measured, so $C$ = 1 for the terrain-analogy profile and 0.30, 0.80 and 0.35 for the balanced-science, rover-mobility and Mars-base field-testing profiles. A profile is ranked only if it is declared rankable, every task-critical family is eligible for every candidate and all candidates share one eligibility key (reference AOI, method, weights, scored features, tolerances, grid, DEM product and mask). Today only terrain analogy is ranked; the other profiles are reported as partial evidence or not assessed. Ties are formed from scenario ranges: each candidate's index is recomputed with the Earth window moved 2 km in four directions, the reference moved 2 km in four directions, each alternative DEM, the 120 and 240 m grids, all tolerances × 0.75 and × 1.25, and feature weights 0.25/0.75; candidates whose ranges overlap, chained in order of nominal index, share a competition rank. These ranges are scenario sensitivities, not confidence intervals."
+    "text": "$A_{\\mathrm{obs}}$ is undefined, never zero, when no family qualifies. $C$ is the share of the planned profile weight that is measured and comparable; it is not statistical confidence and not DEM pixel coverage. Only terrain is currently measured, so $C$ = 1 for the terrain-analogy profile and 0.30, 0.80 and 0.35 for the balanced-science, rover-mobility and Mars-base field-testing profiles. A profile is ranked only if it is declared rankable, every task-critical family is eligible for every candidate and all candidates share one eligibility key (reference AOI, method, weights, scored features, tolerances, grid, DEM product and mask). Today only terrain analogy is ranked; the other profiles are reported as partial evidence or not assessed. If any task-critical gate fails, the overall API/export index is null; family measurements remain visible. Ties are formed from scenario ranges: each candidate's index is recomputed with the Earth window moved 2 km in four directions, the reference moved 2 km in four directions, each alternative DEM, the 120 and 240 m grids, all tolerances × 0.75 and × 1.25, and feature weights 0.25/0.75; candidates whose ranges overlap, chained in order of nominal index, share a competition rank. These ranges are scenario sensitivities, not confidence intervals."
   },
   {
     "type": "table",
-    "caption": "Table 1. Planned family weights and task-critical families by profile.",
+    "caption": "Table 6. Planned family weights and task-critical families by profile.",
     "header": [
       "Profile",
       "Planned weights $w_g$",
@@ -239,7 +586,7 @@
   },
   {
     "type": "table",
-    "caption": "Table 2. Worked example at 60 m. d, τ and δ in the feature units; s and contributions from full-precision values.",
+    "caption": "Table 7. Worked example at 60 m. d, τ and δ in the feature units; s and contributions from full-precision values.",
     "header": [
       "Feature",
       "Earth window",
@@ -313,7 +660,7 @@
   },
   {
     "type": "p",
-    "text": "Python 3.13.4, NumPy 2.3.4, Rasterio 1.4.3 with GDAL 3.9.3, FastAPI 0.162.7. Method configuration backend/app/data/analogue.v1.json (SHA-256 of LF text fa0cebded15dd10b…); calibration backend/data/processed/evaluation/analogue-v1-calibration.json (1e0463f39fca804a…). Scoring functions: backend/app/services/analogue_math.py (similarity, w1_quantile_functions, family_score, observed_index); backend/app/services/analogue_v1_service.py (terrain_features, reference_floor, compare); backend/app/services/terrain_quantiles.py (measure, quantile_function)."
+    "text": "Python 3.12.14, NumPy 2.3.4, Rasterio 1.4.3 with GDAL 3.9.3, FastAPI 0.162.7. Method configuration backend/app/data/analogue.v1.json (SHA-256 of LF text 4d4a2c257499ed6f…); calibration backend/data/processed/evaluation/analogue-v1-calibration.json (1e0463f39fca804a…). Scoring functions: backend/app/services/analogue_math.py (similarity, w1_quantile_functions, family_score, observed_index); backend/app/services/analogue_v1_service.py (terrain_features, reference_floor, compare); backend/app/services/terrain_quantiles.py (measure, quantile_function)."
   },
   {
     "type": "h1",

@@ -1,0 +1,7 @@
+flowchart LR
+ E[Earth quantiles] --> D[Physical W1 distance]
+ P[Reference quantiles] --> D
+ D --> G{Comparability and critical gates}
+ G -->|pass| S[Feature transform and family weights]
+ G -->|fail| N[Null index and explicit missing evidence]
+ S --> O[Index and evidence coverage]

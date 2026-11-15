@@ -125,7 +125,7 @@ def list_site_imagery(site_id: str) -> list[ImageryRecord]:
     bbox = _bbox(aoi.geometry)
     terrain = ImageryRecord(
         imagery_id=f"{site_id}-terrain-v3", site_id=site_id, body=site.body, mode="terrain",
-        provider="TerraLuna derived terrain", collection="terrain-v3.0", product_id=site.processing_status.value,
+        provider="AlterEcho derived terrain", collection="terrain-v3.0", product_id=site.processing_status.value,
         acquisition_datetime=None, resolution_m=60, processing_level="Derived hillshade preview",
         bbox=bbox, aoi_id=site.aoi_id, preview_url=f"/api/sites/{site_id}/terrain/preview.svg",
         attribution="Derived from the registered DEM; see terrain provenance.", official_source_url=f"/api/sites/{site_id}/terrain",

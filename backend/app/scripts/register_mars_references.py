@@ -198,7 +198,7 @@ def register(client: httpx.Client, cand: dict) -> dict:
 
 def main() -> None:
     results = []
-    with httpx.Client(timeout=120, headers={"User-Agent": "TerraLuna-analysis/1.0"}) as client:
+    with httpx.Client(timeout=120, headers={"User-Agent": "AlterEcho-analysis/1.0"}) as client:
         for cand in CANDIDATES:
             r = register(client, cand)
             print(json.dumps(r))

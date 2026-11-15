@@ -16,8 +16,8 @@ client = TestClient(app)
 
 
 def test_sha256_and_equal_aoi_dimensions(tmp_path):
-    sample = tmp_path / "sample.bin"; sample.write_bytes(b"terraluna")
-    assert sha256_file(sample) == "76d9f4a4c5bd4ca91bc93f827c6492645f4409f2f2c1ac543b9e6920cace1213"
+    sample = tmp_path / "sample.bin"; sample.write_bytes(b"alterecho")
+    assert sha256_file(sample) == "bfb65daa2468fa2cc10274a5a51972e0fd38d4ca6d492cb325e716fef7797956"
     jezero, atacama = load_aoi("mars-jezero-aoi-v1"), load_aoi("earth-atacama-aoi-v1")
     assert (jezero.width_m, jezero.height_m) == (atacama.width_m, atacama.height_m) == (10000, 10000)
     assert metric_grid_size(10000, 10000, 60) == (167, 167, 10020, 10020)

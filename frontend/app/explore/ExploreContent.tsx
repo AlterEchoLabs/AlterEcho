@@ -109,7 +109,7 @@ export default function ExploreContent() {
       </section>
       <section className="explore-side" aria-label="Screening">
         <h1>Explore a new Earth area</h1>
-        <p className="muted">Click the map, type coordinates, or start from a documented analog place. TerraLuna measures the same terrain features as the showcase sites and compares them with the processed planetary references. Results are <span className="screening-badge">screening</span> until reviewed.</p>
+        <p className="muted">Click the map, type coordinates, or start from a documented analog place. AlterEcho measures the same terrain features as the showcase sites and compares them with the processed planetary references. Results are <span className="screening-badge">screening</span> until reviewed.</p>
         <form className="coord-form" onSubmit={(e) => { e.preventDefault(); const lat = Number(latText), lon = Number(lonText); if (Number.isFinite(lat) && Number.isFinite(lon) && Math.abs(lat) <= 90 && Math.abs(lon) <= 180) pick(lat, lon); }}>
           <label>Latitude<input inputMode="decimal" value={latText} onChange={(e) => setLatText(e.target.value)} placeholder="e.g. 36.23" aria-label="Latitude in decimal degrees" /></label>
           <label>Longitude<input inputMode="decimal" value={lonText} onChange={(e) => setLonText(e.target.value)} placeholder="e.g. -116.77" aria-label="Longitude in decimal degrees" /></label>
@@ -159,7 +159,7 @@ export default function ExploreContent() {
                 {jezero && <p className="score-figure"><span className="mono">{jezero.terrain_index.toFixed(1)}</span><small>/100 vs Jezero</small></p>}
                 {moon && <p className="muted">Against the lunar south-pole window: <span className="mono">{moon.terrain_index.toFixed(1)}</span>/100 (limited lunar comparison).</p>}
                 {jezero && (
-                  <div className="table-scroll"><table className="feature-table">
+                  <div className="table-scroll" tabIndex={0} role="region" aria-label="Scrollable data table"><table className="feature-table">
                     <thead><tr><th>Family</th><th>W1 at 60 m</th><th>τ</th><th>Index</th></tr></thead>
                     <tbody>{Object.entries(jezero.families).map(([k, f]) => <tr key={k}><th scope="row">{FAMILY_LABEL[k] ?? k}</th><td className="mono">{f.w1_60m.toFixed(2)} {f.units === "degrees" ? "°" : "m"}</td><td className="mono">{f.tau}</td><td className="mono">{f.index.toFixed(1)}</td></tr>)}</tbody>
                   </table></div>
@@ -175,7 +175,16 @@ export default function ExploreContent() {
                 <ul className="limits">{result.limitations.map((l) => <li key={l}>{l}</li>)}</ul>
                 <p className="muted small">Inputs: {result.inputs.map((i) => `${i.tile_id} (SHA-256 ${i.sha256.slice(0, 10)}…)`).join(", ")} · result SHA-256 {result.result_sha256?.slice(0, 12)}…</p>
                 <div className="export-row">
-                  <button type="button" className="button-link secondary" onClick={() => { const url = URL.createObjectURL(new Blob([JSON.stringify(job, null, 2)], { type: "application/json" })); const a = document.createElement("a"); a.href = url; a.download = `terraluna-screening-${job.job_id.slice(0, 8)}.json`; a.click(); URL.revokeObjectURL(url); }}>Download JSON record</button>
+                  <button type="button" className="button-link secondary" onClick={() => {
+                    const url = URL.createObjectURL(new Blob([JSON.stringify(job, null, 2)], { type: "application/json" }));
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = `alterecho-screening-${job.job_id.slice(0, 8)}.json`;
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+                  }}>Download JSON record</button>
                   <button type="button" className="button-link secondary" onClick={() => navigator.clipboard?.writeText(window.location.href)}>Copy share link</button>
                 </div>
               </div>

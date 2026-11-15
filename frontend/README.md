@@ -1,4 +1,4 @@
-# TerraLuna frontend
+# AlterEcho frontend
 
 Next.js 16 (App Router), React 19, MapLibre GL and three.js via `@react-three/fiber`. The UI is one task-ordered page plus two reading pages:
 
@@ -18,7 +18,7 @@ lib/api.ts                      typed API client (URL allowlisting, timeouts, me
 lib/evidence.ts                 TypeScript mirror of backend/app/models/evidence.py
 lib/hooks.ts                    useKeyed (stale responses never render for the wrong site), WebGL / media hooks
 public/textures/                NASA/USGS globe mosaics + textures.manifest.json (attribution, checksums)
-e2e/terraluna.spec.ts           Playwright, three viewports, real backend + production build
+e2e/alterecho.spec.ts           Playwright, three viewports, real backend + production build
 ```
 
 ## Run (Git Bash on Windows)

@@ -1,0 +1,138 @@
+{
+  "scope": "Read-only official landing-page checks; transient failures do not prove product absence",
+  "results": [
+    {
+      "url": "https://astrogeology.usgs.gov/search/map/mars_2020_science_investigation_ctx_dem_mosaic",
+      "status_code": 200,
+      "resolved_url": "https://astrogeology.usgs.gov/search/map/mars_2020_science_investigation_ctx_dem_mosaic"
+    },
+    {
+      "url": "https://dataspace.copernicus.eu/",
+      "status_code": 200,
+      "resolved_url": "https://dataspace.copernicus.eu/"
+    },
+    {
+      "url": "https://donnees-data.asc-csa.gc.ca/en/dataset/radarsat1",
+      "error_type": "ConnectError"
+    },
+    {
+      "url": "https://donnees-data.asc-csa.gc.ca/en/dataset/rcm",
+      "error_type": "ConnectError"
+    },
+    {
+      "url": "https://esa-worldcover.org/",
+      "status_code": 200,
+      "resolved_url": "https://esa-worldcover.org/en"
+    },
+    {
+      "url": "https://github.com/asc-csa/Synthetic_Aperture_Radar_Tutorial",
+      "status_code": 200,
+      "resolved_url": "https://github.com/asc-csa/Synthetic_Aperture_Radar_Tutorial"
+    },
+    {
+      "url": "https://gportal.jaxa.jp/gpr/index/index",
+      "status_code": 200,
+      "resolved_url": "https://www.gportal.jaxa.jp/?lang=en"
+    },
+    {
+      "url": "https://ode.rsl.wustl.edu/",
+      "status_code": 200,
+      "resolved_url": "https://ode.rsl.wustl.edu/"
+    },
+    {
+      "url": "https://opensciencedata.esa.int/",
+      "status_code": 200,
+      "resolved_url": "https://opensciencedata.esa.int/"
+    },
+    {
+      "url": "https://pds-atmospheres.nmsu.edu/PDS/data/PDS4/Mars2020/mars2020_meda/",
+      "status_code": 200,
+      "resolved_url": "https://pds-atmospheres.nmsu.edu/PDS/data/PDS4/Mars2020/mars2020_meda/"
+    },
+    {
+      "url": "https://pds-geosciences.wustl.edu/missions/lro/",
+      "status_code": 200,
+      "resolved_url": "https://pds-geosciences.wustl.edu/missions/lro/"
+    },
+    {
+      "url": "https://pds-geosciences.wustl.edu/missions/lro/lola.htm",
+      "status_code": 200,
+      "resolved_url": "https://pds-geosciences.wustl.edu/missions/lro/lola.htm"
+    },
+    {
+      "url": "https://pds-geosciences.wustl.edu/missions/mro/sharad.htm",
+      "status_code": 200,
+      "resolved_url": "https://pds-geosciences.wustl.edu/missions/mro/sharad.htm"
+    },
+    {
+      "url": "https://planetarycomputer.microsoft.com/dataset/cop-dem-glo-30",
+      "status_code": 200,
+      "resolved_url": "https://planetarycomputer.microsoft.com/dataset/cop-dem-glo-30"
+    },
+    {
+      "url": "https://planetarycomputer.microsoft.com/dataset/modis-11A2-061",
+      "status_code": 200,
+      "resolved_url": "https://planetarycomputer.microsoft.com/dataset/modis-11A2-061"
+    },
+    {
+      "url": "https://planetarycomputer.microsoft.com/dataset/nasadem",
+      "status_code": 200,
+      "resolved_url": "https://planetarycomputer.microsoft.com/dataset/nasadem"
+    },
+    {
+      "url": "https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a",
+      "status_code": 200,
+      "resolved_url": "https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a"
+    },
+    {
+      "url": "https://planetarymaps.usgs.gov/mosaic/Mars_MGS_MOLA_DEM_mosaic_global_463m.tif",
+      "status_code": 200,
+      "resolved_url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Mars_MGS_MOLA_DEM_mosaic_global_463m.tif"
+    },
+    {
+      "url": "https://search.earthdata.nasa.gov/search?q=EMITL2BMIN",
+      "status_code": 200,
+      "resolved_url": "https://search.earthdata.nasa.gov/search?q=EMITL2BMIN"
+    },
+    {
+      "url": "https://search.earthdata.nasa.gov/search?q=SRTMGL1",
+      "status_code": 200,
+      "resolved_url": "https://search.earthdata.nasa.gov/search?q=SRTMGL1"
+    },
+    {
+      "url": "https://stac.astrogeology.usgs.gov/api/collections/mro_ctx_controlled_usgs_dtms/items/B22_018056_1559_XN_24S033W__G01_018557_1555_XN_24S033W",
+      "status_code": 200,
+      "resolved_url": "https://stac.astrogeology.usgs.gov/api/collections/mro_ctx_controlled_usgs_dtms/items/B22_018056_1559_XN_24S033W__G01_018557_1555_XN_24S033W"
+    },
+    {
+      "url": "https://stac.astrogeology.usgs.gov/api/collections/mro_ctx_controlled_usgs_dtms/items/N15_068239_1823_XN_02N224W__F18_042827_1842_XN_04N224W",
+      "status_code": 200,
+      "resolved_url": "https://stac.astrogeology.usgs.gov/api/collections/mro_ctx_controlled_usgs_dtms/items/N15_068239_1823_XN_02N224W__F18_042827_1842_XN_04N224W"
+    },
+    {
+      "url": "https://stac.astrogeology.usgs.gov/api/collections/mro_ctx_controlled_usgs_dtms/items/P22_009530_1653_XI_14S184W__P06_003333_1652_XI_14S184W",
+      "status_code": 200,
+      "resolved_url": "https://stac.astrogeology.usgs.gov/api/collections/mro_ctx_controlled_usgs_dtms/items/P22_009530_1653_XI_14S184W__P06_003333_1652_XI_14S184W"
+    },
+    {
+      "url": "https://stac.astrogeology.usgs.gov/api/collections/mro_ctx_controlled_usgs_dtms/items/T01_000815_1749_XN_05S222W__K19_060629_1752_XI_04S222W",
+      "status_code": 200,
+      "resolved_url": "https://stac.astrogeology.usgs.gov/api/collections/mro_ctx_controlled_usgs_dtms/items/T01_000815_1749_XN_05S222W__K19_060629_1752_XI_04S222W"
+    },
+    {
+      "url": "https://stac.astrogeology.usgs.gov/docs/data/mars/ctxdtms/",
+      "status_code": 200,
+      "resolved_url": "https://stac.astrogeology.usgs.gov/docs/data/mars/ctxdtms/"
+    },
+    {
+      "url": "https://svs.gsfc.nasa.gov/4720/",
+      "status_code": 200,
+      "resolved_url": "https://svs.gsfc.nasa.gov/4720/"
+    },
+    {
+      "url": "https://worldview.earthdata.nasa.gov/",
+      "status_code": 200,
+      "resolved_url": "https://worldview.earthdata.nasa.gov/"
+    }
+  ]
+}

@@ -34,7 +34,13 @@ export default function ReportContent() {
   const d = current.data, c = d.candidate, s = c.simple;
   const download = () => {
     const url = URL.createObjectURL(new Blob([JSON.stringify(d, null, 2)], { type: "application/json" }));
-    const a = document.createElement("a"); a.href = url; a.download = `terraluna-${site}-${profile}-${reference}.json`; a.click(); URL.revokeObjectURL(url);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `alterecho-${site}-${profile}-${reference}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
   };
   return (
     <article className="report" data-testid="report">

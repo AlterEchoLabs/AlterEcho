@@ -16,6 +16,7 @@ export interface FeatureRecord {
 }
 
 export interface FamilyRecord {
+  scientific_status?: "real_processed" | "real_context_only" | "planned" | "not_assessed" | "unavailable" | "failed_quality_gate";
   family: FamilyId; label: string; weight: number; eligible: boolean; status: FamilyStatus; reason: string; score: number | null;
   task_critical: boolean; features: FeatureRecord[]; context: Record<string, unknown> | null;
 }
@@ -31,6 +32,7 @@ export interface SimpleResult {
 export interface Citation { id: string; title: string; url: string }
 
 export interface CandidateV3 {
+  scientific_status?: "real_processed" | "real_context_only" | "planned" | "not_assessed" | "unavailable" | "failed_quality_gate";
   site_id: string; site_name: string; state: CandidateState; rank: number | null; observed_index: number | null; evidence_coverage: number;
   resolution: "unresolved_from_reference" | "resolved" | "not_applicable"; critical_gates: Record<string, boolean>; families: FamilyRecord[];
   sensitivity: SensitivityV3 | null; eligibility_key: string | null; simple: SimpleResult;

@@ -6,6 +6,7 @@ import { apiV3, safeExternalUrl, type Site } from "../../../lib/api";
 import { ROLE_TEXT, STATE_TEXT, STATUS_TEXT, type CandidateV3, type CompareV3, type DataRole, type DistributionPair, type FeatureRecord, type ResultDetail, type ViewMode } from "../../../lib/analogue";
 import { coords, num, pct } from "../../../lib/format";
 import { useKeyed } from "../../../lib/hooks";
+import FormulaList from "../FormulaList";
 
 const unitOf = (units: string) => (units === "degrees" ? "°" : " m");
 const fmt = (v: number | null | undefined, units: string, digits?: number) => (v == null ? "—" : `${v.toFixed(digits ?? (units === "degrees" ? 2 : 1))}${unitOf(units)}`);
@@ -122,13 +123,13 @@ export function FullEvidence({ detail, onBack }: { detail: ResultDetail; onBack?
 
       <section>
         <h3>Formulas and parameters</h3>
-        <ul className="formula-list">{Object.entries(comp.formulas).map(([k, v]) => <li key={k}><span className="muted">{k.replaceAll("_", " ")}</span><code>{v}</code></li>)}</ul>
+        <FormulaList formulas={comp.formulas} />
         <dl className="kv params">{Object.entries(comp.parameters).map(([k, v]) => <Fragment key={k}><dt className="mono">{k}</dt><dd>{v}</dd></Fragment>)}</dl>
       </section>
 
       <section>
         <h3>Per-feature calculation (60 m grid)</h3>
-        <div className="table-scroll">
+        <div className="table-scroll" tabIndex={0} role="region" aria-label="Scrollable data table">
           <table className="feature-table calc-table" data-testid="calc-table">
             <caption className="sr-only">Distances, tolerances, similarities and contributions</caption>
             <thead><tr><th scope="col">Feature</th><th scope="col">Earth median · p90</th><th scope="col">Reference median · p90</th><th scope="col"><span className="g">d</span> (W1)</th><th scope="col"><span className="g">τ</span></th><th scope="col"><span className="g">d/τ</span></th><th scope="col"><span className="g">s</span></th><th scope="col"><span className="g">a</span></th><th scope="col">points</th><th scope="col"><span className="g">δ</span> floor</th></tr></thead>
@@ -163,7 +164,7 @@ export function FullEvidence({ detail, onBack }: { detail: ResultDetail; onBack?
 
       <section>
         <h3>Evidence families, weights and eligibility</h3>
-        <div className="table-scroll">
+        <div className="table-scroll" tabIndex={0} role="region" aria-label="Scrollable data table">
           <table className="feature-table" data-testid="family-table">
             <caption className="sr-only">Planned evidence families for this profile</caption>
             <thead><tr><th scope="col">Family</th><th scope="col">w (planned)</th><th scope="col">Eligible</th><th scope="col">Status</th><th scope="col">S</th><th scope="col">Reason</th></tr></thead>
@@ -197,7 +198,7 @@ export function FullEvidence({ detail, onBack }: { detail: ResultDetail; onBack?
         <section>
           <h3>Sensitivity</h3>
           <p className="muted small">{c.sensitivity.notice}</p>
-          <div className="table-scroll">
+          <div className="table-scroll" tabIndex={0} role="region" aria-label="Scrollable data table">
             <table className="feature-table" data-testid="sensitivity-table">
               <caption className="sr-only">Index and rank under each scenario</caption>
               <thead><tr><th scope="col">Scenario</th><th scope="col">Index</th><th scope="col">Rank</th></tr></thead>
@@ -210,7 +211,7 @@ export function FullEvidence({ detail, onBack }: { detail: ResultDetail; onBack?
 
       <section>
         <h3>Tolerances and resolution floor</h3>
-        <div className="table-scroll">
+        <div className="table-scroll" tabIndex={0} role="region" aria-label="Scrollable data table">
           <table className="feature-table" data-testid="tolerance-table">
             <thead><tr><th scope="col">Feature</th><th scope="col"><span className="g">τ</span> (60 m)</th><th scope="col"><span className="g">τ</span> leave one tile out</th><th scope="col"><span className="g">δ</span> placement</th><th scope="col"><span className="g">δ</span> DEM</th><th scope="col"><span className="g">δ</span> combined</th><th scope="col"><span className="g">τ ≥ 3δ</span></th></tr></thead>
             <tbody>{comp.tolerances.map((t) => (
@@ -295,7 +296,7 @@ export default function ResultPanel({ site, reference, comparison, result, view,
   const range = result.sensitivity?.index_range;
   const groupSize = comparison.tie_groups.find((g) => g.includes(result.site_id))?.length ?? 1;
   const reportHref = `/report?site=${encodeURIComponent(site.id)}&profile=${profileId}&reference=${encodeURIComponent(referenceId)}`;
-  const jsonName = `terraluna-${site.id}-${profileId}-${referenceId}.json`;
+  const jsonName = `alterecho-${site.id}-${profileId}-${referenceId}.json`;
 
   return (
     <section className="result-panel" aria-label={`Result for ${site.name}`}>

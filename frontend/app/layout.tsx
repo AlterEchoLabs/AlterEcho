@@ -17,11 +17,12 @@ export const metadata: Metadata = {
   description: BRAND.description,
 };
 
-export const viewport: Viewport = { themeColor: "#0d1117", colorScheme: "dark" };
+export const viewport: Viewport = { colorScheme: "dark light" };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${serif.variable} ${sans.variable} ${mono.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${serif.variable} ${sans.variable} ${mono.variable}`}>
+      <head><script dangerouslySetInnerHTML={{ __html: `(function(){var r=document.documentElement,m=matchMedia('(prefers-color-scheme: dark)'),p='system';try{p=localStorage.getItem('alterecho-theme')||p}catch(e){}if(!['dark','light','system'].includes(p))p='system';r.dataset.preference=p;function apply(){r.dataset.theme=r.dataset.preference==='system'?(m.matches?'dark':'light'):r.dataset.preference}apply();m.addEventListener('change',apply)})();` }} /></head>
       <body data-application-id={BRAND.applicationId} data-build-identifier={BRAND.buildIdentifier}>
         <a className="skip-link" href="#main">Skip to content</a>
         <Masthead />

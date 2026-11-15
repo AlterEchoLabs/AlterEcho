@@ -1,6 +1,8 @@
 # Final pass: audit, discrimination analysis, Mars references and research paper
 
-Branch `feature/terraluna-phase-6`. Method `analogue-method-v1.0` / `terrain-v5.0`; the historical methods are still served at `/api/v2/compare` (terrain-v4.0, analog-evidence-v2.0) and `/api/evidence/compare` (analog-evidence-v1.0).
+Historical audit retained below. The current `main` checkout review and freshly executed checks are recorded in [RELEASE_HANDOFF.md](RELEASE_HANDOFF.md); the branch and test counts below describe the earlier pass.
+
+Branch `feature/alterecho-phase-6`. Method `analogue-method-v1.0` / `terrain-v5.0`; the historical methods are still served at `/api/v2/compare` (terrain-v4.0, analog-evidence-v2.0) and `/api/evidence/compare` (analog-evidence-v1.0).
 
 ## 1. Audit of the system as found
 
@@ -132,7 +134,7 @@ All results are from the final state of this branch, on 15 November 2026.
 
 | Check | Command | Result |
 |---|---|---|
-| Backend tests | `cd backend && .venv-geo/Scripts/python.exe -m pytest -q` | 255 passed, 11 skipped (all opt-in live provider checks, run with TERRALUNA_LIVE=1); external services mocked |
+| Backend tests | `cd backend && .venv-geo/Scripts/python.exe -m pytest -q` | 255 passed, 11 skipped (all opt-in live provider checks, run with ALTERECHO_LIVE=1); external services mocked |
 | Paper drift check | `python -m app.scripts.build_methods_paper --check` | passes (exit 0): `docs/paper/methods.md` matches a rebuild from the live service |
 | Paper numbers against the API | `tests/test_paper_numbers.py` (part of the suite) | passes; the worked example agrees with the API within 10⁻⁸ |
 | Artifact integrity | `python -m app.scripts.validate_catalog_integrity` | `passed` (artifact integrity only; no scientific validation) |

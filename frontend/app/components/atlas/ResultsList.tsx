@@ -7,7 +7,7 @@ import { pct } from "../../../lib/format";
 
 function rankText(r: CandidateV3, groupSize: number): string {
   if (r.state !== "ranked" || r.rank == null) return "·";
-  return groupSize > 1 ? `${r.rank}=` : String(r.rank);
+  return groupSize > 1 ? `${r.rank} (tie)` : String(r.rank);
 }
 
 function Row({ result, site, selected, groupSize, onSelect, delay }: {

@@ -3,7 +3,7 @@
   "terrain_method": "terrain-v5.0",
   "status": "experimental_research_method",
   "review_status": "not_validated_against_expert_labels_or_field_data",
-  "comparison_definition": "Every result is conditional on (Earth AOI E, planetary reference AOI P, task profile T, epoch or process H, method version V). Valid narrow claim: at the specified 10 km windows and tested scale, site E resembles reference P on the measured descriptors for task T.",
+  "comparison_definition": "Every result is conditional on (Earth AOI E, planetary reference AOI P, task profile T, epoch or process H, method version V, profile configuration R). Valid narrow claim: at the specified 10 km windows and tested scale, site E resembles reference P on the measured descriptors for task T.",
   "notice": "Indices are project-defined bounded indices on the stated measurements. They are not probabilities, confidence levels, percentages of identity, NASA standards or mission-suitability ratings.",
   "formulas": {
     "scalar_distance": "d_k = |x_E,k - x_P,k|   (same units on both bodies)",

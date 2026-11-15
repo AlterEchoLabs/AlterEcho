@@ -1,0 +1,8 @@
+{
+  "results_visible_ms": 3553,
+  "cpu_slowdown": 4,
+  "latency_ms": 40,
+  "download_bytes_per_second": 1125000,
+  "runs": 1,
+  "limitation": "Single headless Chromium run with software rendering on this host, not a device benchmark or production service guarantee"
+}

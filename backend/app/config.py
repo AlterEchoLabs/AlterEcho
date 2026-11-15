@@ -14,7 +14,7 @@ except ImportError:  # python-dotenv ships with uvicorn[standard]; absence just 
 @dataclass(frozen=True)
 class Settings:
     application_id: str = os.getenv("APPLICATION_ID", "alterecho-terrain-explorer")
-    product_name: str = os.getenv("PRODUCT_NAME", "TerraLuna AI")
+    product_name: str = os.getenv("PRODUCT_NAME", "AlterEcho AI")
     subtitle: str = os.getenv("PRODUCT_SUBTITLE", "Interplanetary Terrain Explorer")
     team_name: str = os.getenv("TEAM_NAME", "Team AlterEcho")
     description: str = os.getenv("PRODUCT_DESCRIPTION", "Transparent Earth terrain analog comparisons using processed elevation data.")

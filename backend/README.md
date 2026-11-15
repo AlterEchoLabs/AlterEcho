@@ -1,6 +1,6 @@
 # Backend
 
-Welcome! This is the FastAPI side of TerraLuna AI. It provides the catalog of planetary bodies and terrain sites, comparison endpoints for the frontend, and a separate toolchain for processing elevation data.
+Welcome! This is the FastAPI side of AlterEcho AI. It provides the catalog of planetary bodies and terrain sites, comparison endpoints for the frontend, and a separate toolchain for processing elevation data.
 
 The easiest way to understand the backend is to follow one request from the moment the server starts.
 

@@ -1,10 +1,12 @@
-# TerraLuna
+# AlterEcho
+
+Current local production review: [release handoff](docs/RELEASE_HANDOFF.md), [system and research guide](docs/ALTERECHO_SYSTEM_AND_RESEARCH_GUIDE.md), [source registry](docs/DATA_SOURCE_REGISTRY.md), and [acquisition guide](docs/DATA_ACQUISITION_GUIDE.md). The guide is also available as editable DOCX and PDF in `docs/`.
 
 Team AlterEcho · NASA Space Apps Challenge 2026 · *Identify Earth locations that analog the permanent Moon base locations and Mars*
 
 Choose a reference site on Mars or the Moon, find comparable Earth terrain, and see what each mission question can and cannot conclude. Every result separates three things: **measured analogy** (a similarity index from comparable measurements), **field-test suitability** (a documented record, never scored) and **evidence quality** (statuses, coverage and sensitivity). There is no synthetic confidence number.
 
-TerraLuna is a research-shortlisting tool. It is not a landing-site selector, a safety assessment or a NASA endorsement.
+AlterEcho is a research-shortlisting tool. It is not a landing-site selector, a safety assessment or a NASA endorsement.
 
 ## What runs on real data today
 
@@ -29,10 +31,10 @@ Holuhraun (ArcticDEM) and the McMurdo Dry Valleys (REMA) are listed as planned a
 
 ## How the index is calculated (analogue-method-v1.0)
 
-A result is conditional on (Earth window E, reference window P, task T, epoch H, method V). It answers a narrow question: does window E resemble window P on the measured terrain at a 60 m grid? It does not say a site is "99 % like Mars" or safe for a base.
+A result is conditional on (Earth window E, reference window P, task T, epoch H, method V, profile configuration R). It answers a narrow question: does window E resemble window P on the measured terrain at a 60 m grid? It does not say a site is "99 % like Mars" or safe for a base.
 
 ```
-d_k  = W1(F_E,k, F_P,k) = ∫₀¹ |F_E,k⁻¹(u) − F_P,k⁻¹(u)| du     exact quantile functions of equal-area cells, in degrees or metres
+d_k  = W1(F_E,k, F_P,k) = ∫₀¹ |F_E,k⁻¹(u) − F_P,k⁻¹(u)| du     500 midpoint samples of empirical quantile functions of equal-area cells, in degrees or metres
 s_k  = exp(−ln 2 · (d_k / τ_k)²)                                d = τ → 0.5, d = 2τ → 0.0625
 S_g  = Σ a_k|g · s_k                                              every required feature must be eligible
 index = 100 · Σ w_g I_g S_g / Σ w_g I_g,   coverage = Σ w_g I_g    no qualifying family → no index (never 0)
@@ -40,7 +42,7 @@ index = 100 · Σ w_g I_g S_g / Σ w_g I_g,   coverage = Σ w_g I_g    no qualif
 
 - **Features.** Slope and relative elevation are scored on a 60 m grid. Local relief and roughness are shown but not scored, because they measure the same construct as slope (Spearman ρ 0.985–0.998 across 88 unselected windows). The 120 m and 240 m grids are sensitivity checks.
 - **Tolerance τ.** τ is the median W1 between unselected pairs of Earth land windows: slope 5.81°, relative elevation 77.1 m. It is accepted only if it is at least 3 times the resolution floor.
-- **Resolution floor δ.** δ is what moving the Jezero window 2 km and switching DEM product (SRTM, NASADEM, GLO-30) produce on their own: slope 1.17°, relative elevation 22.2 m. A site within δ on every feature "cannot be told apart" from the reference.
+- **Resolution floor δ.** δ is what moving the Jezero window 2 km and switching DEM product (SRTM, NASADEM, GLO-30) produce on their own: slope 1.17°, relative elevation 22.2 m. A site within δ on every feature "not resolved by the tested data and scenarios" from the reference.
 - **Built-up mask.** ESA WorldCover cells that are at least half built-up are excluded.
 - **Per-reference floor.** Each reference has its own resolution floor, from moving that window 2 km in four directions. The lunar window fails the 3× rule (relative elevation changes by 195 m against a 77 m tolerance), so lunar comparisons show distances without an index.
 - **Background share.** Every candidate also reports the share of the 88 unselected Earth windows that score at least as high against the same reference.
@@ -101,8 +103,8 @@ The atlas serves small committed artifacts, so no raw raster or provider call is
 ```bash
 cd backend
 .venv-geo/Scripts/python.exe -m app.scripts.validate_catalog_integrity
-.venv-geo/Scripts/python.exe -m pytest -q                  # 255 passed, 11 skipped (opt-in live provider checks, TERRALUNA_LIVE=1); external services mocked
-TERRALUNA_LIVE=1 .venv-geo/Scripts/python.exe -m pytest -q tests/test_live_providers.py   # opt-in: read-only metadata checks, no downloads, no credentials
+.venv-geo/Scripts/python.exe -m pytest -q                  # 278 passed, 11 skipped (opt-in live provider checks, ALTERECHO_LIVE=1); external services mocked
+ALTERECHO_LIVE=1 .venv-geo/Scripts/python.exe -m pytest -q tests/test_live_providers.py   # opt-in: read-only metadata checks, no downloads, no credentials
 .venv-geo/Scripts/python.exe -m pip_audit                   # dependency advisories
 
 cd ../frontend
@@ -162,7 +164,7 @@ set -a; . ./.env; set +a          # loads EARTHDATA_TOKEN from the ignored backe
 
 ## Research paper
 
-`docs/paper/` holds the Methods and Results sections for the research paper: `methods.md` (Markdown with LaTeX), `methods.tex`, `methods.pdf` and `methods.docx` (native Word equations). They are generated from the running backend by `app.scripts.build_methods_paper`. The worked example (Atacama south against Jezero) is recomputed independently with the methodology handoff's reference arithmetic, and `tests/test_paper_numbers.py` fails if a documented number no longer matches the API.
+`docs/paper/` holds the concise overall project paper: `methods.md` (Markdown with LaTeX), `methods.tex`, `methods.pdf` and `methods.docx` (native Word equations). It summarizes the system, datasets, APIs, processing, ranking formulas, worked example, limitations and reproducibility; operational acquisition detail remains in the separate guides. The artifacts are generated from the running backend by `app.scripts.build_methods_paper`. The worked example (Atacama south against Jezero) is recomputed independently with the methodology handoff's reference arithmetic, and `tests/test_paper_numbers.py` fails if a documented number no longer matches the API.
 
 ## Sources and attribution
 
@@ -192,7 +194,7 @@ set -a; . ./.env; set +a          # loads EARTHDATA_TOKEN from the ignored backe
 - **Only terrain is scored.** Geology (EMIT, CRISM), water and ice, surface processes and subsurface evidence are not processed. Field-test suitability is a record, not a score. Balanced science, Rover mobility and Mars-base field testing are partial; Biosignature fieldwork is not assessed.
 - **Terrain cannot separate low-relief sites.** Five windows form one tie group and two lie within the resolution floor of Jezero. Distributions ignore spatial arrangement: a synthetic gentle fractal surface scores 88.
 - τ comes from Earth terrain contrast in 88 unselected windows, not from expert labels. The relative-elevation tolerance only narrowly passes the 3× resolution-floor rule. The candidates were known beforehand, so this is not a blind test. Profile weights await independent review.
-- The lunar comparison uses a single 10 km window, with no placement or DEM checks and no illumination or thermal dimension.
+- The lunar comparison uses a single 10 km window, with four 2 km placement checks that fail the scoring gate; alternate DEM, illumination and thermal checks remain unavailable.
 - Copernicus GLO-30 was not measured for Meteor Crater because of a provider rate limit.
 - The original Atacama window contains an industrial complex that WorldCover does not map, so it is excluded and replaced by a window 8 km south. Tracks and a survey grid remain in the new window. The Ladakh window is not the ISRO Tso Kar analog site. The Ladakh image is about 12 months old, and the legend says so.
 - Explore results are *screening* records. They are not peer reviewed and not added to the atlas.
