@@ -39,36 +39,44 @@ test.describe("atlas", () => {
     await expect(page.getByTestId("results-list")).toBeVisible();
   });
 
-  test("1 · terrain analogy: tie groups, resolution floor, base rate, exclusion and a simple result by default", async ({ page }) => {
+  test("1 · terrain shape: class groups, standing among ordinary land, no rank badges, simple result by default", async ({ page }) => {
     const errors = watchErrors(page);
     await expect(page.getByRole("heading", { level: 1, name: "Jezero Crater" })).toBeVisible();
-    await expect(page.getByTestId("profile-state")).toHaveText("Ranked on terrain");
-    for (const id of ["earth-craters-of-the-moon", "earth-atacama-south", "earth-hanksville-mdrs", "earth-meteor-crater", "earth-danakil"]) {
-      await expect(page.getByTestId(`result-${id}`).locator(".result-rank")).toHaveText("1 (tie)");
-    }
-    for (const id of ["earth-upper-mustang", "earth-ladakh"]) await expect(page.getByTestId(`result-${id}`).locator(".result-rank")).toHaveText("6 (tie)");
-    await expect(page.getByTestId("tie-label").first()).toContainText("Tie group · 5 sites · order not resolved by the data");
-    await expect(page.getByTestId("result-earth-craters-of-the-moon")).toContainText("Not resolved from the reference by the floor tests");
-    await expect(page.getByTestId("result-earth-craters-of-the-moon")).toContainText(/top \d+% of background/);
     await expect(page.getByTestId("reference-mars-jezero")).toHaveAttribute("aria-checked", "true");
-    await expect(page.getByTestId("reference-cards").getByRole("radio")).toHaveCount(5);
-    await expect(page.getByTestId("base-rate")).toContainText(/of \d+ unselected Earth windows also score 90 or more/);
-    await expect(page.getByTestId("excluded-earth-atacama")).toContainText("contaminated window");
-    await expect(page.getByTestId("unmeasured-earth-holuhraun")).toBeVisible();
+    await expect(page.getByTestId("reference-cards").getByRole("radio")).toHaveCount(6);
+    await expect(page.getByTestId("mode-terrain")).toHaveAttribute("aria-checked", "true");
+    const groups = page.getByTestId("group-label");
+    await expect(groups).toHaveCount(2);
+    await expect(groups.first()).toContainText("Same terrain class as Jezero Crater · 5");
+    await expect(groups.nth(1)).toContainText("Different terrain from Jezero Crater · 2");
+    // Each row reads "N/100" with how many of the 88 ordinary windows it beats; no "1 (tie)" or "6=" labels anywhere.
+    await expect(page.getByTestId("result-earth-atacama-south")).toContainText("Atacama Desert");
+    await expect(page.getByTestId("result-earth-atacama-south")).toContainText("98/100");
+    await expect(page.getByTestId("result-earth-atacama-south")).toContainText("beats 73 of 88 ordinary");
+    await expect(page.getByTestId("results-list")).not.toContainText(/\(tie\)|\d=/);
+    await expect(page.getByTestId("base-rate")).toContainText(/scored 88 ordinary Earth land windows/);
+    await expect(page.getByTestId("results-list")).not.toContainText("first window");
+    await expect(page.getByTestId("unmeasured-earth-holuhraun")).toContainText("outside SRTM elevation coverage");
 
-    // Simple result is the default and keeps scope and coverage visible.
+    // Simple result is the default: verdict, index with its context, the ordinary-land chart and a collapsed explanation.
     const simple = page.getByTestId("simple-result");
+    await expect(page.getByTestId("verdict")).toContainText("Close terrain match");
+    await expect(page.getByTestId("simple-index")).toContainText("Terrain similarity index");
+    await expect(page.getByTestId("simple-index")).toContainText("Present-day terrain shape at a 60 m analysis grid");
+    await expect(page.getByTestId("standing")).toContainText("of 88 ordinary Earth windows are less similar");
+    await expect(page.getByTestId("ordinary-chart")).toBeVisible();
     await expect(simple).toContainText("terrain only");
-    await expect(simple).toContainText("100% of the planned Terrain analogy evidence is measured and comparable");
-    await expect(page.getByTestId("simple-index")).toContainText("Experimental terrain evidence index");
-    await expect(page.getByTestId("background-text")).toContainText(/unselected Earth land windows score at least as high/);
+    await expect(page.getByTestId("simple-index")).not.toContainText("%");
     await expect(page.getByTestId("full-evidence")).toBeHidden();
-    await expect(page.getByTestId("toggle-full")).toHaveAttribute("aria-expanded", "false");
+    await page.getByTestId("why-match").locator("summary").click();
+    await expect(page.getByTestId("measure-rows")).toContainText("of the typical difference between two ordinary Earth landscapes");
+    await expect(page.getByTestId("background-text")).toContainText("We scored 88 ordinary Earth land windows");
 
     for (const id of ["earth-ladakh", "earth-meteor-crater", "earth-danakil", "earth-hanksville-mdrs", "earth-upper-mustang"]) await selectSite(page, id);
     await expect(page.getByTestId("result-earth-upper-mustang")).toHaveAttribute("aria-current", "true");
     await expect(page.getByTestId("site-viewer")).toHaveAttribute("data-site-id", "earth-upper-mustang");
     await expect(page.locator(".site-name")).toHaveText("Upper Mustang");
+    await expect(page.getByTestId("verdict")).toContainText("Different terrain");
     await expect(page.getByTestId("simple-conclusion")).toContainText("differs from the Jezero Crater window by more than a typical pair of Earth land windows");
     expect(new URL(page.url()).searchParams.get("site")).toBe("earth-upper-mustang");
     await expectNoHorizontalOverflow(page);
@@ -76,30 +84,32 @@ test.describe("atlas", () => {
     expect(errors).toEqual([]);
   });
 
-  test("2 · partial and unassessable modes answer their own question and are never ranked", async ({ page }) => {
-    await page.getByTestId("profile-balanced_science").click();
-    await expect(page.getByTestId("profile-state")).toHaveText("Partial evidence · not ranked");
-    await expect(page.getByTestId("profile-headline")).toContainText("30% of planned balanced science evidence measured");
-    await expect(page.getByTestId("result-earth-atacama-south").locator(".result-rank")).toHaveText("·");
-    await expect(page.getByTestId("simple-conclusion")).toContainText("Terrain evidence available; 30% of planned science evidence measured.");
-    await expect(page.getByTestId("simple-index")).toHaveCount(0);
-    await expect(page.getByTestId("base-rate")).toHaveCount(0);
+  test("2 · compare by temperature and field tests: measured context, clearly not scored", async ({ page }) => {
+    await selectSite(page, "earth-atacama-south");
+    await page.getByTestId("mode-temperature").click();
+    await expect(page.getByTestId("mode-hint")).toContainText("not scored");
+    await expect(page.getByTestId("temperature-chart")).toBeVisible();
+    await expect(page.getByTestId("simple-result")).toContainText("not scored");
+    await expect(page.getByTestId("result-earth-atacama-south")).toContainText("°");
+    await expect(page.getByTestId("site-sort")).toHaveCount(0);
+    expect(new URL(page.url()).searchParams.get("compare")).toBe("temperature");
+    await page.getByTestId("simple-result").getByText("Why temperature is not scored").click();
+    await expect(page.getByTestId("simple-result")).toContainText("Spatial support");
 
-    await page.getByTestId("profile-rover_mobility").click();
-    await expect(page.getByTestId("simple-conclusion")).toContainText("Wheel-scale traversability, rock hazards and soil bearing strength have not been observed");
-    await page.getByTestId("profile-biosignature_fieldwork").click();
-    await expect(page.getByTestId("profile-state")).toHaveText("Not assessed");
-    await expect(page.getByTestId("simple-conclusion")).toContainText("No claim is made that life has been observed on Mars");
-    await page.getByTestId("profile-mars_base_field_testing").click();
-    await expect(page.getByTestId("simple-conclusion")).toContainText("not base or landing-site suitability");
-    expect(new URL(page.url()).searchParams.get("profile")).toBe("mars_base_field_testing");
+    await page.getByTestId("mode-fieldwork").click();
+    await expect(page.getByTestId("result-earth-hanksville-mdrs")).toContainText("studied here");
+    await expect(page.getByTestId("result-earth-upper-mustang")).toContainText("no study found");
+    await expect(page.getByTestId("simple-result")).toContainText("Studied in the region, not at this window");
 
-    await page.goto("/?site=earth-ladakh&profile=balanced_science");
-    await expect(page.getByTestId("profile-balanced_science")).toHaveAttribute("aria-checked", "true");
+    await page.goto("/?site=earth-ladakh&compare=fieldwork");
+    await expect(page.getByTestId("mode-fieldwork")).toHaveAttribute("aria-checked", "true");
     await expect(page.locator(".site-name")).toHaveText("Ladakh");
+    await page.getByTestId("mode-terrain").click();
+    await expect(page.getByTestId("simple-index")).toBeVisible();
+    await expectNoHorizontalOverflow(page);
   });
 
-  test("3 · full evidence: calculations, formulas, sensitivity, JSON export and shareable state", async ({ page }) => {
+  test("3 · full calculation: rendered formulas, sensitivity, JSON export, detailed mode and shareable state", async ({ page }) => {
     await selectSite(page, "earth-hanksville-mdrs");
     const toggle = page.getByTestId("toggle-full");
     await toggle.focus();
@@ -108,22 +118,33 @@ test.describe("atlas", () => {
     const full = page.getByTestId("full-evidence");
     await expect(page.getByTestId("calc-table")).toContainText("Slope distribution");
     await expect(page.getByTestId("calc-table")).toContainText("Relative elevation distribution");
-    await expect(full).toContainText("s_k = exp(-ln 2 * (d_k / tau_k)^2)");
+    await expect(full.locator(".katex").first()).toBeVisible();
+    await expect(full.locator(".katex-html").first()).toBeVisible();
     await expect(page.getByTestId("family-table")).toContainText("F1 Terrain morphology");
     await expect(page.getByTestId("sensitivity-table")).toContainText("Earth DEM");
+    await expect(page.getByTestId("sensitivity-table")).not.toContainText("Rank");
     await expect(page.getByTestId("tolerance-table")).toBeVisible();
     await expect(full.getByRole("img", { name: /Slope distribution: quantile functions/ })).toBeVisible();
     expect(new URL(page.url()).searchParams.get("view")).toBe("full");
 
     const download = page.waitForEvent("download");
     await page.getByTestId("download-json").click();
-    expect((await download).suggestedFilename()).toBe("alterecho-earth-hanksville-mdrs-terrain_analogy-mars-jezero.json");
+    expect((await download).suggestedFilename()).toBe("alterecho-earth-hanksville-mdrs-mars-jezero.json");
 
     await page.reload();
     await expect(page.getByTestId("calc-table")).toBeVisible();
-    await full.getByRole("button", { name: "Back to simple result" }).first().click();
+    await full.getByRole("button", { name: "Hide" }).first().click();
     await expect(page.getByTestId("full-evidence")).toBeHidden();
     expect(new URL(page.url()).searchParams.get("view")).toBeNull();
+
+    // Detailed mode opens the calculation by default and is remembered.
+    await page.getByTestId("detail-toggle").getByRole("radio", { name: "Detailed" }).click();
+    await expect(page.getByTestId("calc-table")).toBeVisible();
+    await expect(page.getByTestId("toggle-full")).toHaveCount(0);
+    await page.reload();
+    await expect(page.getByTestId("detail-toggle").getByRole("radio", { name: "Detailed" })).toHaveAttribute("aria-checked", "true");
+    await page.getByTestId("detail-toggle").getByRole("radio", { name: "Simple" }).click();
+    await expect(page.getByTestId("full-evidence")).toBeHidden();
     await expectNoHorizontalOverflow(page);
   });
 
@@ -179,19 +200,22 @@ test.describe("atlas", () => {
     expect(errors).toEqual([]);
   });
 
-  test("6 · lunar reference, excluded and unmeasured sites, missing imagery and an unreachable API are explained", async ({ page }) => {
-    await page.getByRole("radio", { name: "Moon · 1", exact: true }).click();
+  test("6 · lunar reference, the not-scored Atacama window, unmeasured sites, missing imagery and an unreachable API are explained", async ({ page }) => {
+    await page.getByTestId("reference-moon-south-pole-shackleton").click();
     await expect(page.getByRole("heading", { level: 1, name: "Lunar south pole (Shackleton rim)" })).toBeVisible();
     await expect(page.getByTestId("reference-not-scorable")).toContainText("distances are shown without an index");
-    await expect(page.getByTestId("profile-state")).toHaveText("Not assessed");
+    await expect(page.getByTestId("ordering-note")).toContainText("No index for the Moon");
     await expect(page.getByTestId("simple-conclusion")).toContainText("no index is given");
+    await expect(page.getByTestId("simple-index")).toHaveCount(0);
     await expect(page.getByTestId("base-rate")).toHaveCount(0);
     expect(new URL(page.url()).searchParams.get("reference")).toBe("moon-south-pole-shackleton");
 
-    await page.getByTestId("excluded-earth-atacama").click();
+    // The first Atacama window is reachable by link and explains why it is not scored.
+    await page.goto("/?site=earth-atacama");
     await expect(page.getByTestId("simple-result")).toContainText("industrial complex");
     await page.getByTestId("unmeasured-earth-holuhraun").click();
     await expect(page.getByTestId("site-viewer")).toHaveAttribute("data-site-id", "earth-holuhraun");
+    await expect(page.getByTestId("simple-result")).toContainText("outside SRTM elevation coverage");
     await expect(page.getByRole("tab", { name: "Globe (orientation)" })).toBeVisible();
     await expect(page.getByRole("tab", { name: "Explore map" })).toHaveCount(0);
 
@@ -245,19 +269,16 @@ test.describe("atlas", () => {
     expect(errors).toEqual([]);
   });
 
-  test("6c · candidate search and ordering stay within comparable results", async ({ page }) => {
+  test("6c · candidate search and ordering", async ({ page }) => {
     await page.getByTestId("site-search").fill("meteor");
     await expect(page.getByTestId("results-list").getByRole("button")).toHaveCount(1);
     await expect(page.getByTestId("result-earth-meteor-crater")).toBeVisible();
     await page.getByTestId("site-search").fill("");
     await page.getByTestId("site-sort").selectOption("name");
-    await expect(page.getByTestId("tie-label")).toHaveCount(0);
-    await page.getByTestId("site-filter").selectOption("rugged");
-    await expect(page.getByTestId("result-earth-ladakh")).toBeVisible();
-    await expect(page.getByTestId("result-earth-hanksville-mdrs")).toHaveCount(0);
-    await page.getByTestId("profile-balanced_science").click();
-    await expect(page.getByTestId("site-sort")).toHaveCount(0);
-    await expect(page.locator(".list-tools")).toContainText("listed by name, never ranked");
+    await expect(page.getByTestId("group-label")).toHaveCount(0);
+    await expect(page.getByTestId("results-list").getByRole("button").first()).toContainText("Atacama Desert");
+    await page.getByTestId("site-sort").selectOption("closeness");
+    await expect(page.getByTestId("group-label")).toHaveCount(2);
   });
 
   test("7 · printable report reproduces the full evidence for one comparison", async ({ page }) => {
@@ -266,6 +287,7 @@ test.describe("atlas", () => {
     for (const h of ["Result", "Full evidence and calculations"]) await expect(page.getByRole("heading", { level: 2, name: h })).toBeVisible();
     await expect(page.getByTestId("calc-table")).toBeVisible();
     await expect(page.getByTestId("report")).toContainText("is not resolved from the Jezero Crater window by these tests");
+    await expect(page.getByTestId("report-standing")).toContainText("of 88");
     await expectNoHorizontalOverflow(page);
   });
 });
@@ -280,11 +302,13 @@ const PREFLIGHT = {
   imagery: { product: "Sentinel-2 L2A", authentication: "anonymous SAS", note: "mocked for the test" }, references: ["mars-jezero", "moon-south-pole-shackleton"],
   queue: { pending: 0, max: 4 }, limits: { per_client_per_hour: 3, global_per_day: 40 },
 };
-const families = { slope: { index: 70, w1_60m: 2.1, units: "degrees", tau: 3.4 }, local_relief: { index: 60, w1_60m: 20, units: "metres", tau: 25 }, roughness: { index: 50, w1_60m: 3, units: "metres", tau: 2.6 }, relative_elevation: { index: 40, w1_60m: 30, units: "metres", tau: 22 } };
+const feats = { slope: { label: "Slope distribution", units: "degrees", distance: 2.1, tau: 5.81, similarity: 0.91, role: "scored" }, relative_elevation: { label: "Relative elevation distribution", units: "metres", distance: 30, tau: 77.1, similarity: 0.9, role: "scored" } };
 const RESULT = {
-  label: "screening", inputs: [{ tile_id: "N36W117", file: "N36W117.SRTMGL1.hgt.zip", sha256: "f".repeat(64), product: "SRTMGL1" }], coverage: {}, metrics_60m: {},
-  base_rate: { share_at_or_above: { "99": 0.44 }, windows: 90 },
-  comparisons: { "mars-jezero": { terrain_index: 55.0, method: "terrain-v4.0", families }, "moon-south-pole-shackleton": { terrain_index: 50.0, method: "terrain-v4.0", families } },
+  label: "screening", method_version: "analogue-method-v1.0", inputs: [{ tile_id: "N36W117", file: "N36W117.SRTMGL1.hgt.zip", sha256: "f".repeat(64), product: "SRTMGL1" }], coverage: {}, metrics_60m: {},
+  comparisons: {
+    "mars-jezero": { reference_name: "Jezero Crater", method: "analogue-method-v1.0", scored: true, terrain_index: 55.0, terrain_class: "same", standing: { closer_than: 30, as_close_or_closer: 58, of: 88, statement: "Closer to Jezero Crater than 30 of 88 ordinary Earth land windows" }, reason: null, features: feats },
+    "moon-south-pole-shackleton": { reference_name: "Lunar south pole (Shackleton rim)", method: "analogue-method-v1.0", scored: false, terrain_index: null, terrain_class: null, standing: null, reason: "floor", features: feats },
+  },
   imagery: { status: "unavailable", reason: "mocked: imagery is not requested in tests" }, limitations: ["Mocked result used only to exercise the interface."], result_sha256: "e".repeat(64),
 };
 
@@ -315,9 +339,9 @@ test("8 · explore: a screening job moves through every state and shows a labell
   await expect(page.getByTestId("job-panel")).toBeVisible();
   await expect(page.getByTestId("job-result")).toBeVisible({ timeout: 30_000 });
   await expect(page.getByTestId("job-result")).toContainText("screening · not reviewed");
-  await expect(page.getByTestId("job-result")).toContainText("55.0");
-  await expect(page.getByTestId("job-result")).toContainText("limited lunar comparison");
-  await expect(page.getByTestId("job-result")).toContainText("44%");
+  await expect(page.getByTestId("job-result")).toContainText("55/100");
+  await expect(page.getByTestId("job-result")).toContainText("30 of 88");
+  await expect(page.getByTestId("screening-table")).toContainText("no index");
   await expect(page.locator(".job-steps li.done")).toHaveCount(5);
   expect(new URL(page.url()).searchParams.get("job")).toBe(JOB_ID);
   await expectNoHorizontalOverflow(page);
@@ -358,7 +382,9 @@ test("10 · method and sources pages load with live data", async ({ page }) => {
   await expect(page.getByTestId("method-references")).toContainText("Gale Crater floor (Aeolis Palus)");
   await expect(page.getByTestId("method-references")).toContainText("distances only");
   await expect(page.getByTestId("method-discrimination")).toContainText("Eberswalde crater delta");
-  await expect(page.getByTestId("worked-example")).toContainText("exp(−ln 2");
+  await expect(page.getByTestId("worked-example")).toContainText("Shown in the atlas as");
+  await expect(page.locator(".method-page .katex").first()).toBeVisible();
+  await expect(page.locator(".method-page .katex-html").first()).toBeVisible();
   await expect(page.getByTestId("thermal-audit")).toContainText(/Spatial support/);
   await expectNoHorizontalOverflow(page);
   await nav.getByRole("link", { name: "Data & sources", exact: true }).click();
@@ -393,7 +419,7 @@ test("API contract: analogue-method-v1.0 comparison matches the typed frontend f
   expect(keys(payload)).toEqual(keys(fixture));
   expect(keys(payload.results[0])).toEqual(keys(fixture.results[0]));
   expect(keys(payload.results[0].families[0].features[0])).toEqual(keys(fixture.results[0].families[0].features[0]));
-  expect(payload.results.map((r) => [r.site_id, r.state, r.observed_index, r.rank])).toEqual(fixture.results.map((r) => [r.site_id, r.state, r.observed_index, r.rank]));
+  expect(payload.results.map((r) => [r.site_id, r.state, r.observed_index, r.standing?.closer_than ?? null])).toEqual(fixture.results.map((r) => [r.site_id, r.state, r.observed_index, r.standing?.closer_than ?? null]));
   expect(payload.tie_groups).toEqual(fixture.tie_groups);
 });
 

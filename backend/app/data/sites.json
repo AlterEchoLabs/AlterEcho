@@ -297,7 +297,7 @@
   },
   {
     "id": "earth-atacama",
-    "name": "Atacama Desert",
+    "name": "Atacama Desert (first window, not scored)",
     "body": "earth",
     "country_or_region": "Chile",
     "latitude": -24.2,
@@ -338,7 +338,7 @@
   },
   {
     "id": "earth-atacama-south",
-    "name": "Atacama Desert (south window)",
+    "name": "Atacama Desert",
     "body": "earth",
     "country_or_region": "Chile",
     "latitude": -24.2722,

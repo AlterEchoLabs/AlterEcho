@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { BRAND } from "../../config/brand";
+import DetailToggle from "./DetailToggle";
 import ThemeSelect from "./ThemeSelect";
 
 const LINKS = [
@@ -17,12 +19,14 @@ export default function Masthead() {
   return (
     <header className="masthead">
       <Link href="/" className="wordmark" aria-label={`${BRAND.shortName} home`}>
-        <svg viewBox="0 0 28 28" aria-hidden="true" className="wordmark-mark">
-          <circle cx="11" cy="14" r="7.5" fill="none" stroke="currentColor" strokeWidth="1.4" />
-          <circle cx="20.5" cy="9" r="3.2" fill="currentColor" opacity=".55" />
-        </svg>
-        <span className="wordmark-name">{BRAND.shortName}</span>
-        <span className="wordmark-team">{BRAND.teamName}</span>
+        <Image
+          src="/alterecho-header-logo.png"
+          alt="AlterEcho"
+          width={1028}
+          height={768}
+          priority
+          className="wordmark-logo"
+        />
       </Link>
       <nav aria-label="Primary">
         <ul className="masthead-nav">
@@ -33,7 +37,10 @@ export default function Masthead() {
           ))}
         </ul>
       </nav>
-      <ThemeSelect />
+      <div className="masthead-tools">
+        <DetailToggle />
+        <ThemeSelect />
+      </div>
     </header>
   );
 }

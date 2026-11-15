@@ -27,6 +27,7 @@ export interface SensitivityV3 { scenarios: Scenario[]; index_range: [number, nu
 export interface SimpleResult {
   conclusion: string; measured: string[]; coverage_text: string; validation_status: string; strength: string | null; mismatch: string | null;
   limitation: string; show_index: boolean; index_label: string | null; background_text?: string | null;
+  standing_text?: string | null; class_label?: string | null; verdict?: string | null;
 }
 
 export interface Citation { id: string; title: string; url: string }
@@ -38,7 +39,7 @@ export interface CandidateV3 {
   sensitivity: SensitivityV3 | null; eligibility_key: string | null; simple: SimpleResult;
   exclusion: { reason: string; replacement: string; replacement_name: string | null } | null;
   literature_context: { summary?: string; scope: string; sources: Citation[]; [key: string]: unknown } | null; data_roles: string[];
-  background_share?: number | null;
+  background_share?: number | null; standing?: Standing | null; terrain_class?: TerrainClass | null;
 }
 
 export interface ToleranceRecord {
@@ -71,8 +72,8 @@ export interface CompareV3 {
   method_version: string; terrain_method: string; status: string; review_status: string; comparison_definition: string;
   reference_site_id: string; reference_name: string; reference_aoi_id: string; reference_body: "mars" | "moon";
   profile: ProfileV3; profile_state: ProfileStateV3; profile_state_reason: string; headline: string; evidence_coverage: number; primary_scale_m: number;
-  tolerances: ToleranceRecord[]; base_rate: BaseRate | null; tie_groups: string[][]; ordering_note: string; results: CandidateV3[];
-  physical_limits: string[]; formulas: Record<string, string>; parameters: Record<string, string>; validation_status: string; notice: string; generated_at: string;
+  tolerances: ToleranceRecord[]; base_rate: BaseRate | null; tie_groups: string[][]; class_groups?: ClassGroup[]; background_scores?: number[]; ordering_note: string; results: CandidateV3[];
+  physical_limits: string[]; formulas: Record<string, string>; formulas_tex?: Record<string, string>; parameters: Record<string, string>; validation_status: string; notice: string; generated_at: string;
   discrimination?: Discrimination | null; resolution_floor?: Record<string, FloorRecord> | null;
 }
 
@@ -108,11 +109,11 @@ export interface ExplorerWindow {
 export const PROFILE_IDS_V3: ProfileIdV3[] = ["terrain_analogy", "balanced_science", "rover_mobility", "biosignature_fieldwork", "mars_base_field_testing"];
 
 export const STATE_TEXT: Record<CandidateState, string> = {
-  ranked: "Ranked", partial: "Partial evidence", not_assessed: "Not assessed", excluded: "Excluded", not_measured: "Not measured",
+  ranked: "Compared", partial: "Partial evidence", not_assessed: "Not assessed", excluded: "Excluded", not_measured: "Not measured",
 };
 
 export const PROFILE_STATE_TEXT: Record<ProfileStateV3, string> = {
-  ranked: "Ranked on terrain", partial: "Partial evidence · not ranked", not_assessed: "Not assessed",
+  ranked: "Compared on terrain", partial: "Partial evidence · not ranked", not_assessed: "Not assessed",
 };
 
 export const ROLE_TEXT: Record<DataRole["role"], string> = {
@@ -124,3 +125,30 @@ export const STATUS_TEXT: Record<FamilyStatus, string> = {
   measured_comparable: "Measured · comparable", measured_context_only: "Measured · context only", source_available_unprocessed: "Source exists · not processed",
   missing_earth: "Missing on Earth", missing_planetary: "Missing on the reference", incompatible: "Incompatible", review_pending: "Review pending", excluded: "Excluded",
 };
+
+export type TerrainClass = "same" | "partial" | "different";
+/** Where a candidate sits among the ordinary (unselected) Earth windows scored against the same reference. */
+export interface Standing { closer_than: number; as_close_or_closer: number; of: number; statement: string }
+export interface ClassGroup { terrain_class: TerrainClass; label: string; site_ids: string[]; order_resolved: boolean; note: string }
+export const CLASS_SHORT: Record<TerrainClass, string> = { same: "Same terrain class", partial: "Partly similar", different: "Different terrain" };
+
+/** /api/v3/context: measured context that is shown but never scored. */
+export interface TemperatureRecord {
+  quantity: string; product_id: string; instrument: string | null; platform: string | null; provider: string | null; source_url: string | null; doi: string | null;
+  period: string | null; sampling: string | null; support: string | null; day_c: number | null; night_c: number | null; diurnal_range_k: number | null;
+  day_local_time_h: number | null; night_local_time_h: number | null; paired_samples: number | null; limitations: string[];
+}
+export interface AuditCheckV3 { check: string; required: boolean; passed: boolean; detail: string }
+export interface ContextV3 {
+  reference_site_id: string; reference_name: string; reference_body: "mars" | "moon"; notice: string;
+  temperature: { reference: TemperatureRecord | null; note: string; sites: { site_id: string; site_name: string; record: TemperatureRecord | null; audit: { decision: string; summary: string; checks: AuditCheckV3[] } | null }[] };
+  fieldwork: { note: string; sites: { site_id: string; site_name: string; analog_status: "window" | "region" | "none"; analog_status_text: string; summary: string; sources: Citation[] }[] };
+}
+
+/** The three ways the atlas compares sites. Only terrain is scored. */
+export type CompareMode = "terrain" | "temperature" | "fieldwork";
+export const COMPARE_MODES: { id: CompareMode; label: string; hint: string; scored: boolean }[] = [
+  { id: "terrain", label: "Terrain shape", hint: "Scored · slope and relief measured from elevation models", scored: true },
+  { id: "temperature", label: "Temperature", hint: "Measured on both worlds, shown side by side · not scored", scored: false },
+  { id: "fieldwork", label: "Field tests", hint: "Published analog research at each site · not scored", scored: false },
+];

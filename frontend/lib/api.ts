@@ -1,5 +1,5 @@
 import type { CompareResponseV2, EvidenceCompareResponse, EvidenceModel, ProfileId, ProfileIdV2, ProfileSummary, ProfileV2, SiteEvidence } from "./evidence";
-import type { CompareV3, DataRole, ExplorerWindow, ProfileIdV3, ProfileV3, ReferenceV3, ResultDetail } from "./analogue";
+import type { CompareV3, DataRole, ExplorerWindow, ProfileIdV3, ProfileV3, ReferenceV3, ResultDetail, ContextV3 } from "./analogue";
 
 export type DataStatus = "real_processed" | "planned" | "metadata_only" | "unavailable";
 export type Body = "earth" | "mars" | "moon";
@@ -44,8 +44,13 @@ export interface Preflight {
 
 export interface ScreeningResult {
   label: string; inputs: { tile_id: string; file: string; sha256: string; product: string }[]; coverage: Record<string, Record<string, number>>;
-  metrics_60m: Record<string, number | null>; base_rate: { share_at_or_above: Record<string, number> | null; windows: number | null };
-  comparisons: Record<string, { terrain_index: number; method: string; families: Record<string, { index: number; w1_60m: number; units: string; tau: number }> }>;
+  metrics_60m: Record<string, number | null>; method_version?: string;
+  /** analogue-method-v1.0, one entry per reference window: the same calculation as the atlas. */
+  comparisons: Record<string, {
+    reference_name: string; method: string; scored: boolean; terrain_index: number | null; terrain_class: "same" | "partial" | "different" | null;
+    standing: { closer_than: number; as_close_or_closer: number; of: number; statement: string } | null; reason: string | null;
+    features: Record<string, { label: string; units: string; distance: number | null; tau: number | null; similarity: number | null; role: string }>;
+  }>;
   imagery: null | { status: string; reason?: string; product_id?: string; acquisition_datetime?: string; preview_url?: string; aoi_cloud_fraction?: number; attribution?: string };
   limitations: string[]; result_sha256: string | null;
 }
@@ -190,6 +195,7 @@ export const apiV3 = {
   profiles: () => cached<ProfileV3[]>("/api/v3/profiles"),
   references: () => cached<ReferenceV3[]>("/api/v3/references"),
   dataRoles: () => cached<DataRole[]>("/api/v3/data-roles"),
+  context: (referenceId: string) => cached<ContextV3>(`/api/v3/context?reference=${encodeURIComponent(referenceId)}`),
   explorer: (siteId: string) => cached<ExplorerWindow>(`/api/v3/sites/${encodeURIComponent(siteId)}/explorer`),
   result: (siteId: string, profileId: ProfileIdV3, referenceId: string) =>
     cached<ResultDetail>(`/api/v3/result?site=${encodeURIComponent(siteId)}&profile=${profileId}&reference=${encodeURIComponent(referenceId)}`),

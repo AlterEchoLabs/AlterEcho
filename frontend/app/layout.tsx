@@ -5,6 +5,8 @@ import "./globals.css";
 import "./phase8.css";
 import "./phase9.css";
 import "./phase10.css";
+import "katex/dist/katex.min.css";
+import "./release.css";
 import { BRAND } from "../config/brand";
 import Masthead from "./components/Masthead";
 
@@ -15,6 +17,7 @@ const mono = IBM_Plex_Mono({ variable: "--font-mono", subsets: ["latin"], weight
 export const metadata: Metadata = {
   title: `${BRAND.shortName} · Earth analogs for Jezero Crater`,
   description: BRAND.description,
+  icons: { icon: "/alterecho-favicon.png" },
 };
 
 export const viewport: Viewport = { colorScheme: "dark light" };

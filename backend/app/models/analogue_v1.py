@@ -98,6 +98,26 @@ class SimpleResult(BaseModel):
     show_index: bool
     index_label: str | None
     background_text: str | None = None
+    standing_text: str | None = None
+    class_label: str | None = None
+    verdict: str | None = None
+
+
+class Standing(BaseModel):
+    """Where a candidate sits among the unselected ("ordinary") Earth land windows scored against the same reference."""
+    closer_than: int = Field(..., description="Ordinary windows whose terrain index is strictly lower than this candidate's")
+    as_close_or_closer: int = Field(..., description="Ordinary windows whose terrain index is at least this candidate's")
+    of: int = Field(..., description="Ordinary windows scored against this reference")
+    statement: str
+
+
+class ClassGroup(BaseModel):
+    """Candidates that share a terrain class against the reference, listed together."""
+    terrain_class: Literal["same", "partial", "different"]
+    label: str
+    site_ids: list[str]
+    order_resolved: bool
+    note: str
 
 
 class CandidateV3(BaseModel):
@@ -117,6 +137,9 @@ class CandidateV3(BaseModel):
     literature_context: dict[str, Any] | None = None
     data_roles: list[str]
     background_share: float | None = Field(None, description="Share of unselected Earth windows whose terrain index is at least this candidate's")
+    standing: Standing | None = None
+    terrain_class: Literal["same", "partial", "different"] | None = Field(
+        None, description="same: every scored feature differs from the reference by less than its tolerance; different: every one by more; partial: mixed")
 
     @computed_field
     @property
@@ -177,10 +200,13 @@ class CompareV3(BaseModel):
     tolerances: list[ToleranceRecord]
     base_rate: dict[str, Any] | None
     tie_groups: list[list[str]]
+    class_groups: list[ClassGroup] = Field(default_factory=list)
+    background_scores: list[float] = Field(default_factory=list, description="Terrain index of every ordinary Earth window against this reference, ascending")
     ordering_note: str
     results: list[CandidateV3]
     physical_limits: list[str]
     formulas: dict[str, str]
+    formulas_tex: dict[str, str] = Field(default_factory=dict)
     parameters: dict[str, str]
     validation_status: str
     notice: str

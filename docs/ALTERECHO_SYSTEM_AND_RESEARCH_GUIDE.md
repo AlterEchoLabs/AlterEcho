@@ -185,7 +185,7 @@ For each feature and reference, the floor combines the largest tested 2 km north
 
 ## 23 Ties and ranking
 
-Scenario ranges include candidate placement, reference placement, DEM choice, scale, tolerance and weight changes. Overlapping ranges are grouped; competition ranking gives group members the same position. Only the terrain profile ranks, and only within one reference/profile/configuration/eligibility identity. Ties express unresolved ordering under tested scenarios, not equal terrain or a confidence interval.
+Scenario ranges include candidate placement, reference placement, DEM choice, scale, tolerance and weight changes. Overlapping ranges are grouped. The atlas shows no rank numbers: sites are listed by terrain class (same class when every scored distance is below its tolerance, different when every one is above it) and, inside a class, sites whose ranges overlap are not put in order. The API still returns competition ranks for reproducibility. Only the terrain profile is compared, and only within one reference/profile/configuration/eligibility identity. Overlap expresses unresolved ordering under tested scenarios, not equal terrain or a confidence interval.
 
 ## 24 Evidence coverage and task gates
 
@@ -197,7 +197,7 @@ The generated full-precision Atacama-south/Jezero result is 97.903885; the API a
 
 ## 26 Reliability and discrimination
 
-Against Jezero, the recorded background share at index >= 90 is 0.489. High scores are common among smooth low-relief terrain. Distribution comparisons ignore the spatial arrangement of channels, ridges and hazards; a gentle synthetic control can score highly. Synthetic controls belong to method diagnostics, never production candidate evidence. No independently labelled accuracy percentage is available.
+Against Jezero, 49% of the 88 ordinary windows score 90 or more (median 87.4), so every result is shown with its standing: how many of those ordinary windows it beats (Atacama: 73 of 88). High scores are common among smooth low-relief terrain. Distribution comparisons ignore the spatial arrangement of channels, ridges and hazards; a gentle synthetic control can score highly. Synthetic controls belong to method diagnostics, never production candidate evidence. No independently labelled accuracy percentage is available.
 
 ## 27 Sensitivity testing
 

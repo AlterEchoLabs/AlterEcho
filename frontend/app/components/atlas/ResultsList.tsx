@@ -2,84 +2,78 @@
 
 import { Fragment, useMemo, useState } from "react";
 import type { Site } from "../../../lib/api";
-import { PROFILE_STATE_TEXT, type CandidateV3, type CompareV3 } from "../../../lib/analogue";
-import { pct } from "../../../lib/format";
+import type { CandidateV3, ClassGroup, CompareMode, CompareV3, ContextV3 } from "../../../lib/analogue";
+import { useDetailMode } from "../../../lib/detail";
 
-function rankText(r: CandidateV3, groupSize: number): string {
-  if (r.state !== "ranked" || r.rank == null) return "·";
-  return groupSize > 1 ? `${r.rank} (tie)` : String(r.rank);
+/** How many of the ordinary Earth windows are less similar to the reference than this site. */
+export function StandingBar({ closer, of, wide = false }: { closer: number; of: number; wide?: boolean }) {
+  return <span className={`standing-bar ${wide ? "wide" : ""}`} aria-hidden="true"><span style={{ width: `${(100 * closer) / of}%` }} /></span>;
 }
 
-function Row({ result, site, selected, groupSize, onSelect, delay }: {
-  result: CandidateV3; site: Site | undefined; selected: boolean; groupSize: number; onSelect: () => void; delay: number;
-}) {
-  const ranked = result.state === "ranked";
-  const range = result.sensitivity?.index_range;
-  const terrain = result.families.find((f) => f.family === "terrain");
-  const scored = terrain?.features.filter((f) => f.role === "scored" && f.distance != null) ?? [];
-  const note = result.state === "partial" ? `Terrain only · ${pct(result.evidence_coverage)} of plan measured`
-    : result.state === "not_assessed" ? "Task-critical evidence missing"
-    : result.resolution === "unresolved_from_reference" ? "Not resolved from the reference by the floor tests"
-    : scored.length ? `Slope Δ ${scored.find((f) => f.feature === "slope")?.distance?.toFixed(2)}° · relief Δ ${scored.find((f) => f.feature === "relative_elevation")?.distance?.toFixed(0)} m` : "";
+function TerrainRow({ r, site, selected, onSelect, detailed }: { r: CandidateV3; site?: Site; selected: boolean; onSelect: () => void; detailed: boolean }) {
+  const st = r.standing;
+  const terrain = r.families.find((f) => f.family === "terrain");
+  const slope = terrain?.features.find((f) => f.feature === "slope");
+  const rel = terrain?.features.find((f) => f.feature === "relative_elevation");
+  const reason = r.resolution === "unresolved_from_reference" ? "Differences sit inside the measurement floor"
+    : slope?.distance != null && rel?.distance != null ? `Slope off by ${slope.distance.toFixed(1)}° · relief off by ${rel.distance.toFixed(0)} m` : "";
   return (
-    <li className="result-item" style={{ animationDelay: `${delay}ms` }}>
-      <button type="button" className={`result-row ${selected ? "is-selected" : ""}`} aria-current={selected ? "true" : undefined} onClick={onSelect} data-testid={`result-${result.site_id}`}>
-        <span className="result-rank mono" aria-label={ranked ? `Rank ${rankText(result, groupSize)}` : "Not ranked"}>{rankText(result, groupSize)}</span>
+    <li className="result-item">
+      <button type="button" className={`result-row ${selected ? "is-selected" : ""}`} aria-current={selected ? "true" : undefined} onClick={onSelect} data-testid={`result-${r.site_id}`}>
+        <span className={`class-dot class-${r.terrain_class ?? "none"}`} aria-hidden="true" />
         <span className="result-main">
-          <span className="result-name">{result.site_name}</span>
+          <span className="result-name">{r.site_name}</span>
           {site && <span className="result-place">{site.country_or_region}</span>}
-          {note && <span className="result-reason">{note}</span>}
+          {reason && <span className="result-reason">{reason}</span>}
         </span>
-        <span className="result-score">
-          {ranked && result.observed_index != null ? (
-            <>
-              <b className="mono" title="Experimental terrain index (0–100), not a probability">{result.observed_index.toFixed(0)}</b>
-              {range && <small className="mono" title="Scenario range: placement, DEM, grid, tolerance and weights">{range[0].toFixed(0)}–{range[1].toFixed(0)}</small>}
-              {result.background_share != null && <small className="bg-share" title="Share of unselected Earth windows that score at least as high">top {Math.max(1, Math.round(result.background_share * 100))}% of background</small>}
-            </>
-          ) : (
-            <span className="coverage" title="Share of the planned profile weight that is measured and comparable">
-              <span className="coverage-track"><span style={{ width: pct(result.evidence_coverage) }} /></span>
-              <span className="coverage-label">{pct(result.evidence_coverage)} measured</span>
-            </span>
-          )}
-        </span>
+        {st && r.observed_index != null ? (
+          <span className="result-score">
+            <span className="index-num mono" title="Terrain similarity index, 0–100"><b>{r.observed_index.toFixed(0)}</b><small>/100</small></span>
+            <StandingBar closer={st.closer_than} of={st.of} />
+            <small className="standing-cap">beats {st.closer_than} of {st.of} ordinary</small>
+            {detailed && r.sensitivity?.index_range && <small className="mono muted">range {r.sensitivity.index_range[0].toFixed(0)}–{r.sensitivity.index_range[1].toFixed(0)}</small>}
+          </span>
+        ) : <span className="result-score"><small className="muted">distances only</small></span>}
       </button>
     </li>
   );
 }
 
-export default function ResultsList({ comparison, loading, error, sites, selectedId, onSelect, onRetry }: {
-  comparison: CompareV3 | null; loading: boolean; error: string | null; sites: Site[];
+export default function ResultsList({ mode, comparison, context, loading, error, sites, selectedId, onSelect, onRetry }: {
+  mode: CompareMode; comparison: CompareV3 | null; context: ContextV3 | null; loading: boolean; error: string | null; sites: Site[];
   selectedId: string | null; onSelect: (id: string) => void; onRetry: () => void;
 }) {
+  const [detail] = useDetailMode();
+  const detailed = detail === "detailed";
   const byId = new Map(sites.map((s) => [s.id, s]));
   const [query, setQuery] = useState("");
-  const [filter, setFilter] = useState<"all" | "close" | "rugged">("all");
-  const [sort, setSort] = useState<"rank" | "background" | "name">("rank");
-  const ranked = comparison?.profile_state === "ranked";
-  const sortBy = ranked ? sort : "name";
-  const listed = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    const rows = (comparison?.results ?? []).filter((r) => r.state === "ranked" || r.state === "partial" || r.state === "not_assessed")
-      .filter((r) => !q || `${r.site_name} ${byId.get(r.site_id)?.country_or_region ?? ""}`.toLowerCase().includes(q))
-      .filter((r) => filter === "all" || (filter === "close" ? (r.observed_index ?? 0) >= 50 : (r.observed_index ?? 100) < 50));
-    if (sortBy === "name") return [...rows].sort((a, b) => a.site_name.localeCompare(b.site_name));
-    if (sortBy === "background") return [...rows].sort((a, b) => (a.background_share ?? 1) - (b.background_share ?? 1) || a.site_name.localeCompare(b.site_name));
-    return rows;
+  const [sort, setSort] = useState<"closeness" | "name">("closeness");
+  const q = query.trim().toLowerCase();
+  const matches = (name: string, id: string) => !q || `${name} ${byId.get(id)?.country_or_region ?? ""}`.toLowerCase().includes(q);
+
+  const compared = comparison?.profile_state === "ranked";
+  const terrainRows = useMemo(() => {
+    const rows = (comparison?.results ?? []).filter((r) => r.state !== "excluded" && r.state !== "not_measured").filter((r) => matches(r.site_name, r.site_id));
+    if (sort === "name" || !compared) return [...rows].sort((a, b) => a.site_name.localeCompare(b.site_name));
+    return rows; // backend order: by index within terrain-class groups
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [comparison, query, filter, sortBy, sites]);
-  const excluded = comparison?.results.filter((r) => r.state === "excluded") ?? [];
+  }, [comparison, q, sort, sites]);
+  const groupOf = new Map<string, ClassGroup>();
+  comparison?.class_groups?.forEach((g) => g.site_ids.forEach((id) => groupOf.set(id, g)));
+  const grouped = compared && sort === "closeness" && !q;
   const unmeasured = comparison?.results.filter((r) => r.state === "not_measured") ?? [];
-  const groupFor = (id: string) => comparison?.tie_groups.find((g) => g.includes(id));
-  const base = comparison?.base_rate;
+
+  const heading = mode === "terrain" ? "Earth sites by terrain match" : mode === "temperature" ? "Earth sites by surface temperature" : "Earth sites by field-test record";
+  const listLoading = loading || (mode !== "terrain" && !context && !error);
+
   return (
-    <div className="results" aria-busy={loading}>
+    <div className="results" aria-busy={listLoading}>
       <div className="results-head">
-        <h2>Earth candidates</h2>
-        {comparison && <p className={`state-pill state-${comparison.profile_state}`} data-testid="profile-state">{PROFILE_STATE_TEXT[comparison.profile_state]}</p>}
-        {comparison && <p className="results-headline" data-testid="profile-headline">{comparison.headline}</p>}
-        {loading && !comparison && <p className="muted small">Calculating from prepared measurements…</p>}
+        <h2>{heading}</h2>
+        {mode === "terrain" && comparison && <p className="results-headline" data-testid="profile-headline">{comparison.headline}</p>}
+        {mode === "temperature" && context && <p className="results-headline">{context.temperature.note}</p>}
+        {mode === "fieldwork" && context && <p className="results-headline">{context.fieldwork.note}</p>}
+        {listLoading && <p className="muted small">Loading measurements…</p>}
       </div>
       {error && (
         <div className="notice notice-error" role="alert">
@@ -87,71 +81,95 @@ export default function ResultsList({ comparison, loading, error, sites, selecte
           <button type="button" className="text-button" onClick={onRetry}>Try again</button>
         </div>
       )}
-      {comparison && (
-        <div className="list-tools" role="group" aria-label="Find and order Earth windows">
-          <input type="search" className="search-input" placeholder="Search sites or regions" value={query} onChange={(e) => setQuery(e.target.value)} aria-label="Search Earth windows" data-testid="site-search" />
-          <div className="list-tools-row">
-            {ranked && (
-              <label>Order <select value={sort} onChange={(e) => setSort(e.target.value as typeof sort)} data-testid="site-sort">
-                <option value="rank">by rank (tie groups kept)</option>
-                <option value="background">by background share</option>
-                <option value="name">by name</option>
-              </select></label>
-            )}
-            {ranked && (
-              <label>Show <select value={filter} onChange={(e) => setFilter(e.target.value as typeof filter)} data-testid="site-filter">
-                <option value="all">all measured</option>
-                <option value="close">index 50 or more</option>
-                <option value="rugged">index below 50</option>
-              </select></label>
-            )}
-            {!ranked && <span className="muted small">Partial evidence: listed by name, never ranked.</span>}
-          </div>
-        </div>
-      )}
-      {comparison && (
+      <div className="list-tools" role="group" aria-label="Find Earth sites">
+        <input type="search" className="search-input" placeholder="Search sites or regions" value={query} onChange={(e) => setQuery(e.target.value)} aria-label="Search Earth sites" data-testid="site-search" />
+        {mode === "terrain" && compared && (
+          <label className="sort-label">Order <select value={sort} onChange={(e) => setSort(e.target.value as typeof sort)} data-testid="site-sort">
+            <option value="closeness">closest first, grouped</option>
+            <option value="name">by name</option>
+          </select></label>
+        )}
+      </div>
+
+      {mode === "terrain" && comparison && (
         <ol className="result-list" data-testid="results-list">
-          {listed.length === 0 && <li className="muted small">No measured window matches.</li>}
-          {listed.map((r, i) => {
-            const group = groupFor(r.site_id);
-            const first = sortBy === "rank" && !query && filter === "all" && group && group.length > 1 && group[0] === r.site_id;
+          {terrainRows.length === 0 && <li className="muted small">No measured site matches “{query}”.</li>}
+          {terrainRows.map((r) => {
+            const g = groupOf.get(r.site_id);
+            const first = grouped && g && g.site_ids[0] === r.site_id;
             return (
               <Fragment key={r.site_id}>
-                {first && <li className="tie-label" data-testid="tie-label">Tie group · {group!.length} sites · order not resolved by the data</li>}
-                <Row result={r} site={byId.get(r.site_id)} selected={selectedId === r.site_id} groupSize={group?.length ?? 1} onSelect={() => onSelect(r.site_id)} delay={i * 40} />
+                {first && (
+                  <li className={`group-label class-${g!.terrain_class}`} data-testid="group-label">
+                    <span>{g!.label} · {g!.site_ids.length}</span>
+                    {g!.note && <small>{g!.note}</small>}
+                  </li>
+                )}
+                <TerrainRow r={r} site={byId.get(r.site_id)} selected={selectedId === r.site_id} onSelect={() => onSelect(r.site_id)} detailed={detailed} />
               </Fragment>
             );
           })}
         </ol>
       )}
-      {comparison && <p className="ordering-note" data-testid="ordering-note">{comparison.ordering_note}</p>}
-      {base && comparison?.profile_state === "ranked" && (
-        <p className="base-rate" data-testid="base-rate">
-          <strong>{pct(base.share_at_or_above["90"])}</strong> of {base.count} unselected Earth windows also score 90 or more against {comparison.reference_name}. A high terrain index mostly means low relief.
-        </p>
+
+      {mode === "temperature" && context && (
+        <ol className="result-list" data-testid="results-list">
+          {context.temperature.reference && (
+            <li className="ref-row">
+              <span className="ref-row-name">{context.reference_name}</span>
+              <span className="mono">day {context.temperature.reference.day_c?.toFixed(0)}° · night {context.temperature.reference.night_c?.toFixed(0)}°C</span>
+            </li>
+          )}
+          {context.temperature.sites.filter((t) => matches(t.site_name, t.site_id)).sort((a, b) => a.site_name.localeCompare(b.site_name)).map((t) => (
+            <li className="result-item" key={t.site_id}>
+              <button type="button" className={`result-row plain ${selectedId === t.site_id ? "is-selected" : ""}`} aria-current={selectedId === t.site_id ? "true" : undefined} onClick={() => onSelect(t.site_id)} data-testid={`result-${t.site_id}`}>
+                <span className="result-main">
+                  <span className="result-name">{t.site_name}</span>
+                  <span className="result-place">{byId.get(t.site_id)?.country_or_region}</span>
+                </span>
+                <span className="result-score temp-score">
+                  {t.record ? <><span className="mono"><b>{t.record.day_c?.toFixed(0)}°</b> / {t.record.night_c?.toFixed(0)}°C</span><small className="muted">day / night</small></> : <small className="muted">no record</small>}
+                </span>
+              </button>
+            </li>
+          ))}
+        </ol>
       )}
-      {excluded.length > 0 && (
-        <div className="unmeasured">
-          <h3>Excluded windows</h3>
-          <ul>
-            {excluded.map((r) => (
-              <li key={r.site_id}>
-                <button type="button" className={`unmeasured-row ${selectedId === r.site_id ? "is-selected" : ""}`} aria-current={selectedId === r.site_id ? "true" : undefined} onClick={() => onSelect(r.site_id)} data-testid={`excluded-${r.site_id}`}>
-                  <span>{r.site_name}</span><span className="muted small">contaminated window · replaced by {r.exclusion?.replacement_name}</span>
+
+      {mode === "fieldwork" && context && (
+        <ol className="result-list" data-testid="results-list">
+          {[...context.fieldwork.sites].filter((f) => matches(f.site_name, f.site_id))
+            .sort((a, b) => ["window", "region", "none"].indexOf(a.analog_status) - ["window", "region", "none"].indexOf(b.analog_status) || a.site_name.localeCompare(b.site_name))
+            .map((f) => (
+              <li className="result-item" key={f.site_id}>
+                <button type="button" className={`result-row plain ${selectedId === f.site_id ? "is-selected" : ""}`} aria-current={selectedId === f.site_id ? "true" : undefined} onClick={() => onSelect(f.site_id)} data-testid={`result-${f.site_id}`}>
+                  <span className="result-main">
+                    <span className="result-name">{f.site_name}</span>
+                    <span className="result-place">{byId.get(f.site_id)?.country_or_region}</span>
+                  </span>
+                  <span className={`status-chip analog-${f.analog_status}`}>{f.analog_status === "window" ? "studied here" : f.analog_status === "region" ? "studied nearby" : "no study found"}</span>
                 </button>
               </li>
             ))}
-          </ul>
+        </ol>
+      )}
+
+      {mode === "terrain" && comparison && compared && comparison.base_rate && (
+        <div className="how-to-read" data-testid="base-rate">
+          <p><strong>How to read this.</strong> The index runs from 0 to 100. We also scored {comparison.base_rate.count} ordinary Earth land windows against {comparison.reference_name} the same way, and about half of them reach 90 or more because most land is gentle at a 60 m grid. So the bar under each number shows how many of those ordinary windows the site beats.</p>
         </div>
+      )}
+      {mode === "terrain" && comparison && !compared && comparison.reference_body === "moon" && (
+        <p className="how-to-read" data-testid="ordering-note">No index for the Moon: moving the lunar window just 2 km changes its terrain more than the tolerance allows, so only measured distances are shown.</p>
       )}
       {unmeasured.length > 0 && (
         <div className="unmeasured">
-          <h3>Not measured yet</h3>
+          <h3>Registered, not measured yet</h3>
           <ul>
             {unmeasured.map((r) => (
               <li key={r.site_id}>
                 <button type="button" className={`unmeasured-row ${selectedId === r.site_id ? "is-selected" : ""}`} aria-current={selectedId === r.site_id ? "true" : undefined} onClick={() => onSelect(r.site_id)} data-testid={`unmeasured-${r.site_id}`}>
-                  <span>{r.site_name}</span><span className="muted small">{byId.get(r.site_id)?.country_or_region} · {byId.get(r.site_id)?.data_status === "planned" ? "planned dataset" : "metadata only"}</span>
+                  <span>{r.site_name}</span><span className="muted small">{byId.get(r.site_id)?.country_or_region} · outside SRTM elevation coverage</span>
                 </button>
               </li>
             ))}

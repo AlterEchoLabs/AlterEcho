@@ -33,6 +33,9 @@ export default function SiteExplorer({ site }: { site: Site }) {
   const mapRef = useRef<MapType | null>(null);
   const [ready, setReady] = useState(false);
   const [layer, setLayer] = useState<LayerId>("satellite");
+  // The overlays can be added after the visibility effect has run (they wait for the style to load), so they read the current layer here.
+  const layerRef = useRef<LayerId>("satellite");
+  useEffect(() => { layerRef.current = layer; }, [layer]);
   const [recent, setRecent] = useState(false);
   const [zoom, setZoom] = useState(1.4);
   const [busy, setBusy] = useState(true);
@@ -99,7 +102,7 @@ export default function SiteExplorer({ site }: { site: Site }) {
         if (src) src.updateImage({ url, coordinates });
         else {
           map.addSource(`ov-${id}`, { type: "image", url, coordinates });
-          map.addLayer({ id: `ov-${id}`, type: "raster", source: `ov-${id}`, paint: { "raster-opacity": 1, "raster-fade-duration": reduced ? 0 : 300, "raster-resampling": "linear" } });
+          map.addLayer({ id: `ov-${id}`, type: "raster", source: `ov-${id}`, layout: { visibility: id === layerRef.current ? "visible" : "none" }, paint: { "raster-opacity": 1, "raster-fade-duration": reduced ? 0 : 300, "raster-resampling": "linear" } });
         }
       }
       if (data.recent && !map.getSource("recent")) {

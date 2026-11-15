@@ -19,7 +19,6 @@ const GAZETTEER: { label: string; lat: number; lon: number }[] = [
 ];
 const STEPS: ScreeningJob["state"][] = ["queued", "acquiring", "processing", "quality_check", "ready"];
 const STEP_LABEL: Record<string, string> = { queued: "Queued", acquiring: "Acquiring SRTMGL1", processing: "Measuring terrain", quality_check: "Quality check", ready: "Ready" };
-const FAMILY_LABEL: Record<string, string> = { slope: "Slope", local_relief: "Local relief", roughness: "Roughness", relative_elevation: "Relative elevation" };
 
 const subscribe = (cb: () => void) => { window.addEventListener("popstate", cb); return () => window.removeEventListener("popstate", cb); };
 const useJobParam = () => useSyncExternalStore(subscribe, () => new URLSearchParams(window.location.search).get("job"), () => null);
@@ -96,9 +95,8 @@ export default function ExploreContent() {
 
   const pre = preflight?.key === centerKey ? preflight : null;
   const result = job?.result;
+  const comparisons = Object.entries(result?.comparisons ?? {});
   const jezero = result?.comparisons["mars-jezero"];
-  const moon = result?.comparisons["moon-south-pole-shackleton"];
-  const share99 = result?.base_rate.share_at_or_above?.["99"];
   const stepIndex = job ? STEPS.indexOf(job.state) : -1;
 
   return (
@@ -156,15 +154,34 @@ export default function ExploreContent() {
             {result && job.state === "ready" && (
               <div className="job-result" data-testid="job-result">
                 <h2 className="section-title">Screening result <span className="screening-badge">screening · not reviewed</span></h2>
-                {jezero && <p className="score-figure"><span className="mono">{jezero.terrain_index.toFixed(1)}</span><small>/100 vs Jezero</small></p>}
-                {moon && <p className="muted">Against the lunar south-pole window: <span className="mono">{moon.terrain_index.toFixed(1)}</span>/100 (limited lunar comparison).</p>}
-                {jezero && (
-                  <div className="table-scroll" tabIndex={0} role="region" aria-label="Scrollable data table"><table className="feature-table">
-                    <thead><tr><th>Family</th><th>W1 at 60 m</th><th>τ</th><th>Index</th></tr></thead>
-                    <tbody>{Object.entries(jezero.families).map(([k, f]) => <tr key={k}><th scope="row">{FAMILY_LABEL[k] ?? k}</th><td className="mono">{f.w1_60m.toFixed(2)} {f.units === "degrees" ? "°" : "m"}</td><td className="mono">{f.tau}</td><td className="mono">{f.index.toFixed(1)}</td></tr>)}</tbody>
-                  </table></div>
+                {jezero?.scored && jezero.terrain_index != null && (
+                  <div className="score-block explore-score">
+                    <div className="score-main">
+                      <p className="score-label">Terrain similarity index vs Jezero</p>
+                      <p className="score-value mono"><b>{jezero.terrain_index.toFixed(0)}</b><span>/100</span></p>
+                      <p className="score-what">Present-day terrain shape at a 60 m analysis grid</p>
+                    </div>
+                    {jezero.standing && (
+                      <div className="score-context">
+                        <p className="score-label">Compared with ordinary land</p>
+                        <p className="standing-line"><b className="mono">{jezero.standing.closer_than}</b> of {jezero.standing.of} ordinary Earth windows are less similar to Jezero</p>
+                      </div>
+                    )}
+                  </div>
                 )}
-                {share99 != null && <p className="base-rate"><strong>{Math.round(share99 * 100)}%</strong> of {result.base_rate.windows} unselected Earth windows score 99 or more against Jezero, so a high value here is common for low-relief terrain.</p>}
+                <div className="table-scroll" tabIndex={0} role="region" aria-label="Scores against every reference window"><table className="feature-table" data-testid="screening-table">
+                  <thead><tr><th scope="col">Reference window</th><th scope="col">Index</th><th scope="col">Ordinary windows beaten</th><th scope="col">Slope off by</th><th scope="col">Relief off by</th></tr></thead>
+                  <tbody>{comparisons.map(([id, c]) => (
+                    <tr key={id}>
+                      <th scope="row">{c.reference_name}</th>
+                      <td className="mono">{c.terrain_index != null ? `${c.terrain_index.toFixed(0)}/100` : "no index"}</td>
+                      <td className="mono">{c.standing ? `${c.standing.closer_than} of ${c.standing.of}` : (c.reason ? "—" : "")}</td>
+                      <td className="mono">{c.features.slope?.distance != null ? `${c.features.slope.distance.toFixed(2)}°` : "—"}</td>
+                      <td className="mono">{c.features.relative_elevation?.distance != null ? `${c.features.relative_elevation.distance.toFixed(1)} m` : "—"}</td>
+                    </tr>
+                  ))}</tbody>
+                </table></div>
+                {comparisons.some(([, c]) => !c.scored) && <p className="muted small">No index where the reference’s own measurement floor is too coarse (the lunar window): distances are shown instead.</p>}
                 {result.imagery?.status === "available" && result.imagery.preview_url ? (
                   <figure style={{ margin: "16px 0" }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}

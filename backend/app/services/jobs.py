@@ -191,8 +191,6 @@ def _pipeline(job: dict) -> None:
     from app.scripts.acquire_dataset import download, earthdata_headers, extract_dem
     from app.services.srtm_service import mosaic_rasters, srtm_archive_name, srtm_download_url
     from app.services.terrain_measure import as_artifact, measure_window
-    from app.services.terrain_v3_service import load_v3_artifact
-    from app.services.terrain_v4_service import compare_v4
 
     lat, lon = job["center"]["lat"], job["center"]["lon"]
     work = WORK_DIR / job["job_id"]
@@ -219,30 +217,51 @@ def _pipeline(job: dict) -> None:
         job["result"] = {"coverage": coverage}
         _transition(job, "failed", "Less than 90 % of the window has valid elevation for at least one feature (ocean, lake or SRTM void). No index is computed.")
         return
-    comparisons = {}
-    for reference_id in job["preflight"]["references"]:
-        reference = load_v3_artifact(reference_id)
-        if reference:
-            v4 = compare_v4(reference, artifact)
-            comparisons[reference_id] = {"terrain_index": round(v4["terrain_index"], 2), "method": "terrain-v4.0",
-                                         "families": {k: {"index": round(v["index"], 2), "w1_60m": round(v["by_scale"]["60"]["w1"], 3), "units": v["units"], "tau": v["tau"]} for k, v in v4["families"].items()}}
+    comparisons = screening_comparisons(source, lat, lon)
     imagery = None
     try:
         imagery = _imagery(job, work)
     except Exception as error:
         imagery = {"status": "unavailable", "reason": str(error)[:200]}
-    from app.services.evidence_v2_service import evaluation
-    base = evaluation().get("base_rate", {})
     job["result"] = {
         "label": "screening", "inputs": inputs, "coverage": coverage,
         "metrics_60m": measured["scales"]["60"].metrics, "comparisons": comparisons, "imagery": imagery,
-        "base_rate": {"share_at_or_above": base.get("share_at_or_above"), "windows": base.get("count")},
-        "limitations": ["Screening result: not reviewed, not part of the showcase ranking.", "Terrain shape only at 60–240 m; materials, temperature, water, access and safety are not assessed.",
-                        "A high terrain index is common for low-relief Earth terrain (see base rate)."],
+        "method_version": "analogue-method-v1.0",
+        "limitations": ["Screening result: not reviewed and not added to the atlas list.", "Terrain shape only, at a 60 m analysis grid; materials, temperature, water, access and safety are not assessed.",
+                        "Built-up land is not masked for screened windows (no land-cover check was run), so towns, mines or fields can make terrain look artificially flat.",
+                        "A high index is common for gentle land: read how many ordinary Earth windows the area beats, not the index alone."],
         "result_sha256": None,
     }
     job["result"]["result_sha256"] = sha256(json.dumps(job["result"], sort_keys=True, default=str).encode()).hexdigest()
     _transition(job, "ready", "Screening measurements and comparison are ready.")
+
+
+def screening_comparisons(source, lat: float, lon: float) -> dict:
+    """Score a screened window exactly as the atlas scores registered windows: terrain-v5 quantiles, analogue-method-v1.0
+    tolerances and per-reference resolution floors, and the standing among the 88 ordinary Earth windows."""
+    from app.services import analogue_v1_service as av1
+    from app.services.terrain_quantiles import measure
+
+    measured = measure(source, "earth", lon, lat)
+    out = {}
+    for ref in av1.references():
+        ref_art = av1.artifact(ref["id"])
+        if not ref_art:
+            continue
+        floor = av1.reference_floor(ref_art)
+        feats, s_g, ok, reason = av1.terrain_features(av1._measure_sets(ref_art), measured, floor=floor)
+        background = av1._background(ref_art, floor) if ok else []
+        standing = av1._standing(background, s_g, ref["name"]) if ok and background else None
+        out[ref["id"]] = {
+            "reference_name": ref["name"], "method": "analogue-method-v1.0", "scored": bool(ok),
+            "terrain_index": round(100 * s_g, 2) if ok and s_g is not None else None,
+            "terrain_class": av1._terrain_class(feats) if ok else None,
+            "standing": standing.model_dump() if standing else None,
+            "reason": None if ok else reason,
+            "features": {f.feature: {"label": f.label, "units": f.units, "distance": f.distance, "tau": f.tau, "similarity": f.similarity, "role": f.role}
+                         for f in feats if f.role == "scored"},
+        }
+    return out
 
 
 def _imagery(job: dict, work: Path) -> dict:

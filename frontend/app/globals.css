@@ -26,7 +26,7 @@
   --sans: var(--font-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: var(--font-mono), ui-monospace, "Cascadia Mono", monospace;
   --gutter: clamp(16px, 3vw, 40px);
-  --masthead-h: 56px;
+  --masthead-h: 110px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -66,8 +66,8 @@ p { margin: 0 0 .6em; }
   padding: 0 var(--gutter); background: var(--ink-0); border-bottom: 1px solid var(--line-soft);
   backdrop-filter: saturate(120%) blur(6px);
 }
-.wordmark { display: flex; align-items: baseline; gap: 10px; color: var(--text); text-decoration: none; min-width: 0; }
-.wordmark-mark { width: 22px; height: 22px; color: var(--earth); align-self: center; flex: none; }
+.wordmark { display: flex; align-items: center; color: var(--text); text-decoration: none; min-width: 0; height: 100%; }
+.wordmark-logo { display: block; width: 140px; height: 105px; object-fit: contain; }
 .wordmark-name { font-family: var(--serif); font-size: 21px; letter-spacing: .01em; }
 .wordmark-team { font-size: 12px; color: var(--text-3); white-space: nowrap; }
 .masthead-nav { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
@@ -76,6 +76,7 @@ p { margin: 0 0 .6em; }
   .masthead { height: auto; min-height: var(--masthead-h); flex-wrap: wrap; gap: 6px; padding-block: 8px; }
   .masthead nav { order: 3; width: 100%; }
   .masthead-nav { justify-content: space-between; }
+  .wordmark-logo { width: 112px; height: 84px; }
   .wordmark-team { display: none; }
 }
 .masthead-nav a { display: block; padding: 6px 10px; color: var(--text-2); text-decoration: none; font-size: 14px; border-radius: 3px; }

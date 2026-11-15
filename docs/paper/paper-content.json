@@ -221,7 +221,7 @@
   },
   {
     "type": "p",
-    "text": "The local release records 14 terrain inputs and 13 imagery records. Verified terrain bytes include eight Earth SRTM inputs, five Mars DEM inputs and one lunar derivative. The original Atacama window remains catalogued but excluded because it contains an industrial complex; Atacama south is the registered replacement. Raw files are ignored by Git, while manifests, derived artifacts and LF-normalized metadata hashes are retained."
+    "text": "The local release records 14 terrain inputs and 13 imagery records. Verified terrain bytes include eight Earth SRTM inputs, five Mars DEM inputs and one lunar derivative. The original Atacama window remains catalogued but excluded because it contains an industrial complex; the Atacama Desert window 8 km south is the scored replacement. Raw files are ignored by Git, while manifests, derived artifacts and LF-normalized metadata hashes are retained."
   },
   {
     "type": "h2",
@@ -578,7 +578,7 @@
   },
   {
     "type": "h2",
-    "text": "Worked example: Atacama Desert (south window) compared with Jezero"
+    "text": "Worked example: Atacama Desert compared with Jezero"
   },
   {
     "type": "p",
@@ -660,15 +660,15 @@
   },
   {
     "type": "p",
-    "text": "Python 3.12.14, NumPy 2.3.4, Rasterio 1.4.3 with GDAL 3.9.3, FastAPI 0.162.7. Method configuration backend/app/data/analogue.v1.json (SHA-256 of LF text 4d4a2c257499ed6f…); calibration backend/data/processed/evaluation/analogue-v1-calibration.json (1e0463f39fca804a…). Scoring functions: backend/app/services/analogue_math.py (similarity, w1_quantile_functions, family_score, observed_index); backend/app/services/analogue_v1_service.py (terrain_features, reference_floor, compare); backend/app/services/terrain_quantiles.py (measure, quantile_function)."
+    "text": "Python 3.13.4, NumPy 2.3.4, Rasterio 1.4.3 with GDAL 3.9.3, FastAPI 0.162.7. Method configuration backend/app/data/analogue.v1.json (SHA-256 of LF text f3b1678cc54c1939…); calibration backend/data/processed/evaluation/analogue-v1-calibration.json (1e0463f39fca804a…). Scoring functions: backend/app/services/analogue_math.py (similarity, w1_quantile_functions, family_score, observed_index); backend/app/services/analogue_v1_service.py (terrain_features, reference_floor, compare); backend/app/services/terrain_quantiles.py (measure, quantile_function)."
   },
   {
     "type": "h1",
-    "text": "Results: measured terrain resemblance, Atacama south and Jezero"
+    "text": "Results: measured terrain resemblance, Atacama Desert and Jezero"
   },
   {
     "type": "p",
-    "text": "On the two scored terrain features at a 60 m grid, the Atacama south window differs from the Jezero window by 0.82° in slope distribution and 15.6 m in relative-elevation distribution, giving an experimental terrain evidence index of 97.9 (scenario range 93.1–98.7) with 100 % terrain-profile coverage. Both differences are within the resolution floor of these tests, and the window shares rank 1 with 4 other low-relief windows whose order the data cannot resolve. The score is not distinctive: 17% of 88 unselected Earth windows score at least as high, and 49% score 90 or more. The result shows that the two windows share low-relief terrain at this scale; it does not show that Atacama is the best overall Mars analogue, and it says nothing about geology, habitability or the safety of a base or landing site."
+    "text": "On the two scored terrain features at a 60 m grid, the Atacama Desert window differs from the Jezero window by 0.82° in slope distribution and 15.6 m in relative-elevation distribution, giving an experimental terrain evidence index of 97.9 (scenario range 93.1–98.7) with 100 % terrain-profile coverage. Both differences are within the resolution floor of these tests, and the window shares rank 1 with 4 other low-relief windows whose order the data cannot resolve. The score is not distinctive: 17% of 88 unselected Earth windows score at least as high, and 49% score 90 or more. The result shows that the two windows share low-relief terrain at this scale; it does not show that Atacama is the best overall Mars analogue, and it says nothing about geology, habitability or the safety of a base or landing site."
   },
   {
     "type": "h2",

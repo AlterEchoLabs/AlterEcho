@@ -1,5 +1,7 @@
 # AlterEcho
 
+**Technical paper for this build:** [docs/terraluna-technical-paper.md](docs/terraluna-technical-paper.md).
+
 Current local production review: [release handoff](docs/RELEASE_HANDOFF.md), [system and research guide](docs/ALTERECHO_SYSTEM_AND_RESEARCH_GUIDE.md), [source registry](docs/DATA_SOURCE_REGISTRY.md), and [acquisition guide](docs/DATA_ACQUISITION_GUIDE.md). The guide is also available as editable DOCX and PDF in `docs/`.
 
 Team AlterEcho · NASA Space Apps Challenge 2026 · *Identify Earth locations that analog the permanent Moon base locations and Mars*
@@ -18,8 +20,8 @@ AlterEcho is a research-shortlisting tool. It is not a landing-site selector, a 
 | Gusev crater plains, Spirit site (reference) | Mars | 14.5684° S, 175.4726° E | USGS controlled CTX DTM (20 m) | CTX orthoimage |
 | Eberswalde crater delta (reference) | Mars | 23.85° S, 33.55° W | USGS controlled CTX DTM (20 m) | CTX orthoimage |
 | Lunar south pole, Shackleton rim (reference, *distances only*) | Moon | 90° S | LRO LOLA LDEM_875S_20M | none processed (hillshade) |
-| Atacama Desert (south window) | Earth | 24.27° S, 69.90° W | SRTMGL1.003 | Sentinel-2 L2A 2026-09-27 |
-| Atacama Desert (original, excluded from v1.0: industrial complex) | Earth | 24.20° S, 69.90° W | SRTMGL1.003 | Sentinel-2 L2A 2026-09-27 |
+| Atacama Desert | Earth | 24.27° S, 69.90° W | SRTMGL1.003 | Sentinel-2 L2A 2026-09-27 |
+| Atacama Desert, first window (not scored: industrial complex with graded ground; replaced 8 km south) | Earth | 24.20° S, 69.90° W | SRTMGL1.003 | Sentinel-2 L2A 2026-09-27 |
 | Upper Mustang | Earth | 29.10° N, 83.90° E | SRTMGL1.003 | Sentinel-2 L2A 2026-10-26 |
 | Ladakh | Earth | 34.20° N, 77.60° E | SRTMGL1.003 | Sentinel-2 L2A 2025-11-26 |
 | Dallol, Danakil Depression | Earth | 14.2417° N, 40.2989° E | SRTMGL1.003 | Sentinel-2 L2A 2025-12-03 |
@@ -27,7 +29,7 @@ AlterEcho is a research-shortlisting tool. It is not a landing-site selector, a 
 | Hanksville badlands (MDRS) | Earth | 38.4064° N, 110.7919° W | SRTMGL1.003 | Sentinel-2 L2A 2026-09-03 |
 | Meteor Crater (Barringer) | Earth | 35.0272° N, 111.0225° W | SRTMGL1.003 | Sentinel-2 L2A 2026-11-12 |
 
-Holuhraun (ArcticDEM) and the McMurdo Dry Valleys (REMA) are listed as planned and are never scored. Any other Earth area between 56° S and 60° N can be screened on the **Explore** page.
+Holuhraun and the McMurdo Dry Valleys lie outside SRTM coverage (60° N to 56° S); they are listed as not measured and are never scored. Any other Earth area between 56° S and 60° N can be screened on the **Explore** page.
 
 ## How the index is calculated (analogue-method-v1.0)
 
@@ -45,18 +47,24 @@ index = 100 · Σ w_g I_g S_g / Σ w_g I_g,   coverage = Σ w_g I_g    no qualif
 - **Resolution floor δ.** δ is what moving the Jezero window 2 km and switching DEM product (SRTM, NASADEM, GLO-30) produce on their own: slope 1.17°, relative elevation 22.2 m. A site within δ on every feature "not resolved by the tested data and scenarios" from the reference.
 - **Built-up mask.** ESA WorldCover cells that are at least half built-up are excluded.
 - **Per-reference floor.** Each reference has its own resolution floor, from moving that window 2 km in four directions. The lunar window fails the 3× rule (relative elevation changes by 195 m against a 77 m tolerance), so lunar comparisons show distances without an index.
-- **Background share.** Every candidate also reports the share of the 88 unselected Earth windows that score at least as high against the same reference.
-- **Ranking.** Only *Terrain analogy* ranks. Tie groups come from overlapping scenario ranges: placement, reference placement, DEM, grid, τ and weights. Balanced science, Rover mobility and Mars-base field testing show partial evidence with their coverage (30 %, 80 %, 35 %) and are never ranked. Biosignature fieldwork is not assessed.
+- **Standing among ordinary land.** Every index is shown with how many of the 88 unselected Earth windows it beats against the same reference ($N_{closer} = \#\{b : A_b < A_c\}$). This is the number to read: about half of all ordinary land scores 90 or more.
+- **Terrain class instead of ranks.** A site is in the *same terrain class* when both scored distances are below their tolerances, a *different* class when both are above. Sites whose scenario ranges overlap (placement, reference placement, DEM, grid, τ, weights) are listed together without rank numbers.
+- **Compare by.** The atlas offers three views: *Terrain shape* (scored), *Temperature* (Aqua MODIS and Mars 2020 MEDA records, shown side by side, not scored because they fail the comparability audit) and *Field tests* (published analog research per site, not scored). The partial task profiles remain in the API and are described on the Method page as future work.
+- **Explore uses the same method.** Screened areas are scored with analogue-method-v1.0 against every reference, with the same standing.
 
-| Terrain analogy vs Jezero (v1.0) | Index | Scenario range | Rank |
-|---|---|---|---|
-| Craters of the Moon · Atacama south · Hanksville · Meteor Crater · Dallol | 98.2 · 97.9 · 97.4 · 95.1 · 88.6 | 77–99 overall | 1= (one tie group) |
-| Upper Mustang · Ladakh | 0.6 · 0.0 | 0–4 | 6= |
-| Atacama (original window) | excluded: contains an industrial complex | — | — |
+| Terrain shape vs Jezero | Index | Ordinary windows beaten (of 88) | Scenario range | Class |
+|---|---|---|---|---|
+| Craters of the Moon | 98.2 | 78 | 92–99 | same |
+| Atacama Desert | 97.9 | 73 | 93–99 | same |
+| Hanksville (MDRS) | 97.4 | 71 | 93–99 | same |
+| Meteor Crater | 95.1 | 58 | 85–98 | same |
+| Dallol | 88.6 | 44 | 77–94 | same |
+| Upper Mustang | 0.6 | 9 | 0–4 | different |
+| Ladakh | 0.0 | 6 | 0–0 | different |
 
-Craters of the Moon and Atacama south are not resolved from Jezero by the floor tests (a 2 km reference move and a DEM-product swap).
+The five sites in the same class cannot be put in order: their ranges overlap. Craters of the Moon and Atacama are not resolved from Jezero by the floor tests (a 2 km reference move and a DEM-product swap).
 
-**Discrimination.** Against every Mars reference, 42–49 % of unselected Earth windows score 90 or more, so the index separates low-relief from rugged terrain but does not order low-relief windows. That is why the background share is shown next to each index. Per-feature results, alternative tolerances and leave-one-region-out results (τ ranges from 3.7–9.4° for slope) are on the Method page and in `backend/data/processed/evaluation/analogue-v1-discrimination.json`.
+**Discrimination.** Against every Mars reference, 42–49 % of unselected Earth windows score 90 or more, so the index separates low-relief from rugged terrain but does not order low-relief windows. That is why the standing among ordinary land is shown next to each index. Per-feature results, alternative tolerances and leave-one-region-out results (τ ranges from 3.7–9.4° for slope) are on the Method page and in `backend/data/processed/evaluation/analogue-v1-discrimination.json`.
 
 **Why the old values clustered near 99.9.** Under terrain-v4.0 every low-relief window had d/τ between 0.016 and 0.15 on every family. Three correlated families were averaged, and the binned W1 read 10–20 % low. [docs/PHASE9_AUDIT.md](docs/PHASE9_AUDIT.md) shows the step-by-step decomposition and the full trace. The historical methods still reproduce: terrain-v4.0 and analog-evidence-v2.0 at `/api/v2/compare`, analog-evidence-v1.0 at `/api/evidence/compare`.
 
@@ -187,12 +195,12 @@ set -a; . ./.env; set +a          # loads EARTHDATA_TOKEN from the ignored backe
 
 ## Known limitations
 
-- **The index does not discriminate among low-relief windows.** About half of unselected Earth windows score 90 or more against each Mars reference, and the background sample covers only 4 regions. Read the background share, not the index alone.
+- **The index does not discriminate among low-relief windows.** About half of unselected Earth windows score 90 or more against each Mars reference, and the background sample covers only 4 regions. Read the standing among ordinary land, not the index alone.
 - **Distributions ignore spatial arrangement.** A synthetic gentle fractal surface scores 88 against Jezero.
 - **CTX stereo noise** inflates 60 m slopes on very smooth plains (InSight median 3.1°). The Gale window's south-east corner includes part of a dark-toned band.
 
 - **Only terrain is scored.** Geology (EMIT, CRISM), water and ice, surface processes and subsurface evidence are not processed. Field-test suitability is a record, not a score. Balanced science, Rover mobility and Mars-base field testing are partial; Biosignature fieldwork is not assessed.
-- **Terrain cannot separate low-relief sites.** Five windows form one tie group and two lie within the resolution floor of Jezero. Distributions ignore spatial arrangement: a synthetic gentle fractal surface scores 88.
+- **Terrain cannot separate low-relief sites.** Five windows share one terrain class with overlapping uncertainty ranges, and two lie within the resolution floor of Jezero. Distributions ignore spatial arrangement: a synthetic gentle fractal surface scores 88.
 - τ comes from Earth terrain contrast in 88 unselected windows, not from expert labels. The relative-elevation tolerance only narrowly passes the 3× resolution-floor rule. The candidates were known beforehand, so this is not a blind test. Profile weights await independent review.
 - The lunar comparison uses a single 10 km window, with four 2 km placement checks that fail the scoring gate; alternate DEM, illumination and thermal checks remain unavailable.
 - Copernicus GLO-30 was not measured for Meteor Crater because of a provider rate limit.

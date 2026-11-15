@@ -36,7 +36,7 @@ def _invalid(error: Exception):
 @router.get("/method")
 def method():
     cal = av1.calibration()
-    return {**{k: av1.CONFIG[k] for k in ("method_version", "terrain_method", "status", "review_status", "comparison_definition", "notice", "formulas",
+    return {**{k: av1.CONFIG[k] for k in ("method_version", "terrain_method", "status", "review_status", "comparison_definition", "notice", "formulas", "formulas_tex",
                                           "parameters", "primary_scale_m", "sensitivity_scales_m", "minimum_feature_coverage", "families", "aoi_exclusions",
                                           "validation_status", "compatibility")},
             "tolerances": [t.model_dump() for t in av1.tolerances()],
@@ -85,6 +85,15 @@ def result(site: SiteQuery, reference: SiteQuery = "mars-jezero", profile: Profi
         _not_found()
     except av1.AnalogueError as error:
         _invalid(error)
+
+
+@router.get("/context")
+def context(reference: SiteQuery = "mars-jezero"):
+    """Measured context that is shown but never scored: surface-temperature records and the field-test / research record of each Earth window."""
+    site = get_site(reference)
+    if not site or site.body.value not in {"mars", "moon"}:
+        _not_found()
+    return av1.context(reference)
 
 
 @router.get("/data-roles", response_model=list[DataRole])

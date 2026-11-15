@@ -3,7 +3,7 @@
   "terrain_method": "terrain-v5.0",
   "status": "experimental_research_method",
   "software": {
-    "python": "3.12.14",
+    "python": "3.13.4",
     "numpy": "2.3.4",
     "rasterio": "1.4.3",
     "gdal": "3.9.3",
@@ -12,7 +12,7 @@
   "files": {
     "method_config": {
       "path": "backend/app/data/analogue.v1.json",
-      "sha256_lf": "4d4a2c257499ed6faefea47fc81f0b1cbaa366b49dd152d41087bd4a1a272053"
+      "sha256_lf": "f3b1678cc54c19395b7370f869602de1a1dd076589849db7fd15d14eeb8d6621"
     },
     "calibration": {
       "path": "backend/data/processed/evaluation/analogue-v1-calibration.json",
@@ -283,7 +283,7 @@
   "example": {
     "earth": {
       "site_id": "earth-atacama-south",
-      "name": "Atacama Desert (south window)",
+      "name": "Atacama Desert",
       "aoi_id": "earth-atacama-south-aoi-v1",
       "center": [
         -24.2722,

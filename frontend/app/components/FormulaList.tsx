@@ -1,49 +1,31 @@
-const LABELS: Record<string, string> = {
-  scalar_distance: "Scalar distance",
-  distribution_distance: "Distribution distance",
-  feature_similarity: "Feature similarity",
-  family_score: "Family score",
-  observed_index: "Observed index",
-  evidence_coverage: "Evidence coverage",
+import TeX from "./TeX";
+
+/** Formulas exactly as executed by the backend (analogue.v1.json → formulas_tex), each with a one-line meaning. */
+const META: Record<string, { label: string; meaning: string }> = {
+  slope: { label: "Slope", meaning: "Steepness between neighbouring 60 m cells, in degrees." },
+  relative_elevation: { label: "Relative elevation", meaning: "Height above or below the window’s own median, so Earth and Mars datums never meet." },
+  distribution_distance: { label: "Distance between two windows", meaning: "Wasserstein-1: the area between the two cumulative distributions, in the feature’s units (500 quantiles)." },
+  feature_similarity: { label: "Similarity of one feature", meaning: "1 when identical, 0.5 when the difference equals the tolerance τ, 0.0625 at twice τ." },
+  tolerance: { label: "Tolerance τ", meaning: "The typical difference between two ordinary Earth landscapes (median over 3,828 pairs)." },
+  resolution_floor: { label: "Resolution floor δ", meaning: "What moving the reference 2 km and swapping the Earth elevation model change on their own." },
+  family_score: { label: "Terrain score", meaning: "Slope and relative elevation weighted ½ each; relief and roughness are shown but not counted twice." },
+  observed_index: { label: "Terrain similarity index", meaning: "The score on 0–100. Missing evidence is left out of both sums, never counted as zero." },
+  evidence_coverage: { label: "Evidence coverage", meaning: "Share of the planned evidence that is measured and comparable." },
+  standing: { label: "Comparison with ordinary land", meaning: "How many of the 88 ordinary Earth windows score lower than the candidate against the same reference." },
 };
 
-const LATEX: Record<string, string> = {
-  scalar_distance: String.raw`d_k = |x_{E,k} - x_{P,k}|`,
-  distribution_distance: String.raw`d_k = W_1(F_{E,k}, F_{P,k}) = \int_0^1 |F^{-1}_{E,k}(u) - F^{-1}_{P,k}(u)|\,du`,
-  feature_similarity: String.raw`s_k = \exp\left(-\ln 2\left(\frac{d_k}{\tau_k}\right)^2\right)`,
-  family_score: String.raw`S_g = \sum_{k\in g} a_{k|g}s_k`,
-  observed_index: String.raw`I = 100\frac{\sum_g w_g I_g S_g}{\sum_g w_g I_g}`,
-  evidence_coverage: String.raw`C = \sum_g w_g I_g`,
-};
+export const FORMULA_ORDER = ["slope", "relative_elevation", "distribution_distance", "feature_similarity", "tolerance", "resolution_floor", "family_score", "observed_index", "evidence_coverage", "standing"];
 
-const DISPLAY: Record<string, string> = {
-  scalar_distance: "dₖ = |xₑ,ₖ − xₚ,ₖ|",
-  distribution_distance: "dₖ = W₁(Fₑ,ₖ, Fₚ,ₖ) = ∫₀¹ |F⁻¹ₑ,ₖ(u) − F⁻¹ₚ,ₖ(u)| du",
-  feature_similarity: "sₖ = exp(−ln 2 · (dₖ / τₖ)²)",
-  family_score: "Sg = Σₖ∈g aₖ|g sₖ",
-  observed_index: "I = 100 · (Σg wg Ig Sg) / (Σg wg Ig)",
-  evidence_coverage: "C = Σg wg Ig",
-};
-
-export default function FormulaList({ formulas }: { formulas: Record<string, string> }) {
+export default function FormulaList({ tex, only }: { tex: Record<string, string>; only?: string[] }) {
+  const keys = (only ?? FORMULA_ORDER).filter((k) => tex[k]);
   return (
-    <ul className="formula-list">
-      {Object.entries(formulas).map(([name, source]) => {
-        const latex = LATEX[name] ?? source;
-        return (
-          <li key={name}>
-            <span className="muted">{LABELS[name] ?? name.replaceAll("_", " ")}</span>
-            <div className="formula-block">
-              <span className="formula-display" aria-label={source}>{DISPLAY[name] ?? source}</span>
-              <details className="formula-source">
-                <summary>LaTeX source</summary>
-                <code>{String.raw`\(${latex}\)`}</code>
-              </details>
-            </div>
-            <span className="sr-only">{source}</span>
-          </li>
-        );
-      })}
-    </ul>
+    <ol className="formula-list tex-formulas">
+      {keys.map((k) => (
+        <li key={k}>
+          <div className="formula-head"><strong>{META[k]?.label ?? k.replaceAll("_", " ")}</strong><span className="muted">{META[k]?.meaning}</span></div>
+          <TeX tex={tex[k]} />
+        </li>
+      ))}
+    </ol>
   );
 }

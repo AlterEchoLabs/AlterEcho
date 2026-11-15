@@ -17,7 +17,7 @@ from typing import Any
 
 from app.models.analogue_v1 import (
     CandidateV3, CompareV3, DataRole, DistributionPair, ExplorerWindow, FamilyRecord, FeatureRecord, ProfileV3, ResultDetail, Scenario,
-    SensitivityV3, SimpleResult, ToleranceRecord, WindowStats,
+    SensitivityV3, SimpleResult, Standing, ToleranceRecord, WindowStats, ClassGroup,
 )
 from app.services.analogue_math import competition_ranks, family_score, observed_index, similarity, w1_quantile_functions
 from app.services.catalog_service import SITES, get_site
@@ -372,6 +372,10 @@ def _compare_cached(reference_id: str, profile_id: str, candidate_ids: tuple[str
             exclusion={**exclusion, "replacement_name": get_site(exclusion["replacement"]).name if get_site(exclusion["replacement"]) else None} if exclusion else None,
             literature_context=_literature(cid), data_roles=_roles(prof, body, reference_id),
             background_share=_share_at_or_above(background, terrain_s) if terrain_s is not None and background else None)
+        if terrain_s is not None:
+            cand.terrain_class = _terrain_class(terrain_cache[cid][0])
+            if background:
+                cand.standing = _standing(background, terrain_s, ref_site.name)
         results.append(cand)
         if terrain_s is not None and index is not None:
             nominal[cid] = index
@@ -419,6 +423,7 @@ def _compare_cached(reference_id: str, profile_id: str, candidate_ids: tuple[str
             groups.append([cid])
             low = lo
     ranks = competition_ranks(groups) if state == "ranked" else {}
+    bg_median = _summary(background)["median_index"] if background else None
     for r in results:
         if r.site_id in scenario_values:
             scen = [sc for sc, _ in scenario_values[r.site_id]]
@@ -432,13 +437,14 @@ def _compare_cached(reference_id: str, profile_id: str, candidate_ids: tuple[str
         if state == "not_assessed" and r.state == "partial":
             r.state = "not_assessed"
             r.observed_index = None
+            r.standing = None
         # A family measurement is still useful, but must not escape as an overall
         # task score through JSON exports when a task-critical gate fails.
         if not all(r.critical_gates.values()):
             r.observed_index = None
             r.sensitivity = None
         r.simple = _simple(r, prof, ref_site.name, body, state, groups if state == "ranked" else [], terrain_cache.get(r.site_id, ([], None, False))[0],
-                           len(background) if background else 0)
+                           len(background) if background else 0, bg_median)
 
     def sort_key(r: CandidateV3):
         st = {"ranked": 0, "partial": 1, "not_assessed": 2, "excluded": 3, "not_measured": 4}[r.state]
@@ -447,13 +453,16 @@ def _compare_cached(reference_id: str, profile_id: str, candidate_ids: tuple[str
         return (st, r.site_name)
     results.sort(key=sort_key)
     base = _summary(background) if background else None
+    class_groups = _class_groups(results, groups, ref_site.name) if state == "ranked" else []
     return CompareV3(
         method_version=CONFIG["method_version"], terrain_method=CONFIG["terrain_method"], status=CONFIG["status"], review_status=CONFIG["review_status"],
         comparison_definition=CONFIG["comparison_definition"], reference_site_id=reference_id, reference_name=ref_site.name, reference_aoi_id=ref_site.aoi_id,
-        reference_body=body, profile=prof, profile_state=state, profile_state_reason=reason, headline=_headline(prof, state, results),
+        reference_body=body, profile=prof, profile_state=state, profile_state_reason=reason, headline=_headline(prof, state, results, len(background) if background else 0),
         evidence_coverage=max((r.evidence_coverage for r in results), default=0.0), primary_scale_m=int(PRIMARY), tolerances=tolerances(reference_id),
-        base_rate=base, tie_groups=groups if state == "ranked" else [], ordering_note=_ordering_note(state, groups if state == "ranked" else [], base, body),
-        results=results, physical_limits=CONFIG["physical_limits"][body], formulas=CONFIG["formulas"], parameters=CONFIG["parameters"],
+        base_rate=base, tie_groups=groups if state == "ranked" else [], class_groups=class_groups,
+        background_scores=sorted(round(v, 2) for v in background) if background else [],
+        ordering_note=_ordering_note(state, groups if state == "ranked" else [], base, body),
+        results=results, physical_limits=CONFIG["physical_limits"][body], formulas=CONFIG["formulas"], formulas_tex=CONFIG.get("formulas_tex", {}), parameters=CONFIG["parameters"],
         validation_status=CONFIG["validation_status"], notice=CONFIG["notice"], generated_at=datetime.now(timezone.utc),
         discrimination=_discrimination_summary(reference_id, base), resolution_floor=floor)
 
@@ -481,6 +490,64 @@ def _share_at_or_above(values: list[float], s_g: float) -> float:
     return round(sum(1 for v in values if v >= 100 * s_g - 1e-9) / len(values), 3)
 
 
+def _standing(values: list[float], s_g: float, ref_name: str) -> Standing:
+    """Count the ordinary (unselected) Earth windows that are less similar to the reference than this candidate."""
+    at_or_above = sum(1 for v in values if v >= 100 * s_g - 1e-9)
+    closer = len(values) - at_or_above
+    return Standing(closer_than=closer, as_close_or_closer=at_or_above, of=len(values),
+                    statement=f"Closer to {ref_name} than {closer} of {len(values)} ordinary Earth land windows")
+
+
+CLASS_LABELS = {"same": "Same terrain class as {ref}", "partial": "Partly similar terrain to {ref}", "different": "Different terrain from {ref}"}
+
+
+def _terrain_class(feats: list[FeatureRecord]) -> str | None:
+    """same: every scored feature differs by less than its tolerance (closer than a typical pair of Earth landscapes);
+    different: every scored feature differs by at least its tolerance; partial: a mix."""
+    ratios = [r.d_over_tau for r in feats if r.role == "scored" and r.d_over_tau is not None]
+    if not ratios:
+        return None
+    if all(x < 1 for x in ratios):
+        return "same"
+    if all(x >= 1 for x in ratios):
+        return "different"
+    return "partial"
+
+
+def _verdict(cls: str | None, standing: Standing | None) -> str | None:
+    """Plain-language reading of class + standing. Quartile cut-offs on the ordinary-window count, stated in the Method page."""
+    if cls is None or standing is None:
+        return None
+    share = standing.closer_than / standing.of
+    if cls == "different":
+        return "Different terrain: much steeper or with far more relief than the reference"
+    if cls == "partial":
+        return "Partly similar terrain: one measurement is close, the other is not"
+    if share >= 0.75:
+        return "Close terrain match, closer than most ordinary land"
+    if share >= 0.5:
+        return "Close terrain match, but so is a lot of ordinary gentle land"
+    return "Same broad terrain class, yet many ordinary windows are closer"
+
+
+def _class_groups(results: list[CandidateV3], tie_groups: list[list[str]], ref_name: str) -> list[ClassGroup]:
+    tie_of = {sid: i for i, g in enumerate(tie_groups) for sid in g}
+    out = []
+    for cls in ("same", "partial", "different"):
+        members = [r.site_id for r in results if r.state == "ranked" and r.terrain_class == cls]
+        if not members:
+            continue
+        resolved = len({tie_of.get(m, -1 - i) for i, m in enumerate(members)}) == len(members)
+        if len(members) == 1:
+            note = ""
+        elif resolved:
+            note = "Listed by measured closeness; their uncertainty ranges do not overlap."
+        else:
+            note = "Their uncertainty ranges overlap, so the order inside this group is not meaningful."
+        out.append(ClassGroup(terrain_class=cls, label=CLASS_LABELS[cls].format(ref=ref_name), site_ids=members, order_resolved=resolved, note=note))
+    return out
+
+
 def _summary(values: list[float]) -> dict:
     import numpy as np
     v = np.asarray(values)
@@ -502,7 +569,7 @@ def _discrimination_summary(reference_id: str, base: dict | None) -> dict | None
             "top_five_order_stable_across_regions": len(set(orders)) == 1 if orders else None,
             "population": disc.get("population"), "notice": disc.get("notice"),
             "interpretation": ("At a 60 m grid the index separates low-relief from rugged terrain well, but many unselected low-relief Earth windows also score highly. "
-                               "Read a candidate's background share (the fraction of unselected windows that score at least as high) before reading its index.")}
+                               "Read how many of those ordinary windows a candidate beats before reading its index.")}
 
 
 def _profile_index(families: list[FamilyRecord], terrain_score: float | None) -> float | None:
@@ -559,8 +626,8 @@ def _terrain_sentence(feats: list[FeatureRecord], site_name: str, ref_name: str)
     unit = {f: FEATURE_META[f][2] for f in FEATURE_META}
     unresolved = all(r.distance <= (r.delta or 0) for r in scored)
     if unresolved:
-        sentence = (f"On the measured 10 km terrain features at a 60 m grid, the {site_name} window is not resolved from the {ref_name} window by these tests: "
-                    "every scored difference is at or below the resolution floor set by moving the reference 2 km and swapping the Earth DEM product.")
+        sentence = (f"At a 60 m grid, the {site_name} window is not resolved from the {ref_name} window by these tests: every scored difference is no larger "
+                    "than what moving the reference 2 km or swapping the Earth elevation model produces on its own.")
     else:
         closer = [r for r in scored if r.d_over_tau is not None and r.d_over_tau < 1]
         further = [r for r in scored if r.d_over_tau is not None and r.d_over_tau >= 1]
@@ -584,7 +651,8 @@ def _terrain_sentence(feats: list[FeatureRecord], site_name: str, ref_name: str)
     return sentence, describe(best), describe(worst) if worst is not best else None
 
 
-def _simple(r: CandidateV3, prof: ProfileV3, ref_name: str, body: str, state: str, groups: list[list[str]], feats: list[FeatureRecord], n_background: int = 0) -> SimpleResult:
+def _simple(r: CandidateV3, prof: ProfileV3, ref_name: str, body: str, state: str, groups: list[list[str]], feats: list[FeatureRecord], n_background: int = 0,
+            bg_median: float | None = None) -> SimpleResult:
     measured = [f.label for f in r.families if f.eligible]
     context_only = [f.label for f in r.families if f.status == "measured_context_only"]
     coverage = f"{r.evidence_coverage:.0%} of the planned {prof.label} evidence is measured and comparable"
@@ -600,8 +668,12 @@ def _simple(r: CandidateV3, prof: ProfileV3, ref_name: str, body: str, state: st
                             validation_status=CONFIG["validation_status"], strength=None, mismatch=None, limitation=prof.scope_line, show_index=False, index_label=None, background_text=None)
     sentence, strength, mismatch = _terrain_sentence(feats, r.site_name, ref_name)
     terrain = next((f for f in r.families if f.family == "terrain"), None)
-    background = (f"{r.background_share:.0%} of {n_background} unselected Earth land windows score at least as high against {ref_name}; "
-                  "a high value mostly indicates low relief.") if r.background_share is not None and n_background else None
+    background = None
+    if r.standing is not None and n_background:
+        st = r.standing
+        background = (f"We scored {st.of} ordinary Earth land windows against {ref_name} in exactly the same way: {st.closer_than} are less similar than this window "
+                      f"and {st.as_close_or_closer} are as similar or more." + (f" A typical ordinary window scores {bg_median:.0f}, because most land is gentle "
+                                                                                 "at a 60 m grid." if bg_median is not None else ""))
     if terrain is not None and terrain.status == "measured_context_only":
         scored = [x for x in feats if x.role == "scored" and x.distance is not None]
         unit = {f: FEATURE_META[f][2] for f in FEATURE_META}
@@ -615,14 +687,14 @@ def _simple(r: CandidateV3, prof: ProfileV3, ref_name: str, body: str, state: st
     tie = ""
     if group and len(group) > 1:
         others = len(group) - 1
-        tie = f" Its order relative to the other {others} site{'s' if others != 1 else ''} in its tie group is not resolved by the data."
+        tie = f" The data cannot put it in order with the other {others} site{'s' if others != 1 else ''} whose uncertainty ranges overlap with it."
     lunar = " This is a limited lunar terrain comparison; illumination and regolith are not assessed." if body == "moon" else ""
-    background_note = ""
     show, label = False, None
     if prof.id == "terrain_analogy":
         conclusion = sentence + tie + lunar + " " + prof.scope_line
         if r.observed_index is not None:
-            show, label = True, "Experimental terrain evidence index (0–100; not a probability or a percentage likeness)"
+            show, label = True, ("Terrain similarity index (0–100): present-day terrain shape at a 60 m analysis grid. Most gentle land scores above 90 "
+                                 "on this scale, so read it with the comparison against ordinary windows. Not a probability or a percentage likeness.")
     elif prof.id == "balanced_science":
         conclusion = (f"Terrain evidence available; {r.evidence_coverage:.0%} of planned science evidence measured. " + sentence +
                       " No Balanced science result or ranking is given until geology is measured comparably.")
@@ -644,15 +716,20 @@ def _simple(r: CandidateV3, prof: ProfileV3, ref_name: str, body: str, state: st
         label = "Terrain-only partial index; not a field-test or base rating"
     if state == "not_assessed":
         show, label = False, None
+    terrain_view = prof.id == "terrain_analogy" and state != "not_assessed"
     return SimpleResult(conclusion=conclusion.strip(), measured=measured, coverage_text=coverage + ".", validation_status=CONFIG["validation_status_short"],
                         strength=strength, mismatch=mismatch, limitation=prof.scope_line, show_index=show, index_label=label,
-                        background_text=background if prof.id == "terrain_analogy" and state != "not_assessed" else None)
+                        background_text=background if terrain_view else None,
+                        standing_text=r.standing.statement if terrain_view and r.standing is not None else None,
+                        class_label=CLASS_LABELS[r.terrain_class].format(ref=ref_name) if terrain_view and r.terrain_class else None,
+                        verdict=_verdict(r.terrain_class, r.standing) if terrain_view else None)
 
 
-def _headline(prof: ProfileV3, state: str, results: list[CandidateV3]) -> str:
+def _headline(prof: ProfileV3, state: str, results: list[CandidateV3], n_background: int = 0) -> str:
     coverage = max((r.evidence_coverage for r in results if r.state in {"ranked", "partial"}), default=0.0)
     if state == "ranked":
-        return "Ranked on measured terrain only, with ties where the data cannot separate sites."
+        return ("Compared on measured terrain only. Sites are grouped by terrain class"
+                + (f" and set against {n_background} ordinary Earth land windows scored the same way." if n_background else "."))
     if state == "partial":
         return f"Terrain evidence available; {coverage:.0%} of planned {prof.label.lower()} evidence measured. No overall result or ranking."
     return f"{prof.label}: not assessed. The task-critical evidence does not exist for these windows."
@@ -664,7 +741,7 @@ def _ordering_note(state: str, groups: list[list[str]], base: dict | None, body:
     parts = []
     named = [[get_site(s).name for s in g] for g in groups if len(g) > 1]
     if named:
-        parts.append("Tie groups (order inside a group is not resolved): " + " | ".join(", ".join(g) for g in named) + ".")
+        parts.append("Sites whose uncertainty ranges overlap cannot be put in order by the data: " + " | ".join(", ".join(g) for g in named) + ".")
     if state == "partial":
         parts.insert(0, "Partial evidence: listed alphabetically for exploration, not ranked.")
     if body == "moon":
@@ -823,3 +900,63 @@ def references() -> list[dict]:
                 "Moving this reference window by 2 km changes the scored terrain features by more than a third of the tolerance, so terrain distances are shown without an index.",
         })
     return out
+
+
+# ------------------------------------------------------------------ measured context (shown, never scored)
+
+ANALOG_STATUS_TEXT = {
+    "window": "Studied at this window",
+    "region": "Studied in the region, not at this window",
+    "none": "No peer-reviewed analog study found",
+}
+
+
+def _temperature_record(rec: dict | None) -> dict | None:
+    """A thermal record reduced to what a reader needs: day / night skin temperature in degrees C and its provenance."""
+    if not rec:
+        return None
+    s, prod = rec["summary"], rec["product"]
+    to_c = lambda k: round(k - 273.15, 1) if k is not None else None  # noqa: E731
+    return {
+        "quantity": rec["quantity"].replace("_", " "), "product_id": prod["product_id"], "instrument": prod.get("instrument"), "platform": prod.get("platform"),
+        "provider": prod.get("provider"), "source_url": prod.get("source_url"), "doi": prod.get("doi"), "period": prod.get("observation_period"),
+        "sampling": prod.get("temporal_sampling"), "support": prod.get("analysis_resolution"),
+        "day_c": to_c(s.get("day_temperature_p50_k")), "night_c": to_c(s.get("night_temperature_p50_k")), "diurnal_range_k": s.get("diurnal_range_p50_k"),
+        "day_local_time_h": s.get("day_local_solar_time_p50_h"), "night_local_time_h": s.get("night_local_solar_time_p50_h"),
+        "paired_samples": s.get("paired_samples"), "limitations": rec.get("limitations", []),
+    }
+
+
+def context(reference_id: str) -> dict:
+    """Temperature records and the field-test / research record for every scored Earth window against one reference.
+    Nothing here enters an index: temperature fails the comparability audit, and literature is regional context."""
+    ref_site = get_site(reference_id)
+    ref_thermal = load_thermal(reference_id)
+    temperature, fieldwork = [], []
+    for site in SITES:
+        if site.body.value != "earth" or not artifact(site.id) or site.id in CONFIG["aoi_exclusions"]:
+            continue
+        cand = load_thermal(site.id)
+        audit = thermal_audit(ref_thermal, cand) if ref_thermal and cand else None
+        temperature.append({"site_id": site.id, "site_name": site.name, "record": _temperature_record(cand),
+                            "audit": {"decision": audit.decision, "summary": audit.summary, "checks": [c.model_dump() for c in audit.checks]} if audit else None})
+        rc = CONTEXT["research_context"].get(site.id)
+        status = (rc or {}).get("analog_status", "none")
+        fieldwork.append({"site_id": site.id, "site_name": site.name, "analog_status": status, "analog_status_text": ANALOG_STATUS_TEXT[status],
+                          "summary": rc["text"] if rc else "No analog study of this window or its region is recorded in AlterEcho.",
+                          "sources": [c.model_dump() for c in _citations(rc.get("source_ids"))] if rc else []})
+    return {
+        "reference_site_id": reference_id, "reference_name": ref_site.name, "reference_body": ref_site.body.value,
+        "temperature": {
+            "reference": _temperature_record(ref_thermal),
+            "note": ("Temperature is measured on both bodies but is not scored: an orbital 1 km average over the Earth window and a few square metres beside "
+                     "the rover are not the same measurement." if ref_thermal else
+                     f"There is no ground-temperature record for {ref_site.name}, so only the Earth values are shown."),
+            "sites": temperature,
+        },
+        "fieldwork": {
+            "note": "What each Earth window or its region has been used for in published analog research. Shown as context; it never changes a terrain result.",
+            "sites": fieldwork,
+        },
+        "notice": "Context only: nothing on this page enters the terrain similarity index.",
+    }

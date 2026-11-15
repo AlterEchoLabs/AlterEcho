@@ -72,7 +72,7 @@ The system distinguishes scored inputs from diagnostics, quality masks, display 
 | NASA GIBS/Worldview and OpenFreeMap | Orientation and interactive map context. | [official source](https://worldview.earthdata.nasa.gov/) |
 | MODIS MYD11A2 and Mars MEDA | Temperature context; comparability audit fails scoring use. | [official source](https://planetarycomputer.microsoft.com/dataset/modis-11A2-061) |
 
-The local release records 14 terrain inputs and 13 imagery records. Verified terrain bytes include eight Earth SRTM inputs, five Mars DEM inputs and one lunar derivative. The original Atacama window remains catalogued but excluded because it contains an industrial complex; Atacama south is the registered replacement. Raw files are ignored by Git, while manifests, derived artifacts and LF-normalized metadata hashes are retained.
+The local release records 14 terrain inputs and 13 imagery records. Verified terrain bytes include eight Earth SRTM inputs, five Mars DEM inputs and one lunar derivative. The original Atacama window remains catalogued but excluded because it contains an industrial complex; the Atacama Desert window 8 km south is the scored replacement. Raw files are ignored by Git, while manifests, derived artifacts and LF-normalized metadata hashes are retained.
 
 ## Acquisition, processing and provenance
 
@@ -235,7 +235,7 @@ $A_{\mathrm{obs}}$ is undefined, never zero, when no family qualifies. $C$ is th
 | Biosignature fieldwork | geology 0.35, water ice 0.25, subsurface habitability 0.20, temperature 0.10, terrain 0.10 | geology, water ice, subsurface habitability | no |
 | Mars-base field testing | terrain 0.35, temperature 0.35, water ice 0.15, subsurface habitability 0.15 | terrain, temperature, field test suitability | no |
 
-## Worked example: Atacama Desert (south window) compared with Jezero
+## Worked example: Atacama Desert compared with Jezero
 
 Earth window earth-atacama-south-aoi-v1 (centre 24.2722° S, 69.9005° W; SRTMGL1.003 tile S25W070, extracted file SHA-256 31ff152bdf6000f3…; UTM zone 19S (EPSG:32719); ESA WorldCover v200 2021: cells ≥ 50 % built-up excluded, 0.00 % of cells excluded) is compared with mars-jezero-aoi-v1 (CTX DEM SHA-256 ba7f706ea1b5d63a…) under the terrain-analogy profile, analogue-method-v1.0.
 
@@ -264,11 +264,11 @@ Against Jezero, the 88 background windows have a median index of 87.4; 49% score
 
 ## Software and versions
 
-Python 3.12.14, NumPy 2.3.4, Rasterio 1.4.3 with GDAL 3.9.3, FastAPI 0.162.7. Method configuration backend/app/data/analogue.v1.json (SHA-256 of LF text 4d4a2c257499ed6f…); calibration backend/data/processed/evaluation/analogue-v1-calibration.json (1e0463f39fca804a…). Scoring functions: backend/app/services/analogue_math.py (similarity, w1_quantile_functions, family_score, observed_index); backend/app/services/analogue_v1_service.py (terrain_features, reference_floor, compare); backend/app/services/terrain_quantiles.py (measure, quantile_function).
+Python 3.13.4, NumPy 2.3.4, Rasterio 1.4.3 with GDAL 3.9.3, FastAPI 0.162.7. Method configuration backend/app/data/analogue.v1.json (SHA-256 of LF text f3b1678cc54c1939…); calibration backend/data/processed/evaluation/analogue-v1-calibration.json (1e0463f39fca804a…). Scoring functions: backend/app/services/analogue_math.py (similarity, w1_quantile_functions, family_score, observed_index); backend/app/services/analogue_v1_service.py (terrain_features, reference_floor, compare); backend/app/services/terrain_quantiles.py (measure, quantile_function).
 
-# Results: measured terrain resemblance, Atacama south and Jezero
+# Results: measured terrain resemblance, Atacama Desert and Jezero
 
-On the two scored terrain features at a 60 m grid, the Atacama south window differs from the Jezero window by 0.82° in slope distribution and 15.6 m in relative-elevation distribution, giving an experimental terrain evidence index of 97.9 (scenario range 93.1–98.7) with 100 % terrain-profile coverage. Both differences are within the resolution floor of these tests, and the window shares rank 1 with 4 other low-relief windows whose order the data cannot resolve. The score is not distinctive: 17% of 88 unselected Earth windows score at least as high, and 49% score 90 or more. The result shows that the two windows share low-relief terrain at this scale; it does not show that Atacama is the best overall Mars analogue, and it says nothing about geology, habitability or the safety of a base or landing site.
+On the two scored terrain features at a 60 m grid, the Atacama Desert window differs from the Jezero window by 0.82° in slope distribution and 15.6 m in relative-elevation distribution, giving an experimental terrain evidence index of 97.9 (scenario range 93.1–98.7) with 100 % terrain-profile coverage. Both differences are within the resolution floor of these tests, and the window shares rank 1 with 4 other low-relief windows whose order the data cannot resolve. The score is not distinctive: 17% of 88 unselected Earth windows score at least as high, and 49% score 90 or more. The result shows that the two windows share low-relief terrain at this scale; it does not show that Atacama is the best overall Mars analogue, and it says nothing about geology, habitability or the safety of a base or landing site.
 
 ## References
 

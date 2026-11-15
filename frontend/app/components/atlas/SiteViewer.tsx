@@ -62,7 +62,7 @@ function Legend({ record, site }: { record: ImageryRecord; site: Site }) {
         <dt>Provider</dt><dd>{record.provider}</dd>
       </dl>
       <p className="muted small">A view of the landscape, not evidence of a match. The index uses the elevation model only.</p>
-      {site.id === "earth-atacama" && <p className="muted small">This original window contains a large industrial complex. It is excluded from analogue-method-v1.0 and replaced by the Atacama south window.</p>}
+      {site.id === "earth-atacama" && <p className="muted small">This first Atacama window contains a large industrial complex whose graded ground would look artificially flat. It is not scored; the Atacama Desert window 8 km south, free of built structures, is used instead.</p>}
       {link && <p className="small"><a href={link} target="_blank" rel="noreferrer noopener">Source record</a> · {record.attribution}</p>}
     </div>
   );

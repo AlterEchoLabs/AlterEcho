@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { apiV3 } from "../../lib/api";
-import { PROFILE_IDS_V3, STATE_TEXT, type ProfileIdV3, type ResultDetail } from "../../lib/analogue";
+import { PROFILE_IDS_V3, type ProfileIdV3, type ResultDetail } from "../../lib/analogue";
 import { pct } from "../../lib/format";
 import { FullEvidence } from "../components/atlas/ResultPanel";
 
@@ -53,10 +53,13 @@ export default function ReportContent() {
         <Link className="button-link secondary" href={`/?site=${site}&profile=${profile}&reference=${reference}`}>Open in the atlas</Link>
       </div>
       <h2>Result</h2>
-      <p><strong>{STATE_TEXT[c.state]}</strong>{c.rank != null ? ` · rank ${c.rank}` : ""} · evidence coverage {pct(c.evidence_coverage)}{s.show_index && c.observed_index != null ? ` · experimental terrain index ${c.observed_index.toFixed(2)}` : ""}</p>
+      {s.verdict && <p className="report-verdict"><strong>{s.verdict}</strong></p>}
+      {s.show_index && c.observed_index != null && <p>Terrain similarity index <strong className="mono">{c.observed_index.toFixed(0)}/100</strong> (present-day terrain shape at a 60 m grid){c.sensitivity?.index_range ? `, scenario range ${c.sensitivity.index_range[0].toFixed(0)}–${c.sensitivity.index_range[1].toFixed(0)}` : ""} · evidence coverage {pct(c.evidence_coverage)}</p>}
+      {c.standing && <p data-testid="report-standing"><strong className="mono">{c.standing.closer_than} of {c.standing.of}</strong> ordinary Earth land windows are less similar to {d.reference_window.name} than this site.{s.class_label ? ` ${s.class_label}.` : ""}</p>}
       <p>{s.conclusion}</p>
       {s.strength && <p><strong>Main strength:</strong> {s.strength}</p>}
       {s.mismatch && <p><strong>Main mismatch:</strong> {s.mismatch}</p>}
+      {s.background_text && <p><strong>Compared with ordinary land:</strong> {s.background_text}</p>}
       <p><strong>Limitation:</strong> {s.limitation}</p>
       <p className="muted">{s.validation_status}</p>
       <h2>Full evidence and calculations</h2>

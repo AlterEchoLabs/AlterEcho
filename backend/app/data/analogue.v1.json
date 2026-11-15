@@ -13,6 +13,18 @@
     "observed_index": "100 * sum_g w_g I_g S_g / sum_g w_g I_g   (undefined when no family qualifies)",
     "evidence_coverage": "sum_g w_g I_g   (share of the planned profile weight that is measured and comparable)"
   },
+  "formulas_tex": {
+    "slope": "\\theta = \\arctan\\sqrt{\\left(\\frac{\\partial z}{\\partial x}\\right)^{2} + \\left(\\frac{\\partial z}{\\partial y}\\right)^{2}}",
+    "relative_elevation": "z_{\\text{rel}} = z - \\operatorname{median}(z)",
+    "distribution_distance": "\\begin{aligned} d_k &= W_1(F_{E,k}, F_{P,k}) = \\int_0^1 \\left| F_{E,k}^{-1}(u) - F_{P,k}^{-1}(u) \\right| \\mathrm{d}u \\\\ &\\approx \\frac{1}{500}\\sum_{i=1}^{500} \\left| Q_{E,k}(u_i) - Q_{P,k}(u_i) \\right| \\end{aligned}",
+    "feature_similarity": "s_k = \\exp\\!\\left[-\\ln 2 \\left(\\frac{d_k}{\\tau_k}\\right)^{2}\\right] = 2^{-(d_k/\\tau_k)^{2}}",
+    "tolerance": "\\tau_k = \\operatorname*{median}_{i<j} W_1(F_{i,k}, F_{j,k})",
+    "resolution_floor": "\\delta_k = \\sqrt{\\delta_{\\text{place},k}^{2} + \\delta_{\\text{dem},k}^{2}}, \\qquad \\text{scored only if } \\tau_k \\ge 3\\,\\delta_k",
+    "family_score": "S_g = \\sum_{k} a_{k\\mid g}\\, s_k, \\qquad \\textstyle\\sum_k a_{k\\mid g} = 1",
+    "observed_index": "A_{\\text{obs}} = 100\\,\\frac{\\sum_g w_g I_g S_g}{\\sum_g w_g I_g}",
+    "evidence_coverage": "C = \\sum_g w_g I_g",
+    "standing": "N_{\\text{closer}} = \\#\\{\\, b \\in \\mathcal{B} : A_b < A_c \\,\\}"
+  },
   "parameters": {
     "d_k": "Distance between the Earth and planetary measurement of feature k, in the feature's own units (degrees or metres).",
     "tau_k": "Material-difference tolerance in the same units: the median W1 between unselected pairs of Earth land windows (Earth terrain contrast), accepted only if it is at least 3 times the resolution floor.",

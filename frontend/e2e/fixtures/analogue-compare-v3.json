@@ -33,7 +33,7 @@
   },
   "profile_state": "ranked",
   "profile_state_reason": "Every task-critical family is measured and comparable for every listed candidate, on one shared eligibility key.",
-  "headline": "Ranked on measured terrain only, with ties where the data cannot separate sites.",
+  "headline": "Compared on measured terrain only. Sites are grouped by terrain class and set against 88 ordinary Earth land windows scored the same way.",
   "evidence_coverage": 1.0,
   "primary_scale_m": 60,
   "tolerances": [
@@ -144,7 +144,122 @@
       "earth-ladakh"
     ]
   ],
-  "ordering_note": "Tie groups (order inside a group is not resolved): Craters of the Moon lava field, Atacama Desert (south window), Hanksville badlands (MDRS), Meteor Crater (Barringer), Dallol, Danakil Depression | Upper Mustang, Ladakh.",
+  "class_groups": [
+    {
+      "terrain_class": "same",
+      "label": "Same terrain class as Jezero Crater",
+      "site_ids": [
+        "earth-craters-of-the-moon",
+        "earth-atacama-south",
+        "earth-hanksville-mdrs",
+        "earth-meteor-crater",
+        "earth-danakil"
+      ],
+      "order_resolved": false,
+      "note": "Their uncertainty ranges overlap, so the order inside this group is not meaningful."
+    },
+    {
+      "terrain_class": "different",
+      "label": "Different terrain from Jezero Crater",
+      "site_ids": [
+        "earth-upper-mustang",
+        "earth-ladakh"
+      ],
+      "order_resolved": false,
+      "note": "Their uncertainty ranges overlap, so the order inside this group is not meaningful."
+    }
+  ],
+  "background_scores": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.03,
+    0.04,
+    0.25,
+    1.83,
+    1.88,
+    1.97,
+    3.76,
+    12.99,
+    14.32,
+    14.38,
+    14.95,
+    19.34,
+    20.7,
+    21.51,
+    23.87,
+    27.75,
+    27.87,
+    30.04,
+    31.72,
+    34.08,
+    36.85,
+    41.73,
+    46.66,
+    50.16,
+    55.07,
+    57.17,
+    60.64,
+    61.24,
+    62.34,
+    65.18,
+    67.16,
+    77.55,
+    78.0,
+    80.99,
+    83.34,
+    83.86,
+    84.68,
+    85.49,
+    89.28,
+    90.66,
+    91.55,
+    91.56,
+    92.21,
+    92.66,
+    92.74,
+    93.07,
+    93.25,
+    94.07,
+    94.22,
+    94.45,
+    94.65,
+    94.79,
+    95.37,
+    95.45,
+    95.48,
+    95.49,
+    95.78,
+    95.94,
+    96.0,
+    96.02,
+    96.43,
+    96.63,
+    96.85,
+    96.97,
+    97.36,
+    97.73,
+    97.82,
+    97.93,
+    97.95,
+    97.97,
+    98.02,
+    98.14,
+    98.29,
+    98.3,
+    98.35,
+    98.37,
+    98.38,
+    98.48,
+    98.49,
+    98.7,
+    98.91,
+    99.28
+  ],
+  "ordering_note": "Sites whose uncertainty ranges overlap cannot be put in order by the data: Craters of the Moon lava field, Atacama Desert, Hanksville badlands (MDRS), Meteor Crater (Barringer), Dallol, Danakil Depression | Upper Mustang, Ladakh.",
   "results": [
     {
       "site_id": "earth-craters-of-the-moon",
@@ -428,7 +543,7 @@
       },
       "eligibility_key": "3390c8214e9e929e",
       "simple": {
-        "conclusion": "On the measured 10 km terrain features at a 60 m grid, the Craters of the Moon lava field window is not resolved from the Jezero Crater window by these tests: every scored difference is at or below the resolution floor set by moving the reference 2 km and swapping the Earth DEM product. Its order relative to the other 4 sites in its tie group is not resolved by the data. This result covers terrain only. Geology, soil strength and mission suitability have not been established.",
+        "conclusion": "At a 60 m grid, the Craters of the Moon lava field window is not resolved from the Jezero Crater window by these tests: every scored difference is no larger than what moving the reference 2 km or swapping the Earth elevation model produces on its own. The data cannot put it in order with the other 4 sites whose uncertainty ranges overlap with it. This result covers terrain only. Geology, soil strength and mission suitability have not been established.",
         "measured": [
           "F1 Terrain morphology"
         ],
@@ -438,13 +553,17 @@
         "mismatch": "Relative elevation distribution: differs by 14.9 m (0.19 of the 77.1 m tolerance, within the resolution floor)",
         "limitation": "This result covers terrain only. Geology, soil strength and mission suitability have not been established.",
         "show_index": true,
-        "index_label": "Experimental terrain evidence index (0–100; not a probability or a percentage likeness)",
-        "background_text": "11% of 88 unselected Earth land windows score at least as high against Jezero Crater; a high value mostly indicates low relief."
+        "index_label": "Terrain similarity index (0–100): present-day terrain shape at a 60 m analysis grid. Most gentle land scores above 90 on this scale, so read it with the comparison against ordinary windows. Not a probability or a percentage likeness.",
+        "background_text": "We scored 88 ordinary Earth land windows against Jezero Crater in exactly the same way: 78 are less similar than this window and 10 are as similar or more. A typical ordinary window scores 87, because most land is gentle at a 60 m grid.",
+        "standing_text": "Closer to Jezero Crater than 78 of 88 ordinary Earth land windows",
+        "class_label": "Same terrain class as Jezero Crater",
+        "verdict": "Close terrain match, closer than most ordinary land"
       },
       "exclusion": null,
       "literature_context": {
         "text": "Region-level: NASA BASALT campaigns used Craters of the Moon lava flows as Mars basalt analogs (Lim et al. 2019). This window is not claimed to match their sample sites.",
         "aoi_specific": false,
+        "analog_status": "region",
         "source_ids": [
           "basalt-lim-2019"
         ],
@@ -468,11 +587,18 @@
         "globes"
       ],
       "background_share": 0.114,
+      "standing": {
+        "closer_than": 78,
+        "as_close_or_closer": 10,
+        "of": 88,
+        "statement": "Closer to Jezero Crater than 78 of 88 ordinary Earth land windows"
+      },
+      "terrain_class": "same",
       "scientific_status": "real_processed"
     },
     {
       "site_id": "earth-atacama-south",
-      "site_name": "Atacama Desert (south window)",
+      "site_name": "Atacama Desert",
       "state": "ranked",
       "rank": 1,
       "observed_index": 97.9,
@@ -752,7 +878,7 @@
       },
       "eligibility_key": "3390c8214e9e929e",
       "simple": {
-        "conclusion": "On the measured 10 km terrain features at a 60 m grid, the Atacama Desert (south window) window is not resolved from the Jezero Crater window by these tests: every scored difference is at or below the resolution floor set by moving the reference 2 km and swapping the Earth DEM product. Its order relative to the other 4 sites in its tie group is not resolved by the data. This result covers terrain only. Geology, soil strength and mission suitability have not been established.",
+        "conclusion": "At a 60 m grid, the Atacama Desert window is not resolved from the Jezero Crater window by these tests: every scored difference is no larger than what moving the reference 2 km or swapping the Earth elevation model produces on its own. The data cannot put it in order with the other 4 sites whose uncertainty ranges overlap with it. This result covers terrain only. Geology, soil strength and mission suitability have not been established.",
         "measured": [
           "F1 Terrain morphology"
         ],
@@ -762,11 +888,35 @@
         "mismatch": "Relative elevation distribution: differs by 15.6 m (0.20 of the 77.1 m tolerance, within the resolution floor)",
         "limitation": "This result covers terrain only. Geology, soil strength and mission suitability have not been established.",
         "show_index": true,
-        "index_label": "Experimental terrain evidence index (0–100; not a probability or a percentage likeness)",
-        "background_text": "17% of 88 unselected Earth land windows score at least as high against Jezero Crater; a high value mostly indicates low relief."
+        "index_label": "Terrain similarity index (0–100): present-day terrain shape at a 60 m analysis grid. Most gentle land scores above 90 on this scale, so read it with the comparison against ordinary windows. Not a probability or a percentage likeness.",
+        "background_text": "We scored 88 ordinary Earth land windows against Jezero Crater in exactly the same way: 73 are less similar than this window and 15 are as similar or more. A typical ordinary window scores 87, because most land is gentle at a 60 m grid.",
+        "standing_text": "Closer to Jezero Crater than 73 of 88 ordinary Earth land windows",
+        "class_label": "Same terrain class as Jezero Crater",
+        "verdict": "Close terrain match, closer than most ordinary land"
       },
       "exclusion": null,
-      "literature_context": null,
+      "literature_context": {
+        "text": "Region-level: Mars-like soil studies near Yungay and NASA life-detection instrument tests in the hyperarid core. This window lies roughly 20 km south-east of Yungay, in the same hyperarid belt, but those studies did not measure this exact window.",
+        "aoi_specific": false,
+        "analog_status": "region",
+        "source_ids": [
+          "atacama-study",
+          "nasa-atacama"
+        ],
+        "sources": [
+          {
+            "id": "atacama-study",
+            "title": "Mars-like soils in the Atacama Desert",
+            "url": "https://doi.org/10.1126/science.1089143"
+          },
+          {
+            "id": "nasa-atacama",
+            "title": "NASA JPL Atacama instrument field test",
+            "url": "https://www.jpl.nasa.gov/news/detecting-life-in-the-ultra-dry-atacama-desert/"
+          }
+        ],
+        "scope": "Regional research context. It is not a measurement of this 10 km window and never enters a number."
+      },
       "data_roles": [
         "srtmgl1",
         "ctx-dem",
@@ -778,6 +928,13 @@
         "globes"
       ],
       "background_share": 0.17,
+      "standing": {
+        "closer_than": 73,
+        "as_close_or_closer": 15,
+        "of": 88,
+        "statement": "Closer to Jezero Crater than 73 of 88 ordinary Earth land windows"
+      },
+      "terrain_class": "same",
       "scientific_status": "real_processed"
     },
     {
@@ -1062,7 +1219,7 @@
       },
       "eligibility_key": "3390c8214e9e929e",
       "simple": {
-        "conclusion": "On the measured 10 km terrain features at a 60 m grid, the Hanksville badlands (MDRS) window is closer to the Jezero Crater window than a typical pair of Earth land windows are to each other, on every scored feature. Its order relative to the other 4 sites in its tie group is not resolved by the data. This result covers terrain only. Geology, soil strength and mission suitability have not been established.",
+        "conclusion": "On the measured 10 km terrain features at a 60 m grid, the Hanksville badlands (MDRS) window is closer to the Jezero Crater window than a typical pair of Earth land windows are to each other, on every scored feature. The data cannot put it in order with the other 4 sites whose uncertainty ranges overlap with it. This result covers terrain only. Geology, soil strength and mission suitability have not been established.",
         "measured": [
           "F1 Terrain morphology"
         ],
@@ -1072,13 +1229,17 @@
         "mismatch": "Slope distribution: differs by 1.25° (0.22 of the 5.81° tolerance)",
         "limitation": "This result covers terrain only. Geology, soil strength and mission suitability have not been established.",
         "show_index": true,
-        "index_label": "Experimental terrain evidence index (0–100; not a probability or a percentage likeness)",
-        "background_text": "19% of 88 unselected Earth land windows score at least as high against Jezero Crater; a high value mostly indicates low relief."
+        "index_label": "Terrain similarity index (0–100): present-day terrain shape at a 60 m analysis grid. Most gentle land scores above 90 on this scale, so read it with the comparison against ordinary windows. Not a probability or a percentage likeness.",
+        "background_text": "We scored 88 ordinary Earth land windows against Jezero Crater in exactly the same way: 71 are less similar than this window and 17 are as similar or more. A typical ordinary window scores 87, because most land is gentle at a 60 m grid.",
+        "standing_text": "Closer to Jezero Crater than 71 of 88 ordinary Earth land windows",
+        "class_label": "Same terrain class as Jezero Crater",
+        "verdict": "Close terrain match, closer than most ordinary land"
       },
       "exclusion": null,
       "literature_context": {
         "text": "Window-level: the AOI is centred on the Mars Desert Research Station, an operational analog station. Its operational use does not establish physical similarity.",
         "aoi_specific": true,
+        "analog_status": "window",
         "source_ids": [
           "mdrs-station"
         ],
@@ -1102,6 +1263,13 @@
         "globes"
       ],
       "background_share": 0.193,
+      "standing": {
+        "closer_than": 71,
+        "as_close_or_closer": 17,
+        "of": 88,
+        "statement": "Closer to Jezero Crater than 71 of 88 ordinary Earth land windows"
+      },
+      "terrain_class": "same",
       "scientific_status": "real_processed"
     },
     {
@@ -1379,7 +1547,7 @@
       },
       "eligibility_key": "3390c8214e9e929e",
       "simple": {
-        "conclusion": "On the measured 10 km terrain features at a 60 m grid, the Meteor Crater (Barringer) window is closer to the Jezero Crater window than a typical pair of Earth land windows are to each other, on every scored feature. Its order relative to the other 4 sites in its tie group is not resolved by the data. This result covers terrain only. Geology, soil strength and mission suitability have not been established.",
+        "conclusion": "On the measured 10 km terrain features at a 60 m grid, the Meteor Crater (Barringer) window is closer to the Jezero Crater window than a typical pair of Earth land windows are to each other, on every scored feature. The data cannot put it in order with the other 4 sites whose uncertainty ranges overlap with it. This result covers terrain only. Geology, soil strength and mission suitability have not been established.",
         "measured": [
           "F1 Terrain morphology"
         ],
@@ -1389,13 +1557,17 @@
         "mismatch": "Relative elevation distribution: differs by 26.0 m (0.34 of the 77.1 m tolerance)",
         "limitation": "This result covers terrain only. Geology, soil strength and mission suitability have not been established.",
         "show_index": true,
-        "index_label": "Experimental terrain evidence index (0–100; not a probability or a percentage likeness)",
-        "background_text": "34% of 88 unselected Earth land windows score at least as high against Jezero Crater; a high value mostly indicates low relief."
+        "index_label": "Terrain similarity index (0–100): present-day terrain shape at a 60 m analysis grid. Most gentle land scores above 90 on this scale, so read it with the comparison against ordinary windows. Not a probability or a percentage likeness.",
+        "background_text": "We scored 88 ordinary Earth land windows against Jezero Crater in exactly the same way: 58 are less similar than this window and 30 are as similar or more. A typical ordinary window scores 87, because most land is gentle at a 60 m grid.",
+        "standing_text": "Closer to Jezero Crater than 58 of 88 ordinary Earth land windows",
+        "class_label": "Same terrain class as Jezero Crater",
+        "verdict": "Close terrain match, but so is a lot of ordinary gentle land"
       },
       "exclusion": null,
       "literature_context": {
         "text": "Window-level: Barringer (Meteor) Crater is a well-studied simple impact crater (Kring 2007). It occupies a small part of the 10 km window.",
         "aoi_specific": true,
+        "analog_status": "window",
         "source_ids": [
           "kring-2007-barringer"
         ],
@@ -1419,6 +1591,13 @@
         "globes"
       ],
       "background_share": 0.341,
+      "standing": {
+        "closer_than": 58,
+        "as_close_or_closer": 30,
+        "of": 88,
+        "statement": "Closer to Jezero Crater than 58 of 88 ordinary Earth land windows"
+      },
+      "terrain_class": "same",
       "scientific_status": "real_processed"
     },
     {
@@ -1703,7 +1882,7 @@
       },
       "eligibility_key": "3390c8214e9e929e",
       "simple": {
-        "conclusion": "On the measured 10 km terrain features at a 60 m grid, the Dallol, Danakil Depression window is closer to the Jezero Crater window than a typical pair of Earth land windows are to each other, on every scored feature. Its order relative to the other 4 sites in its tie group is not resolved by the data. This result covers terrain only. Geology, soil strength and mission suitability have not been established.",
+        "conclusion": "On the measured 10 km terrain features at a 60 m grid, the Dallol, Danakil Depression window is closer to the Jezero Crater window than a typical pair of Earth land windows are to each other, on every scored feature. The data cannot put it in order with the other 4 sites whose uncertainty ranges overlap with it. This result covers terrain only. Geology, soil strength and mission suitability have not been established.",
         "measured": [
           "F1 Terrain morphology"
         ],
@@ -1713,13 +1892,17 @@
         "mismatch": "Relative elevation distribution: differs by 42.7 m (0.55 of the 77.1 m tolerance)",
         "limitation": "This result covers terrain only. Geology, soil strength and mission suitability have not been established.",
         "show_index": true,
-        "index_label": "Experimental terrain evidence index (0–100; not a probability or a percentage likeness)",
-        "background_text": "50% of 88 unselected Earth land windows score at least as high against Jezero Crater; a high value mostly indicates low relief."
+        "index_label": "Terrain similarity index (0–100): present-day terrain shape at a 60 m analysis grid. Most gentle land scores above 90 on this scale, so read it with the comparison against ordinary windows. Not a probability or a percentage likeness.",
+        "background_text": "We scored 88 ordinary Earth land windows against Jezero Crater in exactly the same way: 44 are less similar than this window and 44 are as similar or more. A typical ordinary window scores 87, because most land is gentle at a 60 m grid.",
+        "standing_text": "Closer to Jezero Crater than 44 of 88 ordinary Earth land windows",
+        "class_label": "Same terrain class as Jezero Crater",
+        "verdict": "Close terrain match, but so is a lot of ordinary gentle land"
       },
       "exclusion": null,
       "literature_context": {
         "text": "Window-level: the AOI is centred on the Dallol dome characterised as a planetary field analog for hydrothermal and evaporite processes (Cavalazzi et al. 2019). Those processes are not measured by AlterEcho.",
         "aoi_specific": true,
+        "analog_status": "window",
         "source_ids": [
           "dallol-study"
         ],
@@ -1743,6 +1926,13 @@
         "globes"
       ],
       "background_share": 0.5,
+      "standing": {
+        "closer_than": 44,
+        "as_close_or_closer": 44,
+        "of": 88,
+        "statement": "Closer to Jezero Crater than 44 of 88 ordinary Earth land windows"
+      },
+      "terrain_class": "same",
       "scientific_status": "real_processed"
     },
     {
@@ -2027,7 +2217,7 @@
       },
       "eligibility_key": "3390c8214e9e929e",
       "simple": {
-        "conclusion": "On the measured 10 km terrain features at a 60 m grid, the Upper Mustang window differs from the Jezero Crater window by more than a typical pair of Earth land windows, on every scored feature. Its order relative to the other 1 site in its tie group is not resolved by the data. This result covers terrain only. Geology, soil strength and mission suitability have not been established.",
+        "conclusion": "On the measured 10 km terrain features at a 60 m grid, the Upper Mustang window differs from the Jezero Crater window by more than a typical pair of Earth land windows, on every scored feature. The data cannot put it in order with the other 1 site whose uncertainty ranges overlap with it. This result covers terrain only. Geology, soil strength and mission suitability have not been established.",
         "measured": [
           "F1 Terrain morphology"
         ],
@@ -2037,13 +2227,17 @@
         "mismatch": "Relative elevation distribution: differs by 219.0 m (2.84 of the 77.1 m tolerance)",
         "limitation": "This result covers terrain only. Geology, soil strength and mission suitability have not been established.",
         "show_index": true,
-        "index_label": "Experimental terrain evidence index (0–100; not a probability or a percentage likeness)",
-        "background_text": "90% of 88 unselected Earth land windows score at least as high against Jezero Crater; a high value mostly indicates low relief."
+        "index_label": "Terrain similarity index (0–100): present-day terrain shape at a 60 m analysis grid. Most gentle land scores above 90 on this scale, so read it with the comparison against ordinary windows. Not a probability or a percentage likeness.",
+        "background_text": "We scored 88 ordinary Earth land windows against Jezero Crater in exactly the same way: 9 are less similar than this window and 79 are as similar or more. A typical ordinary window scores 87, because most land is gentle at a 60 m grid.",
+        "standing_text": "Closer to Jezero Crater than 9 of 88 ordinary Earth land windows",
+        "class_label": "Different terrain from Jezero Crater",
+        "verdict": "Different terrain: much steeper or with far more relief than the reference"
       },
       "exclusion": null,
       "literature_context": {
         "text": "No peer-reviewed analog study of this window was found. A commercial analog-station proposal has been described publicly; that is not scientific validation.",
         "aoi_specific": false,
+        "analog_status": "none",
         "source_ids": [
           "handoff-candidate-atlas"
         ],
@@ -2067,6 +2261,13 @@
         "globes"
       ],
       "background_share": 0.898,
+      "standing": {
+        "closer_than": 9,
+        "as_close_or_closer": 79,
+        "of": 88,
+        "statement": "Closer to Jezero Crater than 9 of 88 ordinary Earth land windows"
+      },
+      "terrain_class": "different",
       "scientific_status": "real_processed"
     },
     {
@@ -2351,7 +2552,7 @@
       },
       "eligibility_key": "3390c8214e9e929e",
       "simple": {
-        "conclusion": "On the measured 10 km terrain features at a 60 m grid, the Ladakh window differs from the Jezero Crater window by more than a typical pair of Earth land windows, on every scored feature. Its order relative to the other 1 site in its tie group is not resolved by the data. This result covers terrain only. Geology, soil strength and mission suitability have not been established.",
+        "conclusion": "On the measured 10 km terrain features at a 60 m grid, the Ladakh window differs from the Jezero Crater window by more than a typical pair of Earth land windows, on every scored feature. The data cannot put it in order with the other 1 site whose uncertainty ranges overlap with it. This result covers terrain only. Geology, soil strength and mission suitability have not been established.",
         "measured": [
           "F1 Terrain morphology"
         ],
@@ -2361,13 +2562,17 @@
         "mismatch": "Relative elevation distribution: differs by 297.9 m (3.86 of the 77.1 m tolerance)",
         "limitation": "This result covers terrain only. Geology, soil strength and mission suitability have not been established.",
         "show_index": true,
-        "index_label": "Experimental terrain evidence index (0–100; not a probability or a percentage likeness)",
-        "background_text": "93% of 88 unselected Earth land windows score at least as high against Jezero Crater; a high value mostly indicates low relief."
+        "index_label": "Terrain similarity index (0–100): present-day terrain shape at a 60 m analysis grid. Most gentle land scores above 90 on this scale, so read it with the comparison against ordinary windows. Not a probability or a percentage likeness.",
+        "background_text": "We scored 88 ordinary Earth land windows against Jezero Crater in exactly the same way: 6 are less similar than this window and 82 are as similar or more. A typical ordinary window scores 87, because most land is gentle at a 60 m grid.",
+        "standing_text": "Closer to Jezero Crater than 6 of 88 ordinary Earth land windows",
+        "class_label": "Different terrain from Jezero Crater",
+        "verdict": "Different terrain: much steeper or with far more relief than the reference"
       },
       "exclusion": null,
       "literature_context": {
         "text": "Region-level: a 2016 multidisciplinary expedition and ISRO's 2025 analog mission at Tso Kar. This AOI (34.20° N, 77.60° E) is not the Tso Kar site.",
         "aoi_specific": false,
+        "analog_status": "region",
         "source_ids": [
           "ladakh-research",
           "isro-ladakh"
@@ -2397,11 +2602,18 @@
         "globes"
       ],
       "background_share": 0.932,
+      "standing": {
+        "closer_than": 6,
+        "as_close_or_closer": 82,
+        "of": 88,
+        "statement": "Closer to Jezero Crater than 6 of 88 ordinary Earth land windows"
+      },
+      "terrain_class": "different",
       "scientific_status": "real_processed"
     },
     {
       "site_id": "earth-atacama",
-      "site_name": "Atacama Desert",
+      "site_name": "Atacama Desert (first window, not scored)",
       "state": "excluded",
       "rank": null,
       "observed_index": null,
@@ -2555,19 +2767,23 @@
         "validation_status": "Experimental. Tolerances come from Earth terrain contrast and measured resolution limits; the method has not been tested against expert-labelled analogues, negative controls chosen by experts or field outcomes.",
         "strength": null,
         "mismatch": null,
-        "limitation": "Historical scores for this window remain available under terrain-v4.0. Use Atacama Desert (south window) instead.",
+        "limitation": "Historical scores for this window remain available under terrain-v4.0. Use Atacama Desert instead.",
         "show_index": false,
         "index_label": null,
-        "background_text": null
+        "background_text": null,
+        "standing_text": null,
+        "class_label": null,
+        "verdict": null
       },
       "exclusion": {
         "reason": "The window contains a large industrial complex (pads, buildings, graded ground) visible in Sentinel-2 L2A S2B_MSIL2A_20260927T144729_R139_T19KDP. WorldCover 2021 classes it as bare ground, so it cannot be masked. Replaced by earth-atacama-south, chosen by a rule fixed before its terrain was measured.",
         "replacement": "earth-atacama-south",
-        "replacement_name": "Atacama Desert (south window)"
+        "replacement_name": "Atacama Desert"
       },
       "literature_context": {
         "text": "Region-level: Mars-like soil studies near Yungay and NASA life-detection instrument tests in the hyperarid core. This AOI lies about 15 km from Yungay, but those studies did not measure this exact window. The window also contains built infrastructure.",
         "aoi_specific": false,
+        "analog_status": "region",
         "source_ids": [
           "atacama-study",
           "nasa-atacama"
@@ -2597,6 +2813,8 @@
         "globes"
       ],
       "background_share": null,
+      "standing": null,
+      "terrain_class": null,
       "scientific_status": "failed_quality_gate"
     },
     {
@@ -2637,7 +2855,10 @@
         "limitation": "This result covers terrain only. Geology, soil strength and mission suitability have not been established.",
         "show_index": false,
         "index_label": null,
-        "background_text": null
+        "background_text": null,
+        "standing_text": null,
+        "class_label": null,
+        "verdict": null
       },
       "exclusion": null,
       "literature_context": null,
@@ -2652,6 +2873,8 @@
         "globes"
       ],
       "background_share": null,
+      "standing": null,
+      "terrain_class": null,
       "scientific_status": "unavailable"
     },
     {
@@ -2692,7 +2915,10 @@
         "limitation": "This result covers terrain only. Geology, soil strength and mission suitability have not been established.",
         "show_index": false,
         "index_label": null,
-        "background_text": null
+        "background_text": null,
+        "standing_text": null,
+        "class_label": null,
+        "verdict": null
       },
       "exclusion": null,
       "literature_context": null,
@@ -2707,6 +2933,8 @@
         "globes"
       ],
       "background_share": null,
+      "standing": null,
+      "terrain_class": null,
       "scientific_status": "unavailable"
     }
   ],
@@ -2724,6 +2952,18 @@
     "observed_index": "100 * sum_g w_g I_g S_g / sum_g w_g I_g   (undefined when no family qualifies)",
     "evidence_coverage": "sum_g w_g I_g   (share of the planned profile weight that is measured and comparable)"
   },
+  "formulas_tex": {
+    "slope": "\\theta = \\arctan\\sqrt{\\left(\\frac{\\partial z}{\\partial x}\\right)^{2} + \\left(\\frac{\\partial z}{\\partial y}\\right)^{2}}",
+    "relative_elevation": "z_{\\text{rel}} = z - \\operatorname{median}(z)",
+    "distribution_distance": "d_k = W_1(F_{E,k}, F_{P,k}) = \\int_0^1 \\left| F_{E,k}^{-1}(u) - F_{P,k}^{-1}(u) \\right| \\mathrm{d}u \\;\\approx\\; \\frac{1}{500}\\sum_{i=1}^{500} \\left| Q_{E,k}(u_i) - Q_{P,k}(u_i) \\right|",
+    "feature_similarity": "s_k = \\exp\\!\\left[-\\ln 2 \\left(\\frac{d_k}{\\tau_k}\\right)^{2}\\right] = 2^{-(d_k/\\tau_k)^{2}}",
+    "tolerance": "\\tau_k = \\operatorname*{median}_{i<j} W_1(F_{i,k}, F_{j,k})",
+    "resolution_floor": "\\delta_k = \\sqrt{\\delta_{\\text{place},k}^{2} + \\delta_{\\text{dem},k}^{2}}, \\qquad \\text{scored only if } \\tau_k \\ge 3\\,\\delta_k",
+    "family_score": "S_g = \\sum_{k} a_{k\\mid g}\\, s_k, \\qquad \\textstyle\\sum_k a_{k\\mid g} = 1",
+    "observed_index": "A_{\\text{obs}} = 100\\,\\frac{\\sum_g w_g I_g S_g}{\\sum_g w_g I_g}",
+    "evidence_coverage": "C = \\sum_g w_g I_g",
+    "standing": "N_{\\text{closer}} = \\#\\{\\, b \\in \\mathcal{B} : A_b < A_c \\,\\}"
+  },
   "parameters": {
     "d_k": "Distance between the Earth and planetary measurement of feature k, in the feature's own units (degrees or metres).",
     "tau_k": "Material-difference tolerance in the same units: the median W1 between unselected pairs of Earth land windows (Earth terrain contrast), accepted only if it is at least 3 times the resolution floor.",
@@ -2736,7 +2976,7 @@
   },
   "validation_status": "Experimental. Tolerances come from Earth terrain contrast and measured resolution limits; the method has not been tested against expert-labelled analogues, negative controls chosen by experts or field outcomes.",
   "notice": "Indices are project-defined bounded indices on the stated measurements. They are not probabilities, confidence levels, percentages of identity, NASA standards or mission-suitability ratings.",
-  "generated_at": "2026-11-15T07:38:18.469473Z",
+  "generated_at": "2026-11-15T11:19:39.237493Z",
   "discrimination": {
     "background": {
       "count": 88,
